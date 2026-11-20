@@ -53,6 +53,8 @@ export interface PartShape {
 	halfWidth: number;
 	halfHeight: number;
 	spins?: boolean;
+	/** Optional glazing drawn inside the shape, in the same local units. */
+	glassPath?: string;
 }
 
 const circle = (r: number): string =>
@@ -85,6 +87,7 @@ export const PARTS: Record<PartId, PartShape> = {
 	cabin: {
 		id: 'cabin',
 		path: 'M-85,39 L-58,-20 Q-50,-39 -28,-39 L44,-39 Q62,-39 70,-22 L85,39 Z',
+		glassPath: 'M-66,31 L-46,-18 Q-41,-30 -27,-30 L40,-30 Q54,-30 60,-19 L70,31 Z',
 		role: 'shell',
 		radius: 60,
 		halfWidth: 85,
@@ -93,6 +96,7 @@ export const PARTS: Record<PartId, PartShape> = {
 	cab: {
 		id: 'cab',
 		path: 'M-70,42 L-70,-30 Q-70,-42 -56,-42 L30,-42 Q40,-42 46,-32 L70,4 L70,42 Z',
+		glassPath: 'M-54,33 L-54,-20 Q-54,-30 -44,-30 L24,-30 Q31,-30 36,-22 L54,-1 L54,33 Z',
 		role: 'shell',
 		radius: 60,
 		halfWidth: 70,

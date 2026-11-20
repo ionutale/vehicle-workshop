@@ -1,18 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createAssembly } from '#lib/game/assembly';
 import { computeLayout } from '#lib/game/layout';
 import { getVehicle } from '#lib/game/vehicles';
 import { drawChassisGhosts } from '#lib/render/vehicle';
 import { pieceBoxes } from '#lib/render/tray';
-import { vi } from 'vitest';
 
 // jsdom has no Path2D; the renderer only needs construction to succeed.
-vi.stubGlobal(
-	'Path2D',
-	class {
-		constructor(public d: string) {}
-	}
-);
+const stubPath = () =>
+	vi.stubGlobal(
+		'Path2D',
+		class {
+			constructor(public d: string) {}
+		}
+	);
 
 function recordingContext() {
 	const calls: Array<[string, number[]]> = [];
@@ -31,6 +31,11 @@ function recordingContext() {
 		scale: record('scale'),
 		stroke: record('stroke'),
 		fill: record('fill'),
+		clip: record('clip'),
+		fillRect: record('fillRect'),
+		moveTo: record('moveTo'),
+		lineTo: record('lineTo'),
+		closePath: record('closePath'),
 		beginPath: record('beginPath'),
 		arc: record('arc'),
 		ellipse: record('ellipse'),
@@ -44,6 +49,8 @@ function recordingContext() {
 	};
 	return { ctx: ctx as unknown as CanvasRenderingContext2D, calls };
 }
+
+beforeEach(stubPath);
 
 describe('chassis ghost', () => {
 	it('draws the dashed silhouette under the vehicle, not at the world origin', () => {

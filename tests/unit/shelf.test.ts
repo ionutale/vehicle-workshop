@@ -1,18 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createAssembly } from '#lib/game/assembly';
 import { computeLayout, worldToScreen } from '#lib/game/layout';
 import { PARTS } from '#lib/game/parts';
 import { hitPiece } from '#lib/game/pointer';
 import { getVehicle } from '#lib/game/vehicles';
 import { drawShelf, pieceBoxes, trayPieces } from '#lib/render/tray';
-import { vi } from 'vitest';
 
-vi.stubGlobal(
-	'Path2D',
-	class {
-		constructor(public d: string) {}
-	}
-);
+const stubPath = () =>
+	vi.stubGlobal(
+		'Path2D',
+		class {
+			constructor(public d: string) {}
+		}
+	);
 
 function recordingContext() {
 	const calls: Array<{ name: string; args: number[]; alpha: number; lineWidth: number }> = [];
@@ -20,6 +20,8 @@ function recordingContext() {
 		save: () => {},
 		restore: () => {},
 		beginPath: () => {},
+		clip: () => {},
+		fillRect: () => {},
 		fill: () => {},
 		stroke: () => {},
 		globalAlpha: 1,
@@ -39,6 +41,8 @@ function recordingContext() {
 	};
 	return { ctx: ctx as unknown as CanvasRenderingContext2D, calls };
 }
+
+beforeEach(stubPath);
 
 const car = getVehicle('car');
 const insets = { top: 0, right: 0, bottom: 0, left: 0 };

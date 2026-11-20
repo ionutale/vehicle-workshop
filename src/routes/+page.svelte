@@ -29,6 +29,7 @@
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
 	import {
 		drawChassisGhosts,
+		drawContactShadow,
 		drawPart,
 		drawPlacedParts,
 		drawVehicle
@@ -364,19 +365,23 @@
 			drawRoad(ctx, layout, 0);
 
 			if (state.phase === 'assembling') {
+				drawContactShadow(ctx, vehicle, layout);
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
 				drawPlacedParts(ctx, vehicle, state, layout);
 			} else if (state.phase === 'ready') {
+				drawContactShadow(ctx, vehicle, layout);
 				const squash =
 					!reduced && readyT < 250 ? 1 - 0.06 * Math.sin((Math.PI * readyT) / 250) : 1;
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
 				drawVehicle(ctx, vehicle, state, layout, 0, squash);
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
 			} else if (state.phase === 'driving') {
+				drawContactShadow(ctx, vehicle, layout, driveOffset);
 				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1);
 			} else {
 				const arrivedT = clamp01((now - (state.arrivedAt ?? now)) / timings.arriveMs);
 				const offset = -(vehicle.width * layout.gameScale) * (1 - easeOutBack(arrivedT));
+				drawContactShadow(ctx, vehicle, layout, offset);
 				ctx.save();
 				ctx.translate(offset, 0);
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
