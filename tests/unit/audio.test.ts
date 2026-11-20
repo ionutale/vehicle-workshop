@@ -1,0 +1,64 @@
+import { describe, expect, it, vi } from 'vitest';
+import { TONES, createAudioBus } from '#lib/game/audio';
+
+function fakeContext() {
+	const osc = {
+		type: 'sine',
+		frequency: { setValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn() },
+		connect: vi.fn(),
+		start: vi.fn(),
+		stop: vi.fn()
+	};
+	const gain = {
+		gain: { setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn() },
+		connect: vi.fn()
+	};
+	const ctx = {
+		currentTime: 0,
+		state: 'running',
+		destination: {},
+		createOscillator: () => osc,
+		createGain: () => gain,
+		createBufferSource: () => ({ buffer: null, connect: vi.fn(), start: vi.fn(), stop: vi.fn() }),
+		createBuffer: () => ({ getChannelData: () => new Float32Array(64) }),
+		createBiquadFilter: () => ({ type: 'lowpass', frequency: { setValueAtTime: vi.fn() }, connect: vi.fn() }),
+		resume: vi.fn()
+	} as unknown as AudioContext;
+	return { ctx, osc };
+}
+
+describe('audio', () => {
+	it('uses a rising two-note completion chime', () => {
+		expect(TONES.completeB).toBeGreaterThan(TONES.completeA);
+	});
+
+	it('ramps the engine upward', () => {
+		expect(TONES.engineTo).toBeGreaterThan(TONES.engineFrom);
+	});
+
+	it('does nothing without an AudioContext', () => {
+		const bus = createAudioBus(undefined);
+		expect(() => {
+			bus.unlock();
+			bus.pick();
+			bus.snap();
+			bus.complete();
+			bus.engine();
+		}).not.toThrow();
+	});
+
+	it('respects mute', () => {
+		const { ctx, osc } = fakeContext();
+		const bus = createAudioBus(ctx);
+		bus.setMuted(true);
+		bus.pick();
+		expect(osc.start).not.toHaveBeenCalled();
+	});
+
+	it('plays a tone when unmuted', () => {
+		const { ctx, osc } = fakeContext();
+		const bus = createAudioBus(ctx);
+		bus.pick();
+		expect(osc.start).toHaveBeenCalled();
+	});
+});

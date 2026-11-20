@@ -6,6 +6,8 @@
 		timeline,
 		type AssemblyState
 	} from '#lib/game/assembly';
+	import { createBrowserAudioBus } from '#lib/game/audio';
+	import { hydratePrefs, prefs, setMuted } from '#lib/preferences.svelte';
 	import {
 		computeLayout,
 		screenToWorld,
@@ -54,6 +56,9 @@
 		let layout: Layout;
 		let state: AssemblyState;
 		const dust = createDust();
+		const audio = createBrowserAudioBus();
+		hydratePrefs();
+		audio.setMuted(prefs.muted);
 
 		const viewport = (): Viewport => {
 			const rect = element.getBoundingClientRect();
@@ -108,10 +113,30 @@
 			);
 		};
 
+		const onMutePointer = (event: PointerEvent) => {
+			const world = toWorld({ x: event.clientX, y: event.clientY });
+			const button = layout.muteButton;
+			if (
+				world.x >= button.x &&
+				world.x <= button.x + button.w &&
+				world.y >= button.y &&
+				world.y <= button.y + button.h
+			) {
+				setMuted(!prefs.muted);
+				audio.setMuted(prefs.muted);
+				paint(performance.now(), 16);
+				event.preventDefault();
+				event.stopPropagation();
+			}
+		};
+		element.addEventListener('pointerdown', onMutePointer);
+
 		attachPointerHandlers(element, {
 			isActive: () => state.phase === 'assembling' && state.drag === null,
 			hit: (world) => hitPiece(shelfPieces(), world),
 			onPick: (piece: TrayPiece, world: Point) => {
+				audio.unlock();
+				audio.pick();
 				state = reduce(state, {
 					type: 'pick',
 					slotId: piece.slotId,
@@ -127,12 +152,14 @@
 				state = reduce(state, { type: 'move', at: world });
 			},
 			onDrop: (world) => {
+				const before = state.placed.length;
 				state = reduce(state, {
 					type: 'drop',
 					at: world,
 					now: performance.now(),
 					shelfCenters: shelfCenters()
 				});
+				if (state.placed.length > before) audio.snap();
 			},
 			toWorld
 		});
@@ -204,7 +231,7 @@
 			const arriving = state.phase === 'arriving';
 			const pieces = shelfPieces().filter((piece) => piece.slotId !== hidden);
 			drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
-				muted: false,
+				muted: prefs.muted,
 				now,
 				alphaFor: arriving
 					? (index) =>
@@ -247,6 +274,7 @@
 			element.dataset.phase = state.phase;
 			element.dataset.placed = String(state.placed.length);
 			element.dataset.tray = String(shelfPieces().length);
+			element.dataset.muted = String(prefs.muted);
 		};
 
 		reset(performance.now());
@@ -260,7 +288,11 @@
 
 			const before = state.phase;
 			state = reduce(state, { type: 'tick', now });
-			if (before === 'ready' && state.phase === 'driving') beginDrive();
+			if (before === 'ready' && state.phase === 'driving') {
+				beginDrive();
+				audio.engine();
+			}
+			if (before === 'assembling' && state.phase === 'ready') audio.complete();
 
 			if (state.phase === 'driving') {
 				const elapsed = now - state.phaseStartedAt;
@@ -369,6 +401,7 @@
 
 		return () => {
 			stop();
+			element.removeEventListener('pointerdown', onMutePointer);
 			document.removeEventListener('visibilitychange', onVisibility);
 			window.removeEventListener('resize', onResize);
 		};
