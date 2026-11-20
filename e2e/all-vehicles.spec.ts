@@ -1,18 +1,57 @@
 import { expect, test } from '@playwright/test';
 
-const IDS = ['car', 'fire-engine', 'bus', 'tractor', 'digger', 'van'];
+const IDS = [
+	'car',
+	'fire-engine',
+	'bus',
+	'tractor',
+	'digger',
+	'van',
+	'police-car',
+	'taxi',
+	'limousine',
+	'race-car',
+	'ambulance',
+	'camper',
+	'food-truck',
+	'ice-cream-van',
+	'mini-bus',
+	'mail-van',
+	'delivery-van',
+	'armoured-van',
+	'pickup',
+	'school-bus',
+	'tram',
+	'milk-tanker',
+	'fuel-tanker',
+	'tow-truck',
+	'crane-truck',
+	'cement-mixer',
+	'garbage-truck',
+	'flatbed-lorry',
+	'log-truck',
+	'car-transporter',
+	'snow-plough',
+	'street-sweeper',
+	'road-roller',
+	'forklift',
+	'bulldozer',
+	'monster-truck'
+];
 
-for (const id of IDS) {
-	test(`${id} completes and drives away in portrait`, async ({ page }) => {
-		await page.setViewportSize({ width: 390, height: 844 });
+test('every vehicle completes and hands off in portrait', async ({ page }) => {
+	test.setTimeout(180_000);
+	await page.setViewportSize({ width: 390, height: 844 });
+	const stage = page.getByTestId('stage');
+
+	for (const id of IDS) {
 		await page.goto(`/?test=1&vehicle=${id}&order=fixed`);
-		const stage = page.getByTestId('stage');
 		await expect(stage).toHaveAttribute('data-vehicle', id);
 		await page.evaluate(() => (window as any).__vw.complete());
 		await expect(stage).toHaveAttribute('data-phase', 'ready');
-		await expect(stage).not.toHaveAttribute('data-vehicle', id, { timeout: 4_000 });
-	});
-}
+		await expect(stage).not.toHaveAttribute('data-vehicle', id, { timeout: 5_000 });
+	}
+});
 
 test('the next vehicle is never the one just built', async ({ page }) => {
 	await page.goto('/?test=1&vehicle=car');

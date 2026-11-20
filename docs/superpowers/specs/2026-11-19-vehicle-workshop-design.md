@@ -124,7 +124,7 @@ export interface Vehicle {
 
 Two slots may share a `PartId` (two wheels, four on the tractor). Tray pieces are therefore **bound to a part, never to a slot**: a piece of a given part fills the nearest empty slot of that part within its snap radius. Wheels are interchangeable, which is the only interpretation consistent with "impossible to get wrong": a child who drops a wheel on the far wheel's ghost has still built the car. Ties (two anchors nearer than 2 units apart) resolve to the lower slot index, and wheel art is symmetric so a wrong-side landing is invisible.
 
-The catalogue ships six vehicles, in this order for the first pass, then shuffled for every arrival with no immediate repeat:
+The catalogue started with six vehicles and now ships thirty-six, all sharing the slot/part model below; the original six lead the `VEHICLES` array, then the roster is shuffled for every arrival with no immediate repeat. The table here is the original six that define the families (car, working truck, boxy van, tractor, tracked digger):
 
 | Vehicle | Pieces | Slots |
 |---|---|---|

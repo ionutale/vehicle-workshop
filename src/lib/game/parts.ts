@@ -23,7 +23,21 @@ export type PartId =
 	| 'arm'
 	| 'bucket'
 	| 'exhaust'
-	| 'beacon';
+	| 'beacon'
+	| 'tank'
+	| 'mixer'
+	| 'boom'
+	| 'hook'
+	| 'forks'
+	| 'plough'
+	| 'roller'
+	| 'brush'
+	| 'flatbed'
+	| 'logs'
+	| 'pantograph'
+	| 'spoiler'
+	| 'tipper'
+	| 'miniCar';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -193,6 +207,118 @@ export const PARTS: Record<PartId, PartShape> = {
 		radius: 30,
 		halfWidth: 8,
 		halfHeight: 27
+	},
+	tank: {
+		id: 'tank',
+		path: `${rounded(300, 84, 42)} M-120,0 L120,0`,
+		role: 'shell',
+		radius: 120,
+		halfWidth: 150,
+		halfHeight: 42
+	},
+	mixer: {
+		id: 'mixer',
+		path: 'M-62,-36 Q0,-78 62,-34 L44,58 Q0,76 -44,58 Z',
+		role: 'trim',
+		radius: 68,
+		halfWidth: 62,
+		halfHeight: 58
+	},
+	boom: {
+		id: 'boom',
+		path: 'M-140,14 L120,-16 L140,-4 L-120,30 Z',
+		role: 'trim',
+		radius: 110,
+		halfWidth: 140,
+		halfHeight: 30
+	},
+	hook: {
+		id: 'hook',
+		path: 'M-8,-34 L10,-34 L10,-4 Q10,24 0,24 Q-10,24 -10,2',
+		role: 'trim',
+		radius: 24,
+		halfWidth: 12,
+		halfHeight: 34
+	},
+	forks: {
+		id: 'forks',
+		path: 'M-46,-10 L66,-10 L66,4 L-24,4 L-24,36 L-46,36 Z',
+		role: 'trim',
+		radius: 50,
+		halfWidth: 66,
+		halfHeight: 36
+	},
+	plough: {
+		id: 'plough',
+		path: 'M-74,-26 L74,8 L74,32 L-74,2 Z',
+		role: 'shell',
+		radius: 60,
+		halfWidth: 74,
+		halfHeight: 32
+	},
+	roller: {
+		id: 'roller',
+		path: `${rounded(110, 66, 33)} ${circle(20)}`,
+		role: 'trim',
+		radius: 55,
+		halfWidth: 55,
+		halfHeight: 33
+	},
+	brush: {
+		id: 'brush',
+		path: 'M-48,-14 L48,-14 L48,4 L-48,4 Z M-40,4 L-40,26 M-24,4 L-24,26 M-8,4 L-8,26 M8,4 L8,26 M24,4 L24,26 M40,4 L40,26',
+		role: 'trim',
+		radius: 50,
+		halfWidth: 48,
+		halfHeight: 26
+	},
+	flatbed: {
+		id: 'flatbed',
+		path: `${rounded(330, 28, 8)} M-150,14 L-150,26 M150,14 L150,26`,
+		role: 'trim',
+		radius: 120,
+		halfWidth: 165,
+		halfHeight: 14
+	},
+	logs: {
+		id: 'logs',
+		path: `${circle(26)} M0,0` + ` ${circle(26)} M-30,-8` + ` ${circle(26)} M30,-8`,
+		role: 'trim',
+		radius: 55,
+		halfWidth: 56,
+		halfHeight: 26
+	},
+	pantograph: {
+		id: 'pantograph',
+		path: 'M-26,12 L0,-24 L26,12 L0,-2 Z M-32,12 L32,12',
+		role: 'rubber',
+		radius: 26,
+		halfWidth: 30,
+		halfHeight: 20
+	},
+	spoiler: {
+		id: 'spoiler',
+		path: 'M-54,4 L54,4 L54,18 L-54,10 Z M-34,18 L-34,30 M34,18 L34,30',
+		role: 'trim',
+		radius: 40,
+		halfWidth: 54,
+		halfHeight: 18
+	},
+	tipper: {
+		id: 'tipper',
+		path: 'M-104,22 L-86,-28 L86,-28 L104,22 Z',
+		role: 'shell',
+		radius: 80,
+		halfWidth: 104,
+		halfHeight: 28
+	},
+	miniCar: {
+		id: 'miniCar',
+		path: 'M-46,10 L-46,-6 Q-46,-14 -36,-14 L-18,-14 L-6,-30 Q-2,-34 6,-34 L22,-34 Q30,-34 34,-28 L44,-14 L46,-14 L46,10 Z',
+		role: 'shell',
+		radius: 34,
+		halfWidth: 46,
+		halfHeight: 34
 	},
 	beacon: {
 		id: 'beacon',

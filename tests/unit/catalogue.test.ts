@@ -47,8 +47,10 @@ describe('catalogue', () => {
 		expect(getVehicle('car').name).toBe('Car');
 	});
 
-	it('ships exactly six vehicles spanning every part shape', () => {
-		expect(VEHICLES.map((v) => v.id)).toEqual([
+	it('ships 36 distinct vehicles spanning every part shape', () => {
+		expect(VEHICLES).toHaveLength(36);
+		expect(new Set(VEHICLES.map((v) => v.id)).size).toBe(36);
+		expect(VEHICLES.slice(0, 6).map((v) => v.id)).toEqual([
 			'car',
 			'fire-engine',
 			'bus',
@@ -56,8 +58,9 @@ describe('catalogue', () => {
 			'digger',
 			'van'
 		]);
-		for (const v of VEHICLES)
+		for (const v of VEHICLES) {
 			for (const slot of v.slots) expect(Object.keys(PARTS)).toContain(slot.part);
+		}
 	});
 
 	it('uses scale rather than duplicate part ids for the tractor wheels', () => {

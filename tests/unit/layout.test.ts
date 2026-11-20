@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { PARTS } from '#lib/game/parts';
+import { VEHICLES } from '#lib/game/vehicles';
+import { pieceBoxes } from '#lib/render/tray';
 import {
 	computeLayout,
 	packShelf,
@@ -76,4 +79,26 @@ describe('computeLayout', () => {
 		expect(back.x).toBeCloseTo(120, 5);
 		expect(back.y).toBeCloseTo(300, 5);
 	});
+});
+
+
+describe('every vehicle fits both orientations', () => {
+	for (const vp of [
+		{ width: 390, height: 844 },
+		{ width: 844, height: 390 }
+	]) {
+		it(`packs the shelf of all 36 vehicles at ${vp.width}x${vp.height}`, () => {
+			for (const vehicle of VEHICLES) {
+				const boxes = pieceBoxes(vehicle);
+				const largest = Math.max(...vehicle.slots.map((slot) => PARTS[slot.part].radius));
+				const layout = computeLayout(vp, vehicle, boxes, noInsets, largest);
+				for (const row of layout.rows) {
+					const right = row.reduce((max, p) => Math.max(max, p.rect.x + p.rect.w), 0);
+					expect(right).toBeLessThanOrEqual(layout.shelf.x + layout.shelf.w + 0.001);
+				}
+				expect(layout.shelf.y + layout.shelf.h).toBeLessThan(layout.roadY);
+				expect(layout.gameScale).toBeGreaterThan(0.05);
+			}
+		});
+	}
 });

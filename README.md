@@ -2,7 +2,7 @@
 
 **Live:** https://vehicle-workshop-ruddy.vercel.app
 
-A touch game for ages 2–4. Parts sit on a shelf across the top; a child drags each one onto the empty chassis at the bottom. When the last piece lands, the vehicle drives off and the next one rolls in. No text, no score, no losing.
+A touch game for ages 2–4. Parts sit on a shelf across the top; a child drags each one onto the empty chassis at the bottom. When the last piece lands, the vehicle drives off and the next one rolls in. Thirty-six vehicles, no text, no score, no losing.
 
 ## Run it
 
@@ -29,7 +29,7 @@ pnpm icons          # regenerate static/icons from tools/icon.html
 Query flags useful in development and tests:
 
 - `?test=1` — compresses the drive-off timeline and exposes `window.__vw` (`rects()`, `state()`, `complete()`, `drag()`, `pickOne()`).
-- `?vehicle=<id>` — force one of `car`, `fire-engine`, `bus`, `tractor`, `digger`, `van`.
+- `?vehicle=<id>` — force any of the 36 vehicles (`car`, `fire-engine`, `bus`, `tractor`, `digger`, `van`, `police-car`, `taxi`, `limousine`, `race-car`, `ambulance`, `camper`, `food-truck`, `ice-cream-van`, `mini-bus`, `mail-van`, `delivery-van`, `armoured-van`, `pickup`, `school-bus`, `tram`, `milk-tanker`, `fuel-tanker`, `tow-truck`, `crane-truck`, `cement-mixer`, `garbage-truck`, `flatbed-lorry`, `log-truck`, `car-transporter`, `snow-plough`, `street-sweeper`, `road-roller`, `forklift`, `bulldozer`, `monster-truck`).
 - `?order=fixed` — accepted for deterministic runs; shelf order is already size-sorted, so it currently changes nothing.
 
 ## How it is built
