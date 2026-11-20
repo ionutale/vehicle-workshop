@@ -41,7 +41,6 @@ function recordingContext() {
 		ellipse: record('ellipse'),
 		setLineDash: record('setLineDash'),
 		rect: record('rect'),
-		clip: record('clip'),
 		globalAlpha: 1,
 		lineWidth: 1,
 		strokeStyle: '',
