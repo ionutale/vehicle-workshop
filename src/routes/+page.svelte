@@ -221,7 +221,7 @@
 					vehicle.palette,
 					{ x: state.drag.at.x - state.drag.grab.x, y: state.drag.at.y - state.drag.grab.y },
 					slotScale(state.drag.slotId),
-					{ lift: 3 }
+					{ lift: 3, outlineWidth: layout.outline }
 				);
 			} else if (state.settle) {
 				const settle = state.settle;
@@ -235,7 +235,8 @@
 						x: settle.from.x + (settle.to.x - settle.from.x) * eased,
 						y: settle.from.y + (settle.to.y - settle.from.y) * eased
 					},
-					slotScale(settle.slotId)
+					slotScale(settle.slotId),
+					{ outlineWidth: layout.outline }
 				);
 			}
 

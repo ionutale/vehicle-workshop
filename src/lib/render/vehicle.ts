@@ -16,6 +16,8 @@ export interface DrawPartOptions {
 	alpha?: number;
 	flip?: boolean;
 	lift?: number;
+	/** Outline thickness in world units; keeps the stroke weight even across scales. */
+	outlineWidth?: number;
 }
 
 export function drawPart(
@@ -26,7 +28,7 @@ export function drawPart(
 	scale: number,
 	options: DrawPartOptions = {}
 ): void {
-	const { alpha = 1, flip = false, lift = 0 } = options;
+	const { alpha = 1, flip = false, lift = 0, outlineWidth = OUTLINE_WIDTH } = options;
 	ctx.save();
 	ctx.translate(at.x, at.y - lift);
 	ctx.scale(flip ? -scale : scale, scale);
@@ -36,7 +38,7 @@ export function drawPart(
 	ctx.fillStyle = palette[part.role];
 	ctx.fill(path, 'evenodd');
 	ctx.strokeStyle = OUTLINE;
-	ctx.lineWidth = OUTLINE_WIDTH / Math.max(scale, 0.0001);
+	ctx.lineWidth = outlineWidth / Math.max(scale, 0.0001);
 	ctx.stroke(path);
 
 	ctx.restore();
@@ -60,7 +62,7 @@ export function drawChassisGhosts(
 		ctx.save();
 		ctx.scale(layout.gameScale, layout.gameScale);
 		ctx.strokeStyle = 'rgba(58, 39, 27, 0.35)';
-		ctx.lineWidth = 3 / layout.gameScale;
+		ctx.lineWidth = (layout.outline * 0.8) / layout.gameScale;
 		ctx.setLineDash([14 / layout.gameScale, 10 / layout.gameScale]);
 		ctx.stroke(pathFrom(vehicle.chassisPath));
 		ctx.restore();
@@ -91,7 +93,8 @@ export function drawChassisGhosts(
 
 		drawPart(ctx, shape, vehicle.palette, anchor, slotScale, {
 			alpha: highlighted ? 0.32 : 0.18,
-			flip: slot.flip
+			flip: slot.flip,
+			outlineWidth: layout.outline
 		});
 	}
 }
@@ -118,7 +121,7 @@ export function drawPlacedParts(
 			vehicle.palette,
 			anchor,
 			(slot.scale ?? 1) * layout.gameScale,
-			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1 }
+			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1, outlineWidth: layout.outline }
 		);
 	}
 }
@@ -144,7 +147,8 @@ export function drawVehicle(
 		const anchor = anchors.get(slot.id);
 		if (!anchor) continue;
 		drawPart(ctx, PARTS[slot.part], vehicle.palette, anchor, (slot.scale ?? 1) * layout.gameScale, {
-			flip: slot.flip
+			flip: slot.flip,
+			outlineWidth: layout.outline
 		});
 	}
 

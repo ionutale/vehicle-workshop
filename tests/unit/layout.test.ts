@@ -43,9 +43,10 @@ describe('computeLayout', () => {
 		expect(tall.worldWidth).toBeCloseTo((800 * 390) / 844, 5);
 	});
 
-	it('never scales the game above 1', () => {
-		expect(wide.gameScale).toBeLessThanOrEqual(1);
-		expect(tall.gameScale).toBeLessThanOrEqual(1);
+	it('scales the vehicle up on a wide viewport but never past 1.8', () => {
+		expect(wide.gameScale).toBeLessThanOrEqual(1.8);
+		expect(tall.gameScale).toBeLessThanOrEqual(1.8);
+		expect(wide.gameScale).toBeGreaterThan(tall.gameScale);
 	});
 
 	it('keeps the shelf above the vehicle and the vehicle on the road', () => {

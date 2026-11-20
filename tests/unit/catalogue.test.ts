@@ -37,7 +37,6 @@ describe('catalogue', () => {
 	});
 
 	it('never returns the vehicle it just showed', () => {
-		if (VEHICLES.length < 2) return; // the one-vehicle catalogue cannot avoid a repeat
 		for (const v of VEHICLES) {
 			const next = nextVehicleId(v.id, null);
 			expect(next).not.toBe(v.id);
@@ -46,5 +45,24 @@ describe('catalogue', () => {
 
 	it('finds a vehicle by id', () => {
 		expect(getVehicle('car').name).toBe('Car');
+	});
+
+	it('ships exactly six vehicles spanning every part shape', () => {
+		expect(VEHICLES.map((v) => v.id)).toEqual([
+			'car',
+			'fire-engine',
+			'bus',
+			'tractor',
+			'digger',
+			'van'
+		]);
+		for (const v of VEHICLES)
+			for (const slot of v.slots) expect(Object.keys(PARTS)).toContain(slot.part);
+	});
+
+	it('uses scale rather than duplicate part ids for the tractor wheels', () => {
+		const tractor = getVehicle('tractor');
+		const sizes = tractor.slots.filter((s) => s.part === 'wheel').map((s) => s.scale ?? 1);
+		expect(new Set(sizes).size).toBe(2);
 	});
 });

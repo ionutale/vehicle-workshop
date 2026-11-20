@@ -6,6 +6,7 @@
 
 export type PartId =
 	| 'body'
+	| 'bodyBox'
 	| 'cabin'
 	| 'cab'
 	| 'wheel'
@@ -54,6 +55,14 @@ export const PARTS: Record<PartId, PartShape> = {
 		radius: 120,
 		halfWidth: 220,
 		halfHeight: 55
+	},
+	bodyBox: {
+		id: 'bodyBox',
+		path: rounded(460, 120, 24),
+		role: 'shell',
+		radius: 130,
+		halfWidth: 230,
+		halfHeight: 60
 	},
 	cabin: {
 		id: 'cabin',

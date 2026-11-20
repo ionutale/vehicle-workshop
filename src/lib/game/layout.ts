@@ -60,6 +60,8 @@ export interface Layout {
 	vehicleAnchor: Point;
 	muteButton: Rect;
 	snapRadius: number;
+	/** Outline thickness in world units that renders as a consistent on-screen weight. */
+	outline: number;
 }
 
 /**
@@ -121,11 +123,13 @@ export function computeLayout(
 	const gameScale = Math.max(
 		0.05,
 		Math.min(
-			1,
+			1.8,
 			Math.max(1, panelW - SHELF_PADDING * 2) / widestRow,
-			heightBudget / Math.max(1, shelfUnits + vehicle.height)
+			heightBudget / Math.max(1, shelfUnits + vehicle.height),
+			(worldWidth * 0.78) / Math.max(1, vehicle.width)
 		)
 	);
+	const unitsPerPixel = WORLD_HEIGHT / Math.max(vp.height, 1);
 
 	const rows: PlacedPiece[][] = [];
 	let y = shelfY + SHELF_PADDING;
@@ -160,7 +164,8 @@ export function computeLayout(
 			w: MUTE_SIZE,
 			h: MUTE_SIZE
 		},
-		snapRadius: Math.max(48, largestPartRadius * 0.9 * gameScale)
+		snapRadius: Math.max(48, largestPartRadius * 0.9 * gameScale),
+		outline: Math.min(6, Math.max(1.6, unitsPerPixel * 2.2))
 	};
 }
 

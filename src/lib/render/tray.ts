@@ -80,7 +80,7 @@ export function drawShelf(
 		};
 		ctx.save();
 		ctx.globalAlpha = alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1;
-		drawPart(ctx, shape, palette, centre, scale);
+		drawPart(ctx, shape, palette, centre, scale, { outlineWidth: layout.outline });
 		ctx.restore();
 
 		if (hintSlotId === piece.slotId) {
