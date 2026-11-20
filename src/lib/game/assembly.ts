@@ -49,7 +49,7 @@ export interface AssemblyState {
 }
 
 export type AssemblyEvent =
-	| { type: 'pick'; slotId: string; at: Point; now: number }
+	| { type: 'pick'; slotId: string; at: Point; now: number; origin?: Point }
 	| { type: 'move'; at: Point }
 	| { type: 'drop'; at: Point; now: number; shelfCenters: Record<string, Point> }
 	| { type: 'tick'; now: number }
@@ -122,7 +122,10 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 				drag: {
 					slotId: event.slotId,
 					part: anchor.part,
-					grab: { x: event.at.x - anchor.x, y: event.at.y - anchor.y },
+					grab: {
+						x: event.at.x - (event.origin?.x ?? event.at.x),
+						y: event.at.y - (event.origin?.y ?? event.at.y)
+					},
 					at: event.at
 				},
 				settle: null
@@ -154,7 +157,7 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 				drag: null,
 				settle: {
 					slotId: drag.slotId,
-					from: event.at,
+					from: { x: drag.at.x - drag.grab.x, y: drag.at.y - drag.grab.y },
 					to: target ? { x: target.x, y: target.y } : shelfCenter,
 					startedAt: event.now,
 					duration: snapped ? 150 : 220
@@ -167,6 +170,13 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 		case 'tick': {
 			const t = timeline(state.timeScale);
 			const elapsed = event.now - state.phaseStartedAt;
+			const settle =
+				state.settle && event.now - state.settle.startedAt >= state.settle.duration
+					? null
+					: state.settle;
+			if (settle !== state.settle) {
+				return reduce({ ...state, settle }, event);
+			}
 			if (state.phase === 'ready' && elapsed >= t.readyMs) {
 				return { ...state, phase: 'driving', phaseStartedAt: state.phaseStartedAt + t.readyMs };
 			}

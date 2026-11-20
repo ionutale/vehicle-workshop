@@ -27,7 +27,7 @@ export function drawScene(ctx: CanvasRenderingContext2D, layout: Layout, scrollX
 	// Sun sits high and drifts slowest.
 	ctx.fillStyle = SUN;
 	ctx.beginPath();
-	ctx.arc(w * 0.8 - shift(0.08), h * 0.13, 46, 0, Math.PI * 2);
+	ctx.arc(w * 0.62 - shift(0.08), h * 0.13, 46, 0, Math.PI * 2);
 	ctx.fill();
 
 	// Two cloud groups, a little life without motion of their own.
