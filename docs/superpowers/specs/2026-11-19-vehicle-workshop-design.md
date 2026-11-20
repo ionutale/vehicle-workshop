@@ -189,7 +189,7 @@ No play history, no counters. A child who returns sees a fresh vehicle.
 `prefers-reduced-motion: reduce`:
 
 - Drag and snap tweens stay (they are the interaction, not decoration).
-- The vehicle still leaves the screen completely: same exit distance, 55 % speed (≈ 1200 ms), no background scroll and no dust. The hand-off still starts at 1700 ms, so the incoming chassis waits in an empty frame for ~500 ms.
+- The vehicle still leaves the screen completely: same exit distance and the same 1200 ms, with no background scroll, no dust and no squash. The hand-off still starts at 1700 ms.
 - The hint pulse becomes a static ring.
 - The completion bounce is removed.
 

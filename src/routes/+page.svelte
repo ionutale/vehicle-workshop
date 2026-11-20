@@ -7,7 +7,6 @@
 		type AssemblyState
 	} from '#lib/game/assembly';
 	import { createBrowserAudioBus } from '#lib/game/audio';
-	import { hydratePrefs, prefs, setMuted } from '#lib/preferences.svelte';
 	import {
 		computeLayout,
 		screenToWorld,
@@ -20,6 +19,7 @@
 	import { PARTS } from '#lib/game/parts';
 	import { attachPointerHandlers, hitPiece } from '#lib/game/pointer';
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';
+	import { hydratePrefs, markHintSeen, prefs, setMuted } from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
 	import { createDust } from '#lib/render/particles';
 	import { drawScene } from '#lib/render/scene';
@@ -33,7 +33,6 @@
 
 	let canvas: HTMLCanvasElement | undefined = $state();
 
-	const NO_INSETS: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
 	const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 	const easeInCubic = (t: number) => t * t * t;
 	const easeOutBack = (t: number) => {
@@ -55,14 +54,39 @@
 		let previousVehicleId: string | null = null;
 		let layout: Layout;
 		let state: AssemblyState;
+		let hintSlotId: string | null = null;
+		let lastClient: Point | null = null;
+		let lastInteraction = performance.now();
+		let reduced =
+			typeof window.matchMedia === 'function' &&
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 		const dust = createDust();
 		const audio = createBrowserAudioBus();
 		hydratePrefs();
 		audio.setMuted(prefs.muted);
 
+		const insetProbe = document.createElement('div');
+		insetProbe.setAttribute('aria-hidden', 'true');
+		insetProbe.style.cssText =
+			'position:fixed;inset:0;pointer-events:none;visibility:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);';
+		document.body.appendChild(insetProbe);
+
 		const viewport = (): Viewport => {
 			const rect = element.getBoundingClientRect();
 			return { width: rect.width, height: rect.height };
+		};
+
+		const readInsets = (): Insets => {
+			const style = getComputedStyle(insetProbe);
+			const unitsPerPixel = 800 / Math.max(viewport().height, 1);
+			const px = (value: string) => (Number.parseFloat(value) || 0) * unitsPerPixel;
+			return {
+				top: px(style.paddingTop),
+				right: px(style.paddingRight),
+				bottom: px(style.paddingBottom),
+				left: px(style.paddingLeft)
+			};
 		};
 
 		const originFor = (l: Layout, v: Vehicle): Point => ({
@@ -73,9 +97,19 @@
 		const measure = (v: Vehicle) => {
 			const vp = viewport();
 			const largest = Math.max(...v.slots.map((slot) => PARTS[slot.part].radius));
-			layout = computeLayout(vp, v, pieceBoxes(v), NO_INSETS, largest);
+			layout = computeLayout(vp, v, pieceBoxes(v), readInsets(), largest);
 			return layout;
 		};
+
+		const worldAt = (client: Point, l: Layout): Point => {
+			const rect = element.getBoundingClientRect();
+			return screenToWorld(
+				l,
+				{ width: rect.width, height: rect.height },
+				{ x: client.x - rect.left, y: client.y - rect.top }
+			);
+		};
+		const toWorld = (client: Point) => worldAt(client, layout);
 
 		const reset = (now: number) => {
 			measure(vehicle);
@@ -104,13 +138,25 @@
 
 		const shelfPieces = () => trayPieces(vehicle, state, layout);
 
-		const toWorld = (client: Point): Point => {
-			const rect = element.getBoundingClientRect();
-			return screenToWorld(
-				layout,
-				{ width: rect.width, height: rect.height },
-				{ x: client.x - rect.left, y: client.y - rect.top }
+		const realign = (at: Point | null) => {
+			const previous = state;
+			const fresh = createAssembly(
+				vehicle,
+				layout.gameScale,
+				layout.snapRadius,
+				performance.now(),
+				timeScale,
+				originFor(layout, vehicle)
 			);
+			state = {
+				...fresh,
+				phase: previous.phase,
+				placed: previous.placed,
+				phaseStartedAt: previous.phaseStartedAt,
+				arrivedAt: previous.arrivedAt,
+				drag: previous.drag ? { ...previous.drag, at: at ?? previous.drag.at } : null,
+				settle: previous.settle
+			};
 		};
 
 		const onMutePointer = (event: PointerEvent) => {
@@ -131,12 +177,20 @@
 		};
 		element.addEventListener('pointerdown', onMutePointer);
 
+		const trackClient = (event: PointerEvent) => {
+			lastClient = { x: event.clientX, y: event.clientY };
+			lastInteraction = performance.now();
+		};
+		element.addEventListener('pointermove', trackClient);
+		element.addEventListener('pointerdown', trackClient);
+
 		attachPointerHandlers(element, {
 			isActive: () => state.phase === 'assembling' && state.drag === null,
 			hit: (world) => hitPiece(shelfPieces(), world),
 			onPick: (piece: TrayPiece, world: Point) => {
 				audio.unlock();
 				audio.pick();
+				hintSlotId = null;
 				state = reduce(state, {
 					type: 'pick',
 					slotId: piece.slotId,
@@ -159,7 +213,10 @@
 					now: performance.now(),
 					shelfCenters: shelfCenters()
 				});
-				if (state.placed.length > before) audio.snap();
+				if (state.placed.length > before) {
+					audio.snap();
+					markHintSeen();
+				}
 			},
 			toWorld
 		});
@@ -176,6 +233,7 @@
 		};
 
 		const beginDrive = () => {
+			if (reduced) return;
 			const wheel = rearWheel();
 			dust.spawn(wheel.x, wheel.y + 6, 8);
 		};
@@ -206,13 +264,14 @@
 				: 0;
 			const readyT = state.phase === 'ready' ? now - state.phaseStartedAt : 0;
 
-			drawScene(ctx, layout, driveOffset * 0.35, 0);
+			drawScene(ctx, layout, reduced ? 0 : driveOffset * 0.35, 0);
 
 			if (state.phase === 'assembling') {
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
 				drawPlacedParts(ctx, vehicle, state, layout);
 			} else if (state.phase === 'ready') {
-				const squash = readyT < 250 ? 1 - 0.06 * Math.sin((Math.PI * readyT) / 250) : 1;
+				const squash =
+					!reduced && readyT < 250 ? 1 - 0.06 * Math.sin((Math.PI * readyT) / 250) : 1;
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
 				drawVehicle(ctx, vehicle, state, layout, 0, squash);
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
@@ -233,11 +292,10 @@
 			drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
 				muted: prefs.muted,
 				now,
+				hintSlotId,
 				alphaFor: arriving
 					? (index) =>
-							clamp01(
-								((now - (state.arrivedAt ?? now) - index * 60) / 180)
-							)
+							clamp01((now - (state.arrivedAt ?? now) - index * 60) / 180)
 					: undefined
 			});
 
@@ -275,6 +333,20 @@
 			element.dataset.placed = String(state.placed.length);
 			element.dataset.tray = String(shelfPieces().length);
 			element.dataset.muted = String(prefs.muted);
+			element.dataset.hint = String(hintSlotId !== null);
+		};
+
+		const updateHint = (now: number) => {
+			const idleFor = now - lastInteraction;
+			const delay = prefs.seenHint ? 12_000 : 2_000;
+			const eligible =
+				state.phase === 'assembling' && state.drag === null && state.settle === null;
+
+			if (!eligible || idleFor < delay) {
+				hintSlotId = null;
+				return;
+			}
+			if (hintSlotId === null) hintSlotId = shelfPieces()[0]?.slotId ?? null;
 		};
 
 		reset(performance.now());
@@ -299,6 +371,7 @@
 				if (elapsed >= timeline(state.timeScale).driveMs) handOff(now);
 			}
 
+			updateHint(now);
 			paint(now, dt);
 			raf = requestAnimationFrame(frame);
 		};
@@ -326,10 +399,21 @@
 		document.addEventListener('visibilitychange', onVisibility);
 
 		const onResize = () => {
-			state = { ...state, drag: null };
 			measure(vehicle);
+			realign(lastClient ? worldAt(lastClient, layout) : null);
 		};
 		window.addEventListener('resize', onResize);
+		window.visualViewport?.addEventListener('resize', onResize);
+		window.visualViewport?.addEventListener('scroll', onResize);
+
+		const motionQuery =
+			typeof window.matchMedia === 'function'
+				? window.matchMedia('(prefers-reduced-motion: reduce)')
+				: null;
+		const onMotion = () => {
+			reduced = motionQuery?.matches ?? false;
+		};
+		motionQuery?.addEventListener('change', onMotion);
 
 		if (testMode) {
 			(window as unknown as Record<string, unknown>).__vw = {
@@ -377,6 +461,30 @@
 					placed: [...state.placed],
 					tray: shelfPieces().length
 				}),
+				drag: () => {
+					if (!state.drag) return null;
+					const screen = worldToScreen(layout, viewport(), {
+						x: state.drag.at.x,
+						y: state.drag.at.y
+					});
+					return { part: state.drag.part, screen };
+				},
+				pickOne: () => {
+					const piece = shelfPieces()[0];
+					if (!piece) return;
+					const at = {
+						x: piece.rect.x + piece.rect.w / 2,
+						y: piece.rect.y + piece.rect.h / 2
+					};
+					state = reduce(state, {
+						type: 'pick',
+						slotId: piece.slotId,
+						at,
+						now: performance.now(),
+						origin: at
+					});
+					hintSlotId = null;
+				},
 				complete: () => {
 					for (const anchor of [...state.anchors]) {
 						if (state.placed.includes(anchor.slotId)) continue;
@@ -402,8 +510,14 @@
 		return () => {
 			stop();
 			element.removeEventListener('pointerdown', onMutePointer);
+			element.removeEventListener('pointermove', trackClient);
+			element.removeEventListener('pointerdown', trackClient);
 			document.removeEventListener('visibilitychange', onVisibility);
 			window.removeEventListener('resize', onResize);
+			window.visualViewport?.removeEventListener('resize', onResize);
+			window.visualViewport?.removeEventListener('scroll', onResize);
+			motionQuery?.removeEventListener('change', onMotion);
+			insetProbe.remove();
 		};
 	});
 </script>
