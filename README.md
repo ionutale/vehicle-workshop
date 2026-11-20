@@ -1,5 +1,7 @@
 # Vehicle Workshop
 
+**Live:** https://vehicle-workshop-ruddy.vercel.app
+
 A touch game for ages 2–4. Parts sit on a shelf across the top; a child drags each one onto the empty chassis at the bottom. When the last piece lands, the vehicle drives off and the next one rolls in. No text, no score, no losing.
 
 ## Run it
