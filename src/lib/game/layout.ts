@@ -104,7 +104,11 @@ export function computeLayout(
 	const shelfY = SHELF_INSET + insets.top;
 
 	const panelX = SHELF_INSET + insets.left;
-	const panelW = Math.max(1, worldWidth - SHELF_INSET * 2 - insets.left - insets.right);
+	const muteReserve = MUTE_SIZE + 12;
+	const panelW = Math.max(
+		1,
+		worldWidth - SHELF_INSET * 2 - muteReserve - insets.left - insets.right
+	);
 
 	const packed = packShelf(pieces, panelW, SHELF_GAP);
 	const widestRow = Math.max(1, ...packed.map((row) => rowWidth(row, SHELF_GAP)));
@@ -151,7 +155,7 @@ export function computeLayout(
 		roadY,
 		vehicleAnchor: { x: worldWidth / 2, y: roadY },
 		muteButton: {
-			x: worldWidth - SHELF_INSET - insets.right - MUTE_SIZE,
+			x: panelX + panelW + 12,
 			y: shelfY,
 			w: MUTE_SIZE,
 			h: MUTE_SIZE

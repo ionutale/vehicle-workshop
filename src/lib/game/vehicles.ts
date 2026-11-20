@@ -18,6 +18,8 @@ export interface Vehicle {
 	name: string;
 	width: number;
 	height: number;
+	/** Vehicle-unit y where the tyres meet the road. */
+	groundY: number;
 	palette: Record<Role, string>;
 	/** Dash-drawn silhouette, shown only while no slot is filled. */
 	chassisPath: string;
@@ -38,6 +40,7 @@ export const VEHICLES: Vehicle[] = [
 		name: 'Car',
 		width: 480,
 		height: 220,
+		groundY: 190,
 		palette: CAR_PALETTE,
 		chassisPath:
 			'M20,150 Q20,145 26,145 L150,145 L170,105 Q178,90 196,90 L274,90 Q292,90 300,105 L320,145 L454,145 Q460,145 460,155 L460,185 Q460,200 445,200 L35,200 Q20,200 20,185 Z',
