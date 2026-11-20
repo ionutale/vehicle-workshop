@@ -47,6 +47,8 @@ export interface ShelfOptions {
 	now?: number;
 	/** Per-piece opacity, used for the staggered pop-in after a hand-off. */
 	alphaFor?: (index: number) => number;
+	/** Serve calm, static affordances when the user asked for less motion. */
+	reduced?: boolean;
 }
 
 export function drawShelf(
@@ -57,7 +59,7 @@ export function drawShelf(
 	palette: Record<Role, string>,
 	options: ShelfOptions = {}
 ): void {
-	const { hintSlotId = null, muted = false, now = 0, alphaFor } = options;
+	const { hintSlotId = null, muted = false, now = 0, alphaFor, reduced = false } = options;
 	const shelf = layout.shelf;
 
 	ctx.save();
@@ -78,19 +80,27 @@ export function drawShelf(
 			x: piece.rect.x + piece.rect.w / 2,
 			y: piece.rect.y + piece.rect.h / 2
 		};
-		ctx.save();
-		ctx.globalAlpha = alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1;
-		drawPart(ctx, shape, palette, centre, scale, { outlineWidth: layout.outline });
-		ctx.restore();
+		drawPart(ctx, shape, palette, centre, scale, {
+			outlineWidth: layout.outline,
+			alpha: alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1
+		});
 
 		if (hintSlotId === piece.slotId) {
 			const pulse = 0.5 + 0.5 * Math.sin(now / 260);
 			ctx.save();
 			ctx.strokeStyle = SUN;
-			ctx.globalAlpha = 0.45 + 0.45 * pulse;
+			ctx.globalAlpha = reduced ? 0.8 : 0.45 + 0.45 * pulse;
 			ctx.lineWidth = 5;
 			ctx.beginPath();
-			ctx.arc(centre.x, centre.y, Math.max(piece.rect.w, piece.rect.h) * 0.78 + 8, 0, Math.PI * 2);
+			ctx.ellipse(
+				centre.x,
+				centre.y,
+				piece.rect.w / 2 + 10,
+				piece.rect.h / 2 + 10,
+				0,
+				0,
+				Math.PI * 2
+			);
 			ctx.stroke();
 			ctx.restore();
 		}

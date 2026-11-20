@@ -11,7 +11,6 @@ export const ROAD_FRACTION = 0.8;
 const SHELF_GAP = 16;
 const SHELF_PADDING = 10;
 const VEHICLE_GAP = 64;
-const TEACHING_ROWS = 2;
 const MUTE_SIZE = 56;
 
 export interface Point {
@@ -105,8 +104,11 @@ export function computeLayout(
 	const roadY = WORLD_HEIGHT * ROAD_FRACTION;
 	const shelfY = SHELF_INSET + insets.top;
 
+	const unitsPerPixel = WORLD_HEIGHT / Math.max(vp.height, 1);
+	const muteSize = Math.max(MUTE_SIZE, 45 * unitsPerPixel);
+
 	const panelX = SHELF_INSET + insets.left;
-	const muteReserve = MUTE_SIZE + 12;
+	const muteReserve = muteSize + 12;
 	const panelW = Math.max(
 		1,
 		worldWidth - SHELF_INSET * 2 - muteReserve - insets.left - insets.right
@@ -129,7 +131,6 @@ export function computeLayout(
 			(worldWidth * 0.78) / Math.max(1, vehicle.width)
 		)
 	);
-	const unitsPerPixel = WORLD_HEIGHT / Math.max(vp.height, 1);
 
 	const rows: PlacedPiece[][] = [];
 	let y = shelfY + SHELF_PADDING;
@@ -154,25 +155,19 @@ export function computeLayout(
 		worldWidth,
 		worldHeight: WORLD_HEIGHT,
 		gameScale,
-		shelf: { x: panelX, y: shelfY, w: panelW, h: Math.max(shelfHeight, MUTE_SIZE) },
+		shelf: { x: panelX, y: shelfY, w: panelW, h: Math.max(shelfHeight, muteSize) },
 		rows,
 		roadY,
 		vehicleAnchor: { x: worldWidth / 2, y: roadY },
 		muteButton: {
 			x: panelX + panelW + 12,
 			y: shelfY,
-			w: MUTE_SIZE,
-			h: MUTE_SIZE
+			w: muteSize,
+			h: muteSize
 		},
 		snapRadius: Math.max(48, largestPartRadius * 0.9 * gameScale),
 		outline: Math.min(6, Math.max(1.6, unitsPerPixel * 2.2))
 	};
-}
-
-/** The number of rows the shelf needs before any scale is applied; used by callers that
- * want to reserve space. Kept for the teaching-mode check. */
-export function teachingRows(pieces: PieceBox[], panelWidth: number): number {
-	return Math.min(TEACHING_ROWS, packShelf(pieces, panelWidth, SHELF_GAP).length);
 }
 
 export function screenToWorld(layout: Layout, vp: Viewport, p: Point): Point {

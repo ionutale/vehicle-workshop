@@ -22,7 +22,7 @@
 	import { hydratePrefs, markHintSeen, prefs, setMuted } from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
 	import { createDust } from '#lib/render/particles';
-	import { drawScene } from '#lib/render/scene';
+	import { drawFarLayer, drawRoad } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
 	import {
 		drawChassisGhosts,
@@ -56,10 +56,17 @@
 		let state: AssemblyState;
 		let hintSlotId: string | null = null;
 		let lastClient: Point | null = null;
-		let lastInteraction = performance.now();
+		let lastInteraction = 0;
+		let hiddenAccum = 0;
+		let hiddenAt: number | null = null;
+		const nowMs = () => performance.now() - hiddenAccum;
 		let reduced =
 			typeof window.matchMedia === 'function' &&
 			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		let backdrop: HTMLCanvasElement | null = null;
+		let needsPaint = true;
+		let frames = 0;
 
 		const dust = createDust();
 		const audio = createBrowserAudioBus();
@@ -94,10 +101,36 @@
 			y: l.roadY + 10 - v.groundY * l.gameScale
 		});
 
+		const buildBackdrop = () => {
+			const vp = viewport();
+			const dpr = devicePixelRatioFor(window);
+			const layer = document.createElement('canvas');
+			layer.width = Math.max(1, Math.round(2 * vp.width * dpr));
+			layer.height = Math.max(1, Math.round(vp.height * dpr));
+			const layerCtx = layer.getContext('2d');
+			if (!layerCtx) return;
+			layerCtx.setTransform(
+				(dpr * vp.width) / layout.worldWidth,
+				0,
+				0,
+				(dpr * vp.height) / layout.worldHeight,
+				0,
+				0
+			);
+			layerCtx.lineJoin = 'round';
+			layerCtx.lineCap = 'round';
+			drawFarLayer(layerCtx, layout, 0);
+			layerCtx.translate(layout.worldWidth, 0);
+			drawFarLayer(layerCtx, layout, 0);
+			backdrop = layer;
+		};
+
 		const measure = (v: Vehicle) => {
 			const vp = viewport();
 			const largest = Math.max(...v.slots.map((slot) => PARTS[slot.part].radius));
 			layout = computeLayout(vp, v, pieceBoxes(v), readInsets(), largest);
+			buildBackdrop();
+			needsPaint = true;
 			return layout;
 		};
 
@@ -136,15 +169,30 @@
 			return centres;
 		};
 
-		const shelfPieces = () => trayPieces(vehicle, state, layout);
+		let trayMemo: { state: AssemblyState; layout: Layout; vehicle: Vehicle; pieces: TrayPiece[] } | null =
+			null;
+		const shelfPieces = () => {
+			if (
+				trayMemo &&
+				trayMemo.state === state &&
+				trayMemo.layout === layout &&
+				trayMemo.vehicle === vehicle
+			) {
+				return trayMemo.pieces;
+			}
+			const pieces = trayPieces(vehicle, state, layout);
+			trayMemo = { state, layout, vehicle, pieces };
+			return pieces;
+		};
 
 		const realign = (at: Point | null) => {
 			const previous = state;
+			const scaleRatio = layout.gameScale / Math.max(previous.gameScale, 0.0001);
 			const fresh = createAssembly(
 				vehicle,
 				layout.gameScale,
 				layout.snapRadius,
-				performance.now(),
+				nowMs(),
 				timeScale,
 				originFor(layout, vehicle)
 			);
@@ -154,8 +202,17 @@
 				placed: previous.placed,
 				phaseStartedAt: previous.phaseStartedAt,
 				arrivedAt: previous.arrivedAt,
-				drag: previous.drag ? { ...previous.drag, at: at ?? previous.drag.at } : null,
-				settle: previous.settle
+				drag: previous.drag
+					? {
+							...previous.drag,
+							grab: {
+								x: previous.drag.grab.x * scaleRatio,
+								y: previous.drag.grab.y * scaleRatio
+							},
+							at: at ?? previous.drag.at
+						}
+					: null,
+				settle: null
 			};
 		};
 
@@ -170,7 +227,7 @@
 			) {
 				setMuted(!prefs.muted);
 				audio.setMuted(prefs.muted);
-				paint(performance.now(), 16);
+				needsPaint = true;
 				event.preventDefault();
 				event.stopPropagation();
 			}
@@ -179,14 +236,15 @@
 
 		const trackClient = (event: PointerEvent) => {
 			lastClient = { x: event.clientX, y: event.clientY };
-			lastInteraction = performance.now();
+			lastInteraction = nowMs();
 		};
 		element.addEventListener('pointermove', trackClient);
 		element.addEventListener('pointerdown', trackClient);
 
-		attachPointerHandlers(element, {
+		const detachPointer = attachPointerHandlers(element, {
 			isActive: () => state.phase === 'assembling' && state.drag === null,
-			hit: (world) => hitPiece(shelfPieces(), world),
+			hit: (world) =>
+				hitPiece(shelfPieces(), world, 44 * (800 / Math.max(viewport().height, 1))),
 			onPick: (piece: TrayPiece, world: Point) => {
 				audio.unlock();
 				audio.pick();
@@ -195,7 +253,7 @@
 					type: 'pick',
 					slotId: piece.slotId,
 					at: world,
-					now: performance.now(),
+					now: nowMs(),
 					origin: {
 						x: piece.rect.x + piece.rect.w / 2,
 						y: piece.rect.y + piece.rect.h / 2
@@ -204,15 +262,17 @@
 			},
 			onMove: (world) => {
 				state = reduce(state, { type: 'move', at: world });
+				needsPaint = true;
 			},
 			onDrop: (world) => {
 				const before = state.placed.length;
 				state = reduce(state, {
 					type: 'drop',
 					at: world,
-					now: performance.now(),
+					now: nowMs(),
 					shelfCenters: shelfCenters()
 				});
+				needsPaint = true;
 				if (state.placed.length > before) {
 					audio.snap();
 					markHintSeen();
@@ -264,7 +324,15 @@
 				: 0;
 			const readyT = state.phase === 'ready' ? now - state.phaseStartedAt : 0;
 
-			drawScene(ctx, layout, reduced ? 0 : driveOffset * 0.35, 0);
+			const scroll = reduced ? 0 : driveOffset * 0.35;
+			if (backdrop) {
+				const offset =
+					((scroll % layout.worldWidth) + layout.worldWidth) % layout.worldWidth;
+				ctx.drawImage(backdrop, -offset, 0, layout.worldWidth * 2, layout.worldHeight);
+			} else {
+				drawFarLayer(ctx, layout, scroll);
+			}
+			drawRoad(ctx, layout, 0);
 
 			if (state.phase === 'assembling') {
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
@@ -291,6 +359,7 @@
 			const pieces = shelfPieces().filter((piece) => piece.slotId !== hidden);
 			drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
 				muted: prefs.muted,
+				reduced,
 				now,
 				hintSlotId,
 				alphaFor: arriving
@@ -349,20 +418,25 @@
 			if (hintSlotId === null) hintSlotId = shelfPieces()[0]?.slotId ?? null;
 		};
 
-		reset(performance.now());
+		lastInteraction = nowMs();
+		reset(nowMs());
 
 		let raf = 0;
-		let last = performance.now();
+		let last = 0;
 
-		const frame = (now: number) => {
+		const frame = () => {
+			const now = nowMs();
 			const dt = Math.min(32, now - last);
 			last = now;
 
 			const before = state.phase;
+			const previous = state;
 			state = reduce(state, { type: 'tick', now });
+			if (state !== previous) needsPaint = true;
 			if (before === 'ready' && state.phase === 'driving') {
 				beginDrive();
 				audio.engine();
+				needsPaint = true;
 			}
 			if (before === 'assembling' && state.phase === 'ready') audio.complete();
 
@@ -371,14 +445,26 @@
 				if (elapsed >= timeline(state.timeScale).driveMs) handOff(now);
 			}
 
+			const hadHint = hintSlotId;
 			updateHint(now);
-			paint(now, dt);
+			if (hintSlotId !== hadHint) needsPaint = true;
+
+			const animating =
+				state.drag !== null ||
+				state.settle !== null ||
+				state.phase !== 'assembling' ||
+				hintSlotId !== null;
+			if (needsPaint || animating) {
+				paint(now, dt);
+				needsPaint = false;
+				frames++;
+			}
 			raf = requestAnimationFrame(frame);
 		};
 
 		const start = () => {
 			if (raf !== 0) return;
-			last = performance.now();
+			last = nowMs();
 			raf = requestAnimationFrame(frame);
 		};
 		const stop = () => {
@@ -390,9 +476,15 @@
 
 		const onVisibility = () => {
 			if (document.hidden) {
+				if (hiddenAt === null) hiddenAt = performance.now();
 				stop();
 				dust.clear();
 			} else {
+				if (hiddenAt !== null) {
+					hiddenAccum += performance.now() - hiddenAt;
+					hiddenAt = null;
+					lastInteraction = nowMs();
+				}
 				start();
 			}
 		};
@@ -461,6 +553,7 @@
 					placed: [...state.placed],
 					tray: shelfPieces().length
 				}),
+				frames: () => frames,
 				drag: () => {
 					if (!state.drag) return null;
 					const screen = worldToScreen(layout, viewport(), {
@@ -480,7 +573,7 @@
 						type: 'pick',
 						slotId: piece.slotId,
 						at,
-						now: performance.now(),
+						now: nowMs(),
 						origin: at
 					});
 					hintSlotId = null;
@@ -493,13 +586,13 @@
 							type: 'pick',
 							slotId: anchor.slotId,
 							at,
-							now: performance.now(),
+							now: nowMs(),
 							origin: at
 						});
 						state = reduce(state, {
 							type: 'drop',
 							at,
-							now: performance.now(),
+							now: nowMs(),
 							shelfCenters: {}
 						});
 					}
@@ -509,6 +602,7 @@
 
 		return () => {
 			stop();
+			detachPointer();
 			element.removeEventListener('pointerdown', onMutePointer);
 			element.removeEventListener('pointermove', trackClient);
 			element.removeEventListener('pointerdown', trackClient);

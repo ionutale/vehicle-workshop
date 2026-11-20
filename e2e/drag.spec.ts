@@ -28,3 +28,42 @@ test('a missed drop returns the piece to the shelf', async ({ page }) => {
 	await expect(stage).toHaveAttribute('data-placed', '0');
 	await expect(stage).toHaveAttribute('data-tray', '6');
 });
+
+
+test('releasing outside the play area cancels the drag', async ({ page }) => {
+	await page.goto('/?test=1&vehicle=car');
+	const stage = page.getByTestId('stage');
+	await expect(stage).toHaveAttribute('data-vehicle', 'car');
+	const rects = await page.evaluate(() => (window as any).__vw.rects());
+	const wheel = rects.shelf.find((p: any) => p.part === 'wheel');
+
+	await page.mouse.move(wheel.x + wheel.w / 2, wheel.y + wheel.h / 2);
+	await page.mouse.down();
+	await page.mouse.move(2, 2, { steps: 6 });
+	await page.mouse.up();
+
+	await expect(stage).toHaveAttribute('data-placed', '0');
+	await expect(stage).toHaveAttribute('data-tray', '6');
+});
+
+
+test('a wide body grabbed near its end still lands when the body sits on its ghost', async ({
+	page
+}) => {
+	await page.goto('/?test=1&vehicle=car');
+	const stage = page.getByTestId('stage');
+	await expect(stage).toHaveAttribute('data-vehicle', 'car');
+	const rects = await page.evaluate(() => (window as any).__vw.rects());
+	const body = rects.shelf.find((p: any) => p.part === 'body');
+	const slot = rects.slots.find((p: any) => p.part === 'body');
+
+	const grabX = body.x + 10;
+	const grabY = body.y + body.h / 2;
+	await page.mouse.move(grabX, grabY);
+	await page.mouse.down();
+	// Put the piece's centre on the slot, so the finger sits well left of it.
+	await page.mouse.move(slot.x - (body.w / 2 - 10), slot.y, { steps: 10 });
+	await page.mouse.up();
+
+	await expect(stage).toHaveAttribute('data-placed', '1');
+});

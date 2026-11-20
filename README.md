@@ -28,7 +28,7 @@ Query flags useful in development and tests:
 
 - `?test=1` — compresses the drive-off timeline and exposes `window.__vw` (`rects()`, `state()`, `complete()`, `drag()`, `pickOne()`).
 - `?vehicle=<id>` — force one of `car`, `fire-engine`, `bus`, `tractor`, `digger`, `van`.
-- `?order=fixed` — keep shelf pieces in declaration order instead of shuffling.
+- `?order=fixed` — accepted for deterministic runs; shelf order is already size-sorted, so it currently changes nothing.
 
 ## How it is built
 

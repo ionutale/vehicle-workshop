@@ -28,6 +28,28 @@ describe('assembly reducer', () => {
 		expect(dropped.settle?.duration).toBe(150);
 	});
 
+	it('snaps by the piece anchor, not the finger, when a wide part is grabbed near its end', () => {
+		const state = base();
+		const body = state.anchors.find((a) => a.part === 'body')!;
+		const shelf = { x: body.x - 300, y: body.y };
+		// Grabbed 100 units right of the piece's centre.
+		const picked = reduce(state, {
+			type: 'pick',
+			slotId: 'body',
+			at: { x: shelf.x + 100, y: shelf.y },
+			now: 1,
+			origin: shelf
+		});
+		// The finger is 100 units right of the slot, but the piece itself is centred on it.
+		const dropped = reduce(picked, {
+			type: 'drop',
+			at: { x: body.x + 100, y: body.y },
+			now: 2,
+			shelfCenters: {}
+		});
+		expect(dropped.placed).toEqual(['body']);
+	});
+
 	it('returns the piece to the shelf when the drop misses', () => {
 		const state = base();
 		const picked = reduce(state, { type: 'pick', slotId: 'body', at: { x: 10, y: 10 }, now: 10 });

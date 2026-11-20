@@ -150,9 +150,7 @@ export const VEHICLES: Vehicle[] = [
 export const FIRST_VEHICLE_ID = 'car';
 
 export function getVehicle(id: string): Vehicle {
-	const found = VEHICLES.find((vehicle) => vehicle.id === id);
-	if (!found) throw new Error(`Unknown vehicle: ${id}`);
-	return found;
+	return VEHICLES.find((vehicle) => vehicle.id === id) ?? VEHICLES[0];
 }
 
 /** Pick any vehicle that is neither the one just shown nor the one before it, when possible. */

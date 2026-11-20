@@ -1,5 +1,5 @@
 import type { Point } from './layout';
-import { PARTS, type PartId } from './parts';
+import type { PartId } from './parts';
 import { getVehicle, type Slot, type Vehicle } from './vehicles';
 
 /**
@@ -147,7 +147,10 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 		case 'drop': {
 			if (!state.drag) return state;
 			const drag = state.drag;
-			const candidate = nearestSlot(state, drag.part, event.at);
+			// Match the piece's anchor, not the fingertip: a wide slab grabbed near its end
+			// must still land when its body sits on the ghost.
+			const pieceAt = { x: event.at.x - drag.grab.x, y: event.at.y - drag.grab.y };
+			const candidate = nearestSlot(state, drag.part, pieceAt);
 			const snapped = candidate !== null && candidate.distance <= state.snapRadius;
 			const target = snapped
 				? state.anchors.find((a) => a.slotId === candidate.slotId)!
@@ -164,7 +167,7 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 				drag: null,
 				settle: {
 					slotId: drag.slotId,
-					from: { x: drag.at.x - drag.grab.x, y: drag.at.y - drag.grab.y },
+					from: pieceAt,
 					to: target ? { x: target.x, y: target.y } : shelfCenter,
 					startedAt: event.now,
 					duration: snapped ? 150 : 220
@@ -213,9 +216,4 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 			};
 		}
 	}
-}
-
-/** The part radius that sets the snap distance for a given part. */
-export function partSnapRadius(part: PartId, gameScale: number): number {
-	return Math.max(48, PARTS[part].radius * 0.9 * gameScale);
 }

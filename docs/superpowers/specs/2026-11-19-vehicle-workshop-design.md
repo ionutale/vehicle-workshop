@@ -131,11 +131,11 @@ The catalogue ships six vehicles, in this order for the first pass, then shuffle
 | car | 6 | body, cabin, 2 wheels, door, headlight |
 | fire engine | 7 | body, cabin, 2 wheels, ladder, light bar, hose reel |
 | bus | 6 | body, roof, 2 wheels, door, window strip |
-| tractor | 7 | body, cabin, 2 rear wheels, 2 front wheels, exhaust |
+| tractor | 6 | body, cabin, rear wheel, front wheel, exhaust, headlight |
 | digger | 6 | tracks, body, cabin, arm, bucket, beacon |
 | van | 6 | body, cab, 2 wheels, sliding door, roof sign |
 
-Every slot is filled by exactly one tray piece of the same part; replicated parts are interchangeable, so a piece can never be misplaced. The tray holds exactly one piece per unfilled slot.
+Every slot is filled by exactly one tray piece of the same part; replicated parts are interchangeable, so a piece can never be misplaced. The tray holds exactly one piece per unfilled slot. A side view shows two wheels per vehicle, so a tractor is six pieces, not seven.
 
 At rest, every unfilled slot shows a faint (18 % alpha) ghost of its own part, and the chassis outline is dashed only until the first piece lands. The answer is therefore always visible — this is an execution game for toddlers, not a puzzle — and picking a piece brightens only the ghosts for that part.
 

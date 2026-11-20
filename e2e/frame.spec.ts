@@ -23,3 +23,12 @@ test('draws the scene, the ghosts and a shelf of pieces', async ({ page }) => {
 
 	await expect(stage).toHaveScreenshot('first-frame-portrait.png', { maxDiffPixelRatio: 0.02 });
 });
+
+
+test('draws the landscape composition', async ({ page }) => {
+	await page.setViewportSize({ width: 844, height: 390 });
+	await page.goto('/');
+	const stage = page.getByTestId('stage');
+	await expect(stage).toHaveAttribute('data-vehicle', 'car');
+	await expect(stage).toHaveScreenshot('first-frame-landscape.png', { maxDiffPixelRatio: 0.02 });
+});

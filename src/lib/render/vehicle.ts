@@ -1,7 +1,7 @@
 import type { AssemblyState, SlotAnchor } from '../game/assembly';
 import type { Layout, Point } from '../game/layout';
 import { PARTS, type PartShape, type PartId, type Role } from '../game/parts';
-import type { Vehicle } from '../game/vehicles';
+import type { Slot, Vehicle } from '../game/vehicles';
 import { pathFrom } from './draw';
 import { OUTLINE } from './scene';
 
@@ -44,8 +44,25 @@ export function drawPart(
 	ctx.restore();
 }
 
+const anchorMaps = new WeakMap<AssemblyState, Map<string, SlotAnchor>>();
+const sortedSlots = new WeakMap<Vehicle, Slot[]>();
+
 function anchorMap(state: AssemblyState): Map<string, SlotAnchor> {
-	return new Map(state.anchors.map((anchor) => [anchor.slotId, anchor]));
+	let map = anchorMaps.get(state);
+	if (!map) {
+		map = new Map(state.anchors.map((anchor) => [anchor.slotId, anchor]));
+		anchorMaps.set(state, map);
+	}
+	return map;
+}
+
+function slotsInDrawOrder(vehicle: Vehicle): Slot[] {
+	let slots = sortedSlots.get(vehicle);
+	if (!slots) {
+		slots = [...vehicle.slots].sort((a, b) => a.z - b.z);
+		sortedSlots.set(vehicle, slots);
+	}
+	return slots;
 }
 
 /** Faint part-shaped ghosts at every unfilled slot, and the dashed chassis before the first. */
@@ -60,6 +77,11 @@ export function drawChassisGhosts(
 
 	if (state.placed.length === 0) {
 		ctx.save();
+		// Keep the silhouette off the tarmac.
+		ctx.beginPath();
+		ctx.rect(0, 0, layout.worldWidth, layout.roadY);
+		ctx.clip();
+		ctx.translate(state.origin.x, state.origin.y);
 		ctx.scale(layout.gameScale, layout.gameScale);
 		ctx.strokeStyle = 'rgba(58, 39, 27, 0.35)';
 		ctx.lineWidth = (layout.outline * 0.8) / layout.gameScale;
@@ -107,9 +129,7 @@ export function drawPlacedParts(
 	lampAlpha = 1
 ): void {
 	const anchors = anchorMap(state);
-	const placed = vehicle.slots
-		.filter((slot) => state.placed.includes(slot.id))
-		.sort((a, b) => a.z - b.z);
+	const placed = slotsInDrawOrder(vehicle).filter((slot) => state.placed.includes(slot.id));
 
 	for (const slot of placed) {
 		const anchor = anchors.get(slot.id);
@@ -143,7 +163,7 @@ export function drawVehicle(
 	ctx.scale(1, squash);
 	ctx.translate(0, -originY);
 
-	for (const slot of [...vehicle.slots].sort((a, b) => a.z - b.z)) {
+	for (const slot of slotsInDrawOrder(vehicle)) {
 		const anchor = anchors.get(slot.id);
 		if (!anchor) continue;
 		drawPart(ctx, PARTS[slot.part], vehicle.palette, anchor, (slot.scale ?? 1) * layout.gameScale, {

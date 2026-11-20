@@ -3,7 +3,8 @@ import { roundedRect } from './draw';
 
 /**
  * The backdrop: flat paper cut-out, repeating every world width so the drive-off can
- * scroll it. Nothing here depends on game state.
+ * scroll it. The far layer is static per resize and can be pre-rendered; the road is drawn
+ * each frame because it is three rects and a dozen dashes.
  */
 
 export const SKY = '#BFEAFF';
@@ -22,6 +23,12 @@ export function drawScene(
 	scrollX = 0,
 	roadScroll = 0
 ): void {
+	drawFarLayer(ctx, layout, scrollX);
+	drawRoad(ctx, layout, roadScroll);
+}
+
+/** Everything above the road: sky, sun, clouds and both hill bands. */
+export function drawFarLayer(ctx: CanvasRenderingContext2D, layout: Layout, scrollX = 0): void {
 	const { worldWidth: w, worldHeight: h, roadY } = layout;
 
 	ctx.fillStyle = SKY;
@@ -72,8 +79,6 @@ export function drawScene(
 		ctx.closePath();
 		ctx.fill();
 	}
-
-	drawRoad(ctx, layout, roadScroll);
 }
 
 export function drawRoad(ctx: CanvasRenderingContext2D, layout: Layout, scrollX = 0): void {
