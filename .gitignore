@@ -1,0 +1,27 @@
+node_modules
+
+# Output
+build
+.svelte-kit
+.wrangler
+.vercel
+.netlify
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Test and review artifacts
+/test-results
+/playwright-report
+/blob-report
+/coverage
+/screenshots
+
+# Superpowers scratch
+.superpowers/
