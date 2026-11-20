@@ -16,6 +16,7 @@ test('a resize mid-drag keeps the piece under the pointer', async ({ page }) => 
 
 	await page.setViewportSize({ width: 844, height: 390 });
 	await page.waitForFunction(() => window.innerWidth === 844);
+	await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
 
 	const drag = await page.evaluate(() => (window as any).__vw.drag());
 	expect(drag.part).toBe('wheel');

@@ -1,0 +1,9 @@
+{
+	// Static assets only; the game is a pure SPA. Not deployed in v1.
+	"name": "vehicle-workshop",
+	"compatibility_date": "2026-11-20",
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "single-page-application"
+	}
+}

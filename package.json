@@ -10,13 +10,15 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "node tools/serve-build.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"test:e2e": "playwright test",
-		"test:coverage": "vitest run --coverage"
+		"test:e2e": "playwright test --project=chromium",
+		"test:coverage": "vitest run --coverage",
+		"test:pwa": "pnpm build && playwright test --project=pwa",
+		"icons": "node tools/make-icons.mjs"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.65.1",

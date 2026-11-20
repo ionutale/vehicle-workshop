@@ -16,9 +16,13 @@ Installable on iOS and Android from the browser menu; it then opens fullscreen a
 ```bash
 pnpm check          # types
 pnpm test           # unit tests (Vitest, jsdom)
-pnpm test:e2e       # end-to-end (Playwright, Chromium)
-pnpm build && pnpm preview
+pnpm test:e2e       # end-to-end against the dev server (Playwright, Chromium)
+pnpm test:pwa       # build, serve build/, then check the app opens offline
+pnpm icons          # regenerate static/icons from tools/icon.html
 ```
+
+`pnpm preview` serves `build/` the way a static host with a `200.html` fallback does;
+`vite preview` cannot, which is why `tools/serve-build.mjs` exists.
 
 Query flags useful in development and tests:
 
