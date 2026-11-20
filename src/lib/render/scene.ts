@@ -16,7 +16,12 @@ export const ROAD_LINE = '#F3F6FA';
 export const OUTLINE = '#3A271B';
 export const CLOUD = '#FFFFFF';
 
-export function drawScene(ctx: CanvasRenderingContext2D, layout: Layout, scrollX = 0): void {
+export function drawScene(
+	ctx: CanvasRenderingContext2D,
+	layout: Layout,
+	scrollX = 0,
+	roadScroll = 0
+): void {
 	const { worldWidth: w, worldHeight: h, roadY } = layout;
 
 	ctx.fillStyle = SKY;
@@ -68,7 +73,7 @@ export function drawScene(ctx: CanvasRenderingContext2D, layout: Layout, scrollX
 		ctx.fill();
 	}
 
-	drawRoad(ctx, layout, scrollX);
+	drawRoad(ctx, layout, roadScroll);
 }
 
 export function drawRoad(ctx: CanvasRenderingContext2D, layout: Layout, scrollX = 0): void {

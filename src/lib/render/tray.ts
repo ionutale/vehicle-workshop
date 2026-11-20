@@ -45,6 +45,8 @@ export interface ShelfOptions {
 	hintSlotId?: string | null;
 	muted?: boolean;
 	now?: number;
+	/** Per-piece opacity, used for the staggered pop-in after a hand-off. */
+	alphaFor?: (index: number) => number;
 }
 
 export function drawShelf(
@@ -55,26 +57,31 @@ export function drawShelf(
 	palette: Record<Role, string>,
 	options: ShelfOptions = {}
 ): void {
-	const { hintSlotId = null, muted = false, now = 0 } = options;
+	const { hintSlotId = null, muted = false, now = 0, alphaFor } = options;
 	const shelf = layout.shelf;
 
 	ctx.save();
-	ctx.fillStyle = PANEL_FILL;
-	roundedRect(ctx, shelf.x, shelf.y, shelf.w, shelf.h, 22);
-	ctx.fill();
-	ctx.strokeStyle = PANEL_EDGE;
-	ctx.lineWidth = 3;
-	ctx.stroke();
+	if (pieces.length > 0) {
+		ctx.fillStyle = PANEL_FILL;
+		roundedRect(ctx, shelf.x, shelf.y, shelf.w, shelf.h, 22);
+		ctx.fill();
+		ctx.strokeStyle = PANEL_EDGE;
+		ctx.lineWidth = 3;
+		ctx.stroke();
+	}
 	ctx.restore();
 
-	for (const piece of pieces) {
+	for (const [index, piece] of pieces.entries()) {
 		const shape = parts[piece.part];
 		const scale = piece.rect.w / Math.max(shape.halfWidth * 2, 0.001);
 		const centre = {
 			x: piece.rect.x + piece.rect.w / 2,
 			y: piece.rect.y + piece.rect.h / 2
 		};
+		ctx.save();
+		ctx.globalAlpha = alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1;
 		drawPart(ctx, shape, palette, centre, scale);
+		ctx.restore();
 
 		if (hintSlotId === piece.slotId) {
 			const pulse = 0.5 + 0.5 * Math.sin(now / 260);

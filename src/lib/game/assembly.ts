@@ -53,7 +53,14 @@ export type AssemblyEvent =
 	| { type: 'move'; at: Point }
 	| { type: 'drop'; at: Point; now: number; shelfCenters: Record<string, Point> }
 	| { type: 'tick'; now: number }
-	| { type: 'arrive'; vehicleId: string; now: number };
+	| {
+			type: 'arrive';
+			vehicleId: string;
+			now: number;
+			gameScale?: number;
+			snapRadius?: number;
+			origin?: Point;
+	  };
 
 export function timeline(timeScale: number): { readyMs: number; driveMs: number; arriveMs: number } {
 	return { readyMs: 500 * timeScale, driveMs: 1200 * timeScale, arriveMs: 400 * timeScale };
@@ -188,6 +195,8 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 
 		case 'arrive': {
 			const vehicle = getVehicle(event.vehicleId);
+			const gameScale = event.gameScale ?? state.gameScale;
+			const origin = event.origin ?? state.origin;
 			return {
 				...state,
 				phase: 'arriving',
@@ -195,7 +204,10 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 				placed: [],
 				drag: null,
 				settle: null,
-				anchors: anchorsFor(vehicle, state.gameScale, state.origin),
+				anchors: anchorsFor(vehicle, gameScale, origin),
+				gameScale,
+				origin,
+				snapRadius: event.snapRadius ?? state.snapRadius,
 				phaseStartedAt: event.now,
 				arrivedAt: event.now
 			};

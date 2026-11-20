@@ -100,7 +100,8 @@ export function drawPlacedParts(
 	ctx: CanvasRenderingContext2D,
 	vehicle: Vehicle,
 	state: AssemblyState,
-	layout: Layout
+	layout: Layout,
+	lampAlpha = 1
 ): void {
 	const anchors = anchorMap(state);
 	const placed = vehicle.slots
@@ -110,13 +111,14 @@ export function drawPlacedParts(
 	for (const slot of placed) {
 		const anchor = anchors.get(slot.id);
 		if (!anchor) continue;
+		const role = PARTS[slot.part].role;
 		drawPart(
 			ctx,
 			PARTS[slot.part],
 			vehicle.palette,
 			anchor,
 			(slot.scale ?? 1) * layout.gameScale,
-			{ flip: slot.flip }
+			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1 }
 		);
 	}
 }
