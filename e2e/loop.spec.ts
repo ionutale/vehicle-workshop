@@ -9,8 +9,10 @@ test('a finished car drives off and a fresh vehicle arrives', async ({ page }) =
 	await page.evaluate(() => (window as any).__vw.complete());
 	await expect(stage).toHaveAttribute('data-phase', 'ready');
 	await expect(stage).toHaveAttribute('data-placed', '6');
+	expect(await page.evaluate(() => (window as any).__vw.confetti())).toBeGreaterThan(0);
 	await expect(stage).toHaveAttribute('data-phase', 'driving', { timeout: 2_000 });
 	await expect(stage).toHaveAttribute('data-phase', 'assembling', { timeout: 3_000 });
+	expect(await page.evaluate(() => (window as any).__vw.confetti())).toBe(0);
 	await expect(stage).toHaveAttribute('data-placed', '0');
 	await expect(stage).toHaveAttribute('data-tray', /^(5|6|7)$/);
 });

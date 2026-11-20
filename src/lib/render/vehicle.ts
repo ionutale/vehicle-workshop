@@ -300,13 +300,14 @@ export function drawVehicle(
 	state: AssemblyState,
 	layout: Layout,
 	offsetX: number,
-	squash = 1
+	squash = 1,
+	lift = 0
 ): void {
 	const anchors = anchorMap(state);
 	const originY = layout.vehicleAnchor.y;
 
 	ctx.save();
-	ctx.translate(offsetX, originY);
+	ctx.translate(offsetX, originY - lift);
 	ctx.scale(1, squash);
 	ctx.translate(0, -originY);
 

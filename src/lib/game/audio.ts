@@ -8,7 +8,8 @@ export const TONES = {
 	pick: 660,
 	snap: 220,
 	completeA: 523,
-	completeB: 784,
+	completeB: 659,
+	completeC: 784,
 	engineFrom: 80,
 	engineTo: 140
 };
@@ -121,11 +122,13 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		complete() {
 			const ctx = ready();
 			if (!ctx) return;
-			tone(ctx, TONES.completeA, 0.22);
-			window.setTimeout(() => {
-				const later = ready();
-				if (later) tone(later, TONES.completeB, 0.28);
-			}, 140);
+			const notes = [TONES.completeA, TONES.completeB, TONES.completeC];
+			notes.forEach((frequency, index) => {
+				window.setTimeout(() => {
+					const later = ready();
+					if (later) tone(later, frequency, 0.24, 'triangle');
+				}, index * 95);
+			});
 		},
 		engine() {
 			const ctx = ready();

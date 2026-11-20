@@ -24,7 +24,7 @@
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';
 	import { hydratePrefs, markHintSeen, prefs, setMuted } from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
-	import { createDust } from '#lib/render/particles';
+	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
 	import {
@@ -93,6 +93,7 @@
 		let frames = 0;
 
 		const dust = createDust();
+		const confetti = createConfetti();
 		const audio = createBrowserAudioBus();
 		const music = createMusic(audio.context(), audio.musicInput() ?? undefined);
 		music.setVolume(1);
@@ -328,7 +329,18 @@
 			dust.spawn(wheel.x, wheel.y + 6, 8);
 		};
 
+		const celebrate = () => {
+			if (reduced) return;
+			confetti.spawn(
+				layout.vehicleAnchor.x,
+				layout.roadY - vehicle.height * 0.45 * layout.gameScale,
+				[vehicle.palette.shell, vehicle.palette.trim, vehicle.palette.lamp, '#FFFFFF'],
+				44
+			);
+		};
+
 		const handOff = (now: number) => {
+			confetti.clear();
 			const next = nextVehicleId(state.vehicleId, previousVehicleId);
 			previousVehicleId = vehicle.id;
 			vehicle = getVehicle(next);
@@ -369,11 +381,12 @@
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
 				drawPlacedParts(ctx, vehicle, state, layout);
 			} else if (state.phase === 'ready') {
+				const hop = reduced ? 0 : 16 * Math.sin(Math.PI * Math.min(1, readyT / 260));
 				drawContactShadow(ctx, vehicle, layout);
 				const squash =
 					!reduced && readyT < 250 ? 1 - 0.06 * Math.sin((Math.PI * readyT) / 250) : 1;
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
-				drawVehicle(ctx, vehicle, state, layout, 0, squash);
+				drawVehicle(ctx, vehicle, state, layout, 0, squash, hop);
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
@@ -430,6 +443,8 @@
 
 			dust.step(dt);
 			dust.draw(ctx);
+			confetti.step(dt);
+			confetti.draw(ctx);
 
 			element.dataset.vehicle = state.vehicleId;
 			element.dataset.phase = state.phase;
@@ -457,22 +472,30 @@
 
 		let raf = 0;
 		let last = 0;
+		let lastPhase = 'assembling';
 
 		const frame = () => {
 			const now = nowMs();
 			const dt = Math.min(32, now - last);
 			last = now;
 
-			const before = state.phase;
+			const previousPhase = lastPhase;
 			const previous = state;
 			state = reduce(state, { type: 'tick', now });
 			if (state !== previous) needsPaint = true;
-			if (before === 'ready' && state.phase === 'driving') {
-				beginDrive();
-				audio.engine();
+
+			if (previousPhase !== state.phase) {
+				if (state.phase === 'ready') {
+					audio.complete();
+					celebrate();
+				}
+				if (state.phase === 'driving') {
+					beginDrive();
+					audio.engine();
+				}
 				needsPaint = true;
 			}
-			if (before === 'assembling' && state.phase === 'ready') audio.complete();
+			lastPhase = state.phase;
 
 			if (state.phase === 'driving') {
 				const elapsed = now - state.phaseStartedAt;
@@ -514,6 +537,7 @@
 				music.stop();
 				stop();
 				dust.clear();
+				confetti.clear();
 			} else {
 				if (hiddenAt !== null) {
 					hiddenAccum += performance.now() - hiddenAt;
@@ -590,6 +614,7 @@
 					tray: shelfPieces().length
 				}),
 				frames: () => frames,
+				confetti: () => confetti.live(),
 				drag: () => {
 					if (!state.drag) return null;
 					const screen = worldToScreen(layout, viewport(), {

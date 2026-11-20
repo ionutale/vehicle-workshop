@@ -157,7 +157,7 @@ When the final slot fills:
 
 | t (ms) | What happens |
 |---|---|
-| 0–250 | whole vehicle squashes once (scaleY 0.94 → 1.02 → 1); headlights blink twice |
+| 0–250 | a small hop off the road, one squash, confetti bursts from the roof in the vehicle's own colours, and a three-note rising fanfare plays; headlights blink twice |
 | 250–500 | engine start sound; wheels spin up; 8 dust particles puff from the rear wheels |
 | 500–1700 | vehicle accelerates right with `easeInCubic`, wheels rotate proportional to distance; background scrolls at 0.35 × vehicle speed |
 | 1700–2100 | next chassis rolls in from the left, decelerating with a small overshoot; tray repopulates with a 60 ms staggered pop |
