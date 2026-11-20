@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { start } from './helpers';
 
 test('the mute toggle survives a reload', async ({ page }) => {
 	await page.goto('/?test=1');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());

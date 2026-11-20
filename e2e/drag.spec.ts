@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { start } from './helpers';
 
 test('a wheel can be dragged from the shelf onto the car', async ({ page }) => {
 	await page.goto('/?test=1');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
@@ -17,6 +19,7 @@ test('a wheel can be dragged from the shelf onto the car', async ({ page }) => {
 
 test('a missed drop returns the piece to the shelf', async ({ page }) => {
 	await page.goto('/?test=1');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
@@ -32,6 +35,7 @@ test('a missed drop returns the piece to the shelf', async ({ page }) => {
 
 test('releasing outside the play area cancels the drag', async ({ page }) => {
 	await page.goto('/?test=1&vehicle=car');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
@@ -51,6 +55,7 @@ test('a wide body grabbed near its end still lands when the body sits on its gho
 	page
 }) => {
 	await page.goto('/?test=1&vehicle=car');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());

@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { start } from './helpers';
 
 test('a resize mid-drag keeps the piece under the pointer', async ({ page }) => {
 	await page.goto('/?test=1&vehicle=car');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 

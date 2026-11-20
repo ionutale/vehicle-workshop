@@ -6,7 +6,10 @@
 		timeline,
 		type AssemblyState
 	} from '#lib/game/assembly';
-	import { createBrowserAudioBus } from '#lib/game/audio';
+	import { createBrowserAudioBus, type AudioBus } from '#lib/game/audio';
+	import { createMusic, type MusicBus } from '#lib/game/music';
+	import Menu from '#lib/components/Menu.svelte';
+	import SettingsPanel from '#lib/components/SettingsPanel.svelte';
 	import {
 		computeLayout,
 		screenToWorld,
@@ -32,6 +35,26 @@
 	} from '#lib/render/vehicle';
 
 	let canvas: HTMLCanvasElement | undefined = $state();
+	let screen: 'menu' | 'game' | 'settings' = $state('menu');
+	let started = $state(false);
+	let audioRef: AudioBus | null = null;
+	let musicRef: MusicBus | null = null;
+
+	const play = () => {
+		started = true;
+		screen = 'game';
+		audioRef?.unlock();
+		musicRef?.start();
+	};
+
+	const backFromSettings = () => {
+		screen = started ? 'game' : 'menu';
+	};
+
+	$effect(() => {
+		audioRef?.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
+		audioRef?.setMuted(prefs.muted);
+	});
 
 	const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 	const easeInCubic = (t: number) => t * t * t;
@@ -70,8 +93,13 @@
 
 		const dust = createDust();
 		const audio = createBrowserAudioBus();
+		const music = createMusic(audio.context(), audio.musicInput() ?? undefined);
+		music.setVolume(1);
 		hydratePrefs();
 		audio.setMuted(prefs.muted);
+		audio.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
+		audioRef = audio;
+		musicRef = music;
 
 		const insetProbe = document.createElement('div');
 		insetProbe.setAttribute('aria-hidden', 'true');
@@ -217,6 +245,7 @@
 		};
 
 		const onMutePointer = (event: PointerEvent) => {
+			if (screen !== 'game') return;
 			const world = toWorld({ x: event.clientX, y: event.clientY });
 			const button = layout.muteButton;
 			if (
@@ -242,7 +271,7 @@
 		element.addEventListener('pointerdown', trackClient);
 
 		const detachPointer = attachPointerHandlers(element, {
-			isActive: () => state.phase === 'assembling' && state.drag === null,
+			isActive: () => screen === 'game' && state.phase === 'assembling' && state.drag === null,
 			hit: (world) =>
 				hitPiece(shelfPieces(), world, 44 * (800 / Math.max(viewport().height, 1))),
 			onPick: (piece: TrayPiece, world: Point) => {
@@ -477,6 +506,7 @@
 		const onVisibility = () => {
 			if (document.hidden) {
 				if (hiddenAt === null) hiddenAt = performance.now();
+				music.stop();
 				stop();
 				dust.clear();
 			} else {
@@ -485,6 +515,7 @@
 					hiddenAt = null;
 					lastInteraction = nowMs();
 				}
+				if (screen === 'game' && started) music.start();
 				start();
 			}
 		};
@@ -602,6 +633,10 @@
 
 		return () => {
 			stop();
+			music.stop();
+			audio.close();
+			audioRef = null;
+			musicRef = null;
 			detachPointer();
 			element.removeEventListener('pointerdown', onMutePointer);
 			element.removeEventListener('pointermove', trackClient);
@@ -618,6 +653,25 @@
 
 <canvas bind:this={canvas} data-testid="stage"></canvas>
 
+{#if screen === 'game' && started}
+	<button class="gear" type="button" aria-label="Menu" onclick={() => (screen = 'menu')}>
+		<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+			<path
+				d="M4 6h16M4 12h16M4 18h16"
+				stroke="currentColor"
+				stroke-width="2.4"
+				stroke-linecap="round"
+			/>
+		</svg>
+	</button>
+{/if}
+
+{#if screen === 'menu'}
+	<Menu {started} onplay={play} onsettings={() => (screen = 'settings')} />
+{:else if screen === 'settings'}
+	<SettingsPanel onback={backFromSettings} />
+{/if}
+
 <style>
 	:global(html, body) {
 		margin: 0;
@@ -630,5 +684,22 @@
 		width: 100vw;
 		height: 100dvh;
 		touch-action: none;
+	}
+
+	.gear {
+		position: fixed;
+		left: max(14px, env(safe-area-inset-left));
+		bottom: max(14px, env(safe-area-inset-bottom));
+		width: 52px;
+		height: 52px;
+		display: grid;
+		place-items: center;
+		border-radius: 50%;
+		border: 3px solid rgb(58 39 27 / 0.35);
+		background: rgb(255 249 236 / 0.85);
+		color: #3a271b;
+		padding: 0;
+		z-index: 10;
+		touch-action: manipulation;
 	}
 </style>

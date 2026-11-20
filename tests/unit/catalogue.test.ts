@@ -47,9 +47,9 @@ describe('catalogue', () => {
 		expect(getVehicle('car').name).toBe('Car');
 	});
 
-	it('ships 36 distinct vehicles spanning every part shape', () => {
-		expect(VEHICLES).toHaveLength(36);
-		expect(new Set(VEHICLES.map((v) => v.id)).size).toBe(36);
+	it('ships 86 distinct vehicles spanning every part shape', () => {
+		expect(VEHICLES).toHaveLength(86);
+		expect(new Set(VEHICLES.map((v) => v.id)).size).toBe(86);
 		expect(VEHICLES.slice(0, 6).map((v) => v.id)).toEqual([
 			'car',
 			'fire-engine',

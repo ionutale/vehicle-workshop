@@ -1,3 +1,4 @@
+import { FLEET } from './fleet';
 import type { PartId, Role } from './parts';
 
 export interface Slot {
@@ -681,6 +682,8 @@ VEHICLES.push(
 		]
 	}
 );
+
+VEHICLES.push(...FLEET);
 
 export const FIRST_VEHICLE_ID = 'car';
 

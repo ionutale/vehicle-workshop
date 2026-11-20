@@ -1,7 +1,7 @@
 /**
  * Feedback sounds, synthesised at runtime so there is nothing to cache and the engine ramp
- * is a parameter change rather than an asset. Every method is a no-op without a context or
- * while muted.
+ * is a parameter change rather than an asset. Three independent levels feed a master gain:
+ * music, sound effects, and the master the mute toggle drives.
  */
 
 export const TONES = {
@@ -15,6 +15,12 @@ export const TONES = {
 
 export const MASTER_GAIN = 0.2;
 
+export interface Volumes {
+	master: number;
+	music: number;
+	sfx: number;
+}
+
 export interface AudioBus {
 	unlock(): void;
 	pick(): void;
@@ -22,21 +28,35 @@ export interface AudioBus {
 	complete(): void;
 	engine(): void;
 	setMuted(muted: boolean): void;
+	setVolumes(volumes: Partial<Volumes>): void;
+	/** Where a music generator should connect. */
+	musicInput(): AudioNode | null;
+	context(): AudioContext | undefined;
+	close(): void;
 }
 
 export function createAudioBus(context?: AudioContext): AudioBus {
 	let muted = false;
+	let volumes: Volumes = { master: 1, music: 0.5, sfx: 1 };
 	let master: GainNode | null = null;
+	let sfx: GainNode | null = null;
+	let music: GainNode | null = null;
 
 	const ready = () => (context && !muted ? context : null);
 
 	const ensureMaster = (ctx: AudioContext) => {
 		if (!master) {
 			master = ctx.createGain();
-			master.gain.setValueAtTime(MASTER_GAIN, ctx.currentTime);
+			master.gain.setValueAtTime(MASTER_GAIN * volumes.master, ctx.currentTime);
 			master.connect(ctx.destination);
+			sfx = ctx.createGain();
+			sfx.gain.setValueAtTime(volumes.sfx, ctx.currentTime);
+			sfx.connect(master);
+			music = ctx.createGain();
+			music.gain.setValueAtTime(volumes.music, ctx.currentTime);
+			music.connect(master);
 		}
-		return master;
+		return { master, sfx: sfx!, music: music! };
 	};
 
 	const tone = (
@@ -56,7 +76,7 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		gain.gain.setValueAtTime(0.9, ctx.currentTime);
 		gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
 		osc.connect(gain);
-		gain.connect(ensureMaster(ctx));
+		gain.connect(ensureMaster(ctx).sfx);
 		osc.start();
 		osc.stop(ctx.currentTime + duration + 0.02);
 	};
@@ -77,7 +97,7 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		gain.gain.setValueAtTime(0.5, ctx.currentTime);
 		source.connect(filter);
 		filter.connect(gain);
-		gain.connect(ensureMaster(ctx));
+		gain.connect(ensureMaster(ctx).sfx);
 		source.start();
 		source.stop(ctx.currentTime + duration);
 	};
@@ -114,6 +134,25 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		},
 		setMuted(value: boolean) {
 			muted = value;
+			if (master && context) master.gain.setValueAtTime(value ? 0 : MASTER_GAIN * volumes.master, context.currentTime);
+		},
+		setVolumes(next: Partial<Volumes>) {
+			volumes = { ...volumes, ...next };
+			if (!context) return;
+			const nodes = ensureMaster(context);
+			nodes.master.gain.setValueAtTime(muted ? 0 : MASTER_GAIN * volumes.master, context.currentTime);
+			nodes.sfx.gain.setValueAtTime(volumes.sfx, context.currentTime);
+			nodes.music.gain.setValueAtTime(volumes.music, context.currentTime);
+		},
+		musicInput() {
+			if (!context) return null;
+			return ensureMaster(context).music;
+		},
+		context() {
+			return context;
+		},
+		close() {
+			if (context && context.state !== 'closed') void context.close();
 		}
 	};
 }

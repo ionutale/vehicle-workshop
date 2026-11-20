@@ -7,7 +7,6 @@ test('the app opens offline after one visit', async ({ page, context }) => {
 	});
 	await context.setOffline(true);
 	await page.reload();
-	const stage = page.getByTestId('stage');
-	await expect(stage).toBeVisible();
-	await expect(stage).toHaveAttribute('data-vehicle', 'car');
+	await expect(page.getByTestId('stage')).toBeVisible();
+	await expect(page.getByRole('button', { name: 'Play' })).toBeVisible();
 });

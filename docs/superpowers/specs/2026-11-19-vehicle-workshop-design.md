@@ -213,6 +213,14 @@ The loop must be testable without a browser painting pixels:
 - **`?vehicle=<id>`** forces any of the six, and **`?order=fixed`** freezes shelf order, so all six vehicles and the visual baseline are reachable without playing through a shuffle.
 - **Visual baseline.** Two screenshots at fixed viewports (390 × 844 and 844 × 390) on a fixed vehicle and a fixed shelf order.
 
+## Menu, settings and music
+
+The game opens on a menu rather than straight into the shelf: one **Play** button and one **Settings** button, both far larger than a child's finger. The menu is a DOM overlay, not canvas, so the buttons and sliders get native focus, hit targets and accessibility for free; the canvas keeps painting the idle scene behind it. A gear in the bottom-left of the game brings the menu back.
+
+Settings holds three sliders — music, sound (master) and sound effects — each 48 px of track with a 34 px thumb, saved on input under `vw:music`, `vw:sound` and `vw:sfx` as decimals. Music is synthesised at runtime: an eight-bar loop over C–Am–F–G at 84 bpm, a pentatonic melody on a soft triangle, a sine bass and no drums, so there is no audio file to cache and it can duck or stop instantly. It starts on Play (the gesture browsers require), stops when the tab is hidden, and resumes on return.
+
+The page cannot be zoomed: `user-scalable=no` and `maximum-scale=1` in the viewport, `touch-action: manipulation`, and `gesturestart`/`gesturechange`/`dblclick` refused for iOS, which ignores the viewport flags. Text selection and the long-press callout are off on every element; only the settings values remain real, focusable inputs.
+
 ## File layout
 
 ```

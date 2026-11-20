@@ -1,8 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { start } from './helpers';
 
 test('reduced motion still finishes the loop', async ({ page }) => {
 	await page.emulateMedia({ reducedMotion: 'reduce' });
 	await page.goto('/?test=1&vehicle=car&order=fixed');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	await page.evaluate(() => (window as any).__vw.complete());
@@ -12,6 +14,7 @@ test('reduced motion still finishes the loop', async ({ page }) => {
 
 test('the hint appears on the first vehicle and not after the first pick', async ({ page }) => {
 	await page.goto('/?test=1&vehicle=car');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	await expect(stage).toHaveAttribute('data-hint', 'true', { timeout: 5_000 });
@@ -22,6 +25,7 @@ test('the hint appears on the first vehicle and not after the first pick', async
 
 test('a hidden page does not fast-forward the hand-off', async ({ page }) => {
 	await page.goto('/?test=1&vehicle=car');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 

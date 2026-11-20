@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { start } from './helpers';
 
 test('a finished car drives off and a fresh vehicle arrives', async ({ page }) => {
 	await page.goto('/?test=1&order=fixed');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	await page.evaluate(() => (window as any).__vw.complete());
@@ -15,6 +17,7 @@ test('a finished car drives off and a fresh vehicle arrives', async ({ page }) =
 
 test('tapping a piece without moving returns it to the shelf', async ({ page }) => {
 	await page.goto('/?test=1');
+	await start(page);
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());

@@ -37,7 +37,11 @@ export type PartId =
 	| 'pantograph'
 	| 'spoiler'
 	| 'tipper'
-	| 'miniCar';
+	| 'miniCar'
+	| 'header'
+	| 'bale'
+	| 'skip'
+	| 'scissor';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -319,6 +323,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		radius: 34,
 		halfWidth: 46,
 		halfHeight: 34
+	},
+	header: {
+		id: 'header',
+		path: `${rounded(300, 52, 16)} M-120,-26 L-120,26 M-80,-26 L-80,26 M-40,-26 L-40,26 M0,-26 L0,26 M40,-26 L40,26 M80,-26 L80,26 M120,-26 L120,26`,
+		role: 'trim',
+		radius: 140,
+		halfWidth: 150,
+		halfHeight: 26
+	},
+	bale: {
+		id: 'bale',
+		path: `${circle(40)} M-16,-6 A18,18 0 1 1 4,-14`,
+		role: 'trim',
+		radius: 40,
+		halfWidth: 40,
+		halfHeight: 40
+	},
+	skip: {
+		id: 'skip',
+		path: 'M-84,-32 L84,-32 L70,32 L-70,32 Z M-84,-32 L-100,-18 L100,-18 L84,-32',
+		role: 'trim',
+		radius: 80,
+		halfWidth: 100,
+		halfHeight: 32
+	},
+	scissor: {
+		id: 'scissor',
+		path: 'M-52,22 L52,-22 M52,22 L-52,-22 M-34,22 L-34,-22 M34,22 L34,-22',
+		role: 'trim',
+		radius: 50,
+		halfWidth: 52,
+		halfHeight: 22
 	},
 	beacon: {
 		id: 'beacon',
