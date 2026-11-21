@@ -25,6 +25,7 @@ export function recorder(): { ctx: CanvasRenderingContext2D; calls: string[] } {
 		ellipse: record('ellipse'),
 		rect: record('rect'),
 		fillRect: record('fillRect'),
+		strokeRect: record('strokeRect'),
 		setLineDash: record('setLineDash'),
 		globalAlpha: 1,
 		lineWidth: 1,

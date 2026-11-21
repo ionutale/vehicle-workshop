@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { getVehicle } from '#lib/game/vehicles';
+import { PARTS } from '#lib/game/parts';
+import { getVehicle, VEHICLES } from '#lib/game/vehicles';
 import { computeLayout } from '#lib/game/layout';
 import { pieceBoxes } from '#lib/render/tray';
-import type { JobKind } from '#lib/game/families';
-import { drawJob } from '#lib/render/jobs';
+import { JOB_KINDS, type JobKind } from '#lib/game/jobs';
+import { drawJob, jobStage } from '#lib/render/jobs';
 import { recorder, stubPath } from './canvas-recorder';
 
-const jobs: JobKind[] = ['beep', 'deliver', 'passengers', 'harvest', 'dig', 'spray', 'siren', 'platform'];
+const jobs: JobKind[] = [...JOB_KINDS];
 
 describe('job cutscene', () => {
 	beforeEach(stubPath);
@@ -25,6 +26,27 @@ describe('job cutscene', () => {
 			const { ctx, calls } = recorder();
 			drawJob(ctx, car, job, layout, 0.5, false);
 			expect(calls.length).toBeGreaterThan(8);
+		}
+	});
+
+	it('keeps every cutscene inside portrait and landscape', () => {
+		for (const viewport of [
+			{ width: 320, height: 568 },
+			{ width: 844, height: 390 }
+		]) {
+			for (const vehicle of VEHICLES) {
+				const layout = computeLayout(
+					viewport,
+					vehicle,
+					pieceBoxes(vehicle),
+					{ top: 0, right: 0, bottom: 0, left: 0 },
+					Math.max(...vehicle.slots.map((slot) => PARTS[slot.part].radius))
+				);
+				const stage = jobStage(vehicle, layout);
+				expect(stage.centreX - (vehicle.width * stage.scale) / 2).toBeGreaterThanOrEqual(-1);
+				expect(stage.right).toBeLessThanOrEqual(layout.worldWidth + 1);
+				expect(stage.propX + stage.size).toBeLessThanOrEqual(layout.worldWidth + 1);
+			}
 		}
 	});
 

@@ -20,7 +20,8 @@
 		type Viewport
 	} from '#lib/game/layout';
 	import { MAX_LEVEL, vehicleAtLevel } from '#lib/game/difficulty';
-	import { familyOf, jobOf } from '#lib/game/families';
+	import { familyOf } from '#lib/game/families';
+	import { jobOf } from '#lib/game/jobs';
 	import { PARTS } from '#lib/game/parts';
 	import { attachPointerHandlers, hitPiece } from '#lib/game/pointer';
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';

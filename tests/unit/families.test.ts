@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { VEHICLES, getVehicle } from '#lib/game/vehicles';
-import { familyOf, jobOf, type VehicleFamily } from '#lib/game/families';
+import { familyOf, type VehicleFamily } from '#lib/game/families';
 
 describe('families', () => {
 	it('classifies every vehicle into a known family', () => {
@@ -19,10 +19,4 @@ describe('families', () => {
 		expect(familyOf(getVehicle('taxi'))).toBe('car');
 	});
 
-	it('gives fire engines a spray and police a siren', () => {
-		expect(jobOf(getVehicle('fire-engine'))).toBe('spray');
-		expect(jobOf(getVehicle('police-car'))).toBe('siren');
-		expect(jobOf(getVehicle('tractor'))).toBe('harvest');
-		expect(jobOf(getVehicle('tram'))).toBe('platform');
-	});
 });

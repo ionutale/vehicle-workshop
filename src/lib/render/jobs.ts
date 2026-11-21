@@ -1,8 +1,9 @@
 import { createAssembly } from '../game/assembly';
-import type { JobKind } from '../game/families';
+import type { JobKind } from '../game/jobs';
 import type { Layout } from '../game/layout';
 import type { Vehicle } from '../game/vehicles';
 import { drawVehicleDetails } from './details';
+import { roundedRect } from './draw';
 import { OUTLINE } from './scene';
 import { drawVehicle } from './vehicle';
 
@@ -43,6 +44,95 @@ function dot(ctx: CanvasRenderingContext2D, x: number, y: number, radius: number
 	ctx.stroke();
 }
 
+function crate(ctx: CanvasRenderingContext2D, x: number, y: number, size: number): void {
+	rectangle(ctx, x, y, size, size, '#C08552');
+	ctx.strokeStyle = '#8A5A34';
+	ctx.lineWidth = 2;
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + size, y + size);
+	ctx.moveTo(x + size, y);
+	ctx.lineTo(x, y + size);
+	ctx.stroke();
+}
+
+function miniCar(
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	size: number,
+	fill: string
+): void {
+	roundedRect(ctx, x - size * 0.6, y - size * 0.22, size * 1.2, size * 0.5, size * 0.14);
+	ctx.fillStyle = fill;
+	ctx.fill();
+	ctx.strokeStyle = OUTLINE;
+	ctx.lineWidth = 1.8;
+	ctx.stroke();
+	roundedRect(ctx, x - size * 0.25, y - size * 0.52, size * 0.55, size * 0.32, size * 0.1);
+	ctx.fillStyle = '#CFEFFF';
+	ctx.fill();
+	ctx.stroke();
+	dot(ctx, x - size * 0.34, y + size * 0.3, size * 0.16, '#2B2D42');
+	dot(ctx, x + size * 0.34, y + size * 0.3, size * 0.16, '#2B2D42');
+}
+
+function log(
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	length: number,
+	radius: number
+): void {
+	roundedRect(ctx, x - length / 2, y - radius, length, radius * 2, radius);
+	ctx.fillStyle = '#8A5A34';
+	ctx.fill();
+	ctx.strokeStyle = OUTLINE;
+	ctx.lineWidth = 1.8;
+	ctx.stroke();
+	ctx.strokeStyle = '#B98B3A';
+	ctx.lineWidth = 1.5;
+	for (const end of [-1, 1]) {
+		ctx.beginPath();
+		ctx.arc(x + end * (length / 2 - radius * 0.4), y, radius * 0.55, 0, Math.PI * 2);
+		ctx.stroke();
+	}
+}
+
+export interface JobStage {
+	scale: number;
+	centreX: number;
+	propX: number;
+	size: number;
+	ground: number;
+	right: number;
+	top: number;
+	origin: { x: number; y: number };
+}
+
+/** The cutscene geometry, shared by the renderer and its bounds test. */
+export function jobStage(vehicle: Vehicle, layout: Layout): JobStage {
+	const scale = Math.min(
+		layout.gameScale,
+		(layout.worldWidth * 0.46) / Math.max(vehicle.width, 1),
+		(layout.roadY - 120) / Math.max(vehicle.height, 1)
+	);
+	const centreX = layout.worldWidth * 0.27;
+	return {
+		scale,
+		centreX,
+		propX: layout.worldWidth * 0.78,
+		size: Math.max(10, vehicle.height * scale * 0.22),
+		ground: layout.roadY + 12,
+		right: centreX + (vehicle.width * scale) / 2,
+		top: layout.roadY + 10 - vehicle.groundY * scale,
+		origin: {
+			x: centreX - (vehicle.width * scale) / 2,
+			y: layout.roadY + 10 - vehicle.groundY * scale
+		}
+	};
+}
+
 export function drawJob(
 	ctx: CanvasRenderingContext2D,
 	vehicle: Vehicle,
@@ -54,16 +144,7 @@ export function drawJob(
 	const progress = clamp01(t);
 	const fade =
 		progress < 0.12 ? progress / 0.12 : progress > 0.88 ? (1 - progress) / 0.12 : 1;
-	const scale = Math.min(
-		layout.gameScale,
-		(layout.worldWidth * 0.46) / Math.max(vehicle.width, 1),
-		(layout.roadY - 120) / Math.max(vehicle.height, 1)
-	);
-	const centreX = layout.worldWidth * 0.27;
-	const origin = {
-		x: centreX - (vehicle.width * scale) / 2,
-		y: layout.roadY + 10 - vehicle.groundY * scale
-	};
+	const { scale, centreX, propX, size, ground, right, top, origin } = jobStage(vehicle, layout);
 	const state = createAssembly(vehicle, scale, 0, 0, 1, origin);
 	const placed = { ...state, placed: vehicle.slots.map((slot) => slot.id) };
 	const jobLayout: Layout = {
@@ -72,11 +153,6 @@ export function drawJob(
 		vehicleAnchor: { x: centreX, y: layout.roadY },
 		outline: Math.max(1.6, layout.outline)
 	};
-	const size = Math.max(10, vehicle.height * scale * 0.22);
-	const propX = layout.worldWidth * 0.78;
-	const ground = layout.roadY + 12;
-	const right = centreX + (vehicle.width * scale) / 2;
-	const top = origin.y;
 
 	ctx.save();
 	ctx.globalAlpha = 0.14 * fade;
@@ -246,6 +322,200 @@ function drawProp(
 				ctx.arc(x, ground - size * 0.55, size * 0.3, roll * 6, roll * 6 + Math.PI * 1.6);
 				ctx.stroke();
 			}
+			break;
+		}
+
+		case 'lift': {
+			const rise = reduced ? 1 : Math.sin(clamp01((progress - 0.08) / 0.78) * Math.PI);
+			const x = propX - size * 0.5;
+			const y = ground - size - rise * size * 1.8;
+			ctx.strokeStyle = '#6B6B6B';
+			ctx.lineWidth = 2;
+			ctx.beginPath();
+			ctx.moveTo(x + size * 0.15, y);
+			ctx.lineTo(x + size * 0.15, y - size * 0.7);
+			ctx.moveTo(x + size * 0.85, y);
+			ctx.lineTo(x + size * 0.85, y - size * 0.7);
+			ctx.stroke();
+			crate(ctx, x, y, size);
+			break;
+		}
+
+		case 'tow': {
+			const move = reduced ? 1 : ease(clamp01((progress - 0.12) / 0.6));
+			const x = lerp(propX, right + size * 0.2, move);
+			const y = ground - size * 0.55;
+			ctx.strokeStyle = OUTLINE;
+			ctx.lineWidth = 2.5;
+			ctx.beginPath();
+			ctx.moveTo(right - size * 0.2, ground - size * 1.1);
+			ctx.lineTo(x - size * 0.6, y - size * 0.1);
+			ctx.stroke();
+			miniCar(ctx, x, y, size, accent);
+			break;
+		}
+
+		case 'mix': {
+			const drumX = right - size * 0.5;
+			const drumY = top + size * 2.3;
+			dot(ctx, drumX, drumY, size * 0.72, '#8A93A3');
+			ctx.strokeStyle = '#D9D9D9';
+			ctx.lineWidth = 2;
+			ctx.beginPath();
+			ctx.arc(
+				drumX,
+				drumY,
+				size * 0.4,
+				progress * 9,
+				progress * 9 + Math.PI * 1.5
+			);
+			ctx.stroke();
+			rectangle(ctx, propX - size * 0.65, ground - size * 0.8, size * 1.3, size * 0.8, '#B9A58A');
+			for (let i = 0; i < 3; i++) {
+				const q = reduced ? 0.4 + i * 0.18 : clamp01(progress * 1.7 - i * 0.09);
+				if (q <= 0 || q >= 1) continue;
+				dot(
+					ctx,
+					lerp(drumX, propX, q),
+					lerp(drumY, ground - size * 0.8, q) - Math.sin(Math.PI * q) * size * 0.6,
+					size * 0.1,
+					'#9AA3B2'
+				);
+			}
+			break;
+		}
+
+		case 'plough': {
+			const shrink = reduced ? 0.5 : clamp01(progress);
+			ctx.fillStyle = '#FFFFFF';
+			ctx.beginPath();
+			ctx.ellipse(
+				propX + size * 0.9,
+				ground - size * 0.18,
+				size * (1.5 - shrink * 0.85),
+				size * (0.55 - shrink * 0.2),
+				0,
+				0,
+				Math.PI * 2
+			);
+			ctx.fill();
+			ctx.strokeStyle = OUTLINE;
+			ctx.lineWidth = 1.5;
+			ctx.stroke();
+			if (!reduced) {
+				for (let i = 0; i < 3; i++) {
+					dot(
+						ctx,
+						propX + size * (1.2 + i * 0.35),
+						ground - size * (0.45 + (i % 2) * 0.2),
+						size * 0.11,
+						'#FFFFFF'
+					);
+				}
+			}
+			break;
+		}
+
+		case 'sweep': {
+			ctx.strokeStyle = accent;
+			ctx.lineWidth = 3;
+			ctx.beginPath();
+			ctx.arc(
+				propX,
+				ground - size * 0.35,
+				size * 0.45,
+				progress * 8,
+				progress * 8 + Math.PI * 1.4
+			);
+			ctx.stroke();
+			for (let i = 0; i < 5; i++) {
+				dot(
+					ctx,
+					propX - size * (0.25 + i * 0.38),
+					ground - size * (0.18 + (i % 2) * 0.22),
+					size * 0.12,
+					i % 2 ? '#8AD88A' : '#D9A441'
+				);
+			}
+			break;
+		}
+
+		case 'roll': {
+			const q = reduced ? 1 : ease(clamp01(progress / 0.8));
+			ctx.fillStyle = '#5C6472';
+			ctx.fillRect(right, ground - size * 0.1, (propX - right) * q, size * 0.22);
+			dot(ctx, lerp(right, propX, q), ground - size * 0.3, size * 0.4, '#9AA3B2');
+			break;
+		}
+
+		case 'pour': {
+			rectangle(ctx, propX - size * 0.65, ground - size * 1.05, size * 1.3, size * 1.05, '#B9A58A');
+			ctx.fillStyle = '#9AA3B2';
+			ctx.fillRect(propX - size * 0.55, ground - size * 1.05 * clamp01(progress), size * 1.1, size * 1.05 * clamp01(progress));
+			for (let i = 0; i < 3; i++) {
+				const q = reduced ? 0.4 + i * 0.18 : clamp01(progress * 1.5 - i * 0.08);
+				if (q <= 0 || q >= 1) continue;
+				dot(
+					ctx,
+					lerp(right, propX, q),
+					lerp(top + size * 1.2, ground - size, q) - Math.sin(Math.PI * q) * size * 0.8,
+					size * 0.11,
+					'#9AA3B2'
+				);
+			}
+			break;
+		}
+
+		case 'logs': {
+			for (let i = 0; i < 2; i++) {
+				const q = reduced ? 1 : ease(clamp01((progress - i * 0.12) / 0.6));
+				if (q <= 0) continue;
+				log(
+					ctx,
+					lerp(propX, right - size * 0.2, q),
+					ground - size * (0.28 + i * 0.34),
+					size * 1.2,
+					size * 0.18
+				);
+			}
+			break;
+		}
+
+		case 'cars': {
+			for (let i = 0; i < 2; i++) {
+				const q = reduced ? 1 : ease(clamp01((progress - i * 0.12) / 0.6));
+				if (q <= 0) continue;
+				miniCar(
+					ctx,
+					lerp(propX, right - size * 0.1, q),
+					ground - size * (0.4 + i * 0.25),
+					size * 0.8,
+					i === 0 ? '#F4A261' : '#6FC3F7'
+				);
+			}
+			break;
+		}
+
+		case 'rescue': {
+			for (let i = 0; i < 2; i++) {
+				const q = reduced ? 0.45 : (progress * 2 + i / 2) % 1;
+				ctx.globalAlpha = 0.6 * (1 - q) * fade;
+				ctx.strokeStyle = '#E63946';
+				ctx.lineWidth = 4;
+				ctx.beginPath();
+				ctx.arc(propX, ground - size, size * (0.5 + q * 1.6), 0, Math.PI * 2);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = fade;
+			const cx = right - size * 1.3;
+			const cy = top - size * 0.4;
+			ctx.fillStyle = '#FFFFFF';
+			ctx.strokeStyle = '#E63946';
+			ctx.lineWidth = 2;
+			ctx.fillRect(cx - size * 0.13, cy - size * 0.55, size * 0.26, size * 1.1);
+			ctx.strokeRect(cx - size * 0.13, cy - size * 0.55, size * 0.26, size * 1.1);
+			ctx.fillRect(cx - size * 0.5, cy - size * 0.13, size, size * 0.26);
+			ctx.strokeRect(cx - size * 0.5, cy - size * 0.13, size, size * 0.26);
 			break;
 		}
 

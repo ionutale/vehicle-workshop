@@ -1,17 +1,7 @@
 import type { Vehicle } from './vehicles';
 
-/** The seven voices and job beats a vehicle can inherit from its id. */
+/** The seven voices a vehicle can inherit from its id. */
 export type VehicleFamily = 'car' | 'truck' | 'bus' | 'farm' | 'works' | 'emergency' | 'rail';
-
-export type JobKind =
-	| 'beep'
-	| 'deliver'
-	| 'passengers'
-	| 'harvest'
-	| 'dig'
-	| 'spray'
-	| 'siren'
-	| 'platform';
 
 const RULES: Array<[VehicleFamily, RegExp]> = [
 	['rail', /train|tram|trolleybus|metro|light-rail/],
@@ -32,18 +22,4 @@ export function familyOf(vehicle: Vehicle): VehicleFamily {
 	return 'car';
 }
 
-const JOB_BY_FAMILY: Record<VehicleFamily, JobKind> = {
-	car: 'beep',
-	truck: 'deliver',
-	bus: 'passengers',
-	farm: 'harvest',
-	works: 'dig',
-	emergency: 'siren',
-	rail: 'platform'
-};
 
-export function jobOf(vehicle: Vehicle): JobKind {
-	const family = familyOf(vehicle);
-	if (family === 'emergency' && /fire|hazmat|rescue|aerial-ladder/.test(vehicle.id)) return 'spray';
-	return JOB_BY_FAMILY[family];
-}
