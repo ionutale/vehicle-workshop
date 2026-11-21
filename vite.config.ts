@@ -4,6 +4,8 @@ import { withPwa } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+	// Vitest resolves Svelte's server build unless the browser condition is forced.
+	resolve: process.env.VITEST ? { conditions: ['browser'] } : undefined,
 	plugins: [
 		withPwa(
 			{

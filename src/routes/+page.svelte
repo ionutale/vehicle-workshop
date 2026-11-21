@@ -40,12 +40,14 @@
 	let started = $state(false);
 	let audioRef: AudioBus | null = null;
 	let musicRef: MusicBus | null = null;
+	let requestVehicle: ((id: string) => void) | null = null;
 
-	const play = () => {
+	const play = (vehicleId?: string) => {
 		started = true;
 		screen = 'game';
 		audioRef?.unlock();
 		musicRef?.start();
+		if (typeof vehicleId === 'string') requestVehicle?.(vehicleId);
 	};
 
 	const backFromSettings = () => {
@@ -74,7 +76,8 @@
 		const timeScale = testMode ? 0.2 : 1;
 		const requestedVehicle = params.get('vehicle');
 
-		let vehicle: Vehicle = getVehicle(requestedVehicle ?? FIRST_VEHICLE_ID);
+		let baseVehicle: Vehicle = getVehicle(requestedVehicle ?? FIRST_VEHICLE_ID);
+		let vehicle: Vehicle = baseVehicle;
 		let previousVehicleId: string | null = null;
 		let layout: Layout;
 		let state: AssemblyState;
@@ -342,8 +345,9 @@
 		const handOff = (now: number) => {
 			confetti.clear();
 			const next = nextVehicleId(state.vehicleId, previousVehicleId);
-			previousVehicleId = vehicle.id;
-			vehicle = getVehicle(next);
+			previousVehicleId = baseVehicle.id;
+			baseVehicle = getVehicle(next);
+			vehicle = baseVehicle;
 			measure(vehicle);
 			state = reduce(state, {
 				type: 'arrive',
@@ -465,6 +469,18 @@
 				return;
 			}
 			if (hintSlotId === null) hintSlotId = shelfPieces()[0]?.slotId ?? null;
+		};
+
+		requestVehicle = (id) => {
+			previousVehicleId = baseVehicle.id;
+			baseVehicle = getVehicle(id);
+			vehicle = baseVehicle;
+			measure(vehicle);
+			reset(nowMs());
+			hintSlotId = null;
+			confetti.clear();
+			dust.clear();
+			needsPaint = true;
 		};
 
 		lastInteraction = nowMs();
@@ -667,6 +683,7 @@
 			audio.close();
 			audioRef = null;
 			musicRef = null;
+			requestVehicle = null;
 			detachPointer();
 			element.removeEventListener('pointerdown', onMutePointer);
 			element.removeEventListener('pointermove', trackClient);
@@ -697,7 +714,13 @@
 {/if}
 
 {#if screen === 'menu'}
-	<Menu {started} onplay={play} onsettings={() => (screen = 'settings')} />
+	<Menu
+		{started}
+		garage={prefs.garage}
+		onplay={() => play()}
+		onpick={(id) => play(id)}
+		onsettings={() => (screen = 'settings')}
+	/>
 {:else if screen === 'settings'}
 	<SettingsPanel onback={backFromSettings} />
 {/if}

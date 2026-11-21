@@ -1,10 +1,39 @@
 <script lang="ts">
+	import { getVehicle } from '#lib/game/vehicles';
+	import { drawGarageVehicle } from '#lib/render/garage';
+
 	interface Props {
 		started: boolean;
+		garage: string[];
 		onplay: () => void;
+		onpick: (id: string) => void;
 		onsettings: () => void;
 	}
-	let { started, onplay, onsettings }: Props = $props();
+	let { started, garage, onplay, onpick, onsettings }: Props = $props();
+
+	const WIDTH = 64;
+	const HEIGHT = 40;
+
+	const thumbnail = (canvas: HTMLCanvasElement, id: string) => {
+		const paint = () => {
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			canvas.width = Math.round(WIDTH * dpr);
+			canvas.height = Math.round(HEIGHT * dpr);
+			const ctx = canvas.getContext('2d');
+			if (!ctx) return;
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			ctx.clearRect(0, 0, WIDTH, HEIGHT);
+			drawGarageVehicle(ctx, getVehicle(id), WIDTH, HEIGHT);
+		};
+		paint();
+		return {
+			update(next: string) {
+				if (next === id) return;
+				id = next;
+				paint();
+			}
+		};
+	};
 </script>
 
 <div class="screen">
@@ -25,7 +54,7 @@
 		<h1>Vehicle Workshop</h1>
 		<p class="tagline">Drag the parts. Watch it drive away.</p>
 
-		<button class="primary" onclick={onplay} type="button">
+		<button class="primary" onclick={() => onplay()} type="button">
 			<span class="glyph" aria-hidden="true">
 				<svg viewBox="0 0 24 24" width="28" height="28">
 					<path d="M8 5.5 19 12 8 18.5 Z" fill="currentColor" />
@@ -34,7 +63,7 @@
 			{started ? 'Resume' : 'Play'}
 		</button>
 
-		<button class="secondary" onclick={onsettings} type="button">
+		<button class="secondary" onclick={() => onsettings()} type="button">
 			<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
 				<path
 					d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm8 3.5c0 .5 0 1-.1 1.4l2 1.5-2 3.4-2.3-.9c-.7.6-1.5 1.1-2.3 1.4l-.4 2.4h-4l-.4-2.4c-.8-.3-1.6-.8-2.3-1.4l-2.3.9-2-3.4 2-1.5a7.7 7.7 0 0 1 0-2.8l-2-1.5 2-3.4 2.3.9c.7-.6 1.5-1.1 2.3-1.4L12.5 4h4l.4 2.4c.8.3 1.6.8 2.3 1.4l2.3-.9 2 3.4-2 1.5c.1.4.1.9.1 1.4Z"
@@ -46,6 +75,22 @@
 			</svg>
 			Settings
 		</button>
+
+		{#if garage.length > 0}
+			<div class="garage" data-testid="garage" aria-label="Your garage">
+				{#each garage as id (id)}
+					<button
+						class="parked"
+						type="button"
+						aria-label={getVehicle(id).name}
+						data-vehicle={id}
+						onclick={() => onpick(id)}
+					>
+						<canvas use:thumbnail={id} aria-hidden="true"></canvas>
+					</button>
+				{/each}
+			</div>
+		{/if}
 
 		<p class="note">For little hands. No reading needed once it starts.</p>
 	</div>
@@ -134,6 +179,37 @@
 
 	.glyph {
 		display: inline-flex;
+	}
+
+	.garage {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 8px;
+		margin-top: 16px;
+		padding: 10px;
+		border-radius: 20px;
+		background: #eaf7ff;
+		border: 2px solid #c9e8f7;
+	}
+
+	.garage .parked {
+		min-height: 0;
+		width: 100%;
+		padding: 4px;
+		border: 2px solid #bfe2f5;
+		border-radius: 12px;
+		background: #ffffff;
+		box-shadow: none;
+	}
+
+	.garage .parked:active {
+		transform: translateY(1px);
+	}
+
+	.garage canvas {
+		display: block;
+		width: 100%;
+		height: 40px;
 	}
 
 	.note {
