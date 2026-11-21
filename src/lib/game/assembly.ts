@@ -56,6 +56,8 @@ export type AssemblyEvent =
 	| {
 			type: 'arrive';
 			vehicleId: string;
+			/** The level view; omitted by tests that want the full catalogue vehicle. */
+			vehicle?: Vehicle;
 			now: number;
 			gameScale?: number;
 			snapRadius?: number;
@@ -210,7 +212,7 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 		}
 
 		case 'arrive': {
-			const vehicle = getVehicle(event.vehicleId);
+			const vehicle = event.vehicle ?? getVehicle(event.vehicleId);
 			const gameScale = event.gameScale ?? state.gameScale;
 			const origin = event.origin ?? state.origin;
 			return {

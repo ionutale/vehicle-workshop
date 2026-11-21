@@ -26,6 +26,16 @@ describe('difficulty', () => {
 		}
 	});
 
+	it('keeps the part that names the vehicle at level 0', () => {
+		const signature = (id: string) =>
+			vehicleAtLevel(getVehicle(id), 0).slots.map((slot) => slot.part);
+		expect(signature('milk-tanker')).toContain('tank');
+		expect(signature('fire-engine')).toContain('ladder');
+		expect(signature('digger')).toContain('bucket');
+		expect(signature('crane-truck')).toContain('boom');
+		expect(signature('school-bus')).toContain('windowStrip');
+	});
+
 	it('leaves the full vehicle untouched at level 3', () => {
 		const car = getVehicle('car');
 		expect(vehicleAtLevel(car, 3)).toBe(car);

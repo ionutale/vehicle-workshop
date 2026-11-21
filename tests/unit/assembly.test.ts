@@ -7,6 +7,7 @@ import {
 	unfilledSlots
 } from '#lib/game/assembly';
 import { getVehicle } from '#lib/game/vehicles';
+import { vehicleAtLevel } from '#lib/game/difficulty';
 
 const car = getVehicle('car');
 const base = () => createAssembly(car, 0.8, 60, 0);
@@ -114,6 +115,22 @@ describe('assembly reducer', () => {
 		s = reduce(s, { type: 'tick', now: arriveAt + t.arriveMs + 10 });
 		expect(s.phase).toBe('assembling');
 		expect(s.placed).toEqual([]);
+	});
+
+	it('arrives with the trimmed level view it is handed, not the full catalogue entry', () => {
+		const view = vehicleAtLevel(car, 0);
+		const arrived = reduce(base(), {
+			type: 'arrive',
+			vehicleId: 'car',
+			vehicle: view,
+			now: 10,
+			gameScale: 0.8,
+			snapRadius: 60
+		});
+		expect(arrived.anchors.map((anchor) => anchor.slotId)).toEqual(
+			view.slots.map((slot) => slot.id)
+		);
+		expect(arrived.anchors).toHaveLength(4);
 	});
 
 	it('compresses the timeline in test mode but keeps the order', () => {

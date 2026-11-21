@@ -83,8 +83,22 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 	let master: GainNode | null = null;
 	let sfx: GainNode | null = null;
 	let music: GainNode | null = null;
+	let timers: number[] = [];
 
-	const ready = () => (context && !muted ? context : null);
+	const clearTimers = () => {
+		for (const id of timers) window.clearTimeout(id);
+		timers = [];
+	};
+
+	const later = (fn: () => void, delay: number) => {
+		const id = window.setTimeout(() => {
+			timers = timers.filter((timer) => timer !== id);
+			fn();
+		}, delay);
+		timers.push(id);
+	};
+
+	const ready = () => (context && !muted && context.state !== 'closed' ? context : null);
 
 	const ensureMaster = (ctx: AudioContext) => {
 		if (!master) {
@@ -165,9 +179,9 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			if (!ctx) return;
 			const notes = [TONES.completeA, TONES.completeB, TONES.completeC];
 			notes.forEach((frequency, index) => {
-				window.setTimeout(() => {
-					const later = ready();
-					if (later) tone(later, frequency, 0.24, 'triangle');
+				later(() => {
+					const current = ready();
+					if (current) tone(current, frequency, 0.24, 'triangle');
 				}, index * 95);
 			});
 		},
@@ -177,8 +191,9 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			tone(ctx, TONES.engineFrom, 0.7, 'sawtooth', TONES.engineTo);
 		},
 		voice(family) {
+			clearTimers();
 			for (const note of VOICES[family]) {
-				window.setTimeout(() => {
+				later(() => {
 					const ctx = ready();
 					if (ctx) tone(ctx, note.frequency, note.duration, note.type, note.endFrequency);
 				}, note.at);
@@ -186,6 +201,7 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		},
 		setMuted(value: boolean) {
 			muted = value;
+			if (value) clearTimers();
 			if (master && context) master.gain.setValueAtTime(value ? 0 : MASTER_GAIN * volumes.master, context.currentTime);
 		},
 		setVolumes(next: Partial<Volumes>) {
@@ -204,6 +220,7 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			return context;
 		},
 		close() {
+			clearTimers();
 			if (context && context.state !== 'closed') void context.close();
 		}
 	};

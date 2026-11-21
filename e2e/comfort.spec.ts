@@ -10,6 +10,9 @@ test('reduced motion still finishes the loop', async ({ page }) => {
 	await page.evaluate(() => (window as any).__vw.complete());
 	await expect(stage).toHaveAttribute('data-phase', 'ready');
 	expect(await page.evaluate(() => (window as any).__vw.confetti())).toBe(0);
+	await expect
+		.poll(() => page.evaluate(() => (window as any).__vw.jobs()))
+		.toBeGreaterThan(0);
 	await expect(stage).not.toHaveAttribute('data-vehicle', 'car', { timeout: 4_000 });
 	await expect(stage).toHaveAttribute('data-phase', 'assembling');
 });

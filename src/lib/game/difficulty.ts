@@ -27,8 +27,33 @@ export function piecesAtLevel(level: number): number {
 }
 
 const LOCOMOTION = new Set(['wheel', 'tracks', 'roller']);
-const BODY = new Set(['body', 'bodyBox', 'frame', 'seat', 'tipper']);
-const FACE = new Set(['cabin', 'cab', 'windowStrip', 'roof', 'platform']);
+const BODY = new Set(['body', 'bodyBox', 'frame', 'seat']);
+// A cabin or cab carries the driver; window strips and roofs are what remains for buses.
+const FACE_ORDER = ['cabin', 'cab', 'windowStrip', 'roof', 'platform'];
+// Cargo and equipment carry a vehicle's identity: a tanker without a tank, or a fire
+// engine without its ladder, stops being that vehicle. Decorative parts (beacon, sign,
+// spoiler) do not make the cut at four pieces.
+// Connectors first: an arm or boom without its bucket still reads as a machine, while a
+// bucket floating beside the body does not.
+const CONNECTOR = new Set(['arm', 'boom', 'hook', 'ladder']);
+const CARGO = new Set([
+	'hoseReel',
+	'bucket',
+	'tank',
+	'mixer',
+	'forks',
+	'plough',
+	'brush',
+	'flatbed',
+	'logs',
+	'pantograph',
+	'tipper',
+	'miniCar',
+	'header',
+	'bale',
+	'skip',
+	'scissor'
+]);
 
 function area(slot: Slot): number {
 	const shape = PARTS[slot.part];
@@ -43,10 +68,20 @@ function selectSlots(slots: Slot[], limit: number): Slot[] {
 	};
 	const byArea = [...slots].sort((a, b) => area(b) - area(a) || a.z - b.z);
 
-	// A child needs the thing that rolls and the thing that makes it that vehicle.
-	for (const slot of slots) if (LOCOMOTION.has(slot.part)) add(slot);
+	// A child needs the thing that rolls, the thing that holds it together, the part that
+	// says what it is, and a face. Then fill up to the limit with the biggest remainder.
+	// Body first, so a machine with three locomotion slots can never squeeze it out.
 	add(byArea.find((slot) => BODY.has(slot.part)));
-	add(byArea.find((slot) => FACE.has(slot.part)));
+	for (const slot of slots) if (LOCOMOTION.has(slot.part)) add(slot);
+	add(byArea.find((slot) => CONNECTOR.has(slot.part)));
+	add(byArea.find((slot) => CARGO.has(slot.part)));
+	for (const part of FACE_ORDER) {
+		const face = byArea.find((slot) => slot.part === part);
+		if (face) {
+			add(face);
+			break;
+		}
+	}
 	for (const slot of byArea) add(slot);
 
 	return slots.filter((slot) => keep.has(slot.id));
@@ -68,7 +103,7 @@ export function registerFinish(state: DifficultyState): DifficultyState {
 	if (streak >= 3 && state.level < MAX_LEVEL) {
 		return { level: state.level + 1, streak: 0, stalls: 0 };
 	}
-	return { level: state.level, streak, stalls: 0 };
+	return { level: state.level, streak: Math.min(streak, 2), stalls: 0 };
 }
 
 /** Two menu-abandoned builds quietly step back one piece; never below four. */

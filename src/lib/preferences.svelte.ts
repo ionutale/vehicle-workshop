@@ -5,6 +5,7 @@ import {
 	registerStall,
 	type DifficultyState
 } from './game/difficulty';
+import { VEHICLES } from './game/vehicles';
 import { readFlag, readJson, writeFlag, writeJson } from './storage';
 
 export interface Settings {
@@ -39,10 +40,12 @@ function cleanDifficulty(value: DifficultyState): DifficultyState {
 	const whole = (n: number) => Math.max(0, Math.floor(n));
 	return {
 		level: Math.min(MAX_LEVEL, whole(value.level)),
-		streak: whole(value.streak),
-		stalls: whole(value.stalls)
+		streak: Math.min(2, whole(value.streak)),
+		stalls: Math.min(2, whole(value.stalls))
 	};
 }
+
+const VEHICLE_IDS = new Set(VEHICLES.map((vehicle) => vehicle.id));
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
@@ -87,7 +90,9 @@ export function hydratePrefs(): void {
 		[],
 		(value): value is string[] =>
 			Array.isArray(value) && value.every((entry) => typeof entry === 'string')
-	).slice(-GARAGE_LIMIT);
+	)
+		.filter((id, index, all) => VEHICLE_IDS.has(id) && all.indexOf(id) === index)
+		.slice(-GARAGE_LIMIT);
 	prefs.difficulty = cleanDifficulty(
 		readJson<DifficultyState>(KEYS.difficulty, initialDifficulty(), isDifficulty)
 	);

@@ -85,7 +85,7 @@ export function drawJob(
 	ctx.fill();
 	ctx.globalAlpha = fade;
 
-	drawProp(ctx, job, progress, reduced, {
+	drawProp(ctx, job, progress, reduced, fade, {
 		vehicle,
 		propX,
 		ground,
@@ -113,6 +113,7 @@ function drawProp(
 	job: JobKind,
 	progress: number,
 	reduced: boolean,
+	fade: number,
 	stage: Stage
 ): void {
 	const { vehicle, propX, ground, size, right, top } = stage;
@@ -141,18 +142,16 @@ function drawProp(
 			ctx.beginPath();
 			ctx.ellipse(propX, ground, size * 1.1 * grow, size * 0.5 * grow, 0, 0, Math.PI * 2);
 			ctx.fill();
-			if (!reduced) {
-				for (let i = 0; i < 4; i++) {
-					const q = clamp01((progress - i * 0.08) / 0.55);
-					if (q <= 0 || q >= 1) continue;
-					dot(
-						ctx,
-						lerp(propX, right + size * 0.4, q),
-						ground - size * 0.4 - Math.sin(Math.PI * q) * size * 1.7,
-						size * 0.12,
-						'#8A5A34'
-					);
-				}
+			for (let i = 0; i < 4; i++) {
+				const q = reduced ? 0.3 + i * 0.14 : clamp01((progress - i * 0.08) / 0.55);
+				if (q <= 0 || q >= 1) continue;
+				dot(
+					ctx,
+					lerp(propX, right + size * 0.4, q),
+					ground - size * 0.4 - Math.sin(Math.PI * q) * size * 1.7,
+					size * 0.12,
+					'#8A5A34'
+				);
 			}
 			break;
 		}
@@ -169,18 +168,16 @@ function drawProp(
 			ctx.beginPath();
 			ctx.ellipse(propX, ground - flame * 0.28, size * 0.2, flame * 0.22, 0, 0, Math.PI * 2);
 			ctx.fill();
-			if (!reduced) {
-				for (let i = 0; i < 6; i++) {
-					const q = clamp01(progress * 1.5 - i * 0.07);
-					if (q <= 0 || q >= 1) continue;
-					dot(
-						ctx,
-						lerp(right, propX - size * 0.2, q),
-						lerp(top + size * 1.3, ground - flame * 0.5, q) - Math.sin(Math.PI * q) * size * 1.1,
-						size * 0.12,
-						'#6FC3F7'
-					);
-				}
+			for (let i = 0; i < 6; i++) {
+				const q = reduced ? 0.15 + i * 0.13 : clamp01(progress * 1.5 - i * 0.07);
+				if (q <= 0 || q >= 1) continue;
+				dot(
+					ctx,
+					lerp(right, propX - size * 0.2, q),
+					lerp(top + size * 1.3, ground - flame * 0.5, q) - Math.sin(Math.PI * q) * size * 1.1,
+					size * 0.12,
+					'#6FC3F7'
+				);
 			}
 			break;
 		}
@@ -189,14 +186,14 @@ function drawProp(
 			const rings = reduced ? 1 : 3;
 			for (let i = 0; i < rings; i++) {
 				const q = reduced ? 0.45 : (progress * 2 + i / 3) % 1;
-				ctx.globalAlpha = 0.75 * (1 - q);
+				ctx.globalAlpha = 0.75 * (1 - q) * fade;
 				ctx.strokeStyle = i % 2 === 0 ? '#E63946' : '#2C5AA0';
 				ctx.lineWidth = 4;
 				ctx.beginPath();
 				ctx.arc(propX, ground - size, size * (0.5 + q * 1.7), 0, Math.PI * 2);
 				ctx.stroke();
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = fade;
 			break;
 		}
 
@@ -222,23 +219,21 @@ function drawProp(
 		}
 
 		case 'harvest': {
-			if (!reduced) {
-				const stalks = 1 - clamp01((progress - 0.2) / 0.55);
-				ctx.globalAlpha = stalks;
-				for (let i = 0; i < 3; i++) {
-					const x = propX + (i - 1) * size * 0.65;
-					ctx.strokeStyle = '#D9A441';
-					ctx.lineWidth = 3;
-					ctx.beginPath();
-					ctx.moveTo(x, ground);
-					ctx.lineTo(x, ground - size * 1.7);
-					ctx.stroke();
-					for (let grain = 0; grain < 3; grain++) {
-						dot(ctx, x, ground - size * (1.1 + grain * 0.3), size * 0.14, '#F4C95D');
-					}
+			const stalks = reduced ? 0.6 : 1 - clamp01((progress - 0.2) / 0.55);
+			ctx.globalAlpha = stalks * fade;
+			for (let i = 0; i < 3; i++) {
+				const x = propX + (i - 1) * size * 0.65;
+				ctx.strokeStyle = '#D9A441';
+				ctx.lineWidth = 3;
+				ctx.beginPath();
+				ctx.moveTo(x, ground);
+				ctx.lineTo(x, ground - size * 1.7);
+				ctx.stroke();
+				for (let grain = 0; grain < 3; grain++) {
+					dot(ctx, x, ground - size * (1.1 + grain * 0.3), size * 0.14, '#F4C95D');
 				}
-				ctx.globalAlpha = 1;
 			}
+			ctx.globalAlpha = fade;
 			const roll = reduced ? 1 : clamp01((progress - 0.45) / 0.45);
 			if (roll > 0) {
 				const x = lerp(propX, right + size * 0.3, ease(roll));

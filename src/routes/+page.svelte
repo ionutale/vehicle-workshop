@@ -108,6 +108,11 @@
 		let backdrop: HTMLCanvasElement | null = null;
 		let needsPaint = true;
 		let frames = 0;
+		/** Guards the reward so a delayed frame cannot lose or repeat it. */
+		let completedVehicleId: string | null = null;
+		let stallNoted = false;
+		let builds = 0;
+		let jobs = 0;
 
 		const dust = createDust();
 		const confetti = createConfetti();
@@ -136,10 +141,12 @@
 		startVoice = () => audio.voice(familyOf(vehicle));
 		pauseForMenu = () => {
 			if (
+				!stallNoted &&
 				state.phase === 'assembling' &&
 				state.placed.length > 0 &&
 				state.placed.length < state.anchors.length
 			) {
+				stallNoted = true;
 				noteBuildStall();
 			}
 		};
@@ -216,6 +223,8 @@
 		const toWorld = (client: Point) => worldAt(client, layout);
 
 		const reset = (now: number) => {
+			completedVehicleId = null;
+			stallNoted = false;
 			measure(vehicle);
 			state = createAssembly(
 				vehicle,
@@ -348,6 +357,7 @@
 				if (state.placed.length > before) {
 					audio.snap();
 					markHintSeen();
+					if (state.phase === 'ready') completeBuild();
 				}
 			},
 			toWorld
@@ -380,8 +390,23 @@
 			);
 		};
 
+		// Fire the reward from the drop itself, not from a later frame: a stalled frame can
+		// otherwise skip the ready phase entirely and lose the garage entry and ramp step.
+		const completeBuild = () => {
+			if (completedVehicleId === baseVehicle.id) return;
+			completedVehicleId = baseVehicle.id;
+			builds++;
+			audio.complete();
+			celebrate();
+			recordBuild(baseVehicle.id);
+			noteBuildFinished();
+			needsPaint = true;
+		};
+
 		const handOff = (now: number) => {
 			confetti.clear();
+			completedVehicleId = null;
+			stallNoted = false;
 			const next = nextVehicleId(baseVehicle.id, previousVehicleId);
 			previousVehicleId = baseVehicle.id;
 			baseVehicle = getVehicle(next);
@@ -390,6 +415,7 @@
 			state = reduce(state, {
 				type: 'arrive',
 				vehicleId: next,
+				vehicle,
 				now,
 				gameScale: layout.gameScale,
 				snapRadius: layout.snapRadius,
@@ -549,13 +575,9 @@
 			state = reduce(state, { type: 'tick', now });
 			if (state !== previous) needsPaint = true;
 
+			if (state.phase === 'ready') completeBuild();
+
 			if (previousPhase !== state.phase) {
-				if (state.phase === 'ready') {
-					audio.complete();
-					celebrate();
-					recordBuild(baseVehicle.id);
-					noteBuildFinished();
-				}
 				if (state.phase === 'driving') {
 					beginDrive();
 					audio.engine();
@@ -563,6 +585,7 @@
 				if (state.phase === 'working') {
 					// The job is its own vignette; leftover paper from the cheer would clutter it.
 					confetti.clear();
+					jobs++;
 				}
 				if (state.phase === 'assembling' && previousPhase === 'arriving') {
 					audio.voice(familyOf(vehicle));
@@ -694,6 +717,8 @@
 				family: () => familyOf(vehicle),
 				job: () => jobOf(vehicle),
 				garage: () => [...prefs.garage],
+				builds: () => builds,
+				jobs: () => jobs,
 				drag: () => {
 					if (!state.drag) return null;
 					const screen = worldToScreen(layout, viewport(), {
@@ -736,6 +761,7 @@
 							shelfCenters: {}
 						});
 					}
+					if (state.phase === 'ready') completeBuild();
 				}
 			};
 		}
