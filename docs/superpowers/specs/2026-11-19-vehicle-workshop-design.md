@@ -184,6 +184,7 @@ Everything in `localStorage` sits behind a safe wrapper that never throws:
 - `vw:muted`, `vw:seenHint` — booleans.
 - `vw:music`, `vw:sound`, `vw:sfx` — volume decimals.
 - `vw:garage` — the last nine unique vehicle ids, oldest first, as JSON.
+- `vw:installDismissed` — boolean; once set, the add-to-home-screen card never returns.
 - `vw:difficulty` — `{ level, streak, stalls }` as JSON; level 0–3.
 
 A child who returns sees their last builds parked on the menu and the same piece count they had reached.
@@ -225,13 +226,23 @@ Four additions, all silent and reversible:
 - **Difficulty ramp.** Every vehicle is authored complete. `vehicleAtLevel(vehicle, level)` returns a view with 4, 5, 6 or 7 slots. It keeps the largest body first (so a machine with three locomotion slots cannot lose it), then locomotion, then a connector (arm, boom, hook, ladder), then cargo or equipment (tank, bucket, tipper, forks, header and so on), then a face (cabin, cab, window strip, roof, platform), then the largest remaining parts, always preserving slot order. At four pieces that keeps the part that names the vehicle — a tanker keeps its tank, a fire engine its ladder — even when it means the cab waits for the next level. Three clean finishes promote one level; two builds abandoned from the menu step back one. Nothing on screen says so.
 - **Garage.** Finished vehicles are recorded by id (unique, last nine) and drawn on the menu as small canvases using the same renderer. A tap replays that vehicle. The shelf is a flex-wrapped grid; the menu scrolls only if a short screen cannot fit nine.
 - **Family voices.** `familyOf` maps ids to car, truck, bus, farm, works, emergency or rail; `VOICES` holds a short oscillator signature per family, played on arrival and on Play.
-- **Job cutscene.** `jobOf` maps the same family to a `JobKind` (beep, deliver, passengers, harvest, dig, spray, siren or platform), and `drawJob` stages it in a vignette at 27 % world width with a prop at 78 %. Fire engines, hazmat and rescue spray; police and ambulance get rings; buses and rail board passengers.
+- **Job cutscene.** `jobOf` picks a job per vehicle (see the polish pass below), and `drawJob` stages it in a vignette at 27 % world width with a prop at 78 %.
+
+## Polish pass
+
+Five additions, each independent of the others:
+
+- **Per-vehicle detail.** `detailsFor(vehicle)` derives grille, wing mirror, exhaust, mudflaps, livery stripe, cargo straps, counterweight, route board, hazard stripes and hydraulic hoses from that vehicle's own slots. Facing comes from the headlight, else the cab; details carry the slot id they sit on and are skipped until that part is placed. Twelve character vehicles add an override. Details never add a slot, so the ramp and piece counts are unchanged.
+- **Three scenes.** `sceneForBuild(builds)` cycles countryside → town → harbour after each finished vehicle. Countryside keeps the two hill bands; town draws six windowed buildings; harbour draws a sea band, wave arcs, two sailboats and a striped lighthouse. Each backdrop is still pre-rendered once per resize/scene into the offscreen canvas.
+- **Bespoke jobs.** `jobOf` now picks one of eighteen beats: beep, deliver, passengers, harvest, dig, spray, siren, platform, tow, mix, plough, sweep, roll, pour, logs, cars, lift, rescue. Ordered id rules handle the specific machines (mixer, plough, sweeper, roller, pump, log truck, car transporter, forklift/crane), with overrides for fire, police, ambulance and the trolleybus. The cutscene geometry is a pure `jobStage` so every vehicle is proven to fit 320×568 and 844×390.
+- **Parent lock and how-to-play.** Settings sliders are disabled until a 1.2 s hold; the padlock is a real button with `aria-pressed` and a keyboard path. The hold state is per visit and resets on Back.
+- **Install hint.** After two finished builds, the menu offers a dismissible add-to-home-screen card. iOS gets "Tap Share, then Add to Home Screen"; Chromium gets a button backed by `beforeinstallprompt`. It never appears in standalone mode, after dismissal, or before two builds. Dismissal is persisted in `vw:installDismissed`.
 
 ## Menu, settings and music
 
 The game opens on a menu rather than straight into the shelf: one **Play** button and one **Settings** button, both far larger than a child's finger. The menu is a DOM overlay, not canvas, so the buttons and sliders get native focus, hit targets and accessibility for free; the canvas keeps painting the idle scene behind it. A gear in the bottom-left of the game brings the menu back.
 
-Settings holds three sliders — music, sound (master) and sound effects — each 48 px of track with a 34 px thumb, saved on input under `vw:music`, `vw:sound` and `vw:sfx` as decimals. Music is synthesised at runtime: an eight-bar loop over C–Am–F–G at 84 bpm, a pentatonic melody on a soft triangle, a sine bass and no drums, so there is no audio file to cache and it can duck or stop instantly. It starts on Play (the gesture browsers require), stops when the tab is hidden, and resumes on return.
+Settings holds three sliders — music, sound (master) and sound effects — each 48 px of track with a 34 px thumb, saved on input under `vw:music`, `vw:sound` and `vw:sfx` as decimals. They start **locked**: a 1.2 s press-and-hold on the padlock unlocks them, a tap cannot, a keyboard activation can, and Back locks them again. A short "How to play" line sits above the lock. Music is synthesised at runtime: an eight-bar loop over C–Am–F–G at 84 bpm, a pentatonic melody on a soft triangle, a sine bass and no drums, so there is no audio file to cache and it can duck or stop instantly. It starts on Play (the gesture browsers require), stops when the tab is hidden, and resumes on return.
 
 The page cannot be zoomed: `user-scalable=no` and `maximum-scale=1` in the viewport, `touch-action: manipulation`, and `gesturestart`/`gesturechange`/`dblclick` refused for iOS, which ignores the viewport flags. Text selection and the long-press callout are off on every element; only the settings values remain real, focusable inputs.
 
