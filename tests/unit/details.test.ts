@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createAssembly } from '#lib/game/assembly';
+import { vehicleAtLevel } from '#lib/game/difficulty';
 import { getVehicle, VEHICLES } from '#lib/game/vehicles';
 import { computeLayout } from '#lib/game/layout';
 import { pieceBoxes } from '#lib/render/tray';
@@ -34,6 +35,14 @@ describe('vehicle details', () => {
 		}
 		expect(grille('fire-engine').x).toBeLessThan(getVehicle('fire-engine').width / 2);
 		expect(grille('milk-tanker').x).toBeLessThan(getVehicle('milk-tanker').width / 2);
+	});
+
+	it('keeps the facing when the level view has trimmed the cab away', () => {
+		const fire = getVehicle('fire-engine');
+		const trimmed = vehicleAtLevel(fire, 0);
+		expect(trimmed.slots.some((slot) => slot.part === 'cab')).toBe(false);
+		const grille = detailsFor(trimmed).find((detail) => detail.kind === 'grille')!;
+		expect(grille.x).toBeLessThan(fire.width / 2);
 	});
 
 	it('only references slot ids that exist', () => {

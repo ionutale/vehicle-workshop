@@ -2,7 +2,7 @@ import type { AssemblyState } from '../game/assembly';
 import { familyOf } from '../game/families';
 import type { Layout } from '../game/layout';
 import { PARTS } from '../game/parts';
-import type { Slot, Vehicle } from '../game/vehicles';
+import { getVehicle, type Slot, type Vehicle } from '../game/vehicles';
 import { roundedRect } from './draw';
 import { OUTLINE } from './scene';
 
@@ -103,7 +103,11 @@ const DETAIL_OVERRIDES: Record<string, DetailKind[]> = {
 
 /** Details for the full or level-trimmed vehicle. */
 export function detailsFor(vehicle: Vehicle): Detail[] {
-	const slots = vehicle.slots;
+	// A level view may have trimmed the cab away, but the catalogue still knows which
+	// end is the nose. Use the full slot list for geometry; `requires` keeps a detail
+	// off the canvas until its own part is actually placed.
+	const catalogue = getVehicle(vehicle.id);
+	const slots = catalogue.slots.length > vehicle.slots.length ? catalogue.slots : vehicle.slots;
 	const bodySlot = largest(slots, BODY_PARTS) ?? slots[0];
 	if (!bodySlot) return [];
 
