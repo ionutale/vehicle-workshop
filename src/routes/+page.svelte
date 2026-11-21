@@ -37,7 +37,7 @@
 	import { drawVehicleDetails } from '#lib/render/details';
 	import { drawJob } from '#lib/render/jobs';
 	import { createConfetti, createDust } from '#lib/render/particles';
-	import { drawFarLayer, drawRoad } from '#lib/render/scene';
+	import { drawFarLayer, drawRoad, sceneForBuild, type SceneId } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
 	import {
 		drawChassisGhosts,
@@ -107,6 +107,7 @@
 			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		let backdrop: HTMLCanvasElement | null = null;
+		let scene: SceneId = sceneForBuild(0);
 		let needsPaint = true;
 		let frames = 0;
 		/** Guards the reward so a delayed frame cannot lose or repeat it. */
@@ -180,7 +181,7 @@
 			y: l.roadY + 10 - v.groundY * l.gameScale
 		});
 
-		const buildBackdrop = () => {
+		const buildBackdrop = (sceneId: SceneId) => {
 			const vp = viewport();
 			const dpr = devicePixelRatioFor(window);
 			const layer = document.createElement('canvas');
@@ -198,9 +199,9 @@
 			);
 			layerCtx.lineJoin = 'round';
 			layerCtx.lineCap = 'round';
-			drawFarLayer(layerCtx, layout, 0);
+			drawFarLayer(layerCtx, layout, 0, sceneId);
 			layerCtx.translate(layout.worldWidth, 0);
-			drawFarLayer(layerCtx, layout, 0);
+			drawFarLayer(layerCtx, layout, 0, sceneId);
 			backdrop = layer;
 		};
 
@@ -208,7 +209,7 @@
 			const vp = viewport();
 			const largest = Math.max(...v.slots.map((slot) => PARTS[slot.part].radius));
 			layout = computeLayout(vp, v, pieceBoxes(v), readInsets(), largest);
-			buildBackdrop();
+			buildBackdrop(scene);
 			needsPaint = true;
 			return layout;
 		};
@@ -408,6 +409,7 @@
 			confetti.clear();
 			completedVehicleId = null;
 			stallNoted = false;
+			scene = sceneForBuild(builds);
 			const next = nextVehicleId(baseVehicle.id, previousVehicleId);
 			previousVehicleId = baseVehicle.id;
 			baseVehicle = getVehicle(next);
@@ -441,7 +443,7 @@
 					((scroll % layout.worldWidth) + layout.worldWidth) % layout.worldWidth;
 				ctx.drawImage(backdrop, -offset, 0, layout.worldWidth * 2, layout.worldHeight);
 			} else {
-				drawFarLayer(ctx, layout, scroll);
+				drawFarLayer(ctx, layout, scroll, scene);
 			}
 			drawRoad(ctx, layout, 0);
 
@@ -533,6 +535,7 @@
 			element.dataset.family = familyOf(vehicle);
 			element.dataset.job = jobOf(vehicle);
 			element.dataset.garage = String(prefs.garage.length);
+			element.dataset.scene = scene;
 		};
 
 		const updateHint = (now: number) => {
@@ -723,6 +726,7 @@
 				garage: () => [...prefs.garage],
 				builds: () => builds,
 				jobs: () => jobs,
+				scene: () => scene,
 				drag: () => {
 					if (!state.drag) return null;
 					const screen = worldToScreen(layout, viewport(), {
