@@ -19,11 +19,22 @@
 		type Point,
 		type Viewport
 	} from '#lib/game/layout';
+	import { MAX_LEVEL, vehicleAtLevel } from '#lib/game/difficulty';
+	import { familyOf, jobOf } from '#lib/game/families';
 	import { PARTS } from '#lib/game/parts';
 	import { attachPointerHandlers, hitPiece } from '#lib/game/pointer';
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';
-	import { hydratePrefs, markHintSeen, prefs, setMuted } from '#lib/preferences.svelte';
+	import {
+		hydratePrefs,
+		markHintSeen,
+		noteBuildFinished,
+		noteBuildStall,
+		prefs,
+		recordBuild,
+		setMuted
+	} from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
+	import { drawJob } from '#lib/render/jobs';
 	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
@@ -41,6 +52,8 @@
 	let audioRef: AudioBus | null = null;
 	let musicRef: MusicBus | null = null;
 	let requestVehicle: ((id: string) => void) | null = null;
+	let startVoice: (() => void) | null = null;
+	let pauseForMenu: (() => void) | null = null;
 
 	const play = (vehicleId?: string) => {
 		started = true;
@@ -48,6 +61,7 @@
 		audioRef?.unlock();
 		musicRef?.start();
 		if (typeof vehicleId === 'string') requestVehicle?.(vehicleId);
+		else startVoice?.();
 	};
 
 	const backFromSettings = () => {
@@ -101,10 +115,34 @@
 		const music = createMusic(audio.context(), audio.musicInput() ?? undefined);
 		music.setVolume(1);
 		hydratePrefs();
+
+		const requestedLevel = params.get('level');
+		if (requestedLevel !== null) {
+			const parsed = Number.parseInt(requestedLevel, 10);
+			prefs.difficulty = {
+				...prefs.difficulty,
+				level: Number.isFinite(parsed) ? Math.max(0, Math.min(MAX_LEVEL, parsed)) : 0,
+				streak: 0,
+				stalls: 0
+			};
+		}
+		baseVehicle = getVehicle(requestedVehicle ?? FIRST_VEHICLE_ID);
+		vehicle = vehicleAtLevel(baseVehicle, prefs.difficulty.level);
+
 		audio.setMuted(prefs.muted);
 		audio.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
 		audioRef = audio;
 		musicRef = music;
+		startVoice = () => audio.voice(familyOf(vehicle));
+		pauseForMenu = () => {
+			if (
+				state.phase === 'assembling' &&
+				state.placed.length > 0 &&
+				state.placed.length < state.anchors.length
+			) {
+				noteBuildStall();
+			}
+		};
 
 		const insetProbe = document.createElement('div');
 		insetProbe.setAttribute('aria-hidden', 'true');
@@ -344,10 +382,10 @@
 
 		const handOff = (now: number) => {
 			confetti.clear();
-			const next = nextVehicleId(state.vehicleId, previousVehicleId);
+			const next = nextVehicleId(baseVehicle.id, previousVehicleId);
 			previousVehicleId = baseVehicle.id;
 			baseVehicle = getVehicle(next);
-			vehicle = baseVehicle;
+			vehicle = vehicleAtLevel(baseVehicle, prefs.difficulty.level);
 			measure(vehicle);
 			state = reduce(state, {
 				type: 'arrive',
@@ -395,6 +433,9 @@
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
 				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1);
+			} else if (state.phase === 'working') {
+				const jobT = clamp01((now - state.phaseStartedAt) / timings.workMs);
+				drawJob(ctx, vehicle, jobOf(vehicle), layout, jobT, reduced);
 			} else {
 				const arrivedT = clamp01((now - (state.arrivedAt ?? now)) / timings.arriveMs);
 				const offset = -(vehicle.width * layout.gameScale) * (1 - easeOutBack(arrivedT));
@@ -405,19 +446,21 @@
 				ctx.restore();
 			}
 
-			const hidden = state.drag?.slotId ?? state.settle?.slotId ?? null;
-			const arriving = state.phase === 'arriving';
-			const pieces = shelfPieces().filter((piece) => piece.slotId !== hidden);
-			drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
-				muted: prefs.muted,
-				reduced,
-				now,
-				hintSlotId,
-				alphaFor: arriving
-					? (index) =>
-							clamp01((now - (state.arrivedAt ?? now) - index * 60) / 180)
-					: undefined
-			});
+			if (state.phase !== 'working') {
+				const hidden = state.drag?.slotId ?? state.settle?.slotId ?? null;
+				const arriving = state.phase === 'arriving';
+				const pieces = shelfPieces().filter((piece) => piece.slotId !== hidden);
+				drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
+					muted: prefs.muted,
+					reduced,
+					now,
+					hintSlotId,
+					alphaFor: arriving
+						? (index) =>
+								clamp01((now - (state.arrivedAt ?? now) - index * 60) / 180)
+						: undefined
+				});
+			}
 
 			if (state.drag) {
 				drawPart(
@@ -456,6 +499,10 @@
 			element.dataset.tray = String(shelfPieces().length);
 			element.dataset.muted = String(prefs.muted);
 			element.dataset.hint = String(hintSlotId !== null);
+			element.dataset.level = String(prefs.difficulty.level);
+			element.dataset.family = familyOf(vehicle);
+			element.dataset.job = jobOf(vehicle);
+			element.dataset.garage = String(prefs.garage.length);
 		};
 
 		const updateHint = (now: number) => {
@@ -474,12 +521,14 @@
 		requestVehicle = (id) => {
 			previousVehicleId = baseVehicle.id;
 			baseVehicle = getVehicle(id);
-			vehicle = baseVehicle;
+			vehicle = vehicleAtLevel(baseVehicle, prefs.difficulty.level);
 			measure(vehicle);
+			lastPhase = 'assembling';
 			reset(nowMs());
 			hintSlotId = null;
 			confetti.clear();
 			dust.clear();
+			audio.voice(familyOf(vehicle));
 			needsPaint = true;
 		};
 
@@ -504,18 +553,24 @@
 				if (state.phase === 'ready') {
 					audio.complete();
 					celebrate();
+					recordBuild(baseVehicle.id);
+					noteBuildFinished();
 				}
 				if (state.phase === 'driving') {
 					beginDrive();
 					audio.engine();
 				}
+				if (state.phase === 'assembling' && previousPhase === 'arriving') {
+					audio.voice(familyOf(vehicle));
+				}
 				needsPaint = true;
 			}
 			lastPhase = state.phase;
 
-			if (state.phase === 'driving') {
+			if (state.phase === 'working') {
+				const workMs = timeline(state.timeScale).workMs;
 				const elapsed = now - state.phaseStartedAt;
-				if (elapsed >= timeline(state.timeScale).driveMs) handOff(now);
+				if (elapsed >= (reduced ? workMs * 0.5 : workMs)) handOff(now);
 			}
 
 			const hadHint = hintSlotId;
@@ -631,6 +686,10 @@
 				}),
 				frames: () => frames,
 				confetti: () => confetti.live(),
+				level: () => prefs.difficulty.level,
+				family: () => familyOf(vehicle),
+				job: () => jobOf(vehicle),
+				garage: () => [...prefs.garage],
 				drag: () => {
 					if (!state.drag) return null;
 					const screen = worldToScreen(layout, viewport(), {
@@ -684,6 +743,8 @@
 			audioRef = null;
 			musicRef = null;
 			requestVehicle = null;
+			startVoice = null;
+			pauseForMenu = null;
 			detachPointer();
 			element.removeEventListener('pointerdown', onMutePointer);
 			element.removeEventListener('pointermove', trackClient);
@@ -701,7 +762,15 @@
 <canvas bind:this={canvas} data-testid="stage"></canvas>
 
 {#if screen === 'game' && started}
-	<button class="gear" type="button" aria-label="Menu" onclick={() => (screen = 'menu')}>
+	<button
+		class="gear"
+		type="button"
+		aria-label="Menu"
+		onclick={() => {
+			pauseForMenu?.();
+			screen = 'menu';
+		}}
+	>
 		<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
 			<path
 				d="M4 6h16M4 12h16M4 18h16"

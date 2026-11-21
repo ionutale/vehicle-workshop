@@ -1,0 +1,24 @@
+import { expect, test } from '@playwright/test';
+import { start } from './helpers';
+
+test('the first vehicle asks for four pieces and widens after three builds', async ({ page }) => {
+	await page.setViewportSize({ width: 390, height: 844 });
+	await page.goto('/?test=1&vehicle=car');
+	await start(page);
+	const stage = page.getByTestId('stage');
+
+	await expect(stage).toHaveAttribute('data-level', '0');
+	await expect(stage).toHaveAttribute('data-tray', '4');
+
+	for (let build = 0; build < 3; build++) {
+		await page.evaluate(() => (window as any).__vw.complete());
+		await expect(stage).toHaveAttribute('data-phase', 'assembling', { timeout: 5_000 });
+	}
+
+	await expect(stage).toHaveAttribute('data-level', '1');
+
+	await page.reload();
+	await start(page);
+	await expect(page.getByTestId('stage')).toHaveAttribute('data-level', '1');
+	await expect(page.getByTestId('stage')).toHaveAttribute('data-tray', '5');
+});
