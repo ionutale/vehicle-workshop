@@ -13,8 +13,11 @@ describe('menu garage', () => {
 			props: {
 				started: false,
 				garage: ['car'],
+				installHint: null,
 				onplay: vi.fn(),
 				onpick,
+				oninstall: vi.fn(),
+				ondismissinstall: vi.fn(),
 				onsettings: vi.fn()
 			}
 		});
@@ -29,12 +32,56 @@ describe('menu garage', () => {
 			props: {
 				started: false,
 				garage: [],
+				installHint: null,
 				onplay: vi.fn(),
 				onpick: vi.fn(),
+				oninstall: vi.fn(),
+				ondismissinstall: vi.fn(),
 				onsettings: vi.fn()
 			}
 		});
 
 		expect(screen.queryByTestId('garage')).toBeNull();
+	});
+
+	it('shows iOS instructions without a native add button', () => {
+		render(Menu, {
+			props: {
+				started: false,
+				garage: [],
+				installHint: 'ios',
+				onplay: vi.fn(),
+				onpick: vi.fn(),
+				oninstall: vi.fn(),
+				ondismissinstall: vi.fn(),
+				onsettings: vi.fn()
+			}
+		});
+
+		expect(screen.getByTestId('install-hint')).toBeInTheDocument();
+		expect(screen.getByText(/Tap Share, then Add to Home Screen/i)).toBeInTheDocument();
+		expect(screen.queryByRole('button', { name: 'Add' })).toBeNull();
+	});
+
+	it('adds or dismisses the Chromium hint', async () => {
+		const oninstall = vi.fn();
+		const ondismissinstall = vi.fn();
+		render(Menu, {
+			props: {
+				started: false,
+				garage: [],
+				installHint: 'chromium',
+				onplay: vi.fn(),
+				onpick: vi.fn(),
+				oninstall,
+				ondismissinstall,
+				onsettings: vi.fn()
+			}
+		});
+
+		await fireEvent.click(screen.getByRole('button', { name: 'Add' }));
+		expect(oninstall).toHaveBeenCalled();
+		await fireEvent.click(screen.getByRole('button', { name: 'Dismiss install hint' }));
+		expect(ondismissinstall).toHaveBeenCalled();
 	});
 });

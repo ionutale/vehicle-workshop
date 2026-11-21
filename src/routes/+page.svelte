@@ -22,6 +22,12 @@
 	import { MAX_LEVEL, vehicleAtLevel } from '#lib/game/difficulty';
 	import { familyOf } from '#lib/game/families';
 	import { jobOf } from '#lib/game/jobs';
+	import {
+		dismissInstall,
+		install,
+		promptInstall,
+		shouldOfferInstall
+	} from '#lib/install.svelte';
 	import { PARTS } from '#lib/game/parts';
 	import { attachPointerHandlers, hitPiece } from '#lib/game/pointer';
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';
@@ -73,6 +79,11 @@
 	$effect(() => {
 		audioRef?.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
 		audioRef?.setMuted(prefs.muted);
+	});
+
+	const installHint = $derived.by((): 'ios' | 'chromium' | null => {
+		if (!shouldOfferInstall(install, prefs.garage.length)) return null;
+		return install.platform === 'chromium' ? 'chromium' : install.platform === 'ios' ? 'ios' : null;
 	});
 
 	const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -824,9 +835,12 @@
 {#if screen === 'menu'}
 	<Menu
 		{started}
+		{installHint}
 		garage={prefs.garage}
 		onplay={() => play()}
 		onpick={(id) => play(id)}
+		oninstall={() => void promptInstall()}
+		ondismissinstall={dismissInstall}
 		onsettings={() => (screen = 'settings')}
 	/>
 {:else if screen === 'settings'}

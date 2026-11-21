@@ -5,11 +5,23 @@
 	interface Props {
 		started: boolean;
 		garage: string[];
+		installHint: 'ios' | 'chromium' | null;
 		onplay: () => void;
 		onpick: (id: string) => void;
+		oninstall: () => void;
+		ondismissinstall: () => void;
 		onsettings: () => void;
 	}
-	let { started, garage, onplay, onpick, onsettings }: Props = $props();
+	let {
+		started,
+		garage,
+		installHint,
+		onplay,
+		onpick,
+		oninstall,
+		ondismissinstall,
+		onsettings
+	}: Props = $props();
 
 	const WIDTH = 64;
 	const HEIGHT = 40;
@@ -75,6 +87,30 @@
 			</svg>
 			Settings
 		</button>
+
+		{#if installHint}
+			<div class="install" data-testid="install-hint">
+				<div class="install-copy">
+					<strong>Add to home screen</strong>
+					<p>
+						{installHint === 'ios'
+							? 'Tap Share, then Add to Home Screen.'
+							: 'Keep the workshop one tap away.'}
+					</p>
+				</div>
+				{#if installHint === 'chromium'}
+					<button class="install-add" type="button" onclick={() => oninstall()}>Add</button>
+				{/if}
+				<button
+					class="install-close"
+					type="button"
+					aria-label="Dismiss install hint"
+					onclick={() => ondismissinstall()}
+				>
+					×
+				</button>
+			</div>
+		{/if}
 
 		{#if garage.length > 0}
 			<div class="garage" data-testid="garage" aria-label="Your garage">
@@ -183,6 +219,59 @@
 
 	.glyph {
 		display: inline-flex;
+	}
+
+	.install {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 12px;
+		padding: 10px 12px;
+		border-radius: 16px;
+		border: 2px solid #c9e8f7;
+		background: #eaf7ff;
+		text-align: left;
+	}
+
+	.install-copy {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.install-copy strong {
+		display: block;
+		color: #3a271b;
+		font-size: 14px;
+	}
+
+	.install-copy p {
+		margin: 2px 0 0;
+		color: #6b5b48;
+		font-size: 12px;
+		line-height: 1.3;
+	}
+
+	.install .install-add,
+	.install .install-close {
+		flex: 0 0 auto;
+		width: auto;
+		min-height: 34px;
+		padding: 0 12px;
+		border-radius: 999px;
+		border: 2px solid #3a271b;
+		background: #ffd166;
+		color: #3a271b;
+		font-size: 14px;
+		box-shadow: none;
+	}
+
+	.install .install-close {
+		width: 34px;
+		padding: 0;
+		font-size: 20px;
+		line-height: 1;
+		background: #fff9ec;
+		border-color: #bfe2f5;
 	}
 
 	.garage {
