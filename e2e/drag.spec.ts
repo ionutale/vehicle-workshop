@@ -14,7 +14,7 @@ test('a wheel can be dragged from the shelf onto the car', async ({ page }) => {
 	await page.mouse.move(slot.x, slot.y, { steps: 12 });
 	await page.mouse.up();
 	await expect(stage).toHaveAttribute('data-placed', '1');
-	await expect(stage).toHaveAttribute('data-tray', '5');
+	await expect(stage).toHaveAttribute('data-tray', '3');
 });
 
 test('a missed drop returns the piece to the shelf', async ({ page }) => {
@@ -29,7 +29,7 @@ test('a missed drop returns the piece to the shelf', async ({ page }) => {
 	await page.mouse.move(5, 5, { steps: 8 });
 	await page.mouse.up();
 	await expect(stage).toHaveAttribute('data-placed', '0');
-	await expect(stage).toHaveAttribute('data-tray', '6');
+	await expect(stage).toHaveAttribute('data-tray', '4');
 });
 
 
@@ -47,7 +47,7 @@ test('releasing outside the play area cancels the drag', async ({ page }) => {
 	await page.mouse.up();
 
 	await expect(stage).toHaveAttribute('data-placed', '0');
-	await expect(stage).toHaveAttribute('data-tray', '6');
+	await expect(stage).toHaveAttribute('data-tray', '4');
 });
 
 

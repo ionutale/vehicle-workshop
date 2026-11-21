@@ -148,7 +148,7 @@ for (const viewport of [
 		await expect(stage).toHaveAttribute('data-vehicle', 'car');
 
 		await dragEverything(page);
-		await expect(stage).toHaveAttribute('data-placed', '6');
+		await expect(stage).toHaveAttribute('data-placed', '4');
 		await expect(stage).not.toHaveAttribute('data-vehicle', 'car', { timeout: 4_000 });
 	});
 }

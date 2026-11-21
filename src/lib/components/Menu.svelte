@@ -100,8 +100,11 @@
 	.screen {
 		position: fixed;
 		inset: 0;
-		display: grid;
-		place-items: center;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		overflow-y: auto;
+		overscroll-behavior: contain;
 		padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
 			max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
 		background:
@@ -111,6 +114,7 @@
 
 	.panel {
 		width: min(420px, 100%);
+		margin: auto;
 		background: #fff9ec;
 		border: 4px solid #ffd8a8;
 		border-radius: 32px;
@@ -208,13 +212,48 @@
 
 	.garage canvas {
 		display: block;
-		width: 100%;
+		width: 64px;
 		height: 40px;
+		margin: 0 auto;
 	}
 
 	.note {
 		margin: 18px 0 0;
 		font-size: 13px;
 		color: #9a8a74;
+	}
+
+	@media (max-height: 640px) {
+		.panel {
+			padding: 16px;
+		}
+
+		h1 {
+			font-size: 26px;
+			margin: 2px 0 4px;
+		}
+
+		.tagline {
+			margin-bottom: 14px;
+		}
+
+		button {
+			min-height: 50px;
+		}
+
+		.garage {
+			gap: 6px;
+			padding: 8px;
+			margin-top: 12px;
+		}
+
+		.garage canvas {
+			width: 52px;
+			height: 33px;
+		}
+
+		.note {
+			margin-top: 10px;
+		}
 	}
 </style>

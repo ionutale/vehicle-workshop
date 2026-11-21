@@ -560,6 +560,10 @@
 					beginDrive();
 					audio.engine();
 				}
+				if (state.phase === 'working') {
+					// The job is its own vignette; leftover paper from the cheer would clutter it.
+					confetti.clear();
+				}
 				if (state.phase === 'assembling' && previousPhase === 'arriving') {
 					audio.voice(familyOf(vehicle));
 				}

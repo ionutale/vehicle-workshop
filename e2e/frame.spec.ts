@@ -9,7 +9,7 @@ test('draws the scene, the ghosts and a shelf of pieces', async ({ page }) => {
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	await expect(stage).toHaveAttribute('data-phase', 'assembling');
 	await expect(stage).toHaveAttribute('data-placed', '0');
-	await expect(stage).toHaveAttribute('data-tray', '6');
+	await expect(stage).toHaveAttribute('data-tray', '4');
 
 	const painted = await page.evaluate(() => {
 		const canvas = document.querySelector('canvas') as HTMLCanvasElement;

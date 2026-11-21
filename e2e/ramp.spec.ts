@@ -12,9 +12,13 @@ test('the first vehicle asks for four pieces and widens after three builds', asy
 
 	for (let build = 0; build < 3; build++) {
 		await page.evaluate(() => (window as any).__vw.complete());
+		await expect
+			.poll(() => page.evaluate(() => (window as any).__vw.garage().length))
+			.toBeGreaterThan(build);
 		await expect(stage).toHaveAttribute('data-phase', 'assembling', { timeout: 5_000 });
 	}
 
+	await expect.poll(() => page.evaluate(() => (window as any).__vw.level())).toBe(1);
 	await expect(stage).toHaveAttribute('data-level', '1');
 
 	await page.reload();
