@@ -8,6 +8,18 @@ export async function start(page: Page): Promise<void> {
 	await expect(page.getByRole('button', { name: 'Menu' })).toBeVisible();
 }
 
+/** Hold the settings padlock for the deliberate 1.2 s it takes to unlock. */
+export async function unlockSettings(page: Page): Promise<void> {
+	const lock = page.getByRole('button', { name: 'Unlock settings' });
+	const box = await lock.boundingBox();
+	if (!box) throw new Error('no lock button');
+	await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+	await page.mouse.down();
+	await page.waitForTimeout(1300);
+	await page.mouse.up();
+	await expect(page.getByRole('button', { name: 'Lock settings' })).toBeVisible();
+}
+
 /** Drag every shelf piece to a matching ghost using real mouse moves. */
 export async function dragEverything(page: Page): Promise<void> {
 	for (let guard = 0; guard < 10; guard++) {
