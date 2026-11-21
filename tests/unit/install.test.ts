@@ -1,10 +1,20 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
 	detectPlatform,
 	dismissInstall,
 	install,
+	promptInstall,
 	shouldOfferInstall
 } from '#lib/install.svelte';
+
+function installEvent(prompt: () => Promise<void>) {
+	const event = new Event('beforeinstallprompt');
+	Object.defineProperties(event, {
+		prompt: { value: prompt },
+		userChoice: { value: Promise.resolve({ outcome: 'accepted' }) }
+	});
+	return event;
+}
 
 describe('install hint', () => {
 	beforeEach(() => {
@@ -45,5 +55,17 @@ describe('install hint', () => {
 		dismissInstall();
 		expect(install.dismissed).toBe(true);
 		expect(window.localStorage.getItem('vw:installDismissed')).toBe('1');
+	});
+
+	it('catches a beforeinstallprompt that arrives before initInstall', () => {
+		window.dispatchEvent(installEvent(() => Promise.resolve()));
+		expect(install.available).toBe(true);
+		expect(install.platform).toBe('chromium');
+	});
+
+	it('keeps the hint available when the native prompt fails', async () => {
+		window.dispatchEvent(installEvent(() => Promise.reject(new Error('dismissed'))));
+		await promptInstall();
+		expect(install.available).toBe(true);
 	});
 });

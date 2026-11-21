@@ -26,6 +26,30 @@ export const install = $state<InstallState>({
 });
 
 let deferred: BeforeInstallPromptEvent | null = null;
+let listening = false;
+
+const onPrompt = (event: Event) => {
+	event.preventDefault();
+	deferred = event as BeforeInstallPromptEvent;
+	install.available = true;
+	install.platform = 'chromium';
+};
+const onInstalled = () => {
+	install.installed = true;
+	install.available = false;
+	deferred = null;
+};
+
+const listen = () => {
+	if (listening || typeof window === 'undefined') return;
+	window.addEventListener('beforeinstallprompt', onPrompt);
+	window.addEventListener('appinstalled', onInstalled);
+	listening = true;
+};
+
+// Chromium can fire before the layout hydrates; listen at module evaluation so the
+// event is not lost and the menu card can appear on the first visit.
+if (typeof window !== 'undefined') listen();
 
 export function detectPlatform(
 	userAgent: string,
@@ -61,24 +85,12 @@ export function initInstall(): () => void {
 		navigator.maxTouchPoints ?? 0
 	);
 
-	const onPrompt = (event: Event) => {
-		event.preventDefault();
-		deferred = event as BeforeInstallPromptEvent;
-		install.available = true;
-		install.platform = 'chromium';
-	};
-	const onInstalled = () => {
-		install.installed = true;
-		install.available = false;
-		deferred = null;
-	};
-
-	window.addEventListener('beforeinstallprompt', onPrompt);
-	window.addEventListener('appinstalled', onInstalled);
+	listen();
 
 	return () => {
 		window.removeEventListener('beforeinstallprompt', onPrompt);
 		window.removeEventListener('appinstalled', onInstalled);
+		listening = false;
 	};
 }
 
@@ -87,8 +99,14 @@ export async function promptInstall(): Promise<void> {
 	if (!event) return;
 	deferred = null;
 	install.available = false;
-	await event.prompt();
-	await event.userChoice.catch(() => undefined);
+	try {
+		await event.prompt();
+		await event.userChoice.catch(() => undefined);
+	} catch {
+		// A dismissed or unsupported prompt should not cost the card for the session.
+		deferred = event;
+		install.available = true;
+	}
 }
 
 export function dismissInstall(): void {

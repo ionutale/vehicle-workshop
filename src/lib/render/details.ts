@@ -116,10 +116,15 @@ export function detailsFor(vehicle: Vehicle): Detail[] {
 	const connector = connectorSlot ? bounds(connectorSlot) : null;
 	const family = familyOf(vehicle);
 	const lightSlot = slots.find((slot) => slot.part === 'light');
+	const cabSlot = slots.find((slot) => slot.part === 'cab');
+	// A headlight is the strongest signal. A front cab is next, but only on the families
+	// that actually have one; a works machine's cab sits at the rear, so it defaults to
+	// facing right where its blade, forks or drum is.
+	const frontCab = family === 'truck' || family === 'emergency' || family === 'bus';
 	const direction = lightSlot
 		? Math.sign(lightSlot.x - body.cx) || 1
-		: cabinSlot
-			? Math.sign(cabinSlot.x - body.cx) || 1
+		: frontCab && cabSlot
+			? Math.sign(cabSlot.x - body.cx) || 1
 			: 1;
 	const front =
 		direction > 0
@@ -172,9 +177,10 @@ export function detailsFor(vehicle: Vehicle): Detail[] {
 		const wheel = bounds(wheelSlot);
 		details.push({
 			kind: 'mudflap',
-			x: wheel.left - 2,
+			x: direction > 0 ? wheel.left - 2 : wheel.right + 2,
 			y: wheel.bottom - 6,
 			scale: 0.8,
+			flip: direction < 0,
 			requires: wheelSlot.id
 		});
 	}

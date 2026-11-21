@@ -27,6 +27,50 @@ describe('vehicle details', () => {
 		expect(detailsFor(getVehicle('school-bus')).map((detail) => detail.kind)).toContain('exhaust');
 	});
 
+	it('puts the grille at the nose of right-facing and rear-cab machines', () => {
+		const grille = (id: string) => detailsFor(getVehicle(id)).find((d) => d.kind === 'grille')!;
+		for (const id of ['taxi', 'monster-truck', 'digger', 'bulldozer', 'skid-steer', 'steam-roller']) {
+			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
+		}
+		expect(grille('fire-engine').x).toBeLessThan(getVehicle('fire-engine').width / 2);
+		expect(grille('milk-tanker').x).toBeLessThan(getVehicle('milk-tanker').width / 2);
+	});
+
+	it('only references slot ids that exist', () => {
+		for (const vehicle of VEHICLES) {
+			const ids = new Set(vehicle.slots.map((slot) => slot.id));
+			for (const detail of detailsFor(vehicle)) {
+				if (detail.requires) expect(ids.has(detail.requires)).toBe(true);
+			}
+		}
+	});
+
+	it('draws only details whose supporting part is placed', () => {
+		const car = getVehicle('car');
+		const layout = computeLayout(
+			{ width: 390, height: 844 },
+			car,
+			pieceBoxes(car),
+			{ top: 0, right: 0, bottom: 0, left: 0 },
+			34
+		);
+		const base = createAssembly(car, layout.gameScale, layout.snapRadius, 0, 1, { x: 40, y: 300 });
+		const wheel = car.slots.find((slot) => slot.part === 'wheel')!;
+
+		const wheelOnly = recorder();
+		drawVehicleDetails(wheelOnly.ctx, car, { ...base, placed: [wheel.id] }, layout);
+		const everything = recorder();
+		drawVehicleDetails(
+			everything.ctx,
+			car,
+			{ ...base, placed: car.slots.map((slot) => slot.id) },
+			layout
+		);
+
+		expect(wheelOnly.calls.length).toBeGreaterThan(0);
+		expect(wheelOnly.calls.length).toBeLessThan(everything.calls.length);
+	});
+
 	it('skips every detail while no part is placed', () => {
 		const car = getVehicle('car');
 		const layout = computeLayout(

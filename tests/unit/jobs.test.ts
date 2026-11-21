@@ -45,7 +45,8 @@ describe('job cutscene', () => {
 				const stage = jobStage(vehicle, layout);
 				expect(stage.centreX - (vehicle.width * stage.scale) / 2).toBeGreaterThanOrEqual(-1);
 				expect(stage.right).toBeLessThanOrEqual(layout.worldWidth + 1);
-				expect(stage.propX + stage.size).toBeLessThanOrEqual(layout.worldWidth + 1);
+				// The widest prop (the plough mound) reaches about 2.4× the base size.
+				expect(stage.propX + stage.size * 2.4).toBeLessThanOrEqual(layout.worldWidth + 1);
 			}
 		}
 	});
