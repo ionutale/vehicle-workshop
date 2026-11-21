@@ -1,4 +1,11 @@
-import { readFlag, writeFlag } from './storage';
+import {
+	initialDifficulty,
+	MAX_LEVEL,
+	registerFinish,
+	registerStall,
+	type DifficultyState
+} from './game/difficulty';
+import { readFlag, readJson, writeFlag, writeJson } from './storage';
 
 export interface Settings {
 	muted: boolean;
@@ -13,8 +20,29 @@ const KEYS = {
 	seenHint: 'vw:seenHint',
 	music: 'vw:music',
 	sound: 'vw:sound',
-	sfx: 'vw:sfx'
+	sfx: 'vw:sfx',
+	garage: 'vw:garage',
+	difficulty: 'vw:difficulty'
 };
+
+export const GARAGE_LIMIT = 9;
+
+function isDifficulty(value: unknown): value is DifficultyState {
+	if (!value || typeof value !== 'object') return false;
+	const candidate = value as Record<string, unknown>;
+	return ['level', 'streak', 'stalls'].every(
+		(key) => typeof candidate[key] === 'number' && Number.isFinite(candidate[key])
+	);
+}
+
+function cleanDifficulty(value: DifficultyState): DifficultyState {
+	const whole = (n: number) => Math.max(0, Math.floor(n));
+	return {
+		level: Math.min(MAX_LEVEL, whole(value.level)),
+		streak: whole(value.streak),
+		stalls: whole(value.stalls)
+	};
+}
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
@@ -43,7 +71,9 @@ export const prefs = $state({
 	seenHint: false,
 	music: 0.5,
 	sound: 1,
-	sfx: 1
+	sfx: 1,
+	garage: [] as string[],
+	difficulty: initialDifficulty()
 });
 
 export function hydratePrefs(): void {
@@ -52,6 +82,32 @@ export function hydratePrefs(): void {
 	prefs.music = readLevel(KEYS.music, 0.5);
 	prefs.sound = readLevel(KEYS.sound, 1);
 	prefs.sfx = readLevel(KEYS.sfx, 1);
+	prefs.garage = readJson<string[]>(
+		KEYS.garage,
+		[],
+		(value): value is string[] =>
+			Array.isArray(value) && value.every((entry) => typeof entry === 'string')
+	).slice(-GARAGE_LIMIT);
+	prefs.difficulty = cleanDifficulty(
+		readJson<DifficultyState>(KEYS.difficulty, initialDifficulty(), isDifficulty)
+	);
+}
+
+/** Park a finished vehicle at the end of the shelf; replaying it moves it to the front. */
+export function recordBuild(vehicleId: string): void {
+	const garage = [...prefs.garage.filter((id) => id !== vehicleId), vehicleId].slice(-GARAGE_LIMIT);
+	prefs.garage = garage;
+	writeJson(KEYS.garage, garage);
+}
+
+export function noteBuildFinished(): void {
+	prefs.difficulty = registerFinish(prefs.difficulty);
+	writeJson(KEYS.difficulty, prefs.difficulty);
+}
+
+export function noteBuildStall(): void {
+	prefs.difficulty = registerStall(prefs.difficulty);
+	writeJson(KEYS.difficulty, prefs.difficulty);
 }
 
 export function setMuted(value: boolean): void {

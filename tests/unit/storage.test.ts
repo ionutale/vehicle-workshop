@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, afterEach } from 'vitest';
-import { readFlag, writeFlag } from '#lib/storage';
+import { readFlag, readJson, writeFlag, writeJson } from '#lib/storage';
 
 afterEach(() => {
 	vi.restoreAllMocks();
@@ -25,5 +25,17 @@ describe('storage', () => {
 			throw new Error('quota');
 		});
 		expect(() => writeFlag('vw:test', true)).not.toThrow();
+	});
+
+	it('round-trips JSON and falls back on bad data', () => {
+		writeJson('vw:test-list', ['a', 'b']);
+		expect(readJson('vw:test-list', [], (value) => Array.isArray(value))).toEqual(['a', 'b']);
+
+		window.localStorage.setItem('vw:test-list', '{nope');
+		expect(readJson('vw:test-list', [], (value) => Array.isArray(value))).toEqual([]);
+
+		expect(readJson('vw:missing', { level: 0 }, (value) => typeof value === 'object')).toEqual({
+			level: 0
+		});
 	});
 });
