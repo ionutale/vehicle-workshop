@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { TONES, createAudioBus } from '#lib/game/audio';
+import { TONES, VOICES, createAudioBus } from '#lib/game/audio';
 
 function fakeContext() {
 	const osc = {
@@ -44,6 +44,7 @@ describe('audio', () => {
 			bus.snap();
 			bus.complete();
 			bus.engine();
+			bus.voice('car');
 		}).not.toThrow();
 	});
 
@@ -60,5 +61,18 @@ describe('audio', () => {
 		const bus = createAudioBus(ctx);
 		bus.pick();
 		expect(osc.start).toHaveBeenCalled();
+	});
+
+	it('gives every family a distinct voice and mutes it with the rest', () => {
+		const families = ['car', 'truck', 'bus', 'farm', 'works', 'emergency', 'rail'] as const;
+		for (const family of families) expect(VOICES[family].length).toBeGreaterThan(0);
+		expect(new Set(families.map((family) => VOICES[family][0].frequency)).size).toBe(7);
+		expect(VOICES.emergency.some((note) => note.endFrequency !== undefined)).toBe(true);
+
+		const { ctx, osc } = fakeContext();
+		const bus = createAudioBus(ctx);
+		bus.setMuted(true);
+		bus.voice('emergency');
+		expect(osc.start).not.toHaveBeenCalled();
 	});
 });

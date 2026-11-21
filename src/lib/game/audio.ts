@@ -4,6 +4,8 @@
  * music, sound effects, and the master the mute toggle drives.
  */
 
+import type { VehicleFamily } from './families';
+
 export const TONES = {
 	pick: 660,
 	snap: 220,
@@ -15,6 +17,44 @@ export const TONES = {
 };
 
 export const MASTER_GAIN = 0.2;
+
+export interface VoiceNote {
+	/** Milliseconds from the start of the signature. */
+	at: number;
+	frequency: number;
+	duration: number;
+	type: OscillatorType;
+	endFrequency?: number;
+}
+
+/** One short, recognisable signature per family, all synthesised from the same oscillator. */
+export const VOICES: Record<VehicleFamily, VoiceNote[]> = {
+	car: [
+		{ at: 0, frequency: 740, duration: 0.1, type: 'triangle' },
+		{ at: 110, frequency: 988, duration: 0.12, type: 'triangle' }
+	],
+	truck: [{ at: 0, frequency: 196, duration: 0.34, type: 'square', endFrequency: 174 }],
+	bus: [
+		{ at: 0, frequency: 330, duration: 0.22, type: 'square' },
+		{ at: 90, frequency: 392, duration: 0.24, type: 'square' }
+	],
+	farm: [
+		{ at: 0, frequency: 147, duration: 0.13, type: 'triangle' },
+		{ at: 190, frequency: 147, duration: 0.13, type: 'triangle' }
+	],
+	works: [
+		{ at: 0, frequency: 440, duration: 0.12, type: 'square' },
+		{ at: 180, frequency: 440, duration: 0.12, type: 'square' }
+	],
+	emergency: [
+		{ at: 0, frequency: 950, duration: 0.5, type: 'sawtooth', endFrequency: 650 },
+		{ at: 520, frequency: 800, duration: 0.5, type: 'sawtooth' }
+	],
+	rail: [
+		{ at: 0, frequency: 1200, duration: 0.24, type: 'sine' },
+		{ at: 300, frequency: 1200, duration: 0.24, type: 'sine' }
+	]
+};
 
 export interface Volumes {
 	master: number;
@@ -28,6 +68,7 @@ export interface AudioBus {
 	snap(): void;
 	complete(): void;
 	engine(): void;
+	voice(family: VehicleFamily): void;
 	setMuted(muted: boolean): void;
 	setVolumes(volumes: Partial<Volumes>): void;
 	/** Where a music generator should connect. */
@@ -134,6 +175,14 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			const ctx = ready();
 			if (!ctx) return;
 			tone(ctx, TONES.engineFrom, 0.7, 'sawtooth', TONES.engineTo);
+		},
+		voice(family) {
+			for (const note of VOICES[family]) {
+				window.setTimeout(() => {
+					const ctx = ready();
+					if (ctx) tone(ctx, note.frequency, note.duration, note.type, note.endFrequency);
+				}, note.at);
+			}
 		},
 		setMuted(value: boolean) {
 			muted = value;
