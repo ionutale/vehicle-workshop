@@ -31,7 +31,7 @@ export interface Drag {
 	at: Point;
 }
 
-export type Phase = 'assembling' | 'ready' | 'driving' | 'arriving';
+export type Phase = 'assembling' | 'ready' | 'driving' | 'working' | 'arriving';
 
 export interface AssemblyState {
 	phase: Phase;
@@ -62,8 +62,18 @@ export type AssemblyEvent =
 			origin?: Point;
 	  };
 
-export function timeline(timeScale: number): { readyMs: number; driveMs: number; arriveMs: number } {
-	return { readyMs: 500 * timeScale, driveMs: 1200 * timeScale, arriveMs: 400 * timeScale };
+export function timeline(timeScale: number): {
+	readyMs: number;
+	driveMs: number;
+	workMs: number;
+	arriveMs: number;
+} {
+	return {
+		readyMs: 500 * timeScale,
+		driveMs: 1200 * timeScale,
+		workMs: 3000 * timeScale,
+		arriveMs: 400 * timeScale
+	};
 }
 
 function anchorsFor(vehicle: Vehicle, gameScale: number, origin: Point): SlotAnchor[] {
@@ -189,6 +199,9 @@ export function reduce(state: AssemblyState, event: AssemblyEvent): AssemblyStat
 			}
 			if (state.phase === 'ready' && elapsed >= t.readyMs) {
 				return { ...state, phase: 'driving', phaseStartedAt: state.phaseStartedAt + t.readyMs };
+			}
+			if (state.phase === 'driving' && elapsed >= t.driveMs) {
+				return { ...state, phase: 'working', phaseStartedAt: state.phaseStartedAt + t.driveMs };
 			}
 			if (state.phase === 'arriving' && elapsed >= t.arriveMs) {
 				return { ...state, phase: 'assembling', phaseStartedAt: event.now };

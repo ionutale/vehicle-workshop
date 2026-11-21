@@ -301,7 +301,8 @@ export function drawVehicle(
 	layout: Layout,
 	offsetX: number,
 	squash = 1,
-	lift = 0
+	lift = 0,
+	alpha = 1
 ): void {
 	const anchors = anchorMap(state);
 	const originY = layout.vehicleAnchor.y;
@@ -316,6 +317,7 @@ export function drawVehicle(
 		if (!anchor) continue;
 		drawPart(ctx, PARTS[slot.part], vehicle.palette, anchor, (slot.scale ?? 1) * layout.gameScale, {
 			flip: slot.flip,
+			alpha,
 			outlineWidth: layout.outline
 		});
 	}

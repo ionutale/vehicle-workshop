@@ -105,7 +105,9 @@ describe('assembly reducer', () => {
 		const driveAt = placedAt + t.readyMs + 1;
 		s = reduce(s, { type: 'tick', now: driveAt });
 		expect(s.phase).toBe('driving');
-		const arriveAt = driveAt + t.driveMs + 1;
+		s = reduce(s, { type: 'tick', now: driveAt + t.driveMs + 1 });
+		expect(s.phase).toBe('working');
+		const arriveAt = driveAt + t.driveMs + t.workMs + 1;
 		s = reduce(s, { type: 'arrive', vehicleId: 'car', now: arriveAt });
 		expect(s.phase).toBe('arriving');
 		expect(s.arrivedAt).toBe(arriveAt);
@@ -115,7 +117,7 @@ describe('assembly reducer', () => {
 	});
 
 	it('compresses the timeline in test mode but keeps the order', () => {
-		expect(timeline(0.2)).toEqual({ readyMs: 100, driveMs: 240, arriveMs: 80 });
+		expect(timeline(0.2)).toEqual({ readyMs: 100, driveMs: 240, workMs: 600, arriveMs: 80 });
 	});
 
 	it('finds no candidate when the part has no empty slot left', () => {
