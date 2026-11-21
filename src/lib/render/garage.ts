@@ -1,6 +1,7 @@
 import { createAssembly } from '../game/assembly';
 import type { Layout } from '../game/layout';
 import type { Vehicle } from '../game/vehicles';
+import { drawVehicleDetails } from './details';
 import { drawVehicle } from './vehicle';
 
 /**
@@ -41,4 +42,5 @@ export function drawGarageVehicle(
 	};
 
 	drawVehicle(ctx, vehicle, placed, layout, 0);
+	drawVehicleDetails(ctx, vehicle, placed, layout);
 }

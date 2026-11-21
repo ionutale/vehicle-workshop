@@ -34,6 +34,7 @@
 		setMuted
 	} from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
+	import { drawVehicleDetails } from '#lib/render/details';
 	import { drawJob } from '#lib/render/jobs';
 	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad } from '#lib/render/scene';
@@ -448,6 +449,7 @@
 				drawContactShadow(ctx, vehicle, layout);
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
 				drawPlacedParts(ctx, vehicle, state, layout);
+				drawVehicleDetails(ctx, vehicle, state, layout);
 			} else if (state.phase === 'ready') {
 				const hop = reduced ? 0 : 16 * Math.sin(Math.PI * Math.min(1, readyT / 260));
 				drawContactShadow(ctx, vehicle, layout);
@@ -456,9 +458,11 @@
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
 				drawVehicle(ctx, vehicle, state, layout, 0, squash, hop);
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
+				drawVehicleDetails(ctx, vehicle, state, layout, { lift: hop });
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
 				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1);
+				drawVehicleDetails(ctx, vehicle, state, layout, { offsetX: driveOffset });
 			} else if (state.phase === 'working') {
 				const jobT = clamp01((now - state.phaseStartedAt) / timings.workMs);
 				drawJob(ctx, vehicle, jobOf(vehicle), layout, jobT, reduced);
