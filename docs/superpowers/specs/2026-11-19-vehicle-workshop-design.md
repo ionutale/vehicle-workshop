@@ -13,14 +13,14 @@ It is the flat, drag-and-drop, endless-catalogue sibling of `truck-game` (3D, ta
 ## Goals
 
 - A non-reader can pick it up with no adult help and no explanation.
-- The loop is complete in under a minute per vehicle: 5–7 pieces, drag, snap, drive off.
+- The loop is complete in under a minute per vehicle: 4–7 pieces (the ramp starts at four), drag, snap, drive off, then a short job beat.
 - It feels calm and forgiving. No timers, scores, lives, or penalties. A drop that misses is not a mistake, it is a return.
 - One render pass and one input path for touch and mouse.
 - New vehicles are data, not code — adding vehicle seven must not touch the loop.
 
 ## Non-goals
 
-- No scoring, stars, stickers, collection book, garage, unlock progression, or persistence of play history.
+- No scoring, stars, stickers, collection book, or unlock progression. (A garage shelf and persisted build order were added later, at the user's direction; see **Growth pass**.)
 - No failure state of any kind: it must be impossible to place a piece wrongly.
 - No vehicle driving simulation, steering, hills, or collisions. The drive-off is a canned animation.
 - No 3D, no characters, no dialogue, no reading.
@@ -160,9 +160,10 @@ When the final slot fills:
 | 0–250 | a small hop off the road, one squash, confetti bursts from the roof in the vehicle's own colours, and a three-note rising fanfare plays; headlights blink twice |
 | 250–500 | engine start sound; wheels spin up; 8 dust particles puff from the rear wheels |
 | 500–1700 | vehicle accelerates right with `easeInCubic`, wheels rotate proportional to distance; background scrolls at 0.35 × vehicle speed |
-| 1700–2100 | next chassis rolls in from the left, decelerating with a small overshoot; tray repopulates with a 60 ms staggered pop |
+| 1700–4700 | job cutscene: the vehicle pulls up in a small vignette and does its family's job (crate, bale, dirt, water, passengers, platform, beeps); confetti is cleared |
+| 4700–5100 | next chassis rolls in from the left, decelerating with a small overshoot; tray repopulates with a 60 ms staggered pop |
 
-Total ≈ 2.1 s. During the drive-off the canvas ignores pointers; the sequence is short enough that skipping is not needed (and a tap that does nothing is better than one that cuts the reward short).
+Total ≈ 5.1 s. During the drive-off the canvas ignores pointers; the sequence is short enough that skipping is not needed (and a tap that does nothing is better than one that cuts the reward short).
 
 ### Audio
 
@@ -170,30 +171,34 @@ Synthesised at runtime with WebAudio — no audio assets to cache and no latency
 
 - **pick:** 60 ms sine blip at 660 Hz, quick decay.
 - **snap:** 120 ms click — filtered noise burst plus a 220 Hz sine, very short attack.
-- **complete:** two-note chime, 523 → 784 Hz, 300 ms, overlapping tails.
+- **complete:** three-note rising fanfare, C–E–G (523 → 659 → 784 Hz), 95 ms apart on a soft triangle.
+- **voice:** one short signature per family, selected by `familyOf(vehicle)`: car beeps, truck air horn, bus honk, farm chug, works reverse beeps, emergency siren, rail bell. All synthesised and routed through the effects slider.
 - **engine:** 700 ms sawtooth ramping 80 → 140 Hz with a 6 Hz vibrato, low-passed and faded out under the scroll.
 
 Mute toggle: a 44 × 44 speaker icon drawn in the top-right of the tray panel, tinted not-outlined so it never competes with the pieces. Persisted in `localStorage` under `vw:muted`; the key is read defensively (private mode, quota errors) and defaults to unmuted when unavailable.
 
 ### Persistence
 
-Exactly two values, both in `localStorage` behind a safe wrapper:
+Everything in `localStorage` sits behind a safe wrapper that never throws:
 
-- `vw:muted` — boolean.
-- `vw:seenHint` — boolean, set after the first successful pick, used only to shorten the hint delay.
+- `vw:muted`, `vw:seenHint` — booleans.
+- `vw:music`, `vw:sound`, `vw:sfx` — volume decimals.
+- `vw:garage` — the last nine unique vehicle ids, oldest first, as JSON.
+- `vw:difficulty` — `{ level, streak, stalls }` as JSON; level 0–3.
 
-No play history, no counters. A child who returns sees a fresh vehicle.
+A child who returns sees their last builds parked on the menu and the same piece count they had reached.
 
 ### Reduced motion
 
 `prefers-reduced-motion: reduce`:
 
 - Drag and snap tweens stay (they are the interaction, not decoration).
-- The vehicle still leaves the screen completely: same exit distance and the same 1200 ms, with no background scroll, no dust and no squash. The hand-off still starts at 1700 ms.
+- The vehicle still leaves the screen completely: same exit distance and the same 1200 ms, with no background scroll, no dust and no squash.
+- The job beat still appears, but as a static prop-and-vehicle scene with no arcs, rolls or expanding rings; it holds for half the usual time.
 - The hint pulse becomes a static ring.
-- The completion bounce is removed.
+- The completion hop, squash and confetti are removed; the fanfare and headlight blink stay.
 
-`?test=1` compresses every phase proportionally (drive-off 350 ms, hand-off at 450 ms) so the sequence is asserted once, in one set of timings, for both motion modes.
+`?test=1` compresses every phase proportionally (ready 100 ms, drive 240 ms, job 600 ms, arrival 80 ms) so the sequence is asserted once, in one set of timings, for both motion modes. `?level=0..3` pins the ramp for a test.
 
 ### Performance and lifecycle
 
@@ -212,6 +217,15 @@ The loop must be testable without a browser painting pixels:
 - **`?test=1`.** Exposes `window.__vw = { rects(), state() }` — piece rectangles and slot anchor rectangles in CSS pixels — so end-to-end tests use real pointer events at real coordinates instead of reaching into internals. The flag also shortens every phase as described under reduced motion.
 - **`?vehicle=<id>`** forces any of the six, and **`?order=fixed`** freezes shelf order, so all six vehicles and the visual baseline are reachable without playing through a shuffle.
 - **Visual baseline.** Two screenshots at fixed viewports (390 × 844 and 844 × 390) on a fixed vehicle and a fixed shelf order.
+
+## Growth pass
+
+Four additions, all silent and reversible:
+
+- **Difficulty ramp.** Every vehicle is authored complete. `vehicleAtLevel(vehicle, level)` returns a view with 4, 5, 6 or 7 slots, choosing locomotion first, then the largest body, then a face part (cabin, cab, window strip or roof), then the largest remaining parts, preserving slot order. Three clean finishes promote one level; two builds abandoned from the menu step back one. Nothing on screen says so.
+- **Garage.** Finished vehicles are recorded by id (unique, last nine) and drawn on the menu as small canvases using the same renderer. A tap replays that vehicle. The shelf is a flex-wrapped grid; the menu scrolls only if a short screen cannot fit nine.
+- **Family voices.** `familyOf` maps ids to car, truck, bus, farm, works, emergency or rail; `VOICES` holds a short oscillator signature per family, played on arrival and on Play.
+- **Job cutscene.** `jobOf` maps the same family to a `JobKind` (beep, deliver, passengers, harvest, dig, spray, siren or platform), and `drawJob` stages it in a vignette at 27 % world width with a prop at 78 %. Fire engines, hazmat and rescue spray; police and ambulance get rings; buses and rail board passengers.
 
 ## Menu, settings and music
 
