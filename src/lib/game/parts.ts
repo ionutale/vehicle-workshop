@@ -41,9 +41,32 @@ export type PartId =
 	| 'header'
 	| 'bale'
 	| 'skip'
-	| 'scissor';
+	| 'scissor'
+	| 'realCarBody'
+	| 'realCarCabin'
+	| 'realCarDoor'
+	| 'realCarWheel'
+	| 'realFireBody'
+	| 'realFireLadder'
+	| 'realFirePump'
+	| 'realFireWheel'
+	| 'realDiggerHouse'
+	| 'realDiggerTracks'
+	| 'realDiggerBoom'
+	| 'realDiggerBucket'
+	| 'realDiggerBeacon'
+	| 'realTruckCab'
+	| 'realTruckBox'
+	| 'realTruckDoor'
+	| 'realTruckWheel'
+	| 'realBusBody'
+	| 'realBusWindows'
+	| 'realBusDoor'
+	| 'realBusWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
+
+export type PartKind = 'body' | 'face' | 'connector' | 'cargo' | 'locomotion' | 'detail';
 
 export interface PartShape {
 	id: PartId;
@@ -55,6 +78,35 @@ export interface PartShape {
 	spins?: boolean;
 	/** Optional glazing drawn inside the shape, in the same local units. */
 	glassPath?: string;
+	kind?: PartKind;
+	/** Cut-out art: the vehicle id whose full illustration supplies this piece. */
+	realVehicle?: string;
+	/** Mask in the vehicle's local art coordinates, clipped with even-odd. */
+	maskPath?: string;
+	maskBounds?: { x: number; y: number; w: number; h: number };
+}
+
+function realPart(
+	id: PartId,
+	role: Role,
+	kind: PartKind,
+	realVehicle: string,
+	maskPath: string,
+	b: { x: number; y: number; w: number; h: number }
+): PartShape {
+	const r = Math.min(14, b.w / 4, b.h / 4);
+	return {
+		id,
+		path: rounded(b.w, b.h, r),
+		role,
+		radius: Math.hypot(b.w, b.h) / 2,
+		halfWidth: b.w / 2,
+		halfHeight: b.h / 2,
+		kind,
+		realVehicle,
+		maskPath,
+		maskBounds: b
+	};
 }
 
 const circle = (r: number): string =>
@@ -367,5 +419,174 @@ export const PARTS: Record<PartId, PartShape> = {
 		radius: 18,
 		halfWidth: 14,
 		halfHeight: 16
-	}
+	},
+	realCarBody: realPart(
+		'realCarBody',
+		'shell',
+		'body',
+		'car',
+		'M35,235 L35,196 Q35,180 50,176 L100,170 L140,160 L380,160 L430,168 L470,174 Q485,178 485,194 L485,235 Z M86,208 A34,34 0 1 1 86,276 A34,34 0 1 1 86,208 Z M356,208 A34,34 0 1 1 356,276 A34,34 0 1 1 356,208 Z',
+		{ x: 35, y: 160, w: 450, h: 75 }
+	),
+	realCarCabin: realPart(
+		'realCarCabin',
+		'shell',
+		'face',
+		'car',
+		'M140,162 L170,124 Q180,112 198,112 L330,112 Q348,112 360,126 L392,162 Z',
+		{ x: 140, y: 112, w: 252, h: 50 }
+	),
+	realCarDoor: realPart(
+		'realCarDoor',
+		'trim',
+		'detail',
+		'car',
+		'M222,166 L335,166 L335,222 L222,222 Z',
+		{ x: 220, y: 164, w: 117, h: 60 }
+	),
+	realCarWheel: realPart(
+		'realCarWheel',
+		'rubber',
+		'locomotion',
+		'car',
+		'M86,208 A34,34 0 1 1 86,276 A34,34 0 1 1 86,208 Z',
+		{ x: 86, y: 174, w: 68, h: 68 }
+	),
+	realFireBody: realPart(
+		'realFireBody',
+		'shell',
+		'body',
+		'fire-engine',
+		'M40,240 L40,180 Q40,160 52,150 L72,102 Q78,92 92,92 L184,92 Q190,92 190,102 L190,136 L662,136 L662,240 L681,240 L681,256 L38,256 L38,240 Z M109,249 A36,36 0 1 1 109,285 A36,36 0 1 1 109,249 Z M509,249 A36,36 0 1 1 509,285 A36,36 0 1 1 509,249 Z',
+		{ x: 38, y: 92, w: 643, h: 164 }
+	),
+	realFireLadder: realPart(
+		'realFireLadder',
+		'trim',
+		'connector',
+		'fire-engine',
+		'M198,110 L655,110 L655,140 L198,140 Z',
+		{ x: 198, y: 110, w: 457, h: 30 }
+	),
+	realFirePump: realPart(
+		'realFirePump',
+		'trim',
+		'cargo',
+		'fire-engine',
+		'M566,160 L644,160 L644,228 L566,228 Z',
+		{ x: 566, y: 160, w: 78, h: 68 }
+	),
+	realFireWheel: realPart(
+		'realFireWheel',
+		'rubber',
+		'locomotion',
+		'fire-engine',
+		'M109,249 A36,36 0 1 1 109,285 A36,36 0 1 1 109,249 Z',
+		{ x: 109, y: 213, w: 72, h: 72 }
+	),
+	realDiggerHouse: realPart(
+		'realDiggerHouse',
+		'shell',
+		'body',
+		'digger',
+		'M65,242 L65,160 L115,160 L115,132 Q115,112 132,108 L194,100 Q214,98 214,116 L214,238 L385,238 L385,242 Z',
+		{ x: 65, y: 100, w: 320, h: 142 }
+	),
+	realDiggerTracks: realPart(
+		'realDiggerTracks',
+		'rubber',
+		'locomotion',
+		'digger',
+		'M55,255 Q55,238 82,238 L388,238 Q415,238 415,255 L415,310 Q415,327 388,327 L82,327 Q55,327 55,310 Z',
+		{ x: 50, y: 234, w: 372, h: 98 }
+	),
+	realDiggerBoom: realPart(
+		'realDiggerBoom',
+		'trim',
+		'connector',
+		'digger',
+		'M280,184 L452,90 L500,108 L586,252 L532,264 L286,218 Z',
+		{ x: 276, y: 88, w: 316, h: 182 }
+	),
+	realDiggerBucket: realPart(
+		'realDiggerBucket',
+		'trim',
+		'cargo',
+		'digger',
+		'M535,238 L594,230 Q610,230 612,245 L610,265 Q607,286 588,291 L540,278 Z',
+		{ x: 531, y: 226, w: 86, h: 70 }
+	),
+	realDiggerBeacon: realPart(
+		'realDiggerBeacon',
+		'lamp',
+		'detail',
+		'digger',
+		'M201,84 A8,8 0 1 1 201,100 A8,8 0 1 1 201,84 Z',
+		{ x: 193, y: 84, w: 16, h: 16 }
+	),
+	realTruckCab: realPart(
+		'realTruckCab',
+		'shell',
+		'face',
+		'box-truck',
+		'M50,270 L50,190 Q50,172 63,162 L85,132 Q92,120 106,120 L190,120 Q200,120 200,130 L200,270 Z M45,252 L200,252 L200,270 L45,270 Z M150,226 A38,38 0 1 1 150,302 A38,38 0 1 1 150,226 Z',
+		{ x: 32, y: 120, w: 172, h: 150 }
+	),
+	realTruckBox: realPart(
+		'realTruckBox',
+		'shell',
+		'body',
+		'box-truck',
+		'M200,95 L640,95 L640,256 L678,256 L678,270 L200,270 Z M522,226 A38,38 0 1 1 522,302 A38,38 0 1 1 522,226 Z',
+		{ x: 200, y: 95, w: 478, h: 175 }
+	),
+	realTruckDoor: realPart(
+		'realTruckDoor',
+		'trim',
+		'detail',
+		'box-truck',
+		'M588,120 L638,120 L638,262 L588,262 Z',
+		{ x: 586, y: 118, w: 54, h: 146 }
+	),
+	realTruckWheel: realPart(
+		'realTruckWheel',
+		'rubber',
+		'locomotion',
+		'box-truck',
+		'M112,264 A38,38 0 1 1 112,340 A38,38 0 1 1 112,264 Z',
+		{ x: 112, y: 226, w: 76, h: 76 }
+	),
+	realBusBody: realPart(
+		'realBusBody',
+		'shell',
+		'body',
+		'bus',
+		'M60,250 Q45,250 45,232 L45,130 Q45,105 70,105 L700,105 Q725,105 725,130 L725,232 Q725,250 710,250 Z M120,124 L620,124 L620,182 L120,182 Z M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z M554,246 A36,36 0 1 1 554,318 A36,36 0 1 1 554,246 Z',
+		{ x: 45, y: 105, w: 680, h: 145 }
+	),
+	realBusWindows: realPart(
+		'realBusWindows',
+		'glass',
+		'face',
+		'bus',
+		'M120,124 L620,124 L620,182 L120,182 Z',
+		{ x: 118, y: 122, w: 504, h: 62 }
+	),
+	realBusDoor: realPart(
+		'realBusDoor',
+		'trim',
+		'detail',
+		'bus',
+		'M610,124 L648,124 L648,244 L610,244 Z',
+		{ x: 608, y: 122, w: 42, h: 124 }
+	),
+	realBusWheel: realPart(
+		'realBusWheel',
+		'rubber',
+		'locomotion',
+		'bus',
+		'M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z',
+		{ x: 129, y: 210, w: 72, h: 72 }
+	)
+
 };

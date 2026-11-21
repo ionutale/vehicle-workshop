@@ -1,4 +1,4 @@
-import { PARTS } from './parts';
+import { PARTS, type PartId, type PartKind } from './parts';
 import type { Slot, Vehicle } from './vehicles';
 
 /**
@@ -26,34 +26,41 @@ export function piecesAtLevel(level: number): number {
 	return MIN_PIECES + clampLevel(level);
 }
 
-const LOCOMOTION = new Set(['wheel', 'tracks', 'roller']);
-const BODY = new Set(['body', 'bodyBox', 'frame', 'seat']);
+const KIND: Partial<Record<PartId, PartKind>> = {
+	body: 'body',
+	bodyBox: 'body',
+	cabin: 'face',
+	cab: 'face',
+	windowStrip: 'face',
+	roof: 'face',
+	arm: 'connector',
+	boom: 'connector',
+	hook: 'connector',
+	ladder: 'connector',
+	bucket: 'cargo',
+	tank: 'cargo',
+	mixer: 'cargo',
+	forks: 'cargo',
+	plough: 'cargo',
+	brush: 'cargo',
+	flatbed: 'cargo',
+	logs: 'cargo',
+	pantograph: 'cargo',
+	tipper: 'cargo',
+	miniCar: 'cargo',
+	header: 'cargo',
+	bale: 'cargo',
+	skip: 'cargo',
+	scissor: 'cargo',
+	hoseReel: 'cargo',
+	wheel: 'locomotion',
+	tracks: 'locomotion',
+	roller: 'locomotion'
+};
+
+const kindOf = (slot: Slot): PartKind => PARTS[slot.part].kind ?? KIND[slot.part] ?? 'detail';
 // A cabin or cab carries the driver; window strips and roofs are what remains for buses.
 const FACE_ORDER = ['cabin', 'cab', 'windowStrip', 'roof', 'platform'];
-// Cargo and equipment carry a vehicle's identity: a tanker without a tank, or a fire
-// engine without its ladder, stops being that vehicle. Decorative parts (beacon, sign,
-// spoiler) do not make the cut at four pieces.
-// Connectors first: an arm or boom without its bucket still reads as a machine, while a
-// bucket floating beside the body does not.
-const CONNECTOR = new Set(['arm', 'boom', 'hook', 'ladder']);
-const CARGO = new Set([
-	'hoseReel',
-	'bucket',
-	'tank',
-	'mixer',
-	'forks',
-	'plough',
-	'brush',
-	'flatbed',
-	'logs',
-	'pantograph',
-	'tipper',
-	'miniCar',
-	'header',
-	'bale',
-	'skip',
-	'scissor'
-]);
 
 function area(slot: Slot): number {
 	const shape = PARTS[slot.part];
@@ -71,10 +78,10 @@ function selectSlots(slots: Slot[], limit: number): Slot[] {
 	// A child needs the thing that rolls, the thing that holds it together, the part that
 	// says what it is, and a face. Then fill up to the limit with the biggest remainder.
 	// Body first, so a machine with three locomotion slots can never squeeze it out.
-	add(byArea.find((slot) => BODY.has(slot.part)));
-	for (const slot of slots) if (LOCOMOTION.has(slot.part)) add(slot);
-	add(byArea.find((slot) => CONNECTOR.has(slot.part)));
-	add(byArea.find((slot) => CARGO.has(slot.part)));
+	add(byArea.find((slot) => kindOf(slot) === 'body'));
+	for (const slot of slots) if (kindOf(slot) === 'locomotion') add(slot);
+	add(byArea.find((slot) => kindOf(slot) === 'connector'));
+	add(byArea.find((slot) => kindOf(slot) === 'cargo'));
 	for (const part of FACE_ORDER) {
 		const face = byArea.find((slot) => slot.part === part);
 		if (face) {
@@ -82,6 +89,7 @@ function selectSlots(slots: Slot[], limit: number): Slot[] {
 			break;
 		}
 	}
+	add(byArea.find((slot) => kindOf(slot) === 'face'));
 	for (const slot of byArea) add(slot);
 
 	return slots.filter((slot) => keep.has(slot.id));

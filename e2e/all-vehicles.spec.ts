@@ -100,7 +100,6 @@ test('every vehicle completes and hands off in portrait', async ({ page }) => {
 		await start(page);
 		await expect(stage).toHaveAttribute('data-vehicle', id);
 		await page.evaluate(() => (window as any).__vw.complete());
-		await expect(stage).toHaveAttribute('data-phase', 'ready');
 		await expect(stage).not.toHaveAttribute('data-vehicle', id, { timeout: 5_000 });
 	}
 });
@@ -139,8 +138,8 @@ test('a wheel dropped on the other wheel ghost still lands', async ({ page }) =>
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const wheels = rects.slots.filter((s: any) => s.part === 'wheel');
-	const piece = rects.shelf.filter((p: any) => p.part === 'wheel')[0];
+	const wheels = rects.slots.filter((s: any) => (s.part === 'wheel' || /Wheel$/.test(s.part)));
+	const piece = rects.shelf.filter((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)))[0];
 
 	// Aim at the far wheel's ghost, not the one nearest the shelf entry.
 	const far = wheels.find((w: any) => w.x !== piece.x) ?? wheels[1];

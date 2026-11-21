@@ -9,7 +9,7 @@ import {
 import { getVehicle } from '#lib/game/vehicles';
 import { vehicleAtLevel } from '#lib/game/difficulty';
 
-const car = getVehicle('car');
+const car = getVehicle('taxi');
 const base = () => createAssembly(car, 0.8, 60, 0);
 
 describe('assembly reducer', () => {

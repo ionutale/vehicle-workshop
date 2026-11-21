@@ -25,6 +25,8 @@ export interface Vehicle {
 	/** Dash-drawn silhouette, shown only while no slot is filled. */
 	chassisPath: string;
 	slots: Slot[];
+	/** Cut-out realistic art; the full illustration supplies each part tile. */
+	realistic?: boolean;
 }
 
 const palette = (
@@ -39,56 +41,55 @@ export const VEHICLES: Vehicle[] = [
 	{
 		id: 'car',
 		name: 'Car',
-		width: 480,
-		height: 220,
-		groundY: 190,
-		palette: palette('#FF6B6B', '#FFD166'),
+		width: 600,
+		height: 260,
+		groundY: 235,
+		palette: palette('#4EA8DE', '#FFF9EC'),
 		chassisPath:
 			'M20,150 Q20,145 26,145 L150,145 L170,105 Q178,90 196,90 L274,90 Q292,90 300,105 L320,145 L454,145 Q460,145 460,155 L460,185 Q460,200 445,200 L35,200 Q20,200 20,185 Z',
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 240, y: 145, z: 0 },
-			{ id: 'cabin', part: 'cabin', x: 235, y: 61, z: 1 },
-			{ id: 'door', part: 'door', x: 214, y: 132, z: 2 },
-			{ id: 'light', part: 'light', x: 440, y: 138, z: 2 },
-			{ id: 'wheel-l', part: 'wheel', x: 120, y: 190, z: 4 },
-			{ id: 'wheel-r', part: 'wheel', x: 360, y: 190, z: 4, flip: true }
+			{ id: 'body', part: 'realCarBody', x: 260, y: 197.5, z: 0 },
+			{ id: 'cabin', part: 'realCarCabin', x: 266, y: 137, z: 1 },
+			{ id: 'door', part: 'realCarDoor', x: 278.5, y: 194, z: 2 },
+			{ id: 'wheel-l', part: 'realCarWheel', x: 120, y: 208, z: 4 },
+			{ id: 'wheel-r', part: 'realCarWheel', x: 390, y: 208, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'fire-engine',
 		name: 'Fire engine',
-		width: 560,
-		height: 250,
-		groundY: 205,
-		palette: palette('#E63946', '#F1C453'),
+		width: 700,
+		height: 320,
+		groundY: 285,
+		palette: palette('#E63946', '#FFF9EC'),
 		chassisPath:
 			'M70,110 Q70,100 84,100 L470,100 Q530,100 530,150 L530,190 Q530,205 512,205 L86,205 Q70,205 70,190 Z',
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1 },
-			{ id: 'hose', part: 'hoseReel', x: 235, y: 150, z: 2 },
-			{ id: 'ladder', part: 'ladder', x: 360, y: 96, z: 1, scale: 2.2 },
-			{ id: 'lights', part: 'lightBar', x: 110, y: 66, z: 2 },
-			{ id: 'wheel-l', part: 'wheel', x: 150, y: 205, z: 4 },
-			{ id: 'wheel-r', part: 'wheel', x: 460, y: 205, z: 4, flip: true }
+			{ id: 'body', part: 'realFireBody', x: 359.5, y: 174, z: 0 },
+			{ id: 'ladder', part: 'realFireLadder', x: 426.5, y: 125, z: 1 },
+			{ id: 'pump', part: 'realFirePump', x: 605, y: 194, z: 2 },
+			{ id: 'wheel-l', part: 'realFireWheel', x: 145, y: 249, z: 4 },
+			{ id: 'wheel-r', part: 'realFireWheel', x: 545, y: 249, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'bus',
 		name: 'Bus',
-		width: 520,
-		height: 240,
-		groundY: 200,
+		width: 760,
+		height: 320,
+		groundY: 285,
 		palette: palette('#FFC94D', '#F2792B'),
 		chassisPath:
 			'M40,120 Q40,100 64,100 L456,100 Q480,100 480,124 L480,182 Q480,200 462,200 L58,200 Q40,200 40,182 Z',
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 260, y: 150, z: 0, scale: 1.05 },
-			{ id: 'windows', part: 'windowStrip', x: 260, y: 112, z: 1, scale: 2.2 },
-			{ id: 'roof', part: 'roof', x: 260, y: 88, z: 2, scale: 2.6 },
-			{ id: 'door', part: 'door', x: 330, y: 155, z: 2 },
-			{ id: 'wheel-l', part: 'wheel', x: 150, y: 200, z: 4 },
-			{ id: 'wheel-r', part: 'wheel', x: 390, y: 200, z: 4, flip: true }
+			{ id: 'body', part: 'realBusBody', x: 385, y: 177.5, z: 0 },
+			{ id: 'windows', part: 'realBusWindows', x: 370, y: 153, z: 1 },
+			{ id: 'door', part: 'realBusDoor', x: 629, y: 184, z: 2 },
+			{ id: 'wheel-l', part: 'realBusWheel', x: 165, y: 246, z: 4 },
+			{ id: 'wheel-r', part: 'realBusWheel', x: 590, y: 246, z: 4, flip: true }
 		]
 	},
 	{
@@ -112,19 +113,19 @@ export const VEHICLES: Vehicle[] = [
 	{
 		id: 'digger',
 		name: 'Digger',
-		width: 460,
-		height: 280,
-		groundY: 248,
-		palette: palette('#F4A261', '#6B6B6B'),
+		width: 700,
+		height: 360,
+		groundY: 325,
+		palette: palette('#F4A261', '#D9773A'),
 		chassisPath:
 			'M60,180 Q60,160 86,160 L300,160 L330,180 L330,210 L60,210 Z',
+		realistic: true,
 		slots: [
-			{ id: 'tracks', part: 'tracks', x: 230, y: 225, z: 0 },
-			{ id: 'body', part: 'bodyBox', x: 225, y: 185, z: 1, scale: 0.72 },
-			{ id: 'cabin', part: 'cabin', x: 150, y: 130, z: 2, scale: 0.7 },
-			{ id: 'arm', part: 'arm', x: 330, y: 178, z: 3 },
-			{ id: 'bucket', part: 'bucket', x: 420, y: 204, z: 3 },
-			{ id: 'beacon', part: 'beacon', x: 262, y: 132, z: 2 }
+			{ id: 'tracks', part: 'realDiggerTracks', x: 236, y: 283, z: 0 },
+			{ id: 'house', part: 'realDiggerHouse', x: 225, y: 171, z: 1 },
+			{ id: 'beacon', part: 'realDiggerBeacon', x: 201, y: 92, z: 2 },
+			{ id: 'boom', part: 'realDiggerBoom', x: 434, y: 179, z: 3 },
+			{ id: 'bucket', part: 'realDiggerBucket', x: 574, y: 261, z: 3 }
 		]
 	},
 	{

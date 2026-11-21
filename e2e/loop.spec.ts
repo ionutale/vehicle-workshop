@@ -24,7 +24,7 @@ test('tapping a piece without moving returns it to the shelf', async ({ page }) 
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const body = rects.shelf.find((p: any) => p.part === 'body');
+	const body = rects.shelf.find((p: any) => (p.part === 'body' || /Body$/.test(p.part)));
 	await page.mouse.click(body.x + body.w / 2, body.y + body.h / 2);
 	await expect(stage).toHaveAttribute('data-placed', '0');
 	await expect(stage).toHaveAttribute('data-tray', '4');

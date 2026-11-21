@@ -225,18 +225,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'box-truck',
 		name: 'Box truck',
-		width: 600,
-		height: 280,
-		groundY: 212,
-		palette: pal('#F2E8CF', '#6D597A'),
-		chassisPath: slab(600, 212, 150),
+		width: 700,
+		height: 340,
+		groundY: 300,
+		palette: pal('#2C5AA0', '#F4F6FA'),
+		chassisPath: slab(700, 300, 160),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 160, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 115, y: 125, z: 1, scale: 0.9 },
-			{ id: 'door', part: 'door', x: 540, y: 165, z: 2 },
-			wheel('l', 170, 212),
-			wheel('r', 500, 212),
-			{ id: 'light', part: 'light', x: 585, y: 150, z: 2 }
+			{ id: 'body', part: 'realTruckBox', x: 439, y: 182.5, z: 0 },
+			{ id: 'cab', part: 'realTruckCab', x: 118, y: 194, z: 1 },
+			{ id: 'door', part: 'realTruckDoor', x: 613, y: 191, z: 2 },
+			{ id: 'wheel-l', part: 'realTruckWheel', x: 150, y: 264, z: 4 },
+			{ id: 'wheel-r', part: 'realTruckWheel', x: 560, y: 264, z: 4, flip: true }
 		]
 	},
 	{

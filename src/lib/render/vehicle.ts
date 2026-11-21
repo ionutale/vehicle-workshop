@@ -3,6 +3,7 @@ import type { Layout, Point } from '../game/layout';
 import { PARTS, type PartShape, type PartId, type Role } from '../game/parts';
 import type { Slot, Vehicle } from '../game/vehicles';
 import { pathFrom } from './draw';
+import { realPartCanvas, realVehicleCanvas } from './realVehicles';
 import { OUTLINE } from './scene';
 
 /**
@@ -34,6 +35,16 @@ export function drawPart(
 	ctx.translate(at.x, at.y - lift);
 	ctx.scale(flip ? -safeScale : safeScale, safeScale);
 	ctx.globalAlpha = alpha;
+
+	if (part.realVehicle && part.maskBounds) {
+		const tile = realPartCanvas(part);
+		if (tile) {
+			const b = part.maskBounds;
+			ctx.drawImage(tile, -b.w / 2, -b.h / 2, b.w, b.h);
+			ctx.restore();
+			return;
+		}
+	}
 
 	const path = pathFrom(part.path);
 	const hw = part.halfWidth;
@@ -223,6 +234,18 @@ export function drawChassisGhosts(
 	const anchors = anchorMap(state);
 
 	if (state.placed.length === 0) {
+		const art = vehicle.realistic ? realVehicleCanvas(vehicle.id) : null;
+		if (art) {
+			ctx.save();
+			ctx.beginPath();
+			ctx.rect(0, 0, layout.worldWidth, layout.roadY);
+			ctx.clip();
+			ctx.globalAlpha = 0.08;
+			ctx.translate(state.origin.x, state.origin.y);
+			ctx.scale(layout.gameScale, layout.gameScale);
+			ctx.drawImage(art, 0, 0, vehicle.width, vehicle.height);
+			ctx.restore();
+		}
 		ctx.save();
 		// Keep the silhouette off the tarmac.
 		ctx.beginPath();
@@ -233,7 +256,7 @@ export function drawChassisGhosts(
 		ctx.strokeStyle = 'rgba(58, 39, 27, 0.35)';
 		ctx.lineWidth = (layout.outline * 0.8) / layout.gameScale;
 		ctx.setLineDash([14 / layout.gameScale, 10 / layout.gameScale]);
-		ctx.stroke(pathFrom(vehicle.chassisPath));
+		if (!art) ctx.stroke(pathFrom(vehicle.chassisPath));
 		ctx.restore();
 	}
 

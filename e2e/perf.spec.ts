@@ -8,8 +8,8 @@ test('stops painting when nothing is happening', async ({ page }) => {
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const wheel = rects.shelf.find((p: any) => p.part === 'wheel');
-	const slot = rects.slots.find((p: any) => p.part === 'wheel');
+	const wheel = rects.shelf.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
+	const slot = rects.slots.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
 	await page.mouse.move(wheel.x + wheel.w / 2, wheel.y + wheel.h / 2);
 	await page.mouse.down();
 	await page.mouse.move(slot.x, slot.y, { steps: 10 });

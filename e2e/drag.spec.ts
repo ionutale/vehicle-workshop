@@ -7,8 +7,8 @@ test('a wheel can be dragged from the shelf onto the car', async ({ page }) => {
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const wheel = rects.shelf.find((p: any) => p.part === 'wheel');
-	const slot = rects.slots.find((p: any) => p.part === 'wheel');
+	const wheel = rects.shelf.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
+	const slot = rects.slots.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
 	await page.mouse.move(wheel.x + wheel.w / 2, wheel.y + wheel.h / 2);
 	await page.mouse.down();
 	await page.mouse.move(slot.x, slot.y, { steps: 12 });
@@ -23,7 +23,7 @@ test('a missed drop returns the piece to the shelf', async ({ page }) => {
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const body = rects.shelf.find((p: any) => p.part === 'body');
+	const body = rects.shelf.find((p: any) => (p.part === 'body' || /Body$/.test(p.part)));
 	await page.mouse.move(body.x + body.w / 2, body.y + body.h / 2);
 	await page.mouse.down();
 	await page.mouse.move(5, 5, { steps: 8 });
@@ -39,7 +39,7 @@ test('releasing outside the play area cancels the drag', async ({ page }) => {
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const wheel = rects.shelf.find((p: any) => p.part === 'wheel');
+	const wheel = rects.shelf.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
 
 	await page.mouse.move(wheel.x + wheel.w / 2, wheel.y + wheel.h / 2);
 	await page.mouse.down();
@@ -59,8 +59,8 @@ test('a wide body grabbed near its end still lands when the body sits on its gho
 	const stage = page.getByTestId('stage');
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const body = rects.shelf.find((p: any) => p.part === 'body');
-	const slot = rects.slots.find((p: any) => p.part === 'body');
+	const body = rects.shelf.find((p: any) => (p.part === 'body' || /Body$/.test(p.part)));
+	const slot = rects.slots.find((p: any) => (p.part === 'body' || /Body$/.test(p.part)));
 
 	const grabX = body.x + 10;
 	const grabY = body.y + body.h / 2;

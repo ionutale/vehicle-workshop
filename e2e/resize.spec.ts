@@ -8,7 +8,7 @@ test('a resize mid-drag keeps the piece under the pointer', async ({ page }) => 
 	await expect(stage).toHaveAttribute('data-vehicle', 'car');
 
 	const rects = await page.evaluate(() => (window as any).__vw.rects());
-	const wheel = rects.shelf.find((p: any) => p.part === 'wheel');
+	const wheel = rects.shelf.find((p: any) => (p.part === 'wheel' || /Wheel$/.test(p.part)));
 	const grabX = wheel.x + wheel.w / 2;
 	const grabY = wheel.y + wheel.h / 2;
 
@@ -21,7 +21,7 @@ test('a resize mid-drag keeps the piece under the pointer', async ({ page }) => 
 	await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
 
 	const drag = await page.evaluate(() => (window as any).__vw.drag());
-	expect(drag.part).toBe('wheel');
+	expect(drag.part).toMatch(/wheel$/i);
 	expect(drag.screen.x).toBeCloseTo(grabX + 40, 0);
 	expect(drag.screen.y).toBeCloseTo(grabY + 60, 0);
 

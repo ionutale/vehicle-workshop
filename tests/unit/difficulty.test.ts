@@ -17,11 +17,15 @@ describe('difficulty', () => {
 		for (const vehicle of VEHICLES) {
 			const view = vehicleAtLevel(vehicle, 0);
 			expect(view.slots).toHaveLength(4);
-			expect(view.slots.some((slot) => ['wheel', 'tracks', 'roller'].includes(slot.part))).toBe(
-				true
-			);
 			expect(
-				view.slots.some((slot) => ['body', 'bodyBox', 'frame', 'seat'].includes(slot.part))
+				view.slots.some((slot) =>
+					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realDiggerTracks'].includes(slot.part)
+				)
+			).toBe(true);
+			expect(
+				view.slots.some((slot) =>
+					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody'].includes(slot.part)
+				)
 			).toBe(true);
 		}
 	});
@@ -30,8 +34,8 @@ describe('difficulty', () => {
 		const signature = (id: string) =>
 			vehicleAtLevel(getVehicle(id), 0).slots.map((slot) => slot.part);
 		expect(signature('milk-tanker')).toContain('tank');
-		expect(signature('fire-engine')).toContain('ladder');
-		expect(signature('digger')).toContain('bucket');
+		expect(signature('fire-engine')).toContain('realFireLadder');
+		expect(signature('digger')).toContain('realDiggerBucket');
 		expect(signature('crane-truck')).toContain('boom');
 		expect(signature('school-bus')).toContain('windowStrip');
 	});

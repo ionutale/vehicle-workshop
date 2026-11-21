@@ -103,6 +103,7 @@ const DETAIL_OVERRIDES: Record<string, DetailKind[]> = {
 
 /** Details for the full or level-trimmed vehicle. */
 export function detailsFor(vehicle: Vehicle): Detail[] {
+	if (vehicle.realistic) return [];
 	// A level view may have trimmed the cab away, but the catalogue still knows which
 	// end is the nose. Use the full slot list for geometry; `requires` keeps a detail
 	// off the canvas until its own part is actually placed.
@@ -360,7 +361,7 @@ export function drawVehicleDetails(
 	layout: Layout,
 	options: DetailOptions = {}
 ): void {
-	if (state.placed.length === 0) return;
+	if (vehicle.realistic || state.placed.length === 0) return;
 
 	const { offsetX = 0, lift = 0, alpha = 1 } = options;
 	const details = detailsFor(vehicle);

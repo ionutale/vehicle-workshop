@@ -10,8 +10,12 @@ import { recorder, stubPath } from './canvas-recorder';
 describe('vehicle details', () => {
 	beforeEach(stubPath);
 
-	it('gives every vehicle at least two details inside its box', () => {
+	it('gives every generic vehicle at least two details inside its box', () => {
 		for (const vehicle of VEHICLES) {
+			if (vehicle.realistic) {
+				expect(detailsFor(vehicle)).toEqual([]);
+				continue;
+			}
 			const details = detailsFor(vehicle);
 			expect(details.length).toBeGreaterThanOrEqual(2);
 			for (const detail of details) {
@@ -23,26 +27,26 @@ describe('vehicle details', () => {
 		}
 	});
 
-	it('gives the fire engine a grille and the bus an exhaust', () => {
-		expect(detailsFor(getVehicle('fire-engine')).map((detail) => detail.kind)).toContain('grille');
+	it('gives a generic truck a grille and a school bus an exhaust', () => {
+		expect(detailsFor(getVehicle('delivery-van')).map((detail) => detail.kind)).toContain('grille');
 		expect(detailsFor(getVehicle('school-bus')).map((detail) => detail.kind)).toContain('exhaust');
 	});
 
 	it('puts the grille at the nose of right-facing and rear-cab machines', () => {
 		const grille = (id: string) => detailsFor(getVehicle(id)).find((d) => d.kind === 'grille')!;
-		for (const id of ['taxi', 'monster-truck', 'digger', 'bulldozer', 'skid-steer', 'steam-roller']) {
+		for (const id of ['taxi', 'monster-truck', 'bulldozer', 'skid-steer', 'steam-roller']) {
 			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
 		}
-		expect(grille('fire-engine').x).toBeLessThan(getVehicle('fire-engine').width / 2);
+		expect(grille('delivery-van').x).toBeLessThan(getVehicle('delivery-van').width / 2);
 		expect(grille('milk-tanker').x).toBeLessThan(getVehicle('milk-tanker').width / 2);
 	});
 
 	it('keeps the facing when the level view has trimmed the cab away', () => {
-		const fire = getVehicle('fire-engine');
-		const trimmed = vehicleAtLevel(fire, 0);
+		const truck = getVehicle('milk-tanker');
+		const trimmed = vehicleAtLevel(truck, 0);
 		expect(trimmed.slots.some((slot) => slot.part === 'cab')).toBe(false);
 		const grille = detailsFor(trimmed).find((detail) => detail.kind === 'grille')!;
-		expect(grille.x).toBeLessThan(fire.width / 2);
+		expect(grille.x).toBeLessThan(truck.width / 2);
 	});
 
 	it('only references slot ids that exist', () => {
@@ -55,7 +59,7 @@ describe('vehicle details', () => {
 	});
 
 	it('draws only details whose supporting part is placed', () => {
-		const car = getVehicle('car');
+		const car = getVehicle('taxi');
 		const layout = computeLayout(
 			{ width: 390, height: 844 },
 			car,
@@ -81,7 +85,7 @@ describe('vehicle details', () => {
 	});
 
 	it('skips every detail while no part is placed', () => {
-		const car = getVehicle('car');
+		const car = getVehicle('taxi');
 		const layout = computeLayout(
 			{ width: 390, height: 844 },
 			car,
