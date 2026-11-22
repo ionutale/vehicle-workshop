@@ -18,7 +18,9 @@
 		"test:e2e": "playwright test --project=chromium",
 		"test:coverage": "vitest run --coverage",
 		"test:pwa": "pnpm build && playwright test --project=pwa",
-		"icons": "node tools/make-icons.mjs"
+		"icons": "node tools/make-icons.mjs",
+		"vehicle:convert": "node scripts/vehicle-convert.mjs",
+		"vehicle:preview": "node scripts/preview-art.mjs"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.65.1",

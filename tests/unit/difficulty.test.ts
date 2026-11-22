@@ -6,7 +6,16 @@ import {
 	registerStall,
 	vehicleAtLevel
 } from '#lib/game/difficulty';
+import { PARTS } from '#lib/game/parts';
 import { VEHICLES, getVehicle } from '#lib/game/vehicles';
+
+const kindOf = (part: string): string => {
+	const kind = PARTS[part as keyof typeof PARTS]?.kind;
+	if (kind) return kind;
+	if (['wheel', 'tracks', 'roller'].includes(part)) return 'locomotion';
+	if (['body', 'bodyBox'].includes(part)) return 'body';
+	return 'detail';
+};
 
 describe('difficulty', () => {
 	it('starts at four pieces and widens to seven', () => {
@@ -17,16 +26,8 @@ describe('difficulty', () => {
 		for (const vehicle of VEHICLES) {
 			const view = vehicleAtLevel(vehicle, 0);
 			expect(view.slots).toHaveLength(4);
-			expect(
-				view.slots.some((slot) =>
-					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realSchoolBusWheel', 'realMiniBusWheel', 'realDoubleDeckerWheel', 'realBendyBusWheel', 'realCoachBusWheel', 'realAirportShuttleWheel', 'realMobileLibraryWheel', 'realMobileClinicWheel', 'realTrolleybusWheel', 'realDiggerTracks'].includes(slot.part)
-				)
-			).toBe(true);
-			expect(
-				view.slots.some((slot) =>
-					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody', 'realSchoolBusBody', 'realMiniBusBody', 'realDoubleDeckerBody', 'realBendyBusBody', 'realCoachBusBody', 'realAirportShuttleBody', 'realMobileLibraryBody', 'realMobileClinicBody', 'realTrolleybusBody'].includes(slot.part)
-				)
-			).toBe(true);
+			expect(view.slots.some((slot) => kindOf(slot.part) === 'locomotion')).toBe(true);
+			expect(view.slots.some((slot) => kindOf(slot.part) === 'body')).toBe(true);
 		}
 	});
 
