@@ -517,18 +517,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'double-decker',
 		name: 'Double-decker bus',
-		width: 620,
-		height: 320,
-		groundY: 212,
+		width: 760,
+		height: 400,
+		groundY: 360,
 		palette: pal('#E63946', '#F7F9FC'),
-		chassisPath: slab(620, 212, 190),
+		chassisPath: slab(760, 360, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 165, z: 0, scale: 1.18 },
-			{ id: 'windows-up', part: 'windowStrip', x: 310, y: 122, z: 2, scale: 2.6 },
-			{ id: 'windows-down', part: 'windowStrip', x: 310, y: 172, z: 2, scale: 2.6 },
-			{ id: 'door', part: 'door', x: 440, y: 170, z: 3, scale: 0.9 },
-			wheel('l', 170, 212),
-			wheel('r', 470, 212)
+			{ id: 'body', part: 'realDoubleDeckerBody', x: 387, y: 200, z: 0 },
+			{ id: 'windows', part: 'realDoubleDeckerWindows', x: 370, y: 172.5, z: 1 },
+			{ id: 'door', part: 'realDoubleDeckerDoor', x: 618, y: 255, z: 2 },
+			{ id: 'wheel-l', part: 'realDoubleDeckerWheel', x: 160, y: 324, z: 4 },
+			{ id: 'wheel-r', part: 'realDoubleDeckerWheel', x: 600, y: 324, z: 4, flip: true }
 		]
 	},
 	{

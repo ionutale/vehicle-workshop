@@ -47,7 +47,7 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 2. **Level 4 chosen** for the rollout: accurate silhouette, shading, full fittings, cast/contact shadow, rim light and glass/chrome reflections.
 3. **School bus (done):** the first remaining vehicle converted to Level 4; 5 pieces, 4 at the first tier.
 4. **Mini bus (done):** shorter teal shuttle at Level 4; 5 pieces, 4 at the first tier.
-5. Convert the rest of the **buses and coaches**, then the **trams/trains**.
+5. **Double-decker (done):** two window decks, deck band, destination board and door at Level 4; 5 pieces, 4 at the first tier.
 6. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
 7. Convert the remaining **cars and vans**.
 8. Convert **farm** and the remaining **works** machines.

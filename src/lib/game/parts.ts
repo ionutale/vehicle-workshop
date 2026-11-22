@@ -70,7 +70,11 @@ export type PartId =
 	| 'realMiniBusBody'
 	| 'realMiniBusWindows'
 	| 'realMiniBusDoor'
-	| 'realMiniBusWheel';
+	| 'realMiniBusWheel'
+	| 'realDoubleDeckerBody'
+	| 'realDoubleDeckerWindows'
+	| 'realDoubleDeckerDoor'
+	| 'realDoubleDeckerWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -659,6 +663,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'mini-bus',
 		'M106,228 A34,34 0 1 1 106,296 A34,34 0 1 1 106,228 Z',
 		{ x: 106, y: 194, w: 68, h: 68 }
+	),
+	realDoubleDeckerBody: realPart(
+		'realDoubleDeckerBody',
+		'shell',
+		'body',
+		'double-decker',
+		'M55,330 Q40,330 40,312 L40,100 Q40,70 70,70 L690,70 Q720,70 720,100 L720,312 Q720,330 705,330 Z M100,95 L640,95 L640,150 L100,150 Z M100,196 L590,196 L590,252 L100,252 Z M124,324 A36,36 0 1 1 124,396 A36,36 0 1 1 124,324 Z M564,324 A36,36 0 1 1 564,396 A36,36 0 1 1 564,324 Z M720,104 L740,104 L740,116 L720,116 Z M720,314 L736,314 L736,326 L720,326 Z M34,288 L40,288 L40,306 L34,306 Z',
+		{ x: 34, y: 70, w: 706, h: 260 }
+	),
+	realDoubleDeckerWindows: realPart(
+		'realDoubleDeckerWindows',
+		'glass',
+		'face',
+		'double-decker',
+		'M100,95 L640,95 L640,150 L100,150 Z M100,196 L590,196 L590,252 L100,252 Z',
+		{ x: 98, y: 93, w: 544, h: 159 }
+	),
+	realDoubleDeckerDoor: realPart(
+		'realDoubleDeckerDoor',
+		'trim',
+		'detail',
+		'double-decker',
+		'M600,196 L636,196 L636,314 L600,314 Z',
+		{ x: 598, y: 194, w: 40, h: 122 }
+	),
+	realDoubleDeckerWheel: realPart(
+		'realDoubleDeckerWheel',
+		'rubber',
+		'locomotion',
+		'double-decker',
+		'M124,324 A36,36 0 1 1 124,396 A36,36 0 1 1 124,324 Z',
+		{ x: 124, y: 288, w: 72, h: 72 }
 	)
 
 };
@@ -730,7 +766,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realMiniBusBody: 'Mini bus',
 	realMiniBusWindows: 'Windows',
 	realMiniBusDoor: 'Door',
-	realMiniBusWheel: 'Wheel'
+	realMiniBusWheel: 'Wheel',
+	realDoubleDeckerBody: 'Double-decker',
+	realDoubleDeckerWindows: 'Windows',
+	realDoubleDeckerDoor: 'Door',
+	realDoubleDeckerWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {
