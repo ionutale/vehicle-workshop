@@ -48,15 +48,18 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 3. **School bus (done):** the first remaining vehicle converted to Level 4; 5 pieces, 4 at the first tier.
 4. **Mini bus (done):** shorter teal shuttle at Level 4; 5 pieces, 4 at the first tier.
 5. **Double-decker (done):** two window decks, deck band, destination board and door at Level 4; 5 pieces, 4 at the first tier.
-6. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
-7. Convert the remaining **cars and vans**.
-8. Convert **farm** and the remaining **works** machines.
-9. Remove the generic parts once no catalogue entry uses them.
+6. **Bendy bus (done):** two yellow shells, accordion bellows, three axles and a front door at Level 4; 5 pieces, 4 at the first tier.
+7. Convert the remaining **coaches and shuttles**, then the **trams and trains**.
+8. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
+9. Convert the remaining **cars and vans**.
+10. Convert **farm** and the remaining **works** machines.
+11. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 
 ## Risks
 
 - Cut-out body pieces have wheel arches and sometimes a hole for a detail overlay; the shelf shows the cut-out, not a standalone symbolic shape.
+- Wheel masks must be full circles centred on the wheel, not the left/top edge of the bounds. An earlier authoring slip produced quarter-circle wheel tiles on all realistic vehicles; corrected across car, fire engine, truck, bus, school bus, mini bus and double-decker. Check a new wheel tile fills its whole bounds before shipping.
 - The body tile is larger than the old generic body; the shelf packs it on its own row and the gameScale shrinks slightly on narrow phones.
 - The realistic art is rasterised at 2×; the tiles are cached per vehicle and stay crisp at the game’s maximum scale.

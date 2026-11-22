@@ -74,7 +74,11 @@ export type PartId =
 	| 'realDoubleDeckerBody'
 	| 'realDoubleDeckerWindows'
 	| 'realDoubleDeckerDoor'
-	| 'realDoubleDeckerWheel';
+	| 'realDoubleDeckerWheel'
+	| 'realBendyBusBody'
+	| 'realBendyBusWindows'
+	| 'realBendyBusDoor'
+	| 'realBendyBusWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -437,7 +441,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'car',
-		'M35,235 L35,196 Q35,180 50,176 L100,170 L140,160 L380,160 L430,168 L470,174 Q485,178 485,194 L485,235 Z M86,208 A34,34 0 1 1 86,276 A34,34 0 1 1 86,208 Z M356,208 A34,34 0 1 1 356,276 A34,34 0 1 1 356,208 Z',
+		'M35,235 L35,196 Q35,180 50,176 L100,170 L140,160 L380,160 L430,168 L470,174 Q485,178 485,194 L485,235 Z M86,208 A34,34 0 1 1 154,208 A34,34 0 1 1 86,208 Z M356,208 A34,34 0 1 1 424,208 A34,34 0 1 1 356,208 Z',
 		{ x: 35, y: 160, w: 450, h: 75 }
 	),
 	realCarCabin: realPart(
@@ -461,7 +465,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'car',
-		'M86,208 A34,34 0 1 1 86,276 A34,34 0 1 1 86,208 Z',
+		'M86,208 A34,34 0 1 1 154,208 A34,34 0 1 1 86,208 Z',
 		{ x: 86, y: 174, w: 68, h: 68 }
 	),
 	realFireBody: realPart(
@@ -469,7 +473,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'fire-engine',
-		'M40,240 L40,180 Q40,160 52,150 L72,102 Q78,92 92,92 L184,92 Q190,92 190,102 L190,136 L662,136 L662,240 L681,240 L681,256 L38,256 L38,240 Z M109,249 A36,36 0 1 1 109,285 A36,36 0 1 1 109,249 Z M509,249 A36,36 0 1 1 509,285 A36,36 0 1 1 509,249 Z',
+		'M40,240 L40,180 Q40,160 52,150 L72,102 Q78,92 92,92 L184,92 Q190,92 190,102 L190,136 L662,136 L662,240 L681,240 L681,256 L38,256 L38,240 Z M109,249 A36,36 0 1 1 181,249 A36,36 0 1 1 109,249 Z M509,249 A36,36 0 1 1 581,249 A36,36 0 1 1 509,249 Z',
 		{ x: 38, y: 92, w: 643, h: 164 }
 	),
 	realFireLadder: realPart(
@@ -493,7 +497,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'fire-engine',
-		'M109,249 A36,36 0 1 1 109,285 A36,36 0 1 1 109,249 Z',
+		'M109,249 A36,36 0 1 1 181,249 A36,36 0 1 1 109,249 Z',
 		{ x: 109, y: 213, w: 72, h: 72 }
 	),
 	realDiggerHouse: realPart(
@@ -549,7 +553,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'box-truck',
-		'M200,95 L640,95 L640,256 L678,256 L678,270 L200,270 Z M522,226 A38,38 0 1 1 522,302 A38,38 0 1 1 522,226 Z',
+		'M200,95 L640,95 L640,256 L678,256 L678,270 L200,270 Z M522,264 A38,38 0 1 1 598,264 A38,38 0 1 1 522,264 Z',
 		{ x: 200, y: 95, w: 478, h: 175 }
 	),
 	realTruckDoor: realPart(
@@ -565,7 +569,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'box-truck',
-		'M112,264 A38,38 0 1 1 112,340 A38,38 0 1 1 112,264 Z',
+		'M112,264 A38,38 0 1 1 188,264 A38,38 0 1 1 112,264 Z',
 		{ x: 112, y: 226, w: 76, h: 76 }
 	),
 	realBusBody: realPart(
@@ -573,7 +577,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'bus',
-		'M60,250 Q45,250 45,232 L45,130 Q45,105 70,105 L700,105 Q725,105 725,130 L725,232 Q725,250 710,250 Z M120,124 L620,124 L620,182 L120,182 Z M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z M554,246 A36,36 0 1 1 554,318 A36,36 0 1 1 554,246 Z',
+		'M60,250 Q45,250 45,232 L45,130 Q45,105 70,105 L700,105 Q725,105 725,130 L725,232 Q725,250 710,250 Z M120,124 L620,124 L620,182 L120,182 Z M129,246 A36,36 0 1 1 201,246 A36,36 0 1 1 129,246 Z M554,246 A36,36 0 1 1 626,246 A36,36 0 1 1 554,246 Z',
 		{ x: 45, y: 105, w: 680, h: 145 }
 	),
 	realBusWindows: realPart(
@@ -597,7 +601,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'bus',
-		'M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z',
+		'M129,246 A36,36 0 1 1 201,246 A36,36 0 1 1 129,246 Z',
 		{ x: 129, y: 210, w: 72, h: 72 }
 	),
 	realSchoolBusBody: realPart(
@@ -605,7 +609,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'school-bus',
-		'M60,250 Q45,250 45,232 L45,130 Q45,105 70,105 L700,105 Q725,105 725,130 L725,232 Q725,250 710,250 Z M120,124 L610,124 L610,182 L120,182 Z M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z M554,246 A36,36 0 1 1 554,318 A36,36 0 1 1 554,246 Z M725,238 L740,238 L740,250 L725,250 Z M725,116 L746,116 L746,126 L725,126 Z M34,214 L45,214 L45,232 L34,232 Z',
+		'M60,250 Q45,250 45,232 L45,130 Q45,105 70,105 L700,105 Q725,105 725,130 L725,232 Q725,250 710,250 Z M120,124 L610,124 L610,182 L120,182 Z M129,246 A36,36 0 1 1 201,246 A36,36 0 1 1 129,246 Z M554,246 A36,36 0 1 1 626,246 A36,36 0 1 1 554,246 Z M725,238 L740,238 L740,250 L725,250 Z M725,116 L746,116 L746,126 L725,126 Z M34,214 L45,214 L45,232 L34,232 Z',
 		{ x: 34, y: 105, w: 712, h: 145 }
 	),
 	realSchoolBusWindows: realPart(
@@ -629,7 +633,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'school-bus',
-		'M129,246 A36,36 0 1 1 129,318 A36,36 0 1 1 129,246 Z',
+		'M129,246 A36,36 0 1 1 201,246 A36,36 0 1 1 129,246 Z',
 		{ x: 129, y: 210, w: 72, h: 72 }
 	),
 	realMiniBusBody: realPart(
@@ -637,7 +641,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'mini-bus',
-		'M55,235 Q40,235 40,218 L40,125 Q40,100 65,100 L575,100 Q600,100 600,125 L600,218 Q600,235 585,235 Z M100,118 L490,118 L490,172 L100,172 Z M106,228 A34,34 0 1 1 106,296 A34,34 0 1 1 106,228 Z M466,228 A34,34 0 1 1 466,296 A34,34 0 1 1 466,228 Z M600,112 L623,112 L623,124 L600,124 Z M600,218 L620,218 L620,232 L600,232 Z M30,208 L40,208 L40,226 L30,226 Z',
+		'M55,235 Q40,235 40,218 L40,125 Q40,100 65,100 L575,100 Q600,100 600,125 L600,218 Q600,235 585,235 Z M100,118 L490,118 L490,172 L100,172 Z M106,228 A34,34 0 1 1 174,228 A34,34 0 1 1 106,228 Z M466,228 A34,34 0 1 1 534,228 A34,34 0 1 1 466,228 Z M600,112 L623,112 L623,124 L600,124 Z M600,218 L620,218 L620,232 L600,232 Z M30,208 L40,208 L40,226 L30,226 Z',
 		{ x: 30, y: 100, w: 593, h: 135 }
 	),
 	realMiniBusWindows: realPart(
@@ -661,7 +665,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'mini-bus',
-		'M106,228 A34,34 0 1 1 106,296 A34,34 0 1 1 106,228 Z',
+		'M106,228 A34,34 0 1 1 174,228 A34,34 0 1 1 106,228 Z',
 		{ x: 106, y: 194, w: 68, h: 68 }
 	),
 	realDoubleDeckerBody: realPart(
@@ -669,7 +673,7 @@ export const PARTS: Record<PartId, PartShape> = {
 		'shell',
 		'body',
 		'double-decker',
-		'M55,330 Q40,330 40,312 L40,100 Q40,70 70,70 L690,70 Q720,70 720,100 L720,312 Q720,330 705,330 Z M100,95 L640,95 L640,150 L100,150 Z M100,196 L590,196 L590,252 L100,252 Z M124,324 A36,36 0 1 1 124,396 A36,36 0 1 1 124,324 Z M564,324 A36,36 0 1 1 564,396 A36,36 0 1 1 564,324 Z M720,104 L740,104 L740,116 L720,116 Z M720,314 L736,314 L736,326 L720,326 Z M34,288 L40,288 L40,306 L34,306 Z',
+		'M55,330 Q40,330 40,312 L40,100 Q40,70 70,70 L690,70 Q720,70 720,100 L720,312 Q720,330 705,330 Z M100,95 L640,95 L640,150 L100,150 Z M100,196 L590,196 L590,252 L100,252 Z M124,324 A36,36 0 1 1 196,324 A36,36 0 1 1 124,324 Z M564,324 A36,36 0 1 1 636,324 A36,36 0 1 1 564,324 Z M720,104 L740,104 L740,116 L720,116 Z M720,314 L736,314 L736,326 L720,326 Z M34,288 L40,288 L40,306 L34,306 Z',
 		{ x: 34, y: 70, w: 706, h: 260 }
 	),
 	realDoubleDeckerWindows: realPart(
@@ -693,8 +697,40 @@ export const PARTS: Record<PartId, PartShape> = {
 		'rubber',
 		'locomotion',
 		'double-decker',
-		'M124,324 A36,36 0 1 1 124,396 A36,36 0 1 1 124,324 Z',
+		'M124,324 A36,36 0 1 1 196,324 A36,36 0 1 1 124,324 Z',
 		{ x: 124, y: 288, w: 72, h: 72 }
+	),
+	realBendyBusBody: realPart(
+		'realBendyBusBody',
+		'shell',
+		'body',
+		'bendy-bus',
+		'M64,240 L424,240 L424,70 L90,70 Q64,70 64,96 Z M500,240 L852,240 L852,96 Q852,70 826,70 L500,70 Z M424,240 L500,240 L500,74 L424,74 Z M46,228 L64,228 L64,240 L46,240 Z M852,228 L866,228 L866,240 L852,240 Z M852,86 L876,86 L876,104 L852,104 Z M130,64 L174,64 L174,70 L130,70 Z M210,64 L254,64 L254,70 L210,70 Z M290,64 L334,64 L334,70 L290,70 Z M560,64 L604,64 L604,70 L560,70 Z M640,64 L684,64 L684,70 L640,70 Z M304,240 L376,240 L376,272 L304,272 Z',
+		{ x: 46, y: 64, w: 830, h: 208 }
+	),
+	realBendyBusWindows: realPart(
+		'realBendyBusWindows',
+		'glass',
+		'face',
+		'bendy-bus',
+		'M92,92 L396,92 L396,152 L92,152 Z M522,92 L724,92 L724,152 L522,152 Z M798,92 L844,92 L844,150 L798,150 Z',
+		{ x: 92, y: 92, w: 752, h: 60 }
+	),
+	realBendyBusDoor: realPart(
+		'realBendyBusDoor',
+		'trim',
+		'detail',
+		'bendy-bus',
+		'M748,92 L790,92 L790,238 L748,238 Z',
+		{ x: 746, y: 90, w: 46, h: 150 }
+	),
+	realBendyBusWheel: realPart(
+		'realBendyBusWheel',
+		'rubber',
+		'locomotion',
+		'bendy-bus',
+		'M724,236 A36,36 0 1 1 796,236 A36,36 0 1 1 724,236 Z',
+		{ x: 724, y: 200, w: 72, h: 72 }
 	)
 
 };
@@ -770,7 +806,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realDoubleDeckerBody: 'Double-decker',
 	realDoubleDeckerWindows: 'Windows',
 	realDoubleDeckerDoor: 'Door',
-	realDoubleDeckerWheel: 'Wheel'
+	realDoubleDeckerWheel: 'Wheel',
+	realBendyBusBody: 'Bendy bus',
+	realBendyBusWindows: 'Windows',
+	realBendyBusDoor: 'Door',
+	realBendyBusWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {

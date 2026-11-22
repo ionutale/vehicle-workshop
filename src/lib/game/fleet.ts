@@ -534,18 +534,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'bendy-bus',
 		name: 'Bendy bus',
-		width: 720,
-		height: 260,
-		groundY: 210,
+		width: 900,
+		height: 340,
+		groundY: 272,
 		palette: pal('#F9C74F', '#2B2D42'),
-		chassisPath: slab(720, 210, 130),
+		chassisPath: slab(900, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body-front', part: 'bodyBox', x: 230, y: 155, z: 0, scale: 0.85 },
-			{ id: 'body-rear', part: 'bodyBox', x: 530, y: 155, z: 0, scale: 0.85 },
-			{ id: 'windows', part: 'windowStrip', x: 380, y: 118, z: 2, scale: 3.2 },
-			{ id: 'door', part: 'door', x: 200, y: 160, z: 2 },
-			wheel('l', 150, 210),
-			wheel('r', 610, 210)
+			{ id: 'body', part: 'realBendyBusBody', x: 461, y: 168, z: 0 },
+			{ id: 'windows', part: 'realBendyBusWindows', x: 468, y: 122, z: 1 },
+			{ id: 'door', part: 'realBendyBusDoor', x: 769, y: 165, z: 2 },
+			{ id: 'wheel-l', part: 'realBendyBusWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realBendyBusWheel', x: 760, y: 236, z: 4, flip: true }
 		]
 	},
 	{
