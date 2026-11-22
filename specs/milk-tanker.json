@@ -1,0 +1,55 @@
+{
+	"id": "milk-tanker",
+	"name": "Milk tanker",
+	"module": "realMilkTanker",
+	"artWidth": 760,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realMilkTankerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M30,258 L30,128 Q30,111 48,105 L198,96 Q208,96 214,100 L216,110 L672,110 C690,110 702,134 702,176 C702,218 690,242 672,242 L700,242 L700,258 L30,258 Z M540,82 L620,82 L620,110 L540,110 Z M316,84 L384,84 L384,110 L316,110 Z M702,106 L730,106 L730,258 L702,258 Z M16,236 L30,236 L30,258 L16,258 Z M10,110 L30,110 L30,146 L10,146 Z M220,258 L536,258 L536,265 L220,265 Z",
+			"bounds": { "x": 10, "y": 73, "w": 720, "h": 194 },
+			"name": "Milk tanker"
+		},
+		{
+			"id": "realMilkTankerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M50,122 L122,122 Q130,122 130,130 L130,162 Q130,170 122,170 L50,170 Q42,170 42,162 L42,130 Q42,122 50,122 Z M147,126 L199,126 Q204,126 204,131 L204,165 Q204,170 199,170 L147,170 Q142,170 142,165 L142,131 Q142,126 147,126 Z",
+			"bounds": { "x": 42, "y": 122, "w": 162, "h": 48 },
+			"name": "Windows"
+		},
+		{
+			"id": "realMilkTankerDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M44,178 L204,178 L204,252 L44,252 Z",
+			"bounds": { "x": 44, "y": 178, "w": 160, "h": 74 },
+			"name": "Door"
+		},
+		{
+			"id": "realMilkTankerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 340,
+		"groundY": 272,
+		"colors": ["#F7F9FC", "#457B9D"],
+		"chassis": "slabPath(760, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realMilkTankerBody", "x": 370, "y": 170, "z": 0 },
+			{ "id": "windows", "part": "realMilkTankerWindows", "x": 123, "y": 146, "z": 1 },
+			{ "id": "door", "part": "realMilkTankerDoor", "x": 124, "y": 215, "z": 2 },
+			{ "id": "wheel-l", "part": "realMilkTankerWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realMilkTankerWheel", "x": 600, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"id": "flatbed-lorry",
+	"name": "Flatbed lorry",
+	"module": "realFlatbedLorry",
+	"artWidth": 780,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realFlatbedLorryBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M42,266 L42,194 Q42,180 54,172 L76,144 Q84,132 100,132 L200,132 Q212,132 212,144 L212,266 Z M212,150 L754,150 L754,274 L212,274 Z M208,104 L228,104 L228,110 L224,110 L224,150 L212,150 L212,110 L208,110 Z M28,126 L64,126 L64,162 L28,162 Z M28,244 L42,244 L42,266 L28,266 Z M94,124 L178,124 L178,132 L94,132 Z M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z M564,236 A36,36 0 1 1 636,236 A36,36 0 1 1 564,236 Z",
+			"bounds": { "x": 28, "y": 104, "w": 726, "h": 170 },
+			"name": "Flatbed lorry"
+		},
+		{
+			"id": "realFlatbedLorryWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M54,214 L66,154 Q69,148 76,148 L120,148 L120,214 Z M133,148 L195,148 Q200,148 200,153 L200,189 Q200,194 195,194 L133,194 Q128,194 128,189 L128,153 Q128,148 133,148 Z",
+			"bounds": { "x": 54, "y": 148, "w": 146, "h": 66 },
+			"name": "Windows"
+		},
+		{
+			"id": "realFlatbedLorryDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M126,194 L204,194 L204,256 L126,256 Z",
+			"bounds": { "x": 126, "y": 194, "w": 78, "h": 62 },
+			"name": "Door"
+		},
+		{
+			"id": "realFlatbedLorryWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 780,
+		"height": 340,
+		"groundY": 272,
+		"colors": ["#6D597A", "#E9C46A"],
+		"chassis": "slabPath(780, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realFlatbedLorryBody", "x": 391, "y": 189, "z": 0 },
+			{ "id": "windows", "part": "realFlatbedLorryWindows", "x": 127, "y": 181, "z": 1 },
+			{ "id": "door", "part": "realFlatbedLorryDoor", "x": 165, "y": 225, "z": 2 },
+			{ "id": "wheel-l", "part": "realFlatbedLorryWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realFlatbedLorryWheel", "x": 600, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

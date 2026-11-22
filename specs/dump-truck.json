@@ -1,0 +1,55 @@
+{
+	"id": "dump-truck",
+	"name": "Dump truck",
+	"module": "realDumpTruck",
+	"artWidth": 760,
+	"artHeight": 370,
+	"parts": [
+		{
+			"id": "realDumpTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M26,250 L26,220 L38,220 L38,198 L48,190 L48,176 Q48,150 62,138 L80,112 Q88,98 104,98 L264,98 Q276,98 276,112 L276,152 L304,152 L304,46 Q304,40 314,40 L330,40 L330,52 L710,80.8 L710,78.5 L726,78.5 L726,82 L726,250 Z M36,90 L54,90 L54,114 L36,114 Z M54,98 L80,112 L74.4,120 L54,108 Z M128,90 L224,90 L224,98 L128,98 Z M726,236 L750,236 L750,254 L726,254 Z M344,250 L460,250 L460,268 L344,268 Z M186,250 L203,250 L203,270 L186,270 Z M638,250 L655,250 L655,270 L638,270 Z",
+			"bounds": { "x": 26, "y": 40, "w": 724, "h": 230 },
+			"name": "Dump truck"
+		},
+		{
+			"id": "realDumpTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M52,172 L52,158 Q52,148 58,140 L76,118 Q82,108 92,108 L126,108 Q132,108 132,116 L132,164 Q132,172 126,172 Z M142,110 Q142,104 150,104 L244,104 Q252,104 252,112 L252,156 Q252,164 244,164 L150,164 Q142,164 142,156 Z",
+			"bounds": { "x": 52, "y": 104, "w": 200, "h": 68 },
+			"name": "Windows"
+		},
+		{
+			"id": "realDumpTruckDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M204,168 L270,168 L270,250 L204,250 Z",
+			"bounds": { "x": 204, "y": 168, "w": 66, "h": 82 },
+			"name": "Door"
+		},
+		{
+			"id": "realDumpTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 370,
+		"groundY": 272,
+		"colors": ["#E63946", "#2B2D42"],
+		"chassis": "slab(760, 272, 190)",
+		"slots": [
+			{ "id": "body", "part": "realDumpTruckBody", "x": 388, "y": 155, "z": 0 },
+			{ "id": "windows", "part": "realDumpTruckWindows", "x": 152, "y": 138, "z": 1 },
+			{ "id": "door", "part": "realDumpTruckDoor", "x": 237, "y": 209, "z": 2 },
+			{ "id": "wheel-l", "part": "realDumpTruckWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realDumpTruckWheel", "x": 600, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

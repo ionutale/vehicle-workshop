@@ -429,18 +429,18 @@ VEHICLES.push(
 	{
 		id: 'milk-tanker',
 		name: 'Milk tanker',
-		width: 600,
-		height: 260,
-		groundY: 210,
+		width: 760,
+		height: 340,
+		groundY: 272,
 		palette: palette('#F7F9FC', '#457B9D'),
-		chassisPath: slabPath(600, 210, 150),
+		chassisPath: slabPath(760, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 196, z: 0, scale: 0.78 },
-			{ id: 'tank', part: 'tank', x: 355, y: 145, z: 1, scale: 1.1 },
-			{ id: 'cab', part: 'cab', x: 118, y: 120, z: 2, scale: 0.9 },
-			{ id: 'bumper', part: 'bumper', x: 555, y: 185, z: 3 },
-			wheelSlot('l', 180, 210),
-			wheelSlot('r', 480, 210)
+			{ id: 'body', part: 'realMilkTankerBody', x: 370, y: 170, z: 0 },
+			{ id: 'windows', part: 'realMilkTankerWindows', x: 123, y: 146, z: 1 },
+			{ id: 'door', part: 'realMilkTankerDoor', x: 124, y: 215, z: 2 },
+			{ id: 'wheel-l', part: 'realMilkTankerWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMilkTankerWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -531,18 +531,18 @@ VEHICLES.push(
 	{
 		id: 'flatbed-lorry',
 		name: 'Flatbed lorry',
-		width: 600,
-		height: 260,
-		groundY: 210,
+		width: 780,
+		height: 340,
+		groundY: 272,
 		palette: palette('#6D597A', '#E9C46A'),
-		chassisPath: slabPath(600, 210, 140),
+		chassisPath: slabPath(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 178, z: 0, scale: 0.62 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'deck', part: 'flatbed', x: 360, y: 160, z: 1 },
-			{ id: 'light', part: 'light', x: 570, y: 150, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 470, 210)
+			{ id: 'body', part: 'realFlatbedLorryBody', x: 391, y: 189, z: 0 },
+			{ id: 'windows', part: 'realFlatbedLorryWindows', x: 127, y: 181, z: 1 },
+			{ id: 'door', part: 'realFlatbedLorryDoor', x: 165, y: 225, z: 2 },
+			{ id: 'wheel-l', part: 'realFlatbedLorryWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realFlatbedLorryWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{

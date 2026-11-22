@@ -191,18 +191,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'dump-truck',
 		name: 'Dump truck',
-		width: 600,
-		height: 290,
-		groundY: 215,
+		width: 760,
+		height: 370,
+		groundY: 272,
 		palette: pal('#E63946', '#2B2D42'),
-		chassisPath: slab(600, 215, 140),
+		chassisPath: slab(760, 272, 190),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 175, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cab', x: 115, y: 125, z: 1, scale: 0.9 },
-			{ id: 'tipper', part: 'tipper', x: 360, y: 112, z: 2 },
-			{ id: 'light', part: 'light', x: 565, y: 160, z: 2 },
-			wheel('l', 170, 215),
-			wheel('r', 490, 215)
+			{ id: 'body', part: 'realDumpTruckBody', x: 388, y: 155, z: 0 },
+			{ id: 'windows', part: 'realDumpTruckWindows', x: 152, y: 138, z: 1 },
+			{ id: 'door', part: 'realDumpTruckDoor', x: 237, y: 209, z: 2 },
+			{ id: 'wheel-l', part: 'realDumpTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realDumpTruckWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{

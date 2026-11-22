@@ -57,11 +57,13 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 12. **Tram (done):** rounded city tram with pantograph and rail skirt at Level 5; 5 pieces, 4 at the first tier.
 13. **Light-rail train (done):** two-car articulated train with gangway and pantograph at Level 5; 5 pieces, 4 at the first tier.
 14. **Metro train (done):** streamlined metro car with three door sets and pantograph at Level 5; 5 pieces, 4 at the first tier.
-15. Convert the remaining **special vehicles**, then the trucks, cars, farm and works machines.
-16. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
-17. Convert the remaining **cars and vans**.
-18. Convert **farm** and the remaining **works** machines.
-19. Remove the generic parts once no catalogue entry uses them.
+15. **Milk tanker (done):** cab-over tanker with a ribbed tank and rear ladder at Level 5; 5 pieces, 4 at the first tier.
+16. **Dump truck (done):** open tipper bed with hydraulic ram and heavy arches at Level 5; 5 pieces, 4 at the first tier.
+17. **Flatbed lorry (done):** stake-sided deck with a crate load and stowed ramps at Level 5; 5 pieces, 4 at the first tier.
+18. Convert the remaining **special vehicles** and **trucks** by cargo type (mixer, crane, tow, garbage, transporter, refrigerated, curtain-side).
+19. Convert the remaining **cars and vans**.
+20. Convert **farm** and the remaining **works** machines.
+21. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

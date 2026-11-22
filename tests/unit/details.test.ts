@@ -38,11 +38,11 @@ describe('vehicle details', () => {
 			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
 		}
 		expect(grille('delivery-van').x).toBeLessThan(getVehicle('delivery-van').width / 2);
-		expect(grille('milk-tanker').x).toBeLessThan(getVehicle('milk-tanker').width / 2);
+		expect(grille('refrigerated-truck').x).toBeLessThan(getVehicle('refrigerated-truck').width / 2);
 	});
 
 	it('keeps the facing when the level view has trimmed the cab away', () => {
-		const truck = getVehicle('milk-tanker');
+		const truck = getVehicle('fuel-tanker');
 		const trimmed = vehicleAtLevel(truck, 0);
 		expect(trimmed.slots.some((slot) => slot.part === 'cab')).toBe(false);
 		const grille = detailsFor(trimmed).find((detail) => detail.kind === 'grille')!;

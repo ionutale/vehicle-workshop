@@ -36,8 +36,10 @@ Use `src/lib/render/realKit.ts` for `shape`, `rect`, `circle`, `line`, `wheel`,
 `circleMask`, `circleBounds`, `rectMask`, `rectBounds` and the shared `INK`, `GLASS`,
 `TIRE`, `CHROME`, `STEEL` colours. Do not copy those helpers into the art module.
 
-The drawing lives in its own coordinate box `0..artWidth × 0..artHeight`, origin top-left,
-wheels on the road, front facing **right**. The same coordinates are used by the slot anchors.
+The drawing lives in its own coordinate box `0..artWidth × 0..artHeight`, origin top-left and
+wheels on the road. Front faces the same way as the family reference: **buses and coaches face
+right**, **trucks and works machines face left** as in `drawRealTruck`. The same coordinates are
+used by the slot anchors.
 
 ### The five levels
 

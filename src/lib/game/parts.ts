@@ -110,7 +110,19 @@ export type PartId =
 	| 'realLightRailTrainBody'
 	| 'realLightRailTrainWindows'
 	| 'realLightRailTrainDoor'
-	| 'realLightRailTrainWheel';
+	| 'realLightRailTrainWheel'
+	| 'realMilkTankerBody'
+	| 'realMilkTankerWindows'
+	| 'realMilkTankerDoor'
+	| 'realMilkTankerWheel'
+	| 'realDumpTruckBody'
+	| 'realDumpTruckWindows'
+	| 'realDumpTruckDoor'
+	| 'realDumpTruckWheel'
+	| 'realFlatbedLorryBody'
+	| 'realFlatbedLorryWindows'
+	| 'realFlatbedLorryDoor'
+	| 'realFlatbedLorryWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1020,6 +1032,102 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realMilkTankerBody: realPart(
+		'realMilkTankerBody',
+		'shell',
+		'body',
+		'milk-tanker',
+		'M30,258 L30,128 Q30,111 48,105 L198,96 Q208,96 214,100 L216,110 L672,110 C690,110 702,134 702,176 C702,218 690,242 672,242 L700,242 L700,258 L30,258 Z M540,82 L620,82 L620,110 L540,110 Z M316,84 L384,84 L384,110 L316,110 Z M702,106 L730,106 L730,258 L702,258 Z M16,236 L30,236 L30,258 L16,258 Z M10,110 L30,110 L30,146 L10,146 Z M220,258 L536,258 L536,265 L220,265 Z',
+		{ x: 10, y: 73, w: 720, h: 194 }
+	),
+	realMilkTankerWindows: realPart(
+		'realMilkTankerWindows',
+		'glass',
+		'face',
+		'milk-tanker',
+		'M50,122 L122,122 Q130,122 130,130 L130,162 Q130,170 122,170 L50,170 Q42,170 42,162 L42,130 Q42,122 50,122 Z M147,126 L199,126 Q204,126 204,131 L204,165 Q204,170 199,170 L147,170 Q142,170 142,165 L142,131 Q142,126 147,126 Z',
+		{ x: 42, y: 122, w: 162, h: 48 }
+	),
+	realMilkTankerDoor: realPart(
+		'realMilkTankerDoor',
+		'trim',
+		'detail',
+		'milk-tanker',
+		'M44,178 L204,178 L204,252 L44,252 Z',
+		{ x: 44, y: 178, w: 160, h: 74 }
+	),
+	realMilkTankerWheel: realPart(
+		'realMilkTankerWheel',
+		'rubber',
+		'locomotion',
+		'milk-tanker',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realDumpTruckBody: realPart(
+		'realDumpTruckBody',
+		'shell',
+		'body',
+		'dump-truck',
+		'M26,250 L26,220 L38,220 L38,198 L48,190 L48,176 Q48,150 62,138 L80,112 Q88,98 104,98 L264,98 Q276,98 276,112 L276,152 L304,152 L304,46 Q304,40 314,40 L330,40 L330,52 L710,80.8 L710,78.5 L726,78.5 L726,82 L726,250 Z M36,90 L54,90 L54,114 L36,114 Z M54,98 L80,112 L74.4,120 L54,108 Z M128,90 L224,90 L224,98 L128,98 Z M726,236 L750,236 L750,254 L726,254 Z M344,250 L460,250 L460,268 L344,268 Z M186,250 L203,250 L203,270 L186,270 Z M638,250 L655,250 L655,270 L638,270 Z',
+		{ x: 26, y: 40, w: 724, h: 230 }
+	),
+	realDumpTruckWindows: realPart(
+		'realDumpTruckWindows',
+		'glass',
+		'face',
+		'dump-truck',
+		'M52,172 L52,158 Q52,148 58,140 L76,118 Q82,108 92,108 L126,108 Q132,108 132,116 L132,164 Q132,172 126,172 Z M142,110 Q142,104 150,104 L244,104 Q252,104 252,112 L252,156 Q252,164 244,164 L150,164 Q142,164 142,156 Z',
+		{ x: 52, y: 104, w: 200, h: 68 }
+	),
+	realDumpTruckDoor: realPart(
+		'realDumpTruckDoor',
+		'trim',
+		'detail',
+		'dump-truck',
+		'M204,168 L270,168 L270,250 L204,250 Z',
+		{ x: 204, y: 168, w: 66, h: 82 }
+	),
+	realDumpTruckWheel: realPart(
+		'realDumpTruckWheel',
+		'rubber',
+		'locomotion',
+		'dump-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realFlatbedLorryBody: realPart(
+		'realFlatbedLorryBody',
+		'shell',
+		'body',
+		'flatbed-lorry',
+		'M42,266 L42,194 Q42,180 54,172 L76,144 Q84,132 100,132 L200,132 Q212,132 212,144 L212,266 Z M212,150 L754,150 L754,274 L212,274 Z M208,104 L228,104 L228,110 L224,110 L224,150 L212,150 L212,110 L208,110 Z M28,126 L64,126 L64,162 L28,162 Z M28,244 L42,244 L42,266 L28,266 Z M94,124 L178,124 L178,132 L94,132 Z M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z M564,236 A36,36 0 1 1 636,236 A36,36 0 1 1 564,236 Z',
+		{ x: 28, y: 104, w: 726, h: 170 }
+	),
+	realFlatbedLorryWindows: realPart(
+		'realFlatbedLorryWindows',
+		'glass',
+		'face',
+		'flatbed-lorry',
+		'M54,214 L66,154 Q69,148 76,148 L120,148 L120,214 Z M133,148 L195,148 Q200,148 200,153 L200,189 Q200,194 195,194 L133,194 Q128,194 128,189 L128,153 Q128,148 133,148 Z',
+		{ x: 54, y: 148, w: 146, h: 66 }
+	),
+	realFlatbedLorryDoor: realPart(
+		'realFlatbedLorryDoor',
+		'trim',
+		'detail',
+		'flatbed-lorry',
+		'M126,194 L204,194 L204,256 L126,256 Z',
+		{ x: 126, y: 194, w: 78, h: 62 }
+	),
+	realFlatbedLorryWheel: realPart(
+		'realFlatbedLorryWheel',
+		'rubber',
+		'locomotion',
+		'flatbed-lorry',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1131,6 +1239,18 @@ export const PART_NAMES: Record<PartId, string> = {
 	realLightRailTrainWindows: 'Windows',
 	realLightRailTrainDoor: 'Door',
 	realLightRailTrainWheel: 'Wheel',
+	realMilkTankerBody: 'Milk tanker',
+	realMilkTankerWindows: 'Windows',
+	realMilkTankerDoor: 'Door',
+	realMilkTankerWheel: 'Wheel',
+	realDumpTruckBody: 'Dump truck',
+	realDumpTruckWindows: 'Windows',
+	realDumpTruckDoor: 'Door',
+	realDumpTruckWheel: 'Wheel',
+	realFlatbedLorryBody: 'Flatbed lorry',
+	realFlatbedLorryWindows: 'Windows',
+	realFlatbedLorryDoor: 'Door',
+	realFlatbedLorryWheel: 'Wheel',
 
 };
 
