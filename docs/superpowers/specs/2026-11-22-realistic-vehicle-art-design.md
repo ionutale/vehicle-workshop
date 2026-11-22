@@ -50,11 +50,12 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 5. **Double-decker (done):** two window decks, deck band, destination board and door at Level 4; 5 pieces, 4 at the first tier.
 6. **Bendy bus (done):** two yellow shells, accordion bellows, three axles and a front door at Level 4; 5 pieces, 4 at the first tier.
 7. **Coach bus (done):** long shell, raked front, panoramic glass, cream livery band, luggage bays and roof pods at Level 4; 5 pieces, 4 at the first tier.
-8. Convert the remaining **shuttles and minibuses**, then the **trams and trains**.
-9. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
-10. Convert the remaining **cars and vans**.
-11. Convert **farm** and the remaining **works** machines.
-12. Remove the generic parts once no catalogue entry uses them.
+8. **Airport shuttle (done):** white shuttle with a short van nose, blue livery, sliding door, roof air-conditioning pod and shuttle sign at Level 4; 5 pieces, 4 at the first tier.
+9. Convert the remaining **special buses**, then the **trams and trains**.
+10. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
+11. Convert the remaining **cars and vans**.
+12. Convert **farm** and the remaining **works** machines.
+13. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

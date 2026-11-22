@@ -585,18 +585,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'airport-shuttle',
 		name: 'Airport shuttle bus',
-		width: 600,
-		height: 250,
-		groundY: 205,
+		width: 760,
+		height: 320,
+		groundY: 262,
 		palette: pal('#F7F9FC', '#457B9D'),
-		chassisPath: slab(600, 205, 130),
+		chassisPath: slab(760, 262, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 155, z: 0, scale: 1.1 },
-			{ id: 'windows', part: 'windowStrip', x: 300, y: 112, z: 2, scale: 2.4 },
-			{ id: 'door', part: 'door', x: 430, y: 158, z: 2 },
-			{ id: 'lights', part: 'lightBar', x: 120, y: 150, z: 2 },
-			wheel('l', 170, 205),
-			wheel('r', 450, 205)
+			{ id: 'body', part: 'realAirportShuttleBody', x: 393, y: 170, z: 0 },
+			{ id: 'windows', part: 'realAirportShuttleWindows', x: 404, y: 140, z: 1 },
+			{ id: 'door', part: 'realAirportShuttleDoor', x: 582, y: 176, z: 2 },
+			{ id: 'wheel-l', part: 'realAirportShuttleWheel', x: 160, y: 228, z: 4 },
+			{ id: 'wheel-r', part: 'realAirportShuttleWheel', x: 640, y: 228, z: 4, flip: true }
 		]
 	},
 	{

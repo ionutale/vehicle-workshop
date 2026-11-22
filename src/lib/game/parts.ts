@@ -82,7 +82,11 @@ export type PartId =
 	| 'realCoachBusBody'
 	| 'realCoachBusWindows'
 	| 'realCoachBusDoor'
-	| 'realCoachBusWheel';
+	| 'realCoachBusWheel'
+	| 'realAirportShuttleBody'
+	| 'realAirportShuttleWindows'
+	| 'realAirportShuttleDoor'
+	| 'realAirportShuttleWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -767,6 +771,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'coach-bus',
 		'M604,252 A36,36 0 1 1 676,252 A36,36 0 1 1 604,252 Z',
 		{ x: 604, y: 216, w: 72, h: 72 }
+	),
+	realAirportShuttleBody: realPart(
+		'realAirportShuttleBody',
+		'shell',
+		'body',
+		'airport-shuttle',
+		'M70,240 L70,108 Q70,90 92,90 L640,90 Q658,90 666,102 L706,162 Q712,172 712,184 L712,214 Q712,240 694,240 Z M300,82 L382,82 L382,90 L300,90 Z M470,78 L562,78 L562,90 L470,90 Z M700,138 L732,138 L732,152 L700,152 Z M712,224 L718,224 L718,238 L712,238 Z M54,228 L70,228 L70,240 L54,240 Z',
+		{ x: 54, y: 78, w: 678, h: 184 }
+	),
+	realAirportShuttleWindows: realPart(
+		'realAirportShuttleWindows',
+		'glass',
+		'face',
+		'airport-shuttle',
+		'M100,116 L544,116 L544,176 L100,176 Z M668,104 L694,104 L708,166 L682,172 Z',
+		{ x: 100, y: 104, w: 608, h: 72 }
+	),
+	realAirportShuttleDoor: realPart(
+		'realAirportShuttleDoor',
+		'trim',
+		'detail',
+		'airport-shuttle',
+		'M556,116 L608,116 L608,236 L556,236 Z',
+		{ x: 554, y: 114, w: 56, h: 124 }
+	),
+	realAirportShuttleWheel: realPart(
+		'realAirportShuttleWheel',
+		'rubber',
+		'locomotion',
+		'airport-shuttle',
+		'M606,228 A34,34 0 1 1 674,228 A34,34 0 1 1 606,228 Z',
+		{ x: 606, y: 194, w: 68, h: 68 }
 	)
 
 };
@@ -850,7 +886,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realCoachBusBody: 'Coach',
 	realCoachBusWindows: 'Windows',
 	realCoachBusDoor: 'Door',
-	realCoachBusWheel: 'Wheel'
+	realCoachBusWheel: 'Wheel',
+	realAirportShuttleBody: 'Airport shuttle',
+	realAirportShuttleWindows: 'Windows',
+	realAirportShuttleDoor: 'Door',
+	realAirportShuttleWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {
