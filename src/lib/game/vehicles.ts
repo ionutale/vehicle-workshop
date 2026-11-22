@@ -463,52 +463,52 @@ VEHICLES.push(
 	{
 		id: 'tow-truck',
 		name: 'Tow truck',
-		width: 580,
-		height: 270,
-		groundY: 210,
+		width: 780,
+		height: 390,
+		groundY: 272,
 		palette: palette('#457B9D', '#E9C46A'),
-		chassisPath: slabPath(580, 210, 140),
+		chassisPath: slabPath(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'boom', part: 'boom', x: 360, y: 84, z: 2, scale: 0.9 },
-			{ id: 'hook', part: 'hook', x: 505, y: 52, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 460, 210)
+			{ id: 'body', part: 'realTowTruckBody', x: 383, y: 163, z: 0 },
+			{ id: 'windows', part: 'realTowTruckWindows', x: 117, y: 150, z: 1 },
+			{ id: 'door', part: 'realTowTruckDoor', x: 156, y: 215, z: 2 },
+			{ id: 'wheel-l', part: 'realTowTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realTowTruckWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'crane-truck',
 		name: 'Crane truck',
-		width: 600,
+		width: 820,
 		height: 300,
-		groundY: 215,
+		groundY: 272,
 		palette: palette('#E76F51', '#264653'),
-		chassisPath: slabPath(600, 215, 150),
+		chassisPath: slabPath(820, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 165, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 110, y: 125, z: 1, scale: 0.9 },
-			{ id: 'boom', part: 'boom', x: 380, y: 62, z: 2, scale: 1.1 },
-			{ id: 'hook', part: 'hook', x: 530, y: 30, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 300, y: 100, z: 2 },
-			wheelSlot('l', 170, 215),
-			wheelSlot('r', 480, 215)
+			{ id: 'body', part: 'realCraneTruckBody', x: 395, y: 151, z: 0 },
+			{ id: 'windows', part: 'realCraneTruckWindows', x: 116, y: 152.5, z: 1 },
+			{ id: 'door', part: 'realCraneTruckDoor', x: 159, y: 220, z: 2 },
+			{ id: 'wheel-l', part: 'realCraneTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCraneTruckWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'cement-mixer',
 		name: 'Cement mixer',
-		width: 580,
-		height: 270,
-		groundY: 210,
+		width: 740,
+		height: 380,
+		groundY: 272,
 		palette: palette('#F4A261', '#264653'),
-		chassisPath: slabPath(580, 210, 150),
+		chassisPath: slabPath(740, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'mixer', part: 'mixer', x: 370, y: 120, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 460, 210)
+			{ id: 'body', part: 'realCementMixerBody', x: 352, y: 157, z: 0 },
+			{ id: 'windows', part: 'realCementMixerWindows', x: 114, y: 131, z: 1 },
+			{ id: 'door', part: 'realCementMixerDoor', x: 117, y: 207, z: 2 },
+			{ id: 'wheel-l', part: 'realCementMixerWheel', x: 140, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCementMixerWheel', x: 500, y: 236, z: 4, flip: true }
 		]
 	},
 	{

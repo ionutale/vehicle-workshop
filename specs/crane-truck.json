@@ -1,0 +1,55 @@
+{
+	"id": "crane-truck",
+	"name": "Crane truck",
+	"module": "realCraneTruck",
+	"artWidth": 820,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realCraneTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M34,252 L34,128 Q34,110 50,104 L186,104 Q196,104 196,114 L196,204 L462,204 L462,174 L494.3,167.1 L719.4,36.3 L728.6,51.7 L509.7,192.9 L538,174 L538,204 L772,204 L772,248 L196,248 L196,252 Z M398,204 L398,188 L400,188 L400,172 L408,172 L408,184 L430,184 L430,174 L446,174 L446,204 Z M386,204 L386,166 L454,166 L454,204 L450,204 L450,170 L390,170 L390,204 Z M100,104 L100,100 Q100,92 108,92 L140,92 Q148,92 148,100 L148,104 Z M22,118 L34,118 L34,144 L22,144 Z M20,238 L34,238 L34,260 L20,260 Z M204,124 L200,124 L200,116 L220,116 L220,124 L216,124 L216,204 L204,204 Z M204,116 Q202,102 214,98 Q222,86 236,88 Q250,90 250,102 Q260,108 254,116 Z M230,248 L244,248 L244,260 L258,260 L258,266 L214,266 L214,260 L230,260 Z M700,248 L714,248 L714,260 L728,260 L728,266 L684,266 L684,260 L700,260 Z M707,66 L713,66 L713,156 L707,156 Z M696,156 L724,156 L724,176 L696,176 Z M700,176 L724,176 L724,196 L700,196 Z M586.96,204 A46,46 0 0 1 653.04,204 L636.49,204 A36,36 0 0 0 603.51,204 Z M196,248 L208,248 L208,251 Q208,253 206,253 L196,253 Z",
+			"bounds": { "x": 18, "y": 36, "w": 754, "h": 230 },
+			"name": "Crane truck"
+		},
+		{
+			"id": "realCraneTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M46,186 L46,130 Q46,119 57,119 L112,119 Q120,119 120,127 L120,186 Z M134,123 L180,123 Q186,123 186,129 L186,177 Q186,183 180,183 L134,183 Q128,183 128,177 L128,129 Q128,123 134,123 Z",
+			"bounds": { "x": 46, "y": 119, "w": 140, "h": 67 },
+			"name": "Windows"
+		},
+		{
+			"id": "realCraneTruckDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M128,190 L190,190 L190,250 L128,250 Z",
+			"bounds": { "x": 128, "y": 190, "w": 62, "h": 60 },
+			"name": "Door"
+		},
+		{
+			"id": "realCraneTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 820,
+		"height": 300,
+		"groundY": 272,
+		"colors": ["#E76F51", "#264653"],
+		"chassis": "slabPath(820, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realCraneTruckBody", "x": 395, "y": 151, "z": 0 },
+			{ "id": "windows", "part": "realCraneTruckWindows", "x": 116, "y": 152.5, "z": 1 },
+			{ "id": "door", "part": "realCraneTruckDoor", "x": 159, "y": 220, "z": 2 },
+			{ "id": "wheel-l", "part": "realCraneTruckWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realCraneTruckWheel", "x": 620, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

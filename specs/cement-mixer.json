@@ -1,0 +1,109 @@
+{
+	"id": "cement-mixer",
+	"name": "Cement mixer",
+	"module": "realCementMixer",
+	"artWidth": 740,
+	"artHeight": 380,
+	"parts": [
+		{
+			"id": "realCementMixerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M34,260 L34,124 Q34,104 50,98 L60,90 Q68,84 82,84 L182,84 Q196,84 196,96 L196,150 L212,162 L226,172 C256,158 296,134 340,108 C388,84 434,66 480,60 C512,56 534,62 546,76 L552,54 L644,54 L644,78 L620,78 L620,98 L596,98 L596,118 L584,118 L560,136 C562,152 560,172 552,190 C548,200 544,204 542,204 L548,200 L620,226 L638,220 L636,241 L620,241 L552,218 L542,208 C526,220 502,228 476,234 C430,242 382,244 332,238 C302,234 278,224 252,210 L226,204 L226,244 L690,244 L690,260 Z M14,100 L28,100 L28,132 L14,132 Z M18,232 L34,232 L34,256 L18,256 Z M232,216 L262,216 L266,244 L228,244 Z",
+			"bounds": {
+				"x": 14,
+				"y": 54,
+				"w": 676,
+				"h": 206
+			},
+			"name": "Cement mixer"
+		},
+		{
+			"id": "realCementMixerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M49,100 L111,100 Q118,100 118,107 L118,155 Q118,162 111,162 L49,162 Q42,162 42,155 L42,107 Q42,100 49,100 Z M133,104 L181,104 Q186,104 186,109 L186,155 Q186,160 181,160 L133,160 Q128,160 128,155 L128,109 Q128,104 133,104 Z",
+			"bounds": {
+				"x": 42,
+				"y": 100,
+				"w": 144,
+				"h": 62
+			},
+			"name": "Windows"
+		},
+		{
+			"id": "realCementMixerDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M44,170 L190,170 L190,244 L44,244 Z",
+			"bounds": {
+				"x": 44,
+				"y": 170,
+				"w": 146,
+				"h": 74
+			},
+			"name": "Door"
+		},
+		{
+			"id": "realCementMixerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M104,236 A36,36 0 1 1 176,236 A36,36 0 1 1 104,236 Z",
+			"bounds": {
+				"x": 104,
+				"y": 200,
+				"w": 72,
+				"h": 72
+			},
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 740,
+		"height": 380,
+		"groundY": 272,
+		"colors": [
+			"#F4A261",
+			"#264653"
+		],
+		"chassis": "slabPath(740, 272, 200)",
+		"slots": [
+			{
+				"id": "body",
+				"part": "realCementMixerBody",
+				"x": 352,
+				"y": 157,
+				"z": 0
+			},
+			{
+				"id": "windows",
+				"part": "realCementMixerWindows",
+				"x": 114,
+				"y": 131,
+				"z": 1
+			},
+			{
+				"id": "door",
+				"part": "realCementMixerDoor",
+				"x": 117,
+				"y": 207,
+				"z": 2
+			},
+			{
+				"id": "wheel-l",
+				"part": "realCementMixerWheel",
+				"x": 140,
+				"y": 236,
+				"z": 4
+			},
+			{
+				"id": "wheel-r",
+				"part": "realCementMixerWheel",
+				"x": 500,
+				"y": 236,
+				"z": 4,
+				"flip": true
+			}
+		]
+	}
+}

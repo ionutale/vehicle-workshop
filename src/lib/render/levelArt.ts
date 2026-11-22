@@ -6,11 +6,14 @@
  * with no per-vehicle page.
  */
 
+import { drawRealCementMixerLevel } from './realCementMixer';
+import { drawRealCraneTruckLevel } from './realCraneTruck';
 import { drawRealDumpTruckLevel } from './realDumpTruck';
 import { drawRealFlatbedLorryLevel } from './realFlatbedLorry';
 import { drawRealLightRailTrainLevel } from './realLightRailTrain';
 import { drawRealMetroTrainLevel } from './realMetroTrain';
 import { drawRealMilkTankerLevel } from './realMilkTanker';
+import { drawRealTowTruckLevel } from './realTowTruck';
 import { drawRealTramLevel } from './realTram';
 
 export type LevelDraw = (
@@ -33,7 +36,10 @@ export const LEVEL_ART: Record<string, LevelArtSpec> = {
 	'light-rail-train': { draw: drawRealLightRailTrainLevel, width: 900, height: 380 },
 	'milk-tanker': { draw: drawRealMilkTankerLevel, width: 760, height: 340 },
 	'dump-truck': { draw: drawRealDumpTruckLevel, width: 760, height: 370 },
-	'flatbed-lorry': { draw: drawRealFlatbedLorryLevel, width: 780, height: 340 }
+	'flatbed-lorry': { draw: drawRealFlatbedLorryLevel, width: 780, height: 340 },
+	'cement-mixer': { draw: drawRealCementMixerLevel, width: 740, height: 380 },
+	'crane-truck': { draw: drawRealCraneTruckLevel, width: 820, height: 300 },
+	'tow-truck': { draw: drawRealTowTruckLevel, width: 780, height: 390 }
 };
 
 export const LEVEL_IDS = Object.keys(LEVEL_ART);

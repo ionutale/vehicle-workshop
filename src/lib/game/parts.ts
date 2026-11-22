@@ -122,7 +122,19 @@ export type PartId =
 	| 'realFlatbedLorryBody'
 	| 'realFlatbedLorryWindows'
 	| 'realFlatbedLorryDoor'
-	| 'realFlatbedLorryWheel';
+	| 'realFlatbedLorryWheel'
+	| 'realCraneTruckBody'
+	| 'realCraneTruckWindows'
+	| 'realCraneTruckDoor'
+	| 'realCraneTruckWheel'
+	| 'realCementMixerBody'
+	| 'realCementMixerWindows'
+	| 'realCementMixerDoor'
+	| 'realCementMixerWheel'
+	| 'realTowTruckBody'
+	| 'realTowTruckWindows'
+	| 'realTowTruckDoor'
+	| 'realTowTruckWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1128,6 +1140,102 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realCraneTruckBody: realPart(
+		'realCraneTruckBody',
+		'shell',
+		'body',
+		'crane-truck',
+		'M34,252 L34,128 Q34,110 50,104 L186,104 Q196,104 196,114 L196,204 L462,204 L462,174 L494.3,167.1 L719.4,36.3 L728.6,51.7 L509.7,192.9 L538,174 L538,204 L772,204 L772,248 L196,248 L196,252 Z M398,204 L398,188 L400,188 L400,172 L408,172 L408,184 L430,184 L430,174 L446,174 L446,204 Z M386,204 L386,166 L454,166 L454,204 L450,204 L450,170 L390,170 L390,204 Z M100,104 L100,100 Q100,92 108,92 L140,92 Q148,92 148,100 L148,104 Z M22,118 L34,118 L34,144 L22,144 Z M20,238 L34,238 L34,260 L20,260 Z M204,124 L200,124 L200,116 L220,116 L220,124 L216,124 L216,204 L204,204 Z M204,116 Q202,102 214,98 Q222,86 236,88 Q250,90 250,102 Q260,108 254,116 Z M230,248 L244,248 L244,260 L258,260 L258,266 L214,266 L214,260 L230,260 Z M700,248 L714,248 L714,260 L728,260 L728,266 L684,266 L684,260 L700,260 Z M707,66 L713,66 L713,156 L707,156 Z M696,156 L724,156 L724,176 L696,176 Z M700,176 L724,176 L724,196 L700,196 Z M586.96,204 A46,46 0 0 1 653.04,204 L636.49,204 A36,36 0 0 0 603.51,204 Z M196,248 L208,248 L208,251 Q208,253 206,253 L196,253 Z',
+		{ x: 18, y: 36, w: 754, h: 230 }
+	),
+	realCraneTruckWindows: realPart(
+		'realCraneTruckWindows',
+		'glass',
+		'face',
+		'crane-truck',
+		'M46,186 L46,130 Q46,119 57,119 L112,119 Q120,119 120,127 L120,186 Z M134,123 L180,123 Q186,123 186,129 L186,177 Q186,183 180,183 L134,183 Q128,183 128,177 L128,129 Q128,123 134,123 Z',
+		{ x: 46, y: 119, w: 140, h: 67 }
+	),
+	realCraneTruckDoor: realPart(
+		'realCraneTruckDoor',
+		'trim',
+		'detail',
+		'crane-truck',
+		'M128,190 L190,190 L190,250 L128,250 Z',
+		{ x: 128, y: 190, w: 62, h: 60 }
+	),
+	realCraneTruckWheel: realPart(
+		'realCraneTruckWheel',
+		'rubber',
+		'locomotion',
+		'crane-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realCementMixerBody: realPart(
+		'realCementMixerBody',
+		'shell',
+		'body',
+		'cement-mixer',
+		'M34,260 L34,124 Q34,104 50,98 L60,90 Q68,84 82,84 L182,84 Q196,84 196,96 L196,150 L212,162 L226,172 C256,158 296,134 340,108 C388,84 434,66 480,60 C512,56 534,62 546,76 L552,54 L644,54 L644,78 L620,78 L620,98 L596,98 L596,118 L584,118 L560,136 C562,152 560,172 552,190 C548,200 544,204 542,204 L548,200 L620,226 L638,220 L636,241 L620,241 L552,218 L542,208 C526,220 502,228 476,234 C430,242 382,244 332,238 C302,234 278,224 252,210 L226,204 L226,244 L690,244 L690,260 Z M14,100 L28,100 L28,132 L14,132 Z M18,232 L34,232 L34,256 L18,256 Z M232,216 L262,216 L266,244 L228,244 Z',
+		{ x: 14, y: 54, w: 676, h: 206 }
+	),
+	realCementMixerWindows: realPart(
+		'realCementMixerWindows',
+		'glass',
+		'face',
+		'cement-mixer',
+		'M49,100 L111,100 Q118,100 118,107 L118,155 Q118,162 111,162 L49,162 Q42,162 42,155 L42,107 Q42,100 49,100 Z M133,104 L181,104 Q186,104 186,109 L186,155 Q186,160 181,160 L133,160 Q128,160 128,155 L128,109 Q128,104 133,104 Z',
+		{ x: 42, y: 100, w: 144, h: 62 }
+	),
+	realCementMixerDoor: realPart(
+		'realCementMixerDoor',
+		'trim',
+		'detail',
+		'cement-mixer',
+		'M44,170 L190,170 L190,244 L44,244 Z',
+		{ x: 44, y: 170, w: 146, h: 74 }
+	),
+	realCementMixerWheel: realPart(
+		'realCementMixerWheel',
+		'rubber',
+		'locomotion',
+		'cement-mixer',
+		'M104,236 A36,36 0 1 1 176,236 A36,36 0 1 1 104,236 Z',
+		{ x: 104, y: 200, w: 72, h: 72 }
+	),
+	realTowTruckBody: realPart(
+		'realTowTruckBody',
+		'shell',
+		'body',
+		'tow-truck',
+		'M22,252 L22,236 L34,236 L34,120 Q34,104 50,98 L184,98 Q196,98 196,110 L196,252 Z M20,110 Q20,106 24,106 L30,106 Q34,106 34,110 L34,146 Q34,150 30,150 L24,150 Q20,150 20,146 Z M76,98 L76,90 Q76,82 84,82 L160,82 Q168,82 168,90 L168,98 Z M208,244 L208,190 Q208,180 218,180 L648,180 Q656,180 656,190 L656,244 Z M656,244 L656,224 Q656,218 662,218 L738,218 Q746,218 746,226 L746,244 Z M232,180 L232,156 Q232,151 237,149 L276,146 L276,180 Z M276,152 L716,58 L716,80 L276,180 Z M709,84 L715,84 L714,164 L708,164 Z M694,164 L720,164 L720,196 Q720,216 704,216 Q694,216 694,204 Z M198,90 L206,90 L206,246 L198,246 Z M192,90 L192,84 Q192,80 196,80 L208,80 Q212,80 212,84 L212,90 Z M236,244 L312,244 L312,260 Q312,264 308,264 L240,264 Q236,264 236,260 Z M700,244 L716,244 L714,262 L702,262 Z M690,262 L726,262 L726,268 L690,268 Z M50,252 L196,252 L196,258 L50,258 Z M196,244 L198,244 L198,258 L196,258 Z M198,246 L206,246 L206,258 L198,258 Z M206,244 L208,244 L208,258 L206,258 Z M208,244 L236,244 L236,258 L208,258 Z M312,244 L656,244 L656,258 L312,258 Z M656,244 L700,244 L700,258 L656,258 Z M716,244 L746,244 L746,258 L716,258 Z',
+		{ x: 20, y: 58, w: 726, h: 210 }
+	),
+	realTowTruckWindows: realPart(
+		'realTowTruckWindows',
+		'glass',
+		'face',
+		'tow-truck',
+		'M46,184 L46,128 Q46,118 55,116 L110,116 Q118,116 118,124 L118,176 Q118,184 110,184 Z M132,118 L180,118 Q188,118 188,126 L188,170 Q188,178 180,178 L132,178 Q124,178 124,170 L124,126 Q124,118 132,118 Z',
+		{ x: 46, y: 116, w: 142, h: 68 }
+	),
+	realTowTruckDoor: realPart(
+		'realTowTruckDoor',
+		'trim',
+		'detail',
+		'tow-truck',
+		'M124,186 L188,186 L188,244 L124,244 Z',
+		{ x: 124, y: 186, w: 64, h: 58 }
+	),
+	realTowTruckWheel: realPart(
+		'realTowTruckWheel',
+		'rubber',
+		'locomotion',
+		'tow-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1251,6 +1359,18 @@ export const PART_NAMES: Record<PartId, string> = {
 	realFlatbedLorryWindows: 'Windows',
 	realFlatbedLorryDoor: 'Door',
 	realFlatbedLorryWheel: 'Wheel',
+	realCraneTruckBody: 'Crane truck',
+	realCraneTruckWindows: 'Windows',
+	realCraneTruckDoor: 'Door',
+	realCraneTruckWheel: 'Wheel',
+	realCementMixerBody: 'Cement mixer',
+	realCementMixerWindows: 'Windows',
+	realCementMixerDoor: 'Door',
+	realCementMixerWheel: 'Wheel',
+	realTowTruckBody: 'Tow truck',
+	realTowTruckWindows: 'Windows',
+	realTowTruckDoor: 'Door',
+	realTowTruckWheel: 'Wheel',
 
 };
 
