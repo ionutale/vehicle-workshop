@@ -44,11 +44,13 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 ## Rollout
 
 1. **Pilot (done):** car, fire engine, digger, box truck, bus.
-2. Convert the rest of the **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
-3. Convert the rest of the **buses and coaches**, then the **trams/trains**.
-4. Convert the remaining **cars and vans**.
-5. Convert **farm** and the remaining **works** machines.
-6. Remove the generic parts once no catalogue entry uses them.
+2. **Level 4 chosen** for the rollout: accurate silhouette, shading, full fittings, cast/contact shadow, rim light and glass/chrome reflections.
+3. **School bus (done):** the first remaining vehicle converted to Level 4; 5 pieces, 4 at the first tier.
+4. Convert the rest of the **buses and coaches**, then the **trams/trains**.
+5. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
+6. Convert the remaining **cars and vans**.
+7. Convert **farm** and the remaining **works** machines.
+8. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

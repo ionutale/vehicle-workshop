@@ -395,19 +395,18 @@ VEHICLES.push(
 	{
 		id: 'school-bus',
 		name: 'School bus',
-		width: 580,
-		height: 250,
-		groundY: 208,
-		palette: palette('#F9C74F', '#2B2D42'),
-		chassisPath: slabPath(580, 208, 140),
+		width: 760,
+		height: 320,
+		groundY: 285,
+		palette: palette('#FFC94D', '#3A271B'),
+		chassisPath: slabPath(760, 285, 160),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 290, y: 155, z: 0, scale: 1.1 },
-			{ id: 'windows', part: 'windowStrip', x: 290, y: 114, z: 2, scale: 2.4 },
-			{ id: 'roof', part: 'roof', x: 290, y: 88, z: 1, scale: 2.7 },
-			{ id: 'sign', part: 'roofSign', x: 120, y: 86, z: 1 },
-			{ id: 'door', part: 'door', x: 380, y: 158, z: 2 },
-			wheelSlot('l', 160, 208),
-			wheelSlot('r', 440, 208)
+			{ id: 'body', part: 'realSchoolBusBody', x: 390, y: 177.5, z: 0 },
+			{ id: 'windows', part: 'realSchoolBusWindows', x: 365, y: 153, z: 1 },
+			{ id: 'door', part: 'realSchoolBusDoor', x: 629, y: 184, z: 2 },
+			{ id: 'wheel-l', part: 'realSchoolBusWheel', x: 165, y: 246, z: 4 },
+			{ id: 'wheel-r', part: 'realSchoolBusWheel', x: 590, y: 246, z: 4, flip: true }
 		]
 	},
 	{

@@ -1,4 +1,5 @@
 import { roundedRect } from '#lib/render/draw';
+import { drawRealSchoolBus } from './realSchoolBus';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -725,7 +726,8 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	digger: { draw: drawRealDigger, width: 700, height: 360 },
 	'box-truck': { draw: drawRealTruck, width: 700, height: 340 },
 	bus: { draw: drawRealBus, width: 760, height: 320 },
-	car: { draw: drawRealCar, width: 600, height: 260 }
+	car: { draw: drawRealCar, width: 600, height: 260 },
+	'school-bus': { draw: drawRealSchoolBus, width: 760, height: 320 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

@@ -27,9 +27,9 @@ describe('vehicle details', () => {
 		}
 	});
 
-	it('gives a generic truck a grille and a school bus an exhaust', () => {
+	it('gives a generic truck a grille and a mini bus an exhaust', () => {
 		expect(detailsFor(getVehicle('delivery-van')).map((detail) => detail.kind)).toContain('grille');
-		expect(detailsFor(getVehicle('school-bus')).map((detail) => detail.kind)).toContain('exhaust');
+		expect(detailsFor(getVehicle('mini-bus')).map((detail) => detail.kind)).toContain('exhaust');
 	});
 
 	it('puts the grille at the nose of right-facing and rear-cab machines', () => {
