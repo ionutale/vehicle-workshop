@@ -242,18 +242,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'curtain-side-lorry',
 		name: 'Curtain-side lorry',
-		width: 640,
-		height: 280,
-		groundY: 212,
+		width: 800,
+		height: 360,
+		groundY: 272,
 		palette: pal('#457B9D', '#CED4DA'),
-		chassisPath: slab(640, 212, 150),
+		chassisPath: slab(800, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 350, y: 160, z: 0, scale: 1.05 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'roof', part: 'roof', x: 350, y: 86, z: 1, scale: 2.6 },
-			wheel('l', 180, 212),
-			wheel('r', 530, 212),
-			{ id: 'light', part: 'light', x: 625, y: 150, z: 2 }
+			{ id: 'body', part: 'realCurtainSideLorryBody', x: 397, y: 170, z: 0 },
+			{ id: 'windows', part: 'realCurtainSideLorryWindows', x: 108, y: 144, z: 1 },
+			{ id: 'door', part: 'realCurtainSideLorryDoor', x: 160, y: 219, z: 2 },
+			{ id: 'wheel-l', part: 'realCurtainSideLorryWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCurtainSideLorryWheel', x: 640, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -481,18 +481,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'parcel-lorry',
 		name: 'Parcel lorry',
-		width: 660,
-		height: 290,
-		groundY: 215,
+		width: 780,
+		height: 360,
+		groundY: 272,
 		palette: pal('#C1121F', '#F2E8CF'),
-		chassisPath: slab(660, 215, 160),
+		chassisPath: slab(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 370, y: 165, z: 0, scale: 1.1 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'door', part: 'door', x: 580, y: 170, z: 2 },
-			{ id: 'light', part: 'light', x: 640, y: 155, z: 2 },
-			wheel('l', 180, 215),
-			wheel('r', 540, 215)
+			{ id: 'body', part: 'realParcelLorryBody', x: 392, y: 150, z: 0 },
+			{ id: 'windows', part: 'realParcelLorryWindows', x: 111, y: 144, z: 1 },
+			{ id: 'door', part: 'realParcelLorryDoor', x: 520, y: 151, z: 2 },
+			{ id: 'wheel-l', part: 'realParcelLorryWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realParcelLorryWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{

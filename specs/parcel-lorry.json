@@ -1,0 +1,55 @@
+{
+	"id": "parcel-lorry",
+	"name": "Parcel lorry",
+	"module": "realParcelLorry",
+	"artWidth": 780,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realParcelLorryBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M24,258 L24,124 Q24,106 42,102 L196,102 L196,44 L748,44 Q764,44 764,60 L764,240 L196,240 L196,258 Z M196,240 L764,240 L764,258 L196,258 Z M214,32 L742,32 L742,38 L214,38 Z M226,38 L234,38 L234,44 L226,44 Z M722,38 L730,38 L730,44 L722,44 Z M186,82 L196,82 L196,102 L186,102 Z M8,118 L24,118 L24,152 L8,152 Z M8,242 L24,242 L24,266 L8,266 Z M764,248 L776,248 L776,266 L764,266 Z M92,258 L124,258 L124,268 L92,268 Z",
+			"bounds": { "x": 8, "y": 32, "w": 768, "h": 236 },
+			"name": "Parcel lorry"
+		},
+		{
+			"id": "realParcelLorryWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M44,112 L128,112 Q138,112 138,122 L138,166 Q138,176 128,176 L44,176 Q34,176 34,166 L34,122 Q34,112 44,112 Z M151,116 L183,116 Q188,116 188,121 L188,167 Q188,172 183,172 L151,172 Q146,172 146,167 L146,121 Q146,116 151,116 Z",
+			"bounds": { "x": 34, "y": 112, "w": 154, "h": 64 },
+			"name": "Windows"
+		},
+		{
+			"id": "realParcelLorryDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M474,96 L566,96 L566,206 L474,206 Z",
+			"bounds": { "x": 474, "y": 96, "w": 92, "h": 110 },
+			"name": "Side loading door"
+		},
+		{
+			"id": "realParcelLorryWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 780,
+		"height": 360,
+		"groundY": 272,
+		"colors": ["#C1121F", "#F2E8CF"],
+		"chassis": "slab(780, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realParcelLorryBody", "x": 392, "y": 150, "z": 0 },
+			{ "id": "windows", "part": "realParcelLorryWindows", "x": 111, "y": 144, "z": 1 },
+			{ "id": "door", "part": "realParcelLorryDoor", "x": 520, "y": 151, "z": 2 },
+			{ "id": "wheel-l", "part": "realParcelLorryWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realParcelLorryWheel", "x": 620, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

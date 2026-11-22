@@ -146,7 +146,19 @@ export type PartId =
 	| 'realRefrigeratedTruckBody'
 	| 'realRefrigeratedTruckWindows'
 	| 'realRefrigeratedTruckDoor'
-	| 'realRefrigeratedTruckWheel';
+	| 'realRefrigeratedTruckWheel'
+	| 'realCurtainSideLorryBody'
+	| 'realCurtainSideLorryWindows'
+	| 'realCurtainSideLorryDoor'
+	| 'realCurtainSideLorryWheel'
+	| 'realParcelLorryBody'
+	| 'realParcelLorryWindows'
+	| 'realParcelLorryDoor'
+	| 'realParcelLorryWheel'
+	| 'realLogTruckBody'
+	| 'realLogTruckWindows'
+	| 'realLogTruckDoor'
+	| 'realLogTruckWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1344,6 +1356,102 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realCurtainSideLorryBody: realPart(
+		'realCurtainSideLorryBody',
+		'shell',
+		'body',
+		'curtain-side-lorry',
+		'M22,258 L22,126 Q22,106 40,101 L70,93 Q78,91 86,91 L188,91 L188,78 Q188,74 194,74 L762,74 Q770,74 770,82 L770,262 L196,262 L196,258 Z M6,108 L22,108 L22,144 L6,144 Z M6,240 L22,240 L22,266 L6,266 Z M770,246 L788,246 L788,264 L770,264 Z',
+		{ x: 6, y: 74, w: 782, h: 192 }
+	),
+	realCurtainSideLorryWindows: realPart(
+		'realCurtainSideLorryWindows',
+		'glass',
+		'face',
+		'curtain-side-lorry',
+		'M38,112 L114,112 Q122,112 122,120 L122,168 Q122,176 114,176 L38,176 Q30,176 30,168 L30,120 Q30,112 38,112 Z M138,112 L180,112 Q186,112 186,118 L186,160 Q186,166 180,166 L138,166 Q132,166 132,160 L132,118 Q132,112 138,112 Z',
+		{ x: 30, y: 112, w: 156, h: 64 }
+	),
+	realCurtainSideLorryDoor: realPart(
+		'realCurtainSideLorryDoor',
+		'trim',
+		'detail',
+		'curtain-side-lorry',
+		'M128,182 L192,182 L192,256 L128,256 Z',
+		{ x: 128, y: 182, w: 64, h: 74 }
+	),
+	realCurtainSideLorryWheel: realPart(
+		'realCurtainSideLorryWheel',
+		'rubber',
+		'locomotion',
+		'curtain-side-lorry',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realParcelLorryBody: realPart(
+		'realParcelLorryBody',
+		'shell',
+		'body',
+		'parcel-lorry',
+		'M24,258 L24,124 Q24,106 42,102 L196,102 L196,44 L748,44 Q764,44 764,60 L764,240 L196,240 L196,258 Z M196,240 L764,240 L764,258 L196,258 Z M214,32 L742,32 L742,38 L214,38 Z M226,38 L234,38 L234,44 L226,44 Z M722,38 L730,38 L730,44 L722,44 Z M186,82 L196,82 L196,102 L186,102 Z M8,118 L24,118 L24,152 L8,152 Z M8,242 L24,242 L24,266 L8,266 Z M764,248 L776,248 L776,266 L764,266 Z M92,258 L124,258 L124,268 L92,268 Z',
+		{ x: 8, y: 32, w: 768, h: 236 }
+	),
+	realParcelLorryWindows: realPart(
+		'realParcelLorryWindows',
+		'glass',
+		'face',
+		'parcel-lorry',
+		'M44,112 L128,112 Q138,112 138,122 L138,166 Q138,176 128,176 L44,176 Q34,176 34,166 L34,122 Q34,112 44,112 Z M151,116 L183,116 Q188,116 188,121 L188,167 Q188,172 183,172 L151,172 Q146,172 146,167 L146,121 Q146,116 151,116 Z',
+		{ x: 34, y: 112, w: 154, h: 64 }
+	),
+	realParcelLorryDoor: realPart(
+		'realParcelLorryDoor',
+		'trim',
+		'detail',
+		'parcel-lorry',
+		'M474,96 L566,96 L566,206 L474,206 Z',
+		{ x: 474, y: 96, w: 92, h: 110 }
+	),
+	realParcelLorryWheel: realPart(
+		'realParcelLorryWheel',
+		'rubber',
+		'locomotion',
+		'parcel-lorry',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realLogTruckBody: realPart(
+		'realLogTruckBody',
+		'shell',
+		'body',
+		'log-truck',
+		'M46,252 L46,142 Q46,120 58,110 L72,100 Q80,92 94,92 L212,92 Q224,92 224,104 L224,252 Z M224,246 L782,246 L782,264 L54,264 L54,252 L224,252 Z M230,186 L782,186 L782,246 L230,246 Z M226,60 L258,60 L258,186 L226,186 Z M260,186 L260,86 L292,86 L292,64 L714,64 L714,86 L778,86 L778,186 Z M16,98 L46,98 L46,128 L16,128 Z M28,230 L46,230 L46,258 L28,258 Z M182,252 L200,252 L200,268 L182,268 Z M670,264 L688,264 L688,268 L670,268 Z M181,72 L203,72 L203,92 L181,92 Z',
+		{ x: 16, y: 60, w: 766, h: 208 }
+	),
+	realLogTruckWindows: realPart(
+		'realLogTruckWindows',
+		'glass',
+		'face',
+		'log-truck',
+		'M56,128 Q56,114 64,112 L128,112 Q134,112 134,118 L134,178 Q134,184 128,184 L62,184 Q56,184 56,178 Z M146,114 L204,114 Q212,114 212,122 L212,152 Q212,158 206,158 L146,158 Q140,158 140,152 L140,120 Q140,114 146,114 Z',
+		{ x: 56, y: 112, w: 156, h: 72 }
+	),
+	realLogTruckDoor: realPart(
+		'realLogTruckDoor',
+		'trim',
+		'detail',
+		'log-truck',
+		'M142,164 L218,164 L218,246 L142,246 Z',
+		{ x: 142, y: 164, w: 76, h: 82 }
+	),
+	realLogTruckWheel: realPart(
+		'realLogTruckWheel',
+		'rubber',
+		'locomotion',
+		'log-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1491,6 +1599,18 @@ export const PART_NAMES: Record<PartId, string> = {
 	realRefrigeratedTruckWindows: 'Windows',
 	realRefrigeratedTruckDoor: 'Side door',
 	realRefrigeratedTruckWheel: 'Wheel',
+	realCurtainSideLorryBody: 'Curtain-side lorry',
+	realCurtainSideLorryWindows: 'Windows',
+	realCurtainSideLorryDoor: 'Cab door',
+	realCurtainSideLorryWheel: 'Wheel',
+	realParcelLorryBody: 'Parcel lorry',
+	realParcelLorryWindows: 'Windows',
+	realParcelLorryDoor: 'Side loading door',
+	realParcelLorryWheel: 'Wheel',
+	realLogTruckBody: 'Log truck',
+	realLogTruckWindows: 'Windows',
+	realLogTruckDoor: 'Door',
+	realLogTruckWheel: 'Wheel',
 
 };
 

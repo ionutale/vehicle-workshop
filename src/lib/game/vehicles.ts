@@ -548,18 +548,18 @@ VEHICLES.push(
 	{
 		id: 'log-truck',
 		name: 'Log truck',
-		width: 600,
-		height: 270,
-		groundY: 210,
+		width: 800,
+		height: 380,
+		groundY: 272,
 		palette: palette('#8B5E34', '#6B4226'),
-		chassisPath: slabPath(600, 210, 140),
+		chassisPath: slabPath(800, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 178, z: 0, scale: 0.62 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'deck', part: 'flatbed', x: 370, y: 165, z: 1 },
-			{ id: 'logs', part: 'logs', x: 370, y: 128, z: 2, scale: 1.2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 470, 210)
+			{ id: 'body', part: 'realLogTruckBody', x: 399, y: 164, z: 0 },
+			{ id: 'windows', part: 'realLogTruckWindows', x: 134, y: 148, z: 1 },
+			{ id: 'door', part: 'realLogTruckDoor', x: 180, y: 205, z: 2 },
+			{ id: 'wheel-l', part: 'realLogTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realLogTruckWheel', x: 640, y: 236, z: 4, flip: true }
 		]
 	},
 	{
