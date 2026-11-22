@@ -551,18 +551,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'coach-bus',
 		name: 'Coach bus',
-		width: 660,
-		height: 280,
-		groundY: 210,
+		width: 860,
+		height: 360,
+		groundY: 288,
 		palette: pal('#457B9D', '#F7F9FC'),
-		chassisPath: slab(660, 210, 150),
+		chassisPath: slab(860, 288, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 160, z: 0, scale: 1.2 },
-			{ id: 'windows', part: 'windowStrip', x: 330, y: 118, z: 2, scale: 2.8 },
-			{ id: 'roof', part: 'roof', x: 330, y: 88, z: 1, scale: 2.8 },
-			{ id: 'door', part: 'door', x: 450, y: 162, z: 2 },
-			wheel('l', 170, 210),
-			wheel('r', 520, 210)
+			{ id: 'body', part: 'realCoachBusBody', x: 447, y: 172, z: 0 },
+			{ id: 'windows', part: 'realCoachBusWindows', x: 452, y: 134, z: 1 },
+			{ id: 'door', part: 'realCoachBusDoor', x: 714, y: 170, z: 2 },
+			{ id: 'wheel-l', part: 'realCoachBusWheel', x: 170, y: 252, z: 4 },
+			{ id: 'wheel-r', part: 'realCoachBusWheel', x: 640, y: 252, z: 4, flip: true }
 		]
 	},
 	{

@@ -78,7 +78,11 @@ export type PartId =
 	| 'realBendyBusBody'
 	| 'realBendyBusWindows'
 	| 'realBendyBusDoor'
-	| 'realBendyBusWheel';
+	| 'realBendyBusWheel'
+	| 'realCoachBusBody'
+	| 'realCoachBusWindows'
+	| 'realCoachBusDoor'
+	| 'realCoachBusWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -731,6 +735,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'bendy-bus',
 		'M724,236 A36,36 0 1 1 796,236 A36,36 0 1 1 724,236 Z',
 		{ x: 724, y: 200, w: 72, h: 72 }
+	),
+	realCoachBusBody: realPart(
+		'realCoachBusBody',
+		'shell',
+		'body',
+		'coach-bus',
+		'M70,250 L70,88 Q70,66 92,66 L766,66 Q788,66 798,88 L820,182 L820,250 Z M190,56 L280,56 L280,66 L190,66 Z M330,56 L420,56 L420,66 L330,66 Z M812,78 L838,78 L838,96 L812,96 Z M820,228 L826,228 L826,248 L820,248 Z M56,232 L70,232 L70,248 L56,248 Z',
+		{ x: 56, y: 56, w: 782, h: 232 }
+	),
+	realCoachBusWindows: realPart(
+		'realCoachBusWindows',
+		'glass',
+		'face',
+		'coach-bus',
+		'M100,96 L684,96 L684,168 L100,168 Z M752,96 L788,96 L804,172 L762,172 Z',
+		{ x: 100, y: 96, w: 704, h: 76 }
+	),
+	realCoachBusDoor: realPart(
+		'realCoachBusDoor',
+		'trim',
+		'detail',
+		'coach-bus',
+		'M692,96 L736,96 L736,244 L692,244 Z',
+		{ x: 690, y: 94, w: 48, h: 152 }
+	),
+	realCoachBusWheel: realPart(
+		'realCoachBusWheel',
+		'rubber',
+		'locomotion',
+		'coach-bus',
+		'M604,252 A36,36 0 1 1 676,252 A36,36 0 1 1 604,252 Z',
+		{ x: 604, y: 216, w: 72, h: 72 }
 	)
 
 };
@@ -810,7 +846,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realBendyBusBody: 'Bendy bus',
 	realBendyBusWindows: 'Windows',
 	realBendyBusDoor: 'Door',
-	realBendyBusWheel: 'Wheel'
+	realBendyBusWheel: 'Wheel',
+	realCoachBusBody: 'Coach',
+	realCoachBusWindows: 'Windows',
+	realCoachBusDoor: 'Door',
+	realCoachBusWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {
