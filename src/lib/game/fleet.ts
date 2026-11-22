@@ -567,18 +567,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'trolleybus',
 		name: 'Trolleybus',
-		width: 620,
-		height: 300,
-		groundY: 210,
+		width: 820,
+		height: 400,
+		groundY: 272,
 		palette: pal('#2A9D8F', '#F2E8CF'),
-		chassisPath: slab(620, 210, 150),
+		chassisPath: slab(820, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 158, z: 0, scale: 1.15 },
-			{ id: 'windows', part: 'windowStrip', x: 310, y: 114, z: 2, scale: 2.6 },
-			{ id: 'poles', part: 'pantograph', x: 420, y: 66, z: 1, scale: 1.4 },
-			{ id: 'door', part: 'door', x: 420, y: 160, z: 2 },
-			wheel('l', 170, 210),
-			wheel('r', 470, 210)
+			{ id: 'body', part: 'realTrolleybusBody', x: 438.5, y: 154, z: 0 },
+			{ id: 'windows', part: 'realTrolleybusWindows', x: 432, y: 142, z: 1 },
+			{ id: 'door', part: 'realTrolleybusDoor', x: 689, y: 180, z: 2 },
+			{ id: 'wheel-l', part: 'realTrolleybusWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realTrolleybusWheel', x: 640, y: 236, z: 4, flip: true }
 		]
 	},
 	{

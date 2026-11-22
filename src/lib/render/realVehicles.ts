@@ -3,6 +3,7 @@ import { drawRealAirportShuttle } from './realAirportShuttle';
 import { drawRealBendyBus } from './realBendyBus';
 import { drawRealCoachBus } from './realCoachBus';
 import { drawRealMobileClinic } from './realMobileClinic';
+import { drawRealTrolleybus } from './realTrolleybus';
 import { drawRealMobileLibrary } from './realMobileLibrary';
 import { drawRealDoubleDecker } from './realDoubleDecker';
 import { drawRealMiniBus } from './realMiniBus';
@@ -741,7 +742,8 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'coach-bus': { draw: drawRealCoachBus, width: 860, height: 360 },
 	'airport-shuttle': { draw: drawRealAirportShuttle, width: 760, height: 320 },
 	'mobile-library': { draw: drawRealMobileLibrary, width: 780, height: 340 },
-	'mobile-clinic': { draw: drawRealMobileClinic, width: 780, height: 340 }
+	'mobile-clinic': { draw: drawRealMobileClinic, width: 780, height: 340 },
+	trolleybus: { draw: drawRealTrolleybus, width: 820, height: 400 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

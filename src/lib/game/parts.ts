@@ -94,7 +94,11 @@ export type PartId =
 	| 'realMobileClinicBody'
 	| 'realMobileClinicWindows'
 	| 'realMobileClinicDoor'
-	| 'realMobileClinicWheel';
+	| 'realMobileClinicWheel'
+	| 'realTrolleybusBody'
+	| 'realTrolleybusWindows'
+	| 'realTrolleybusDoor'
+	| 'realTrolleybusWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -875,6 +879,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'mobile-clinic',
 		'M586,236 A34,34 0 1 1 654,236 A34,34 0 1 1 586,236 Z',
 		{ x: 586, y: 202, w: 68, h: 68 }
+	),
+	realTrolleybusBody: realPart(
+		'realTrolleybusBody',
+		'shell',
+		'body',
+		'trolleybus',
+		'M70,246 L70,124 Q70,100 94,100 L730,100 Q752,100 762,116 L790,180 Q796,192 796,206 L796,232 Q796,246 780,246 Z M280,36 L520,36 L520,100 L280,100 Z M190,92 L262,92 L262,100 L190,100 Z M280,92 L352,92 L352,100 L280,100 Z M794,116 L823,116 L823,136 L794,136 Z M796,228 L812,228 L812,242 L796,242 Z M54,230 L70,230 L70,242 L54,242 Z',
+		{ x: 54, y: 36, w: 769, h: 236 }
+	),
+	realTrolleybusWindows: realPart(
+		'realTrolleybusWindows',
+		'glass',
+		'face',
+		'trolleybus',
+		'M100,118 L660,118 L660,180 L100,180 Z M714,104 L746,104 L764,172 L732,178 Z',
+		{ x: 100, y: 104, w: 664, h: 76 }
+	),
+	realTrolleybusDoor: realPart(
+		'realTrolleybusDoor',
+		'trim',
+		'detail',
+		'trolleybus',
+		'M668,118 L710,118 L710,242 L668,242 Z',
+		{ x: 666, y: 116, w: 46, h: 128 }
+	),
+	realTrolleybusWheel: realPart(
+		'realTrolleybusWheel',
+		'rubber',
+		'locomotion',
+		'trolleybus',
+		'M604,236 A36,36 0 1 1 676,236 A36,36 0 1 1 604,236 Z',
+		{ x: 604, y: 200, w: 72, h: 72 }
 	)
 
 };
@@ -970,7 +1006,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realMobileClinicBody: 'Mobile clinic',
 	realMobileClinicWindows: 'Windows',
 	realMobileClinicDoor: 'Door',
-	realMobileClinicWheel: 'Wheel'
+	realMobileClinicWheel: 'Wheel',
+	realTrolleybusBody: 'Trolleybus',
+	realTrolleybusWindows: 'Windows',
+	realTrolleybusDoor: 'Door',
+	realTrolleybusWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {

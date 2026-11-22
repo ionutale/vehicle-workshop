@@ -19,12 +19,12 @@ describe('difficulty', () => {
 			expect(view.slots).toHaveLength(4);
 			expect(
 				view.slots.some((slot) =>
-					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realSchoolBusWheel', 'realMiniBusWheel', 'realDoubleDeckerWheel', 'realBendyBusWheel', 'realCoachBusWheel', 'realAirportShuttleWheel', 'realMobileLibraryWheel', 'realMobileClinicWheel', 'realDiggerTracks'].includes(slot.part)
+					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realSchoolBusWheel', 'realMiniBusWheel', 'realDoubleDeckerWheel', 'realBendyBusWheel', 'realCoachBusWheel', 'realAirportShuttleWheel', 'realMobileLibraryWheel', 'realMobileClinicWheel', 'realTrolleybusWheel', 'realDiggerTracks'].includes(slot.part)
 				)
 			).toBe(true);
 			expect(
 				view.slots.some((slot) =>
-					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody', 'realSchoolBusBody', 'realMiniBusBody', 'realDoubleDeckerBody', 'realBendyBusBody', 'realCoachBusBody', 'realAirportShuttleBody', 'realMobileLibraryBody', 'realMobileClinicBody'].includes(slot.part)
+					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody', 'realSchoolBusBody', 'realMiniBusBody', 'realDoubleDeckerBody', 'realBendyBusBody', 'realCoachBusBody', 'realAirportShuttleBody', 'realMobileLibraryBody', 'realMobileClinicBody', 'realTrolleybusBody'].includes(slot.part)
 				)
 			).toBe(true);
 		}
@@ -43,6 +43,7 @@ describe('difficulty', () => {
 		expect(signature('airport-shuttle')).toContain('realAirportShuttleWindows');
 		expect(signature('mobile-library')).toContain('realMobileLibraryWindows');
 		expect(signature('mobile-clinic')).toContain('realMobileClinicWindows');
+		expect(signature('trolleybus')).toContain('realTrolleybusWindows');
 	});
 
 	it('leaves the full vehicle untouched at level 3', () => {
