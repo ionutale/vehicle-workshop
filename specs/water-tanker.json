@@ -1,0 +1,109 @@
+{
+  "id": "water-tanker",
+  "name": "Water tanker",
+  "module": "realWaterTanker",
+  "artWidth": 780,
+  "artHeight": 340,
+  "parts": [
+    {
+      "id": "realWaterTankerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M26,258 L26,132 Q26,110 46,104 L186,98 Q200,98 206,104 L216,112 L640,112 C658,112 672,140 672,176 C672,212 658,240 640,240 L672,240 L672,152 L756,152 L756,258 Z M410,84 L478,84 L478,112 L410,112 Z M290,96 L322,96 L322,112 L290,112 Z M6,114 L26,114 L26,152 L6,152 Z M8,236 L26,236 L26,262 L8,262 Z M50,258 L100,258 L100,266 L50,266 Z M220,258 L572,258 L572,266 L220,266 Z M666,258 L758,258 L758,270 L666,270 Z M756,118 L778,118 L778,246 L756,246 Z",
+      "bounds": {
+        "x": 6,
+        "y": 84,
+        "w": 772,
+        "h": 186
+      },
+      "name": "Water tanker"
+    },
+    {
+      "id": "realWaterTankerWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M45,114 L111,114 Q120,114 120,123 L120,163 Q120,172 111,172 L45,172 Q36,172 36,163 L36,123 Q36,114 45,114 Z M133,118 L181,118 Q186,118 186,123 L186,163 Q186,168 181,168 L133,168 Q128,168 128,163 L128,123 Q128,118 133,118 Z",
+      "bounds": {
+        "x": 36,
+        "y": 114,
+        "w": 150,
+        "h": 58
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realWaterTankerDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M48,182 L186,182 L186,248 L48,248 Z",
+      "bounds": {
+        "x": 48,
+        "y": 182,
+        "w": 138,
+        "h": 66
+      },
+      "name": "Door"
+    },
+    {
+      "id": "realWaterTankerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": {
+        "x": 114,
+        "y": 200,
+        "w": 72,
+        "h": 72
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 780,
+    "height": 340,
+    "groundY": 272,
+    "colors": [
+      "#4E9BD4",
+      "#F7F9FC"
+    ],
+    "chassis": "slab(780, 272, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realWaterTankerBody",
+        "x": 392,
+        "y": 177,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realWaterTankerWindows",
+        "x": 111,
+        "y": 143,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realWaterTankerDoor",
+        "x": 117,
+        "y": 215,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realWaterTankerWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realWaterTankerWheel",
+        "x": 620,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

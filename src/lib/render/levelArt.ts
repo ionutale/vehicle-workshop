@@ -15,11 +15,13 @@ import { drawRealFlatbedLorryLevel } from './realFlatbedLorry';
 import { drawRealGarbageTruckLevel } from './realGarbageTruck';
 import { drawRealLightRailTrainLevel } from './realLightRailTrain';
 import { drawRealMetroTrainLevel } from './realMetroTrain';
+import { drawRealLivestockTruckLevel } from './realLivestockTruck';
 import { drawRealLogTruckLevel } from './realLogTruck';
 import { drawRealMilkTankerLevel } from './realMilkTanker';
 import { drawRealParcelLorryLevel } from './realParcelLorry';
 import { drawRealRefrigeratedTruckLevel } from './realRefrigeratedTruck';
 import { drawRealTowTruckLevel } from './realTowTruck';
+import { drawRealWaterTankerLevel } from './realWaterTanker';
 import { drawRealTramLevel } from './realTram';
 
 export type LevelDraw = (
@@ -51,7 +53,9 @@ export const LEVEL_ART: Record<string, LevelArtSpec> = {
 	'refrigerated-truck': { draw: drawRealRefrigeratedTruckLevel, width: 780, height: 340 },
 	'curtain-side-lorry': { draw: drawRealCurtainSideLorryLevel, width: 800, height: 360 },
 	'parcel-lorry': { draw: drawRealParcelLorryLevel, width: 780, height: 360 },
-	'log-truck': { draw: drawRealLogTruckLevel, width: 800, height: 380 }
+	'log-truck': { draw: drawRealLogTruckLevel, width: 800, height: 380 },
+	'livestock-truck': { draw: drawRealLivestockTruckLevel, width: 800, height: 300 },
+	'water-tanker': { draw: drawRealWaterTankerLevel, width: 780, height: 340 },
 };
 
 export const LEVEL_IDS = Object.keys(LEVEL_ART);

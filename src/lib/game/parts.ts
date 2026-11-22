@@ -158,7 +158,15 @@ export type PartId =
 	| 'realLogTruckBody'
 	| 'realLogTruckWindows'
 	| 'realLogTruckDoor'
-	| 'realLogTruckWheel';
+	| 'realLogTruckWheel'
+	| 'realLivestockTruckBody'
+	| 'realLivestockTruckWindows'
+	| 'realLivestockTruckDoor'
+	| 'realLivestockTruckWheel'
+	| 'realWaterTankerBody'
+	| 'realWaterTankerWindows'
+	| 'realWaterTankerDoor'
+	| 'realWaterTankerWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1452,6 +1460,70 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realLivestockTruckBody: realPart(
+		'realLivestockTruckBody',
+		'shell',
+		'body',
+		'livestock-truck',
+		'M22,258 L22,146 Q22,120 36,112 L52,104 Q62,99 78,99 L190,99 L190,52 Q190,44 200,44 L748,44 Q762,44 762,56 L762,248 L200,248 L200,258 Z M200,248 L762,248 L762,262 L200,262 Z M2,116 L18,116 L18,152 L2,152 Z M4,244 L22,244 L22,268 L4,268 Z M300,30 L352,30 L352,44 L300,44 Z M462,30 L514,30 L514,44 L462,44 Z M624,30 L676,30 L676,44 L624,44 Z M762,58 L790,58 L790,244 L762,244 Z',
+		{ x: 2, y: 30, w: 788, h: 238 }
+	),
+	realLivestockTruckWindows: realPart(
+		'realLivestockTruckWindows',
+		'glass',
+		'face',
+		'livestock-truck',
+		'M47,120 L113,120 Q122,120 122,129 L122,169 Q122,178 113,178 L47,178 Q38,178 38,169 L38,129 Q38,120 47,120 Z M133,122 L171,122 Q176,122 176,127 L176,173 Q176,178 171,178 L133,178 Q128,178 128,173 L128,127 Q128,122 133,122 Z',
+		{ x: 38, y: 120, w: 138, h: 58 }
+	),
+	realLivestockTruckDoor: realPart(
+		'realLivestockTruckDoor',
+		'trim',
+		'detail',
+		'livestock-truck',
+		'M40,182 L178,182 L178,252 L40,252 Z',
+		{ x: 40, y: 182, w: 138, h: 70 }
+	),
+	realLivestockTruckWheel: realPart(
+		'realLivestockTruckWheel',
+		'rubber',
+		'locomotion',
+		'livestock-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realWaterTankerBody: realPart(
+		'realWaterTankerBody',
+		'shell',
+		'body',
+		'water-tanker',
+		'M26,258 L26,132 Q26,110 46,104 L186,98 Q200,98 206,104 L216,112 L640,112 C658,112 672,140 672,176 C672,212 658,240 640,240 L672,240 L672,152 L756,152 L756,258 Z M410,84 L478,84 L478,112 L410,112 Z M290,96 L322,96 L322,112 L290,112 Z M6,114 L26,114 L26,152 L6,152 Z M8,236 L26,236 L26,262 L8,262 Z M50,258 L100,258 L100,266 L50,266 Z M220,258 L572,258 L572,266 L220,266 Z M666,258 L758,258 L758,270 L666,270 Z M756,118 L778,118 L778,246 L756,246 Z',
+		{ x: 6, y: 84, w: 772, h: 186 }
+	),
+	realWaterTankerWindows: realPart(
+		'realWaterTankerWindows',
+		'glass',
+		'face',
+		'water-tanker',
+		'M45,114 L111,114 Q120,114 120,123 L120,163 Q120,172 111,172 L45,172 Q36,172 36,163 L36,123 Q36,114 45,114 Z M133,118 L181,118 Q186,118 186,123 L186,163 Q186,168 181,168 L133,168 Q128,168 128,163 L128,123 Q128,118 133,118 Z',
+		{ x: 36, y: 114, w: 150, h: 58 }
+	),
+	realWaterTankerDoor: realPart(
+		'realWaterTankerDoor',
+		'trim',
+		'detail',
+		'water-tanker',
+		'M48,182 L186,182 L186,248 L48,248 Z',
+		{ x: 48, y: 182, w: 138, h: 66 }
+	),
+	realWaterTankerWheel: realPart(
+		'realWaterTankerWheel',
+		'rubber',
+		'locomotion',
+		'water-tanker',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1611,6 +1683,14 @@ export const PART_NAMES: Record<PartId, string> = {
 	realLogTruckWindows: 'Windows',
 	realLogTruckDoor: 'Door',
 	realLogTruckWheel: 'Wheel',
+	realLivestockTruckBody: 'Livestock truck',
+	realLivestockTruckWindows: 'Windows',
+	realLivestockTruckDoor: 'Side door',
+	realLivestockTruckWheel: 'Wheel',
+	realWaterTankerBody: 'Water tanker',
+	realWaterTankerWindows: 'Windows',
+	realWaterTankerDoor: 'Door',
+	realWaterTankerWheel: 'Wheel',
 
 };
 

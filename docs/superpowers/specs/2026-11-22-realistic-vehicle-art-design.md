@@ -69,10 +69,13 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 24. **Curtain-side lorry (done):** trailer with tensioned curtain bays, ratchets and twin rear doors at Level 5; 5 pieces, 4 at the first tier.
 25. **Parcel lorry (done):** red parcel box with shutter and loading door at Level 5; 5 pieces, 4 at the first tier.
 26. **Log truck (done):** stake bunk with a loaded log stack and chains at Level 5; 5 pieces, 4 at the first tier.
-27. Convert the remaining **trucks** (cement tanker, livestock, recovery) and **vans**.
-28. Convert the remaining **cars**.
-29. Convert **farm** and the remaining **works** machines.
-30. Remove the generic parts once no catalogue entry uses them.
+27. **Livestock truck (done):** double-deck slatted cattle body with folded ramp at Level 5; 5 pieces, 4 at the first tier.
+28. **Water tanker (done):** blue barrel tanker with hose-reel cabinet and ladder at Level 5; 5 pieces, 4 at the first tier.
+29. **Fuel tanker (rework):** cylindrical multi-compartment barrel with hazard placards and rear hose cabinet; awaiting level review.
+30. Convert the remaining **trucks** and **vans**.
+31. Convert the remaining **cars**.
+32. Convert **farm** and the remaining **works** machines.
+33. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 
