@@ -86,7 +86,11 @@ export type PartId =
 	| 'realAirportShuttleBody'
 	| 'realAirportShuttleWindows'
 	| 'realAirportShuttleDoor'
-	| 'realAirportShuttleWheel';
+	| 'realAirportShuttleWheel'
+	| 'realMobileLibraryBody'
+	| 'realMobileLibraryWindows'
+	| 'realMobileLibraryDoor'
+	| 'realMobileLibraryWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -803,6 +807,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'airport-shuttle',
 		'M606,228 A34,34 0 1 1 674,228 A34,34 0 1 1 606,228 Z',
 		{ x: 606, y: 194, w: 68, h: 68 }
+	),
+	realMobileLibraryBody: realPart(
+		'realMobileLibraryBody',
+		'shell',
+		'body',
+		'mobile-library',
+		'M70,246 L70,96 Q70,76 92,76 L700,76 Q718,76 726,88 L764,160 Q770,172 770,186 L770,222 Q770,246 750,246 Z M462,62 L558,62 L558,76 L462,76 Z M300,68 L364,68 L364,76 L300,76 Z M760,136 L792,136 L792,154 L760,154 Z M770,228 L782,228 L782,242 L770,242 Z M54,230 L70,230 L70,242 L54,242 Z',
+		{ x: 54, y: 62, w: 738, h: 208 }
+	),
+	realMobileLibraryWindows: realPart(
+		'realMobileLibraryWindows',
+		'glass',
+		'face',
+		'mobile-library',
+		'M120,112 L520,112 L520,184 L120,184 Z',
+		{ x: 120, y: 112, w: 400, h: 72 }
+	),
+	realMobileLibraryDoor: realPart(
+		'realMobileLibraryDoor',
+		'trim',
+		'detail',
+		'mobile-library',
+		'M552,112 L606,112 L606,242 L552,242 Z',
+		{ x: 550, y: 110, w: 58, h: 134 }
+	),
+	realMobileLibraryWheel: realPart(
+		'realMobileLibraryWheel',
+		'rubber',
+		'locomotion',
+		'mobile-library',
+		'M586,236 A34,34 0 1 1 654,236 A34,34 0 1 1 586,236 Z',
+		{ x: 586, y: 202, w: 68, h: 68 }
 	)
 
 };
@@ -890,7 +926,11 @@ export const PART_NAMES: Record<PartId, string> = {
 	realAirportShuttleBody: 'Airport shuttle',
 	realAirportShuttleWindows: 'Windows',
 	realAirportShuttleDoor: 'Door',
-	realAirportShuttleWheel: 'Wheel'
+	realAirportShuttleWheel: 'Wheel',
+	realMobileLibraryBody: 'Mobile library',
+	realMobileLibraryWindows: 'Windows',
+	realMobileLibraryDoor: 'Door',
+	realMobileLibraryWheel: 'Wheel'
 };
 
 export function partName(part: PartId): string {
