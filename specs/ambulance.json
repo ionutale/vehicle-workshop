@@ -1,0 +1,109 @@
+{
+  "id": "ambulance",
+  "name": "Ambulance",
+  "module": "realAmbulance",
+  "artWidth": 720,
+  "artHeight": 340,
+  "parts": [
+    {
+      "id": "realAmbulanceBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M36,258 L36,178 Q36,170 44,166 L86,154 L158,96 Q162,88 172,88 L236,88 L236,62 Q236,56 244,56 L656,56 Q668,56 668,68 L668,244 Q668,258 654,258 Z M252,40 L372,40 L372,56 L252,56 Z M18,230 L36,230 L36,258 L18,258 Z M18,146 L36,146 L36,186 L18,186 Z M668,236 L686,236 L686,256 L668,256 Z M200,258 L540,258 L540,268 L200,268 Z",
+      "bounds": {
+        "x": 18,
+        "y": 40,
+        "w": 668,
+        "h": 228
+      },
+      "name": "Ambulance"
+    },
+    {
+      "id": "realAmbulanceWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M102,172 L158,98 L188,102 L134,176 Z M197,102 L227,102 Q232,102 232,107 L232,147 Q232,152 227,152 L197,152 Q192,152 192,147 L192,107 Q192,102 197,102 Z M542,116 L588,116 Q594,116 594,122 L594,156 Q594,162 588,162 L542,162 Q536,162 536,156 L536,122 Q536,116 542,116 Z",
+      "bounds": {
+        "x": 102,
+        "y": 98,
+        "w": 492,
+        "h": 78
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realAmbulanceDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M416,104 L512,104 L512,226 L416,226 Z",
+      "bounds": {
+        "x": 416,
+        "y": 104,
+        "w": 96,
+        "h": 122
+      },
+      "name": "Side sliding door"
+    },
+    {
+      "id": "realAmbulanceWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": {
+        "x": 114,
+        "y": 200,
+        "w": 72,
+        "h": 72
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 720,
+    "height": 340,
+    "groundY": 272,
+    "colors": [
+      "#F7F9FC",
+      "#E63946"
+    ],
+    "chassis": "slabPath(720, 272, 160)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realAmbulanceBody",
+        "x": 352,
+        "y": 154,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realAmbulanceWindows",
+        "x": 348,
+        "y": 137,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realAmbulanceDoor",
+        "x": 464,
+        "y": 165,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realAmbulanceWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realAmbulanceWheel",
+        "x": 580,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

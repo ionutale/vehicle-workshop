@@ -27,17 +27,16 @@ describe('vehicle details', () => {
 		}
 	});
 
-	it('gives a generic truck a grille and a delivery van an exhaust', () => {
-		expect(detailsFor(getVehicle('delivery-van')).map((detail) => detail.kind)).toContain('grille');
-		expect(detailsFor(getVehicle('delivery-van')).map((detail) => detail.kind)).toContain('exhaust');
+	it('gives a generic truck a grille and an airport bowser an exhaust', () => {
+		expect(detailsFor(getVehicle('airport-fuel-bowser')).map((detail) => detail.kind)).toContain('grille');
+		expect(detailsFor(getVehicle('airport-fuel-bowser')).map((detail) => detail.kind)).toContain('exhaust');
 	});
 
 	it('puts the grille at the nose of right-facing and rear-cab machines', () => {
 		const grille = (id: string) => detailsFor(getVehicle(id)).find((d) => d.kind === 'grille')!;
-		for (const id of ['taxi', 'monster-truck', 'bulldozer', 'skid-steer', 'steam-roller']) {
+		for (const id of ['monster-truck', 'bulldozer', 'skid-steer', 'steam-roller']) {
 			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
 		}
-		expect(grille('delivery-van').x).toBeLessThan(getVehicle('delivery-van').width / 2);
 		expect(grille('airport-fuel-bowser').x).toBeLessThan(getVehicle('airport-fuel-bowser').width / 2);
 	});
 
@@ -59,7 +58,7 @@ describe('vehicle details', () => {
 	});
 
 	it('draws only details whose supporting part is placed', () => {
-		const car = getVehicle('taxi');
+		const car = getVehicle('van');
 		const layout = computeLayout(
 			{ width: 390, height: 844 },
 			car,
@@ -68,7 +67,7 @@ describe('vehicle details', () => {
 			34
 		);
 		const base = createAssembly(car, layout.gameScale, layout.snapRadius, 0, 1, { x: 40, y: 300 });
-		const wheel = car.slots.find((slot) => slot.part === 'wheel')!;
+		const wheel = car.slots.find((slot) => slot.part === 'wheel' || slot.part.endsWith('Wheel'))!;
 
 		const wheelOnly = recorder();
 		drawVehicleDetails(wheelOnly.ctx, car, { ...base, placed: [wheel.id] }, layout);
@@ -85,7 +84,7 @@ describe('vehicle details', () => {
 	});
 
 	it('skips every detail while no part is placed', () => {
-		const car = getVehicle('taxi');
+		const car = getVehicle('van');
 		const layout = computeLayout(
 			{ width: 390, height: 844 },
 			car,

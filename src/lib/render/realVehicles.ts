@@ -26,6 +26,19 @@ import { drawRealLogTruck } from './realLogTruck';
 import { drawRealLivestockTruck } from './realLivestockTruck';
 import { drawRealWaterTanker } from './realWaterTanker';
 import { drawRealFuelTanker } from './realFuelTanker';
+import { drawRealIceCreamVan } from './realIceCreamVan';
+import { drawRealMailVan } from './realMailVan';
+import { drawRealCamper } from './realCamper';
+import { drawRealDeliveryVan } from './realDeliveryVan';
+import { drawRealArmouredVan } from './realArmouredVan';
+import { drawRealAmbulance } from './realAmbulance';
+import { drawRealRemovalsVan } from './realRemovalsVan';
+import { drawRealPoliceVan } from './realPoliceVan';
+import { drawRealPickup } from './realPickup';
+import { drawRealPoliceCar } from './realPoliceCar';
+import { drawRealTaxi } from './realTaxi';
+import { drawRealLimousine } from './realLimousine';
+import { drawRealRaceCar } from './realRaceCar';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -779,7 +792,20 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'log-truck': { draw: drawRealLogTruck, width: 800, height: 380 },
 	'livestock-truck': { draw: drawRealLivestockTruck, width: 800, height: 300 },
 	'water-tanker': { draw: drawRealWaterTanker, width: 780, height: 340 },
-	'fuel-tanker': { draw: drawRealFuelTanker, width: 900, height: 360 }
+	'fuel-tanker': { draw: drawRealFuelTanker, width: 900, height: 360 },
+	'ice-cream-van': { draw: drawRealIceCreamVan, width: 700, height: 330 },
+	'mail-van': { draw: drawRealMailVan, width: 700, height: 330 },
+	'camper': { draw: drawRealCamper, width: 720, height: 340 },
+	'delivery-van': { draw: drawRealDeliveryVan, width: 720, height: 330 },
+	'armoured-van': { draw: drawRealArmouredVan, width: 720, height: 340 },
+	'ambulance': { draw: drawRealAmbulance, width: 720, height: 340 },
+	'removals-van': { draw: drawRealRemovalsVan, width: 780, height: 360 },
+	'police-van': { draw: drawRealPoliceVan, width: 720, height: 340 },
+	'pickup': { draw: drawRealPickup, width: 700, height: 330 },
+	'police-car': { draw: drawRealPoliceCar, width: 660, height: 300 },
+	'taxi': { draw: drawRealTaxi, width: 660, height: 300 },
+	'limousine': { draw: drawRealLimousine, width: 820, height: 300 },
+	'race-car': { draw: drawRealRaceCar, width: 680, height: 280 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

@@ -1,0 +1,55 @@
+{
+	"id": "ice-cream-van",
+	"name": "Ice-cream van",
+	"module": "realIceCreamVan",
+	"artWidth": 700,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realIceCreamVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M34,258 L34,206 Q34,196 42,192 L58,180 L82,118 Q84,110 92,110 L638,110 Q652,110 652,124 L652,242 Q652,258 636,258 Z M250,100 L230,72 Q218,68 228,58 Q218,50 230,42 Q228,30 242,30 Q250,19 258,30 Q272,30 270,42 Q282,50 272,58 Q282,68 270,72 Z M240,100 L260,100 L260,110 L240,110 Z M20,242 L34,242 L34,262 L20,262 Z M652,246 L666,246 L666,262 L652,262 Z",
+			"bounds": { "x": 20, "y": 24, "w": 646, "h": 238 },
+			"name": "Ice-cream van"
+		},
+		{
+			"id": "realIceCreamVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M72,162 L90,124 Q92,120 98,120 L130,120 Q134,120 134,124 L118,162 Z M146,120 L188,120 Q194,120 194,126 L194,150 Q194,156 188,156 L146,156 Q140,156 140,150 L140,126 Q140,120 146,120 Z",
+			"bounds": { "x": 72, "y": 120, "w": 122, "h": 42 },
+			"name": "Windows"
+		},
+		{
+			"id": "realIceCreamVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M122,162 L198,162 L198,252 L122,252 Z",
+			"bounds": { "x": 122, "y": 162, "w": 76, "h": 90 },
+			"name": "Door"
+		},
+		{
+			"id": "realIceCreamVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z",
+			"bounds": { "x": 116, "y": 202, "w": 68, "h": 68 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 330,
+		"groundY": 272,
+		"colors": ["#F7C8E0", "#6D597A"],
+		"chassis": "slabPath(700, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realIceCreamVanBody", "x": 343, "y": 143, "z": 0 },
+			{ "id": "windows", "part": "realIceCreamVanWindows", "x": 133, "y": 141, "z": 1 },
+			{ "id": "door", "part": "realIceCreamVanDoor", "x": 160, "y": 207, "z": 2 },
+			{ "id": "wheel-l", "part": "realIceCreamVanWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realIceCreamVanWheel", "x": 560, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

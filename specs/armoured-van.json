@@ -1,0 +1,55 @@
+{
+	"id": "armoured-van",
+	"name": "Armoured van",
+	"module": "realArmouredVan",
+	"artWidth": 720,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realArmouredVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M44,250 L44,196 Q44,188 52,184 L88,172 L134,96 Q138,88 148,88 L176,88 L176,64 Q176,56 186,56 L672,56 Q684,56 684,68 L684,250 Z M408,42 L492,42 L492,56 L408,56 Z M22,230 L44,230 L44,264 L22,264 Z M684,238 L704,238 L704,266 L684,266 Z M190,250 L526,250 L526,259 L190,259 Z M92,106 L110,106 L110,132 L92,132 Z M110,117 L121,117 L117.4,123 L110,123 Z",
+			"bounds": { "x": 22, "y": 42, "w": 682, "h": 224 },
+			"name": "Armoured van"
+		},
+		{
+			"id": "realArmouredVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M92,168 L130,106 L148,114 L110,176 Z M156,102 L168,102 Q172,102 172,106 L172,144 Q172,148 168,148 L156,148 Q152,148 152,144 L152,106 Q152,102 156,102 Z",
+			"bounds": { "x": 92, "y": 102, "w": 80, "h": 74 },
+			"name": "Windows"
+		},
+		{
+			"id": "realArmouredVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M300,92 L392,92 L392,238 L300,238 Z",
+			"bounds": { "x": 300, "y": 92, "w": 92, "h": 146 },
+			"name": "Reinforced side door"
+		},
+		{
+			"id": "realArmouredVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 340,
+		"groundY": 272,
+		"colors": ["#495057", "#CED4DA"],
+		"chassis": "slabPath(720, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realArmouredVanBody", "x": 363, "y": 154, "z": 0 },
+			{ "id": "windows", "part": "realArmouredVanWindows", "x": 132, "y": 139, "z": 1 },
+			{ "id": "door", "part": "realArmouredVanDoor", "x": 346, "y": 165, "z": 2 },
+			{ "id": "wheel-l", "part": "realArmouredVanWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realArmouredVanWheel", "x": 580, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

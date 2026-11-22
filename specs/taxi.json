@@ -1,0 +1,55 @@
+{
+	"id": "taxi",
+	"name": "Taxi",
+	"module": "realTaxi",
+	"artWidth": 660,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realTaxiBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M16,244 L16,220 L34,220 L34,206 Q34,193 46,189 L148,174 Q180,170 196,166 L248,116 Q254,108 266,108 L292,108 L292,80 Q292,76 296,76 L360,76 Q364,76 364,80 L364,108 L398,107 Q412,107 420,115 L474,168 Q484,175 498,177 L582,181 Q616,183 616,199 L616,218 L634,218 L634,244 L616,244 L616,248 L540,248 A40,40 0 0 0 460,248 L180,248 A40,40 0 0 0 100,248 L34,248 L34,244 Z M182,140 Q182,138 184,138 L197,138 Q199,138 199,140 L199,160 Q199,162 197,162 L184,162 Q182,162 182,160 Z M199,148 L207,148 L207,152 L199,152 Z",
+			"bounds": { "x": 16, "y": 76, "w": 618, "h": 172 },
+			"name": "Taxi"
+		},
+		{
+			"id": "realTaxiWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M211,164 L252,120 L300,120 L300,164 Q300,168 296,168 L215,168 Q211,168 211,164 Z M315,120 L389,120 Q394,120 394,125 L394,163 Q394,168 389,168 L315,168 Q310,168 310,163 L310,125 Q310,120 315,120 Z M402,168 L402,128 L426,128 L463,168 Z",
+			"bounds": { "x": 211, "y": 120, "w": 252, "h": 48 },
+			"name": "Windows"
+		},
+		{
+			"id": "realTaxiDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M200,182 L334,182 L334,244 L200,244 Z",
+			"bounds": { "x": 200, "y": 182, "w": 134, "h": 62 },
+			"name": "Front door"
+		},
+		{
+			"id": "realTaxiWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M108,240 A32,32 0 1 1 172,240 A32,32 0 1 1 108,240 Z",
+			"bounds": { "x": 108, "y": 208, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 660,
+		"height": 300,
+		"groundY": 272,
+		"colors": ["#FFC94D", "#2B2D42"],
+		"chassis": "slabPath(660, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realTaxiBody", "x": 325, "y": 162, "z": 0 },
+			{ "id": "windows", "part": "realTaxiWindows", "x": 337, "y": 144, "z": 1 },
+			{ "id": "door", "part": "realTaxiDoor", "x": 267, "y": 213, "z": 2 },
+			{ "id": "wheel-l", "part": "realTaxiWheel", "x": 140, "y": 240, "z": 4 },
+			{ "id": "wheel-r", "part": "realTaxiWheel", "x": 500, "y": 240, "z": 4, "flip": true }
+		]
+	}
+}

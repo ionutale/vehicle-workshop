@@ -1,0 +1,55 @@
+{
+	"id": "delivery-van",
+	"name": "Delivery van",
+	"module": "realDeliveryVan",
+	"artWidth": 720,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realDeliveryVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M36,258 L36,196 Q36,186 46,182 L84,178 L140,98 Q144,88 156,88 L676,88 Q688,88 688,102 L688,244 Q688,258 672,258 Z M302,88 L306,74 Q308,72 312,72 L360,72 Q364,72 366,74 L370,88 Z M78,110 L100,110 L100,124 L119,128 L113.4,136 L100,132 L100,146 L78,146 Z M24,236 L36,236 L36,258 L24,258 Z M688,244 L700,244 L700,256 L688,256 Z M206,258 L514,258 L514,264 L206,264 Z",
+			"bounds": { "x": 24, "y": 72, "w": 676, "h": 192 },
+			"name": "Delivery van"
+		},
+		{
+			"id": "realDeliveryVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M94,171 L136.6,110 L151.3,120.2 L109,182 Z M178,104 L218,104 Q224,104 224,110 L224,152 Q224,158 218,158 L178,158 Q172,158 172,152 L172,110 Q172,104 178,104 Z",
+			"bounds": { "x": 94, "y": 104, "w": 130, "h": 78 },
+			"name": "Windows"
+		},
+		{
+			"id": "realDeliveryVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M232,106 L378,106 L378,234 L232,234 Z",
+			"bounds": { "x": 232, "y": 106, "w": 146, "h": 128 },
+			"name": "Sliding side door"
+		},
+		{
+			"id": "realDeliveryVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z",
+			"bounds": { "x": 116, "y": 202, "w": 68, "h": 68 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 330,
+		"groundY": 272,
+		"colors": ["#6A994E", "#F2E8CF"],
+		"chassis": "slabPath(720, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realDeliveryVanBody", "x": 362, "y": 168, "z": 0 },
+			{ "id": "windows", "part": "realDeliveryVanWindows", "x": 159, "y": 143, "z": 1 },
+			{ "id": "door", "part": "realDeliveryVanDoor", "x": 305, "y": 170, "z": 2 },
+			{ "id": "wheel-l", "part": "realDeliveryVanWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realDeliveryVanWheel", "x": 560, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

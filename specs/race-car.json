@@ -1,0 +1,55 @@
+{
+	"id": "race-car",
+	"name": "Race car",
+	"module": "realRaceCar",
+	"artWidth": 680,
+	"artHeight": 280,
+	"parts": [
+		{
+			"id": "realRaceCarBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M22,248 L22,226 Q22,218 32,216 L96,204 L168,194 L214,190 L260,152 Q263,149 268,149 L334,149 Q340,149 344,154 L390,190 L486,196 L540,202 L618,202 Q640,203 645,218 L648,240 Q649,248 640,248 Z M556,126 L654,126 L654,140 L556,140 Z M548,116 L556,116 L556,148 L548,148 Z M654,116 L662,116 L662,148 L654,148 Z M570,140 L577,140 L577,202 L570,202 Z M604,140 L611,140 L611,202 L604,202 Z M14,248 L102,248 L102,256 L22,256 Q14,256 14,248 Z M584,248 L640,248 L640,256 L584,256 Z",
+			"bounds": { "x": 14, "y": 116, "w": 648, "h": 140 },
+			"name": "Race car"
+		},
+		{
+			"id": "realRaceCarWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M220,189 L254,157 L274,157 L240,189 Z M285,157 L329,157 Q334,157 334,162 L334,184 Q334,189 329,189 L285,189 Q280,189 280,184 L280,162 Q280,157 285,157 Z",
+			"bounds": { "x": 220, "y": 157, "w": 114, "h": 32 },
+			"name": "Canopy glass"
+		},
+		{
+			"id": "realRaceCarDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M302,198 L364,198 L364,242 L302,242 Z",
+			"bounds": { "x": 302, "y": 198, "w": 62, "h": 44 },
+			"name": "Door"
+		},
+		{
+			"id": "realRaceCarWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M110,244 A30,30 0 1 1 170,244 A30,30 0 1 1 110,244 Z",
+			"bounds": { "x": 110, "y": 214, "w": 60, "h": 60 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 680,
+		"height": 280,
+		"groundY": 272,
+		"colors": ["#E63946", "#FFFFFF"],
+		"chassis": "slabPath(680, 272, 120)",
+		"slots": [
+			{ "id": "body", "part": "realRaceCarBody", "x": 338, "y": 186, "z": 0 },
+			{ "id": "windows", "part": "realRaceCarWindows", "x": 277, "y": 173, "z": 1 },
+			{ "id": "door", "part": "realRaceCarDoor", "x": 333, "y": 220, "z": 2 },
+			{ "id": "wheel-l", "part": "realRaceCarWheel", "x": 140, "y": 244, "z": 4 },
+			{ "id": "wheel-r", "part": "realRaceCarWheel", "x": 520, "y": 244, "z": 4, "flip": true }
+		]
+	}
+}

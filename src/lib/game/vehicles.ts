@@ -173,104 +173,103 @@ VEHICLES.push(
 	{
 		id: 'police-car',
 		name: 'Police car',
-		width: 480,
-		height: 220,
-		groundY: 190,
+		width: 660,
+		height: 300,
+		groundY: 272,
 		palette: palette('#F4F6FA', '#2C5AA0'),
-		chassisPath: slabPath(480, 190),
+		chassisPath: slabPath(660, 272, 140),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 240, y: 145, z: 0 },
-			{ id: 'cabin', part: 'cabin', x: 235, y: 61, z: 1 },
-			{ id: 'lights', part: 'lightBar', x: 235, y: 24, z: 2 },
-			{ id: 'light', part: 'light', x: 440, y: 138, z: 2 },
-			wheelSlot('l', 120, 190),
-			wheelSlot('r', 360, 190)
+			{ id: 'body', part: 'realPoliceCarBody', x: 317, y: 178, z: 0 },
+			{ id: 'windows', part: 'realPoliceCarWindows', x: 323, y: 155, z: 1 },
+			{ id: 'door', part: 'realPoliceCarDoor', x: 306, y: 214, z: 2 },
+			{ id: 'wheel-l', part: 'realPoliceCarWheel', x: 140, y: 240, z: 4 },
+			{ id: 'wheel-r', part: 'realPoliceCarWheel', x: 500, y: 240, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'taxi',
 		name: 'Taxi',
-		width: 480,
-		height: 220,
-		groundY: 190,
+		width: 660,
+		height: 300,
+		groundY: 272,
 		palette: palette('#FFC94D', '#2B2D42'),
-		chassisPath: slabPath(480, 190),
+		chassisPath: slabPath(660, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 240, y: 145, z: 0 },
-			{ id: 'cabin', part: 'cabin', x: 235, y: 61, z: 1 },
-			{ id: 'sign', part: 'roofSign', x: 235, y: 18, z: 2 },
-			{ id: 'door', part: 'door', x: 214, y: 132, z: 2 },
-			wheelSlot('l', 120, 190),
-			wheelSlot('r', 360, 190)
+			{ id: 'body', part: 'realTaxiBody', x: 325, y: 162, z: 0 },
+			{ id: 'windows', part: 'realTaxiWindows', x: 337, y: 144, z: 1 },
+			{ id: 'door', part: 'realTaxiDoor', x: 267, y: 213, z: 2 },
+			{ id: 'wheel-l', part: 'realTaxiWheel', x: 140, y: 240, z: 4 },
+			{ id: 'wheel-r', part: 'realTaxiWheel', x: 500, y: 240, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'limousine',
 		name: 'Limousine',
-		width: 620,
-		height: 220,
-		groundY: 190,
+		width: 820,
+		height: 300,
+		groundY: 272,
 		palette: palette('#2E2B3A', '#C9A227'),
-		chassisPath: slabPath(620, 190, 110),
+		chassisPath: slabPath(820, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 310, y: 150, z: 0, scale: 1.3 },
-			{ id: 'cabin', part: 'cabin', x: 330, y: 66, z: 1, scale: 0.85 },
-			{ id: 'door-front', part: 'door', x: 250, y: 138, z: 2 },
-			{ id: 'door-rear', part: 'door', x: 430, y: 138, z: 2 },
-			{ id: 'light', part: 'light', x: 580, y: 145, z: 2 },
-			wheelSlot('l', 160, 190),
-			wheelSlot('r', 470, 190)
+			{ id: 'body', part: 'realLimousineBody', x: 422, y: 187, z: 0 },
+			{ id: 'windows', part: 'realLimousineWindows', x: 433, y: 147, z: 1 },
+			{ id: 'door', part: 'realLimousineDoor', x: 560, y: 212, z: 2 },
+			{ id: 'wheel-l', part: 'realLimousineWheel', x: 150, y: 240, z: 4 },
+			{ id: 'wheel-r', part: 'realLimousineWheel', x: 650, y: 240, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'race-car',
 		name: 'Race car',
-		width: 500,
-		height: 200,
-		groundY: 175,
+		width: 680,
+		height: 280,
+		groundY: 272,
 		palette: palette('#E63946', '#FFFFFF'),
-		chassisPath: slabPath(500, 175, 90),
+		chassisPath: slabPath(680, 272, 120),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 250, y: 140, z: 0, scale: 0.9 },
-			{ id: 'cabin', part: 'cabin', x: 250, y: 82, z: 1, scale: 0.6 },
-			{ id: 'spoiler', part: 'spoiler', x: 80, y: 112, z: 1 },
-			{ id: 'light', part: 'light', x: 460, y: 132, z: 2 },
-			wheelSlot('l', 130, 175, 1.15),
-			wheelSlot('r', 380, 175, 1.15)
+			{ id: 'body', part: 'realRaceCarBody', x: 338, y: 186, z: 0 },
+			{ id: 'windows', part: 'realRaceCarWindows', x: 277, y: 173, z: 1 },
+			{ id: 'door', part: 'realRaceCarDoor', x: 333, y: 220, z: 2 },
+			{ id: 'wheel-l', part: 'realRaceCarWheel', x: 140, y: 244, z: 4 },
+			{ id: 'wheel-r', part: 'realRaceCarWheel', x: 520, y: 244, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'ambulance',
 		name: 'Ambulance',
-		width: 500,
-		height: 250,
-		groundY: 210,
+		width: 720,
+		height: 340,
+		groundY: 272,
 		palette: palette('#F7F9FC', '#E63946'),
-		chassisPath: slabPath(500, 210, 150),
+		chassisPath: slabPath(720, 272, 160),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 152, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 96, y: 128, z: 1, scale: 0.75 },
-			{ id: 'window', part: 'windowStrip', x: 96, y: 108, z: 2, scale: 0.55 },
-			{ id: 'lights', part: 'lightBar', x: 250, y: 88, z: 2 },
-			wheelSlot('l', 140, 210),
-			wheelSlot('r', 390, 210)
+			{ id: 'body', part: 'realAmbulanceBody', x: 352, y: 154, z: 0 },
+			{ id: 'windows', part: 'realAmbulanceWindows', x: 348, y: 137, z: 1 },
+			{ id: 'door', part: 'realAmbulanceDoor', x: 464, y: 165, z: 2 },
+			{ id: 'wheel-l', part: 'realAmbulanceWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realAmbulanceWheel', x: 580, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'camper',
 		name: 'Camper',
-		width: 520,
-		height: 260,
-		groundY: 212,
+		width: 720,
+		height: 340,
+		groundY: 272,
 		palette: palette('#F2E8CF', '#A44A3F'),
-		chassisPath: slabPath(520, 212, 150),
+		chassisPath: slabPath(720, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 260, y: 155, z: 0, scale: 1 },
-			{ id: 'roof', part: 'roof', x: 260, y: 86, z: 2, scale: 2.3 },
-			{ id: 'windows', part: 'windowStrip', x: 250, y: 120, z: 2, scale: 1.8 },
-			{ id: 'door', part: 'door', x: 360, y: 155, z: 2 },
-			wheelSlot('l', 150, 212),
-			wheelSlot('r', 400, 212)
+			{ id: 'body', part: 'realCamperBody', x: 355, y: 143, z: 0 },
+			{ id: 'windows', part: 'realCamperWindows', x: 352, y: 145, z: 1 },
+			{ id: 'door', part: 'realCamperDoor', x: 294, y: 214, z: 2 },
+			{ id: 'wheel-l', part: 'realCamperWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCamperWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -293,18 +292,18 @@ VEHICLES.push(
 	{
 		id: 'ice-cream-van',
 		name: 'Ice-cream van',
-		width: 500,
-		height: 250,
-		groundY: 210,
+		width: 700,
+		height: 330,
+		groundY: 272,
 		palette: palette('#F7C8E0', '#6D597A'),
-		chassisPath: slabPath(500, 210, 140),
+		chassisPath: slabPath(700, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 152, z: 0, scale: 0.95 },
-			{ id: 'sign', part: 'roofSign', x: 250, y: 86, z: 1 },
-			{ id: 'window', part: 'windowStrip', x: 160, y: 112, z: 2, scale: 1 },
-			{ id: 'light', part: 'light', x: 470, y: 165, z: 2 },
-			wheelSlot('l', 140, 210),
-			wheelSlot('r', 390, 210)
+			{ id: 'body', part: 'realIceCreamVanBody', x: 343, y: 143, z: 0 },
+			{ id: 'windows', part: 'realIceCreamVanWindows', x: 133, y: 141, z: 1 },
+			{ id: 'door', part: 'realIceCreamVanDoor', x: 160, y: 207, z: 2 },
+			{ id: 'wheel-l', part: 'realIceCreamVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realIceCreamVanWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -327,69 +326,69 @@ VEHICLES.push(
 	{
 		id: 'mail-van',
 		name: 'Mail van',
-		width: 500,
-		height: 250,
-		groundY: 210,
+		width: 700,
+		height: 330,
+		groundY: 272,
 		palette: palette('#FFD166', '#1D3557'),
-		chassisPath: slabPath(500, 210, 140),
+		chassisPath: slabPath(700, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 152, z: 0, scale: 0.95 },
-			{ id: 'sign', part: 'roofSign', x: 250, y: 88, z: 1 },
-			{ id: 'door', part: 'door', x: 310, y: 155, z: 2 },
-			{ id: 'light', part: 'light', x: 470, y: 165, z: 2 },
-			wheelSlot('l', 140, 210),
-			wheelSlot('r', 390, 210)
+			{ id: 'body', part: 'realMailVanBody', x: 350, y: 155, z: 0 },
+			{ id: 'windows', part: 'realMailVanWindows', x: 182, y: 132, z: 1 },
+			{ id: 'door', part: 'realMailVanDoor', x: 347, y: 170, z: 2 },
+			{ id: 'wheel-l', part: 'realMailVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMailVanWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'delivery-van',
 		name: 'Delivery van',
-		width: 500,
-		height: 250,
-		groundY: 210,
+		width: 720,
+		height: 330,
+		groundY: 272,
 		palette: palette('#6A994E', '#F2E8CF'),
-		chassisPath: slabPath(500, 210, 140),
+		chassisPath: slabPath(720, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 152, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 96, y: 128, z: 1, scale: 0.75 },
-			{ id: 'window', part: 'windowStrip', x: 96, y: 108, z: 2, scale: 0.55 },
-			{ id: 'door', part: 'door', x: 310, y: 155, z: 2 },
-			wheelSlot('l', 140, 210),
-			wheelSlot('r', 390, 210)
+			{ id: 'body', part: 'realDeliveryVanBody', x: 362, y: 168, z: 0 },
+			{ id: 'windows', part: 'realDeliveryVanWindows', x: 159, y: 143, z: 1 },
+			{ id: 'door', part: 'realDeliveryVanDoor', x: 305, y: 170, z: 2 },
+			{ id: 'wheel-l', part: 'realDeliveryVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realDeliveryVanWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'armoured-van',
 		name: 'Armoured van',
-		width: 520,
-		height: 250,
-		groundY: 210,
+		width: 720,
+		height: 340,
+		groundY: 272,
 		palette: palette('#495057', '#CED4DA'),
-		chassisPath: slabPath(520, 210, 140),
+		chassisPath: slabPath(720, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 260, y: 152, z: 0, scale: 1 },
-			{ id: 'window', part: 'windowStrip', x: 260, y: 110, z: 2, scale: 1.1 },
-			{ id: 'lights', part: 'lightBar', x: 260, y: 86, z: 1 },
-			{ id: 'door', part: 'door', x: 150, y: 155, z: 2 },
-			wheelSlot('l', 150, 210),
-			wheelSlot('r', 400, 210)
+			{ id: 'body', part: 'realArmouredVanBody', x: 363, y: 154, z: 0 },
+			{ id: 'windows', part: 'realArmouredVanWindows', x: 132, y: 139, z: 1 },
+			{ id: 'door', part: 'realArmouredVanDoor', x: 346, y: 165, z: 2 },
+			{ id: 'wheel-l', part: 'realArmouredVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realArmouredVanWheel', x: 580, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'pickup',
 		name: 'Pickup',
-		width: 540,
-		height: 240,
-		groundY: 200,
+		width: 700,
+		height: 330,
+		groundY: 272,
 		palette: palette('#BC4749', '#F2E8CF'),
-		chassisPath: slabPath(540, 200, 120),
+		chassisPath: slabPath(700, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 172, z: 0, scale: 0.72 },
-			{ id: 'cab', part: 'cab', x: 120, y: 130, z: 1, scale: 0.8 },
-			{ id: 'bed', part: 'flatbed', x: 400, y: 162, z: 1, scale: 0.75 },
-			{ id: 'light', part: 'light', x: 510, y: 150, z: 2 },
-			wheelSlot('l', 150, 200),
-			wheelSlot('r', 430, 200)
+			{ id: 'body', part: 'realPickupBody', x: 351, y: 188, z: 0 },
+			{ id: 'windows', part: 'realPickupWindows', x: 272, y: 145, z: 1 },
+			{ id: 'door', part: 'realPickupDoor', x: 291, y: 206, z: 2 },
+			{ id: 'wheel-l', part: 'realPickupWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realPickupWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{

@@ -1,0 +1,55 @@
+{
+	"id": "mail-van",
+	"name": "Mail van",
+	"module": "realMailVan",
+	"artWidth": 700,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realMailVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M40,258 L40,198 Q40,188 50,184 L104,170 L166,88 Q170,78 182,78 L646,78 Q662,78 662,94 L662,244 Q662,258 648,258 Z M262,44 L384,44 L384,74 L262,74 Z M278,74 L287,74 L287,78 L278,78 Z M359,74 L368,74 L368,78 L359,78 Z M26,232 L40,232 L40,252 L26,252 Z M662,240 L674,240 L674,256 L662,256 Z M86,124 L106,124 L106,146 L122.1,146 L116.1,154 L106,154 L106,158 L86,158 Z M190,258 L524,258 L524,266 L190,266 Z",
+			"bounds": { "x": 26, "y": 44, "w": 648, "h": 222 },
+			"name": "Mail van"
+		},
+		{
+			"id": "realMailVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M112,164 L164,94 L190,102 L132,170 Z M201,100 L247,100 Q252,100 252,105 L252,151 Q252,156 247,156 L201,156 Q196,156 196,151 L196,105 Q196,100 201,100 Z",
+			"bounds": { "x": 112, "y": 94, "w": 140, "h": 76 },
+			"name": "Windows"
+		},
+		{
+			"id": "realMailVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M272,104 L422,104 L422,236 L272,236 Z",
+			"bounds": { "x": 272, "y": 104, "w": 150, "h": 132 },
+			"name": "Roll-up cargo door"
+		},
+		{
+			"id": "realMailVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z",
+			"bounds": { "x": 116, "y": 202, "w": 68, "h": 68 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 330,
+		"groundY": 272,
+		"colors": ["#FFD166", "#1D3557"],
+		"chassis": "slabPath(700, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realMailVanBody", "x": 350, "y": 155, "z": 0 },
+			{ "id": "windows", "part": "realMailVanWindows", "x": 182, "y": 132, "z": 1 },
+			{ "id": "door", "part": "realMailVanDoor", "x": 347, "y": 170, "z": 2 },
+			{ "id": "wheel-l", "part": "realMailVanWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realMailVanWheel", "x": 560, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

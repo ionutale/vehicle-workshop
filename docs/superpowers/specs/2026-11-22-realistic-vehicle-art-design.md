@@ -72,10 +72,21 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 27. **Livestock truck (done):** double-deck slatted cattle body with folded ramp at Level 5; 5 pieces, 4 at the first tier.
 28. **Water tanker (done):** blue barrel tanker with hose-reel cabinet and ladder at Level 5; 5 pieces, 4 at the first tier.
 29. **Fuel tanker (done):** articulated tractor and semi-trailer with a long four-compartment barrel, hazard placards and rear hose cabinet at Level 5; 5 pieces, 4 at the first tier.
-30. Convert the remaining **trucks** and **vans**.
-31. Convert the remaining **cars**.
-32. Convert **farm** and the remaining **works** machines.
-33. Remove the generic parts once no catalogue entry uses them.
+30. **Ice-cream van (done):** pink serving van with awning, counter and roof cone at Level 5; 5 pieces, 4 at the first tier.
+31. **Mail van (done):** postal van with shutter, letter slot and MAIL roof sign at Level 5; 5 pieces, 4 at the first tier.
+32. **Camper (done):** two-tone camper with pop-top and awning at Level 5; 5 pieces, 4 at the first tier.
+33. **Delivery van (done):** green panel van with parcel roundel and sliding door at Level 5; 5 pieces, 4 at the first tier.
+34. **Armoured van (done):** dark security van with armour panels and roof hatch at Level 5; 5 pieces, 4 at the first tier.
+35. **Ambulance (done):** box ambulance with light bar, stripe and chevrons at Level 5; 5 pieces, 4 at the first tier.
+36. **Removals van (done):** luton box with roller shutter and furniture load at Level 5; 5 pieces, 4 at the first tier.
+37. **Police van (done):** battenburg van with light bar and barred windows at Level 5; 5 pieces, 4 at the first tier.
+38. **Pickup (done):** open-bed pickup with ribbed bed and tailgate at Level 5; 5 pieces, 4 at the first tier.
+39. **Police car (done):** saloon with light bar, battenburg and push bar at Level 5; 5 pieces, 4 at the first tier.
+40. **Taxi (done):** yellow cab with roof sign and checker band at Level 5; 5 pieces, 4 at the first tier.
+41. **Limousine (done):** long black body with gold waistline at Level 5; 5 pieces, 4 at the first tier.
+42. **Race car (done):** low racer with rear wing and number roundel at Level 5; 5 pieces, 4 at the first tier.
+43. Convert the remaining **special trucks**, **farm** and **works** machines.
+44. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 
@@ -83,5 +94,6 @@ Each batch keeps the same cut-out method: one full illustration, 5–6 masks, fo
 
 - Cut-out body pieces have wheel arches and sometimes a hole for a detail overlay; the shelf shows the cut-out, not a standalone symbolic shape.
 - Wheel masks must be full circles centred on the wheel, not the left/top edge of the bounds. An earlier authoring slip produced quarter-circle wheel tiles on all realistic vehicles; corrected across car, fire engine, truck, bus, school bus, mini bus and double-decker. Check a new wheel tile fills its whole bounds before shipping.
+- Fittings that sit outside the shell (mirrors, ladders, exhaust tips) need their own body-mask subpath, or they are trimmed from the cut-out. The limousine mirror is the known outstanding case.
 - The body tile is larger than the old generic body; the shelf packs it on its own row and the gameScale shrinks slightly on narrow phones.
 - The realistic art is rasterised at 2×; the tiles are cached per vehicle and stay crisp at the game’s maximum scale.

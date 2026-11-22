@@ -498,18 +498,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'removals-van',
 		name: 'Removals van',
-		width: 600,
-		height: 290,
-		groundY: 212,
+		width: 780,
+		height: 360,
+		groundY: 272,
 		palette: pal('#6A994E', '#F2E8CF'),
-		chassisPath: slab(600, 212, 170),
+		chassisPath: slab(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 155, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 115, y: 125, z: 1, scale: 0.9 },
-			{ id: 'ramp', part: 'flatbed', x: 540, y: 195, z: 2, scale: 0.5 },
-			{ id: 'sign', part: 'roofSign', x: 330, y: 82, z: 1, scale: 1.2 },
-			wheel('l', 170, 212),
-			wheel('r', 490, 212)
+			{ id: 'body', part: 'realRemovalsVanBody', x: 388, y: 143, z: 0 },
+			{ id: 'windows', part: 'realRemovalsVanWindows', x: 111, y: 142, z: 1 },
+			{ id: 'door', part: 'realRemovalsVanDoor', x: 516, y: 151, z: 2 },
+			{ id: 'wheel-l', part: 'realRemovalsVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realRemovalsVanWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	// ── Public transport ─────────────────────────────────────────────────────────────
@@ -689,19 +689,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'police-van',
 		name: 'Police van',
-		width: 560,
-		height: 280,
-		groundY: 210,
+		width: 720,
+		height: 340,
+		groundY: 272,
 		palette: pal('#1D3557', '#F1FAEE'),
-		chassisPath: slab(560, 210, 160),
+		chassisPath: slab(720, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 290, y: 158, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 105, y: 125, z: 1, scale: 0.85 },
-			{ id: 'window', part: 'windowStrip', x: 320, y: 118, z: 2, scale: 1.4 },
-			{ id: 'lights', part: 'lightBar', x: 290, y: 82, z: 2 },
-			{ id: 'door', part: 'door', x: 430, y: 160, z: 2 },
-			wheel('l', 160, 210),
-			wheel('r', 430, 210)
+			{ id: 'body', part: 'realPoliceVanBody', x: 359, y: 163, z: 0 },
+			{ id: 'windows', part: 'realPoliceVanWindows', x: 381, y: 143, z: 1 },
+			{ id: 'door', part: 'realPoliceVanDoor', x: 363, y: 179, z: 2 },
+			{ id: 'wheel-l', part: 'realPoliceVanWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realPoliceVanWheel', x: 580, y: 236, z: 4, flip: true }
 		]
 	},
 	{

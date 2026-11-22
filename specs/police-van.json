@@ -1,0 +1,109 @@
+{
+  "id": "police-van",
+  "name": "Police van",
+  "module": "realPoliceVan",
+  "artWidth": 720,
+  "artHeight": 340,
+  "parts": [
+    {
+      "id": "realPoliceVanBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M30,258 L30,202 Q30,192 40,189 L80,182 L118,98 Q122,88 134,88 L676,88 Q690,88 690,102 L690,242 Q690,258 674,258 Z M161,60 L301,60 Q306,60 306,65 L306,88 L156,88 L156,65 Q156,60 161,60 Z M16,236 L30,236 L30,262 L16,262 Z M690,240 L702,240 L702,258 L690,258 Z M62,122 L80,122 L80,158 L62,158 Z M80,138 L99.9,138 L93.6,152 L80,152 Z M190,258 L540,258 L540,266 L190,266 Z",
+      "bounds": {
+        "x": 16,
+        "y": 60,
+        "w": 686,
+        "h": 206
+      },
+      "name": "Police van"
+    },
+    {
+      "id": "realPoliceVanWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M94,172 L120,110 L148,116 L122,180 Z M171,106 L223,106 Q228,106 228,111 L228,153 Q228,158 223,158 L171,158 Q166,158 166,153 L166,111 Q166,106 171,106 Z M249,116 L279,116 Q282,116 282,119 L282,153 Q282,156 279,156 L249,156 Q246,156 246,153 L246,119 Q246,116 249,116 Z M451,116 L481,116 Q484,116 484,119 L484,153 Q484,156 481,156 L451,156 Q448,156 448,153 L448,119 Q448,116 451,116 Z M615,116 L634,116 Q636,116 636,118 L636,146 Q636,148 634,148 L615,148 Q613,148 613,146 L613,118 Q613,116 615,116 Z M647,116 L666,116 Q668,116 668,118 L668,146 Q668,148 666,148 L647,148 Q645,148 645,146 L645,118 Q645,116 647,116 Z",
+      "bounds": {
+        "x": 94,
+        "y": 106,
+        "w": 574,
+        "h": 74
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realPoliceVanDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M300,108 L426,108 L426,250 L300,250 Z",
+      "bounds": {
+        "x": 300,
+        "y": 108,
+        "w": 126,
+        "h": 142
+      },
+      "name": "Sliding side door"
+    },
+    {
+      "id": "realPoliceVanWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": {
+        "x": 114,
+        "y": 200,
+        "w": 72,
+        "h": 72
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 720,
+    "height": 340,
+    "groundY": 272,
+    "colors": [
+      "#1D3557",
+      "#F1FAEE"
+    ],
+    "chassis": "slab(720, 272, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realPoliceVanBody",
+        "x": 359,
+        "y": 163,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realPoliceVanWindows",
+        "x": 381,
+        "y": 143,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realPoliceVanDoor",
+        "x": 363,
+        "y": 179,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realPoliceVanWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realPoliceVanWheel",
+        "x": 580,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

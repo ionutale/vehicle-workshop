@@ -6,21 +6,34 @@
  * with no per-vehicle page.
  */
 
+import { drawRealAmbulanceLevel } from './realAmbulance';
+import { drawRealArmouredVanLevel } from './realArmouredVan';
 import { drawRealCarTransporterLevel } from './realCarTransporter';
 import { drawRealCementMixerLevel } from './realCementMixer';
 import { drawRealCraneTruckLevel } from './realCraneTruck';
 import { drawRealCurtainSideLorryLevel } from './realCurtainSideLorry';
+import { drawRealCamperLevel } from './realCamper';
+import { drawRealDeliveryVanLevel } from './realDeliveryVan';
 import { drawRealDumpTruckLevel } from './realDumpTruck';
 import { drawRealFlatbedLorryLevel } from './realFlatbedLorry';
 import { drawRealFuelTankerLevel } from './realFuelTanker';
 import { drawRealGarbageTruckLevel } from './realGarbageTruck';
+import { drawRealIceCreamVanLevel } from './realIceCreamVan';
 import { drawRealLightRailTrainLevel } from './realLightRailTrain';
 import { drawRealMetroTrainLevel } from './realMetroTrain';
 import { drawRealLivestockTruckLevel } from './realLivestockTruck';
 import { drawRealLogTruckLevel } from './realLogTruck';
+import { drawRealLimousineLevel } from './realLimousine';
+import { drawRealMailVanLevel } from './realMailVan';
+import { drawRealPickupLevel } from './realPickup';
+import { drawRealPoliceCarLevel } from './realPoliceCar';
+import { drawRealPoliceVanLevel } from './realPoliceVan';
+import { drawRealRaceCarLevel } from './realRaceCar';
+import { drawRealRemovalsVanLevel } from './realRemovalsVan';
 import { drawRealMilkTankerLevel } from './realMilkTanker';
 import { drawRealParcelLorryLevel } from './realParcelLorry';
 import { drawRealRefrigeratedTruckLevel } from './realRefrigeratedTruck';
+import { drawRealTaxiLevel } from './realTaxi';
 import { drawRealTowTruckLevel } from './realTowTruck';
 import { drawRealWaterTankerLevel } from './realWaterTanker';
 import { drawRealTramLevel } from './realTram';
@@ -57,7 +70,20 @@ export const LEVEL_ART: Record<string, LevelArtSpec> = {
 	'log-truck': { draw: drawRealLogTruckLevel, width: 800, height: 380 },
 	'livestock-truck': { draw: drawRealLivestockTruckLevel, width: 800, height: 300 },
 	'water-tanker': { draw: drawRealWaterTankerLevel, width: 780, height: 340 },
-	'fuel-tanker': { draw: drawRealFuelTankerLevel, width: 900, height: 360 }
+	'fuel-tanker': { draw: drawRealFuelTankerLevel, width: 900, height: 360 },
+	'ice-cream-van': { draw: drawRealIceCreamVanLevel, width: 700, height: 330 },
+	'mail-van': { draw: drawRealMailVanLevel, width: 700, height: 330 },
+	camper: { draw: drawRealCamperLevel, width: 720, height: 340 },
+	'delivery-van': { draw: drawRealDeliveryVanLevel, width: 720, height: 330 },
+	'armoured-van': { draw: drawRealArmouredVanLevel, width: 720, height: 340 },
+	ambulance: { draw: drawRealAmbulanceLevel, width: 720, height: 340 },
+	'removals-van': { draw: drawRealRemovalsVanLevel, width: 780, height: 360 },
+	'police-van': { draw: drawRealPoliceVanLevel, width: 720, height: 340 },
+	pickup: { draw: drawRealPickupLevel, width: 700, height: 330 },
+	'police-car': { draw: drawRealPoliceCarLevel, width: 660, height: 300 },
+	taxi: { draw: drawRealTaxiLevel, width: 660, height: 300 },
+	limousine: { draw: drawRealLimousineLevel, width: 820, height: 300 },
+	'race-car': { draw: drawRealRaceCarLevel, width: 680, height: 280 }
 };
 
 export const LEVEL_IDS = Object.keys(LEVEL_ART);

@@ -1,0 +1,55 @@
+{
+	"id": "removals-van",
+	"name": "Removals van",
+	"module": "realRemovalsVan",
+	"artWidth": 780,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realRemovalsVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M24,258 L24,124 Q24,106 42,102 L112,102 L112,34 Q112,32 118,32 L744,32 Q756,32 756,44 L756,240 L196,240 L196,258 Z M196,240 L756,240 L756,258 L196,258 Z M214,18 L742,18 L742,26 L214,26 Z M226,26 L234,26 L234,32 L226,32 Z M722,26 L730,26 L730,32 L722,32 Z M6,112 L24,112 L24,148 L6,148 Z M8,244 L24,244 L24,266 L8,266 Z M94,258 L126,258 L126,268 L94,268 Z M756,246 L770,246 L770,264 L756,264 Z",
+			"bounds": { "x": 6, "y": 18, "w": 764, "h": 250 },
+			"name": "Removals van"
+		},
+		{
+			"id": "realRemovalsVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M45,112 L123,112 Q132,112 132,121 L132,165 Q132,174 123,174 L45,174 Q36,174 36,165 L36,121 Q36,112 45,112 Z M145,110 L181,110 Q186,110 186,115 L186,153 Q186,158 181,158 L145,158 Q140,158 140,153 L140,115 Q140,110 145,110 Z",
+			"bounds": { "x": 36, "y": 110, "w": 150, "h": 64 },
+			"name": "Windows"
+		},
+		{
+			"id": "realRemovalsVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M470,94 L562,94 L562,208 L470,208 Z",
+			"bounds": { "x": 470, "y": 94, "w": 92, "h": 114 },
+			"name": "Side loading door"
+		},
+		{
+			"id": "realRemovalsVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 780,
+		"height": 360,
+		"groundY": 272,
+		"colors": ["#6A994E", "#F2E8CF"],
+		"chassis": "slab(780, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realRemovalsVanBody", "x": 388, "y": 143, "z": 0 },
+			{ "id": "windows", "part": "realRemovalsVanWindows", "x": 111, "y": 142, "z": 1 },
+			{ "id": "door", "part": "realRemovalsVanDoor", "x": 516, "y": 151, "z": 2 },
+			{ "id": "wheel-l", "part": "realRemovalsVanWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realRemovalsVanWheel", "x": 620, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

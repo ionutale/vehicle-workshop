@@ -1,0 +1,55 @@
+{
+	"id": "limousine",
+	"name": "Limousine",
+	"module": "realLimousine",
+	"artWidth": 820,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realLimousineBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M46,250 L46,204 Q46,194 58,191 L204,177 Q214,174 219,169 L253,124 Q259,118 269,118 L666,118 Q676,118 681,126 L714,171 L790,171 Q798,171 798,179 L798,236 Q798,250 784,250 Z M32,222 L46,222 L46,248 L32,248 Z M798,234 L812,234 L812,254 L798,254 Z M712,250 L730,250 L730,256 L712,256 Z",
+			"bounds": { "x": 32, "y": 118, "w": 780, "h": 138 },
+			"name": "Limousine"
+		},
+		{
+			"id": "realLimousineWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M278,126 L348,126 Q352,126 352,130 L352,164 Q352,168 348,168 L246,168 Z M373,126 L483,126 Q488,126 488,131 L488,163 Q488,168 483,168 L373,168 Q368,168 368,163 L368,131 Q368,126 373,126 Z M509,126 L615,126 Q620,126 620,131 L620,163 Q620,168 615,168 L509,168 Q504,168 504,163 L504,131 Q504,126 509,126 Z",
+			"bounds": { "x": 246, "y": 126, "w": 374, "h": 42 },
+			"name": "Windows"
+		},
+		{
+			"id": "realLimousineDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M504,176 L616,176 L616,248 L504,248 Z",
+			"bounds": { "x": 504, "y": 176, "w": 112, "h": 72 },
+			"name": "Rear passenger door"
+		},
+		{
+			"id": "realLimousineWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M118,240 A32,32 0 1 1 182,240 A32,32 0 1 1 118,240 Z",
+			"bounds": { "x": 118, "y": 208, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 820,
+		"height": 300,
+		"groundY": 272,
+		"colors": ["#2E2B3A", "#C9A227"],
+		"chassis": "slabPath(820, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realLimousineBody", "x": 422, "y": 187, "z": 0 },
+			{ "id": "windows", "part": "realLimousineWindows", "x": 433, "y": 147, "z": 1 },
+			{ "id": "door", "part": "realLimousineDoor", "x": 560, "y": 212, "z": 2 },
+			{ "id": "wheel-l", "part": "realLimousineWheel", "x": 150, "y": 240, "z": 4 },
+			{ "id": "wheel-r", "part": "realLimousineWheel", "x": 650, "y": 240, "z": 4, "flip": true }
+		]
+	}
+}

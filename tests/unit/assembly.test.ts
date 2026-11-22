@@ -20,7 +20,7 @@ describe('assembly reducer', () => {
 
 	it('snaps to the nearest empty slot of the same part', () => {
 		const state = base();
-		const wheel = state.anchors.find((a) => a.part === 'wheel')!;
+		const wheel = state.anchors.find((a) => (a.part === 'wheel' || a.part.endsWith('Wheel')))!;
 		const nearOther = { x: wheel.x + 30, y: wheel.y };
 		const picked = reduce(state, { type: 'pick', slotId: wheel.slotId, at: nearOther, now: 10 });
 		const dropped = reduce(picked, { type: 'drop', at: nearOther, now: 20, shelfCenters: {} });
@@ -31,7 +31,7 @@ describe('assembly reducer', () => {
 
 	it('snaps by the piece anchor, not the finger, when a wide part is grabbed near its end', () => {
 		const state = base();
-		const body = state.anchors.find((a) => a.part === 'body')!;
+		const body = state.anchors.find((a) => (a.part === 'body' || a.part === 'bodyBox' || a.part.endsWith('Body')))!;
 		const shelf = { x: body.x - 300, y: body.y };
 		// Grabbed 100 units right of the piece's centre.
 		const picked = reduce(state, {
@@ -139,7 +139,7 @@ describe('assembly reducer', () => {
 
 	it('finds no candidate when the part has no empty slot left', () => {
 		const state = base();
-		const other = state.anchors.find((a) => a.part === 'body')!;
+		const other = state.anchors.find((a) => (a.part === 'body' || a.part === 'bodyBox' || a.part.endsWith('Body')))!;
 		const afterBody = { ...state, placed: [other.slotId] };
 		expect(nearestSlot(afterBody, 'body', { x: other.x, y: other.y })).toBeNull();
 	});

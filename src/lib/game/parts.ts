@@ -170,7 +170,59 @@ export type PartId =
 	| 'realFuelTankerBody'
 	| 'realFuelTankerWindows'
 	| 'realFuelTankerDoor'
-	| 'realFuelTankerWheel';
+	| 'realFuelTankerWheel'
+	| 'realIceCreamVanBody'
+	| 'realIceCreamVanWindows'
+	| 'realIceCreamVanDoor'
+	| 'realIceCreamVanWheel'
+	| 'realMailVanBody'
+	| 'realMailVanWindows'
+	| 'realMailVanDoor'
+	| 'realMailVanWheel'
+	| 'realCamperBody'
+	| 'realCamperWindows'
+	| 'realCamperDoor'
+	| 'realCamperWheel'
+	| 'realDeliveryVanBody'
+	| 'realDeliveryVanWindows'
+	| 'realDeliveryVanDoor'
+	| 'realDeliveryVanWheel'
+	| 'realArmouredVanBody'
+	| 'realArmouredVanWindows'
+	| 'realArmouredVanDoor'
+	| 'realArmouredVanWheel'
+	| 'realAmbulanceBody'
+	| 'realAmbulanceWindows'
+	| 'realAmbulanceDoor'
+	| 'realAmbulanceWheel'
+	| 'realRemovalsVanBody'
+	| 'realRemovalsVanWindows'
+	| 'realRemovalsVanDoor'
+	| 'realRemovalsVanWheel'
+	| 'realPoliceVanBody'
+	| 'realPoliceVanWindows'
+	| 'realPoliceVanDoor'
+	| 'realPoliceVanWheel'
+	| 'realPickupBody'
+	| 'realPickupWindows'
+	| 'realPickupDoor'
+	| 'realPickupWheel'
+	| 'realPoliceCarBody'
+	| 'realPoliceCarWindows'
+	| 'realPoliceCarDoor'
+	| 'realPoliceCarWheel'
+	| 'realTaxiBody'
+	| 'realTaxiWindows'
+	| 'realTaxiDoor'
+	| 'realTaxiWheel'
+	| 'realLimousineBody'
+	| 'realLimousineWindows'
+	| 'realLimousineDoor'
+	| 'realLimousineWheel'
+	| 'realRaceCarBody'
+	| 'realRaceCarWindows'
+	| 'realRaceCarDoor'
+	| 'realRaceCarWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1560,6 +1612,422 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M124,236 A36,36 0 1 1 196,236 A36,36 0 1 1 124,236 Z',
 		{ x: 124, y: 200, w: 72, h: 72 }
 	),
+	realIceCreamVanBody: realPart(
+		'realIceCreamVanBody',
+		'shell',
+		'body',
+		'ice-cream-van',
+		'M34,258 L34,206 Q34,196 42,192 L58,180 L82,118 Q84,110 92,110 L638,110 Q652,110 652,124 L652,242 Q652,258 636,258 Z M250,100 L230,72 Q218,68 228,58 Q218,50 230,42 Q228,30 242,30 Q250,19 258,30 Q272,30 270,42 Q282,50 272,58 Q282,68 270,72 Z M240,100 L260,100 L260,110 L240,110 Z M20,242 L34,242 L34,262 L20,262 Z M652,246 L666,246 L666,262 L652,262 Z',
+		{ x: 20, y: 24, w: 646, h: 238 }
+	),
+	realIceCreamVanWindows: realPart(
+		'realIceCreamVanWindows',
+		'glass',
+		'face',
+		'ice-cream-van',
+		'M72,162 L90,124 Q92,120 98,120 L130,120 Q134,120 134,124 L118,162 Z M146,120 L188,120 Q194,120 194,126 L194,150 Q194,156 188,156 L146,156 Q140,156 140,150 L140,126 Q140,120 146,120 Z',
+		{ x: 72, y: 120, w: 122, h: 42 }
+	),
+	realIceCreamVanDoor: realPart(
+		'realIceCreamVanDoor',
+		'trim',
+		'detail',
+		'ice-cream-van',
+		'M122,162 L198,162 L198,252 L122,252 Z',
+		{ x: 122, y: 162, w: 76, h: 90 }
+	),
+	realIceCreamVanWheel: realPart(
+		'realIceCreamVanWheel',
+		'rubber',
+		'locomotion',
+		'ice-cream-van',
+		'M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z',
+		{ x: 116, y: 202, w: 68, h: 68 }
+	),
+	realMailVanBody: realPart(
+		'realMailVanBody',
+		'shell',
+		'body',
+		'mail-van',
+		'M40,258 L40,198 Q40,188 50,184 L104,170 L166,88 Q170,78 182,78 L646,78 Q662,78 662,94 L662,244 Q662,258 648,258 Z M262,44 L384,44 L384,74 L262,74 Z M278,74 L287,74 L287,78 L278,78 Z M359,74 L368,74 L368,78 L359,78 Z M26,232 L40,232 L40,252 L26,252 Z M662,240 L674,240 L674,256 L662,256 Z M86,124 L106,124 L106,146 L122.1,146 L116.1,154 L106,154 L106,158 L86,158 Z M190,258 L524,258 L524,266 L190,266 Z',
+		{ x: 26, y: 44, w: 648, h: 222 }
+	),
+	realMailVanWindows: realPart(
+		'realMailVanWindows',
+		'glass',
+		'face',
+		'mail-van',
+		'M112,164 L164,94 L190,102 L132,170 Z M201,100 L247,100 Q252,100 252,105 L252,151 Q252,156 247,156 L201,156 Q196,156 196,151 L196,105 Q196,100 201,100 Z',
+		{ x: 112, y: 94, w: 140, h: 76 }
+	),
+	realMailVanDoor: realPart(
+		'realMailVanDoor',
+		'trim',
+		'detail',
+		'mail-van',
+		'M272,104 L422,104 L422,236 L272,236 Z',
+		{ x: 272, y: 104, w: 150, h: 132 }
+	),
+	realMailVanWheel: realPart(
+		'realMailVanWheel',
+		'rubber',
+		'locomotion',
+		'mail-van',
+		'M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z',
+		{ x: 116, y: 202, w: 68, h: 68 }
+	),
+	realCamperBody: realPart(
+		'realCamperBody',
+		'shell',
+		'body',
+		'camper',
+		'M52,252 Q44,252 44,244 L44,156 Q44,138 52,126 Q60,114 78,108 Q94,102 120,98 L150,98 L146,64 Q146,46 160,46 L580,46 Q594,46 594,64 L590,98 L650,98 Q682,98 682,120 L682,244 Q682,252 674,252 Z M24,238 L44,238 L44,258 L24,258 Z M682,240 L700,240 L700,258 L682,258 Z M10,120 L30,120 L30,152 L10,152 Z M30,130 L46,130 L46,138 L30,138 Z M220,28 L520,28 L520,33 L220,33 Z M234,33 L239,33 L239,46 L234,46 Z M314,33 L319,33 L319,46 L314,46 Z M394,33 L399,33 L399,46 L394,46 Z M474,33 L479,33 L479,46 L474,46 Z M108,252 L120,252 A34,34 0 0 0 122.505,256 L108,256 Z M177.495,256 A34,34 0 0 1 180,252 L525,252 L530,252 A34,34 0 0 0 532.505,256 Z M250,256 L338,256 L338,258 L250,258 Z M590,252 A34,34 0 0 1 587.495,256 L628,256 L628,252 Z',
+		{ x: 10, y: 28, w: 690, h: 230 }
+	),
+	realCamperWindows: realPart(
+		'realCamperWindows',
+		'glass',
+		'face',
+		'camper',
+		'M62,124 L86,124 Q92,124 92,130 L92,172 Q92,178 86,178 L62,178 Q56,178 56,172 L56,130 Q56,124 62,124 Z M113,112 L183,112 Q190,112 190,119 L190,163 Q190,170 183,170 L113,170 Q106,170 106,163 L106,119 Q106,112 113,112 Z M272,128 L318,128 Q322,128 322,132 L322,164 Q322,168 318,168 L272,168 Q268,168 268,164 L268,132 Q268,128 272,128 Z M359,124 L465,124 Q470,124 470,129 L470,165 Q470,170 465,170 L359,170 Q354,170 354,165 L354,129 Q354,124 359,124 Z M565,124 L643,124 Q648,124 648,129 L648,165 Q648,170 643,170 L565,170 Q560,170 560,165 L560,129 Q560,124 565,124 Z',
+		{ x: 56, y: 112, w: 592, h: 66 }
+	),
+	realCamperDoor: realPart(
+		'realCamperDoor',
+		'trim',
+		'detail',
+		'camper',
+		'M248,176 L340,176 L340,252 L248,252 Z',
+		{ x: 248, y: 176, w: 92, h: 76 }
+	),
+	realCamperWheel: realPart(
+		'realCamperWheel',
+		'rubber',
+		'locomotion',
+		'camper',
+		'M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z',
+		{ x: 116, y: 202, w: 68, h: 68 }
+	),
+	realDeliveryVanBody: realPart(
+		'realDeliveryVanBody',
+		'shell',
+		'body',
+		'delivery-van',
+		'M36,258 L36,196 Q36,186 46,182 L84,178 L140,98 Q144,88 156,88 L676,88 Q688,88 688,102 L688,244 Q688,258 672,258 Z M302,88 L306,74 Q308,72 312,72 L360,72 Q364,72 366,74 L370,88 Z M78,110 L100,110 L100,124 L119,128 L113.4,136 L100,132 L100,146 L78,146 Z M24,236 L36,236 L36,258 L24,258 Z M688,244 L700,244 L700,256 L688,256 Z M206,258 L514,258 L514,264 L206,264 Z',
+		{ x: 24, y: 72, w: 676, h: 192 }
+	),
+	realDeliveryVanWindows: realPart(
+		'realDeliveryVanWindows',
+		'glass',
+		'face',
+		'delivery-van',
+		'M94,171 L136.6,110 L151.3,120.2 L109,182 Z M178,104 L218,104 Q224,104 224,110 L224,152 Q224,158 218,158 L178,158 Q172,158 172,152 L172,110 Q172,104 178,104 Z',
+		{ x: 94, y: 104, w: 130, h: 78 }
+	),
+	realDeliveryVanDoor: realPart(
+		'realDeliveryVanDoor',
+		'trim',
+		'detail',
+		'delivery-van',
+		'M232,106 L378,106 L378,234 L232,234 Z',
+		{ x: 232, y: 106, w: 146, h: 128 }
+	),
+	realDeliveryVanWheel: realPart(
+		'realDeliveryVanWheel',
+		'rubber',
+		'locomotion',
+		'delivery-van',
+		'M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z',
+		{ x: 116, y: 202, w: 68, h: 68 }
+	),
+	realArmouredVanBody: realPart(
+		'realArmouredVanBody',
+		'shell',
+		'body',
+		'armoured-van',
+		'M44,250 L44,196 Q44,188 52,184 L88,172 L134,96 Q138,88 148,88 L176,88 L176,64 Q176,56 186,56 L672,56 Q684,56 684,68 L684,250 Z M408,42 L492,42 L492,56 L408,56 Z M22,230 L44,230 L44,264 L22,264 Z M684,238 L704,238 L704,266 L684,266 Z M190,250 L526,250 L526,259 L190,259 Z M92,106 L110,106 L110,132 L92,132 Z M110,117 L121,117 L117.4,123 L110,123 Z',
+		{ x: 22, y: 42, w: 682, h: 224 }
+	),
+	realArmouredVanWindows: realPart(
+		'realArmouredVanWindows',
+		'glass',
+		'face',
+		'armoured-van',
+		'M92,168 L130,106 L148,114 L110,176 Z M156,102 L168,102 Q172,102 172,106 L172,144 Q172,148 168,148 L156,148 Q152,148 152,144 L152,106 Q152,102 156,102 Z',
+		{ x: 92, y: 102, w: 80, h: 74 }
+	),
+	realArmouredVanDoor: realPart(
+		'realArmouredVanDoor',
+		'trim',
+		'detail',
+		'armoured-van',
+		'M300,92 L392,92 L392,238 L300,238 Z',
+		{ x: 300, y: 92, w: 92, h: 146 }
+	),
+	realArmouredVanWheel: realPart(
+		'realArmouredVanWheel',
+		'rubber',
+		'locomotion',
+		'armoured-van',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realAmbulanceBody: realPart(
+		'realAmbulanceBody',
+		'shell',
+		'body',
+		'ambulance',
+		'M36,258 L36,178 Q36,170 44,166 L86,154 L158,96 Q162,88 172,88 L236,88 L236,62 Q236,56 244,56 L656,56 Q668,56 668,68 L668,244 Q668,258 654,258 Z M252,40 L372,40 L372,56 L252,56 Z M18,230 L36,230 L36,258 L18,258 Z M18,146 L36,146 L36,186 L18,186 Z M668,236 L686,236 L686,256 L668,256 Z M200,258 L540,258 L540,268 L200,268 Z',
+		{ x: 18, y: 40, w: 668, h: 228 }
+	),
+	realAmbulanceWindows: realPart(
+		'realAmbulanceWindows',
+		'glass',
+		'face',
+		'ambulance',
+		'M102,172 L158,98 L188,102 L134,176 Z M197,102 L227,102 Q232,102 232,107 L232,147 Q232,152 227,152 L197,152 Q192,152 192,147 L192,107 Q192,102 197,102 Z M542,116 L588,116 Q594,116 594,122 L594,156 Q594,162 588,162 L542,162 Q536,162 536,156 L536,122 Q536,116 542,116 Z',
+		{ x: 102, y: 98, w: 492, h: 78 }
+	),
+	realAmbulanceDoor: realPart(
+		'realAmbulanceDoor',
+		'trim',
+		'detail',
+		'ambulance',
+		'M416,104 L512,104 L512,226 L416,226 Z',
+		{ x: 416, y: 104, w: 96, h: 122 }
+	),
+	realAmbulanceWheel: realPart(
+		'realAmbulanceWheel',
+		'rubber',
+		'locomotion',
+		'ambulance',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realRemovalsVanBody: realPart(
+		'realRemovalsVanBody',
+		'shell',
+		'body',
+		'removals-van',
+		'M24,258 L24,124 Q24,106 42,102 L112,102 L112,34 Q112,32 118,32 L744,32 Q756,32 756,44 L756,240 L196,240 L196,258 Z M196,240 L756,240 L756,258 L196,258 Z M214,18 L742,18 L742,26 L214,26 Z M226,26 L234,26 L234,32 L226,32 Z M722,26 L730,26 L730,32 L722,32 Z M6,112 L24,112 L24,148 L6,148 Z M8,244 L24,244 L24,266 L8,266 Z M94,258 L126,258 L126,268 L94,268 Z M756,246 L770,246 L770,264 L756,264 Z',
+		{ x: 6, y: 18, w: 764, h: 250 }
+	),
+	realRemovalsVanWindows: realPart(
+		'realRemovalsVanWindows',
+		'glass',
+		'face',
+		'removals-van',
+		'M45,112 L123,112 Q132,112 132,121 L132,165 Q132,174 123,174 L45,174 Q36,174 36,165 L36,121 Q36,112 45,112 Z M145,110 L181,110 Q186,110 186,115 L186,153 Q186,158 181,158 L145,158 Q140,158 140,153 L140,115 Q140,110 145,110 Z',
+		{ x: 36, y: 110, w: 150, h: 64 }
+	),
+	realRemovalsVanDoor: realPart(
+		'realRemovalsVanDoor',
+		'trim',
+		'detail',
+		'removals-van',
+		'M470,94 L562,94 L562,208 L470,208 Z',
+		{ x: 470, y: 94, w: 92, h: 114 }
+	),
+	realRemovalsVanWheel: realPart(
+		'realRemovalsVanWheel',
+		'rubber',
+		'locomotion',
+		'removals-van',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realPoliceVanBody: realPart(
+		'realPoliceVanBody',
+		'shell',
+		'body',
+		'police-van',
+		'M30,258 L30,202 Q30,192 40,189 L80,182 L118,98 Q122,88 134,88 L676,88 Q690,88 690,102 L690,242 Q690,258 674,258 Z M161,60 L301,60 Q306,60 306,65 L306,88 L156,88 L156,65 Q156,60 161,60 Z M16,236 L30,236 L30,262 L16,262 Z M690,240 L702,240 L702,258 L690,258 Z M62,122 L80,122 L80,158 L62,158 Z M80,138 L99.9,138 L93.6,152 L80,152 Z M190,258 L540,258 L540,266 L190,266 Z',
+		{ x: 16, y: 60, w: 686, h: 206 }
+	),
+	realPoliceVanWindows: realPart(
+		'realPoliceVanWindows',
+		'glass',
+		'face',
+		'police-van',
+		'M94,172 L120,110 L148,116 L122,180 Z M171,106 L223,106 Q228,106 228,111 L228,153 Q228,158 223,158 L171,158 Q166,158 166,153 L166,111 Q166,106 171,106 Z M249,116 L279,116 Q282,116 282,119 L282,153 Q282,156 279,156 L249,156 Q246,156 246,153 L246,119 Q246,116 249,116 Z M451,116 L481,116 Q484,116 484,119 L484,153 Q484,156 481,156 L451,156 Q448,156 448,153 L448,119 Q448,116 451,116 Z M615,116 L634,116 Q636,116 636,118 L636,146 Q636,148 634,148 L615,148 Q613,148 613,146 L613,118 Q613,116 615,116 Z M647,116 L666,116 Q668,116 668,118 L668,146 Q668,148 666,148 L647,148 Q645,148 645,146 L645,118 Q645,116 647,116 Z',
+		{ x: 94, y: 106, w: 574, h: 74 }
+	),
+	realPoliceVanDoor: realPart(
+		'realPoliceVanDoor',
+		'trim',
+		'detail',
+		'police-van',
+		'M300,108 L426,108 L426,250 L300,250 Z',
+		{ x: 300, y: 108, w: 126, h: 142 }
+	),
+	realPoliceVanWheel: realPart(
+		'realPoliceVanWheel',
+		'rubber',
+		'locomotion',
+		'police-van',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realPickupBody: realPart(
+		'realPickupBody',
+		'shell',
+		'body',
+		'pickup',
+		'M42,244 L42,198 Q42,190 52,186 L62,184 Q68,172 86,170 L198,165 L206,176 L242,118 Q246,112 258,112 L324,112 Q337,112 339,125 L341,190 L654,190 L654,244 Z M24,240 L42,240 L42,252 L24,252 Z M348,154 L654,154 L654,190 L348,190 Z M654,154 L676,154 L676,248 L654,248 Z M654,248 L678,248 L678,260 L654,260 Z M196,146 L208,146 L208,164 L196,164 Z M42,244 L654,244 L654,264 L42,264 Z',
+		{ x: 24, y: 112, w: 654, h: 152 }
+	),
+	realPickupWindows: realPart(
+		'realPickupWindows',
+		'glass',
+		'face',
+		'pickup',
+		'M208,171 L244,119 L257,119 L257,171 Z M268,119 L308,119 Q313,119 313,124 L313,160 Q313,165 308,165 L268,165 Q263,165 263,160 L263,124 Q263,119 268,119 Z M320,124 L331,124 Q336,124 336,129 L336,155 Q336,160 331,160 L320,160 Q315,160 315,155 L315,129 Q315,124 320,124 Z',
+		{ x: 208, y: 119, w: 128, h: 52 }
+	),
+	realPickupDoor: realPart(
+		'realPickupDoor',
+		'trim',
+		'detail',
+		'pickup',
+		'M264,170 L318,170 L318,242 L264,242 Z',
+		{ x: 264, y: 170, w: 54, h: 72 }
+	),
+	realPickupWheel: realPart(
+		'realPickupWheel',
+		'rubber',
+		'locomotion',
+		'pickup',
+		'M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z',
+		{ x: 116, y: 202, w: 68, h: 68 }
+	),
+	realPoliceCarBody: realPart(
+		'realPoliceCarBody',
+		'shell',
+		'body',
+		'police-car',
+		'M48,252 L48,212 Q48,200 58,198 L188,186 L196,185 L272,126 Q276,122 286,122 L390,122 Q400,122 404,128 L456,180 Q462,186 472,186 L588,186 Q606,186 606,200 L606,252 Z M292,115 L384,115 L384,122 L292,122 Z M294,100 L382,100 L382,115 L294,115 Z M12,206 L32,206 L32,252 L12,252 Z M32,236 L48,236 L48,254 L32,254 Z M36,200 L48,200 L48,222 L36,222 Z M606,240 L622,240 L622,256 L606,256 Z M196,152 L212,152 L212,170 L196,170 Z M552,136 L590,136 L590,186 L552,186 Z',
+		{ x: 12, y: 100, w: 610, h: 156 }
+	),
+	realPoliceCarWindows: realPart(
+		'realPoliceCarWindows',
+		'glass',
+		'face',
+		'police-car',
+		'M214,172 L276,132 L296,141 L234,178 Z M311,136 L357,136 Q362,136 362,141 L362,165 Q362,170 357,170 L311,170 Q306,170 306,165 L306,141 Q306,136 311,136 Z M378,136 L400,136 L432,170 L378,170 Z',
+		{ x: 214, y: 132, w: 218, h: 46 }
+	),
+	realPoliceCarDoor: realPart(
+		'realPoliceCarDoor',
+		'trim',
+		'detail',
+		'police-car',
+		'M238,182 L374,182 L374,246 L238,246 Z',
+		{ x: 238, y: 182, w: 136, h: 64 }
+	),
+	realPoliceCarWheel: realPart(
+		'realPoliceCarWheel',
+		'rubber',
+		'locomotion',
+		'police-car',
+		'M108,240 A32,32 0 1 1 172,240 A32,32 0 1 1 108,240 Z',
+		{ x: 108, y: 208, w: 64, h: 64 }
+	),
+	realTaxiBody: realPart(
+		'realTaxiBody',
+		'shell',
+		'body',
+		'taxi',
+		'M16,244 L16,220 L34,220 L34,206 Q34,193 46,189 L148,174 Q180,170 196,166 L248,116 Q254,108 266,108 L292,108 L292,80 Q292,76 296,76 L360,76 Q364,76 364,80 L364,108 L398,107 Q412,107 420,115 L474,168 Q484,175 498,177 L582,181 Q616,183 616,199 L616,218 L634,218 L634,244 L616,244 L616,248 L540,248 A40,40 0 0 0 460,248 L180,248 A40,40 0 0 0 100,248 L34,248 L34,244 Z M182,140 Q182,138 184,138 L197,138 Q199,138 199,140 L199,160 Q199,162 197,162 L184,162 Q182,162 182,160 Z M199,148 L207,148 L207,152 L199,152 Z',
+		{ x: 16, y: 76, w: 618, h: 172 }
+	),
+	realTaxiWindows: realPart(
+		'realTaxiWindows',
+		'glass',
+		'face',
+		'taxi',
+		'M211,164 L252,120 L300,120 L300,164 Q300,168 296,168 L215,168 Q211,168 211,164 Z M315,120 L389,120 Q394,120 394,125 L394,163 Q394,168 389,168 L315,168 Q310,168 310,163 L310,125 Q310,120 315,120 Z M402,168 L402,128 L426,128 L463,168 Z',
+		{ x: 211, y: 120, w: 252, h: 48 }
+	),
+	realTaxiDoor: realPart(
+		'realTaxiDoor',
+		'trim',
+		'detail',
+		'taxi',
+		'M200,182 L334,182 L334,244 L200,244 Z',
+		{ x: 200, y: 182, w: 134, h: 62 }
+	),
+	realTaxiWheel: realPart(
+		'realTaxiWheel',
+		'rubber',
+		'locomotion',
+		'taxi',
+		'M108,240 A32,32 0 1 1 172,240 A32,32 0 1 1 108,240 Z',
+		{ x: 108, y: 208, w: 64, h: 64 }
+	),
+	realLimousineBody: realPart(
+		'realLimousineBody',
+		'shell',
+		'body',
+		'limousine',
+		'M46,250 L46,204 Q46,194 58,191 L204,177 Q214,174 219,169 L253,124 Q259,118 269,118 L666,118 Q676,118 681,126 L714,171 L790,171 Q798,171 798,179 L798,236 Q798,250 784,250 Z M32,222 L46,222 L46,248 L32,248 Z M798,234 L812,234 L812,254 L798,254 Z M712,250 L730,250 L730,256 L712,256 Z',
+		{ x: 32, y: 118, w: 780, h: 138 }
+	),
+	realLimousineWindows: realPart(
+		'realLimousineWindows',
+		'glass',
+		'face',
+		'limousine',
+		'M278,126 L348,126 Q352,126 352,130 L352,164 Q352,168 348,168 L246,168 Z M373,126 L483,126 Q488,126 488,131 L488,163 Q488,168 483,168 L373,168 Q368,168 368,163 L368,131 Q368,126 373,126 Z M509,126 L615,126 Q620,126 620,131 L620,163 Q620,168 615,168 L509,168 Q504,168 504,163 L504,131 Q504,126 509,126 Z',
+		{ x: 246, y: 126, w: 374, h: 42 }
+	),
+	realLimousineDoor: realPart(
+		'realLimousineDoor',
+		'trim',
+		'detail',
+		'limousine',
+		'M504,176 L616,176 L616,248 L504,248 Z',
+		{ x: 504, y: 176, w: 112, h: 72 }
+	),
+	realLimousineWheel: realPart(
+		'realLimousineWheel',
+		'rubber',
+		'locomotion',
+		'limousine',
+		'M118,240 A32,32 0 1 1 182,240 A32,32 0 1 1 118,240 Z',
+		{ x: 118, y: 208, w: 64, h: 64 }
+	),
+	realRaceCarBody: realPart(
+		'realRaceCarBody',
+		'shell',
+		'body',
+		'race-car',
+		'M22,248 L22,226 Q22,218 32,216 L96,204 L168,194 L214,190 L260,152 Q263,149 268,149 L334,149 Q340,149 344,154 L390,190 L486,196 L540,202 L618,202 Q640,203 645,218 L648,240 Q649,248 640,248 Z M556,126 L654,126 L654,140 L556,140 Z M548,116 L556,116 L556,148 L548,148 Z M654,116 L662,116 L662,148 L654,148 Z M570,140 L577,140 L577,202 L570,202 Z M604,140 L611,140 L611,202 L604,202 Z M14,248 L102,248 L102,256 L22,256 Q14,256 14,248 Z M584,248 L640,248 L640,256 L584,256 Z',
+		{ x: 14, y: 116, w: 648, h: 140 }
+	),
+	realRaceCarWindows: realPart(
+		'realRaceCarWindows',
+		'glass',
+		'face',
+		'race-car',
+		'M220,189 L254,157 L274,157 L240,189 Z M285,157 L329,157 Q334,157 334,162 L334,184 Q334,189 329,189 L285,189 Q280,189 280,184 L280,162 Q280,157 285,157 Z',
+		{ x: 220, y: 157, w: 114, h: 32 }
+	),
+	realRaceCarDoor: realPart(
+		'realRaceCarDoor',
+		'trim',
+		'detail',
+		'race-car',
+		'M302,198 L364,198 L364,242 L302,242 Z',
+		{ x: 302, y: 198, w: 62, h: 44 }
+	),
+	realRaceCarWheel: realPart(
+		'realRaceCarWheel',
+		'rubber',
+		'locomotion',
+		'race-car',
+		'M110,244 A30,30 0 1 1 170,244 A30,30 0 1 1 110,244 Z',
+		{ x: 110, y: 214, w: 60, h: 60 }
+	),
 
 };
 
@@ -1731,6 +2199,58 @@ export const PART_NAMES: Record<PartId, string> = {
 	realFuelTankerWindows: 'Windows',
 	realFuelTankerDoor: 'Door',
 	realFuelTankerWheel: 'Wheel',
+	realIceCreamVanBody: 'Ice-cream van',
+	realIceCreamVanWindows: 'Windows',
+	realIceCreamVanDoor: 'Door',
+	realIceCreamVanWheel: 'Wheel',
+	realMailVanBody: 'Mail van',
+	realMailVanWindows: 'Windows',
+	realMailVanDoor: 'Roll-up cargo door',
+	realMailVanWheel: 'Wheel',
+	realCamperBody: 'Camper',
+	realCamperWindows: 'Windows',
+	realCamperDoor: 'Side door',
+	realCamperWheel: 'Wheel',
+	realDeliveryVanBody: 'Delivery van',
+	realDeliveryVanWindows: 'Windows',
+	realDeliveryVanDoor: 'Sliding side door',
+	realDeliveryVanWheel: 'Wheel',
+	realArmouredVanBody: 'Armoured van',
+	realArmouredVanWindows: 'Windows',
+	realArmouredVanDoor: 'Reinforced side door',
+	realArmouredVanWheel: 'Wheel',
+	realAmbulanceBody: 'Ambulance',
+	realAmbulanceWindows: 'Windows',
+	realAmbulanceDoor: 'Side sliding door',
+	realAmbulanceWheel: 'Wheel',
+	realRemovalsVanBody: 'Removals van',
+	realRemovalsVanWindows: 'Windows',
+	realRemovalsVanDoor: 'Side loading door',
+	realRemovalsVanWheel: 'Wheel',
+	realPoliceVanBody: 'Police van',
+	realPoliceVanWindows: 'Windows',
+	realPoliceVanDoor: 'Sliding side door',
+	realPoliceVanWheel: 'Wheel',
+	realPickupBody: 'Pickup',
+	realPickupWindows: 'Windows',
+	realPickupDoor: 'Door',
+	realPickupWheel: 'Wheel',
+	realPoliceCarBody: 'Police car',
+	realPoliceCarWindows: 'Windows',
+	realPoliceCarDoor: 'Front door',
+	realPoliceCarWheel: 'Wheel',
+	realTaxiBody: 'Taxi',
+	realTaxiWindows: 'Windows',
+	realTaxiDoor: 'Front door',
+	realTaxiWheel: 'Wheel',
+	realLimousineBody: 'Limousine',
+	realLimousineWindows: 'Windows',
+	realLimousineDoor: 'Rear passenger door',
+	realLimousineWheel: 'Wheel',
+	realRaceCarBody: 'Race car',
+	realRaceCarWindows: 'Canopy glass',
+	realRaceCarDoor: 'Door',
+	realRaceCarWheel: 'Wheel',
 
 };
 

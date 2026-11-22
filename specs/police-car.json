@@ -1,0 +1,55 @@
+{
+	"id": "police-car",
+	"name": "Police car",
+	"module": "realPoliceCar",
+	"artWidth": 660,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realPoliceCarBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M48,252 L48,212 Q48,200 58,198 L188,186 L196,185 L272,126 Q276,122 286,122 L390,122 Q400,122 404,128 L456,180 Q462,186 472,186 L588,186 Q606,186 606,200 L606,252 Z M292,115 L384,115 L384,122 L292,122 Z M294,100 L382,100 L382,115 L294,115 Z M12,206 L32,206 L32,252 L12,252 Z M32,236 L48,236 L48,254 L32,254 Z M36,200 L48,200 L48,222 L36,222 Z M606,240 L622,240 L622,256 L606,256 Z M196,152 L212,152 L212,170 L196,170 Z M552,136 L590,136 L590,186 L552,186 Z",
+			"bounds": { "x": 12, "y": 100, "w": 610, "h": 156 },
+			"name": "Police car"
+		},
+		{
+			"id": "realPoliceCarWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M214,172 L276,132 L296,141 L234,178 Z M311,136 L357,136 Q362,136 362,141 L362,165 Q362,170 357,170 L311,170 Q306,170 306,165 L306,141 Q306,136 311,136 Z M378,136 L400,136 L432,170 L378,170 Z",
+			"bounds": { "x": 214, "y": 132, "w": 218, "h": 46 },
+			"name": "Windows"
+		},
+		{
+			"id": "realPoliceCarDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M238,182 L374,182 L374,246 L238,246 Z",
+			"bounds": { "x": 238, "y": 182, "w": 136, "h": 64 },
+			"name": "Front door"
+		},
+		{
+			"id": "realPoliceCarWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M108,240 A32,32 0 1 1 172,240 A32,32 0 1 1 108,240 Z",
+			"bounds": { "x": 108, "y": 208, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 660,
+		"height": 300,
+		"groundY": 272,
+		"colors": ["#F4F6FA", "#2C5AA0"],
+		"chassis": "slabPath(660, 272, 140)",
+		"slots": [
+			{ "id": "body", "part": "realPoliceCarBody", "x": 317, "y": 178, "z": 0 },
+			{ "id": "windows", "part": "realPoliceCarWindows", "x": 323, "y": 155, "z": 1 },
+			{ "id": "door", "part": "realPoliceCarDoor", "x": 306, "y": 214, "z": 2 },
+			{ "id": "wheel-l", "part": "realPoliceCarWheel", "x": 140, "y": 240, "z": 4 },
+			{ "id": "wheel-r", "part": "realPoliceCarWheel", "x": 500, "y": 240, "z": 4, "flip": true }
+		]
+	}
+}

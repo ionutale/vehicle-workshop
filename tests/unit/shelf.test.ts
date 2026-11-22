@@ -52,7 +52,7 @@ describe('shelf affordances', () => {
 		const layout = computeLayout({ width: 390, height: 844 }, car, pieceBoxes(car), insets, 120);
 		const state = createAssembly(car, layout.gameScale, layout.snapRadius, 0);
 		const pieces = trayPieces(car, state, layout);
-		const body = pieces.find((piece) => piece.part === 'body')!;
+		const body = pieces.find((piece) => (piece.part === 'body' || piece.part === 'bodyBox' || piece.part.endsWith('Body')))!;
 		const { ctx, calls } = recordingContext();
 
 		drawShelf(ctx, layout, pieces, PARTS, car.palette, { hintSlotId: body.slotId, now: 0 });
@@ -68,7 +68,7 @@ describe('shelf affordances', () => {
 		const layout = computeLayout({ width: 390, height: 844 }, car, pieceBoxes(car), insets, 120);
 		const state = createAssembly(car, layout.gameScale, layout.snapRadius, 0);
 		const pieces = trayPieces(car, state, layout);
-		const body = pieces.find((piece) => piece.part === 'body')!;
+		const body = pieces.find((piece) => (piece.part === 'body' || piece.part === 'bodyBox' || piece.part.endsWith('Body')))!;
 
 		const first = recordingContext();
 		drawShelf(first.ctx, layout, pieces, PARTS, car.palette, {
