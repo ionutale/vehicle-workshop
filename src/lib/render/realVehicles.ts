@@ -1,4 +1,5 @@
 import { roundedRect } from '#lib/render/draw';
+import { drawRealMiniBus } from './realMiniBus';
 import { drawRealSchoolBus } from './realSchoolBus';
 
 /**
@@ -727,7 +728,8 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'box-truck': { draw: drawRealTruck, width: 700, height: 340 },
 	bus: { draw: drawRealBus, width: 760, height: 320 },
 	car: { draw: drawRealCar, width: 600, height: 260 },
-	'school-bus': { draw: drawRealSchoolBus, width: 760, height: 320 }
+	'school-bus': { draw: drawRealSchoolBus, width: 760, height: 320 },
+	'mini-bus': { draw: drawRealMiniBus, width: 640, height: 300 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

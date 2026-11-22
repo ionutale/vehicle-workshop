@@ -310,18 +310,18 @@ VEHICLES.push(
 	{
 		id: 'mini-bus',
 		name: 'Mini bus',
-		width: 560,
-		height: 240,
-		groundY: 205,
+		width: 640,
+		height: 300,
+		groundY: 265,
 		palette: palette('#8AC6D1', '#1D3557'),
-		chassisPath: slabPath(560, 205, 130),
+		chassisPath: slabPath(640, 265, 160),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 280, y: 152, z: 0, scale: 1.05 },
-			{ id: 'windows', part: 'windowStrip', x: 280, y: 112, z: 2, scale: 2.2 },
-			{ id: 'roof', part: 'roof', x: 280, y: 86, z: 1, scale: 2.5 },
-			{ id: 'door', part: 'door', x: 370, y: 155, z: 2 },
-			wheelSlot('l', 160, 205),
-			wheelSlot('r', 420, 205)
+			{ id: 'body', part: 'realMiniBusBody', x: 326.5, y: 167.5, z: 0 },
+			{ id: 'windows', part: 'realMiniBusWindows', x: 294, y: 145, z: 1 },
+			{ id: 'door', part: 'realMiniBusDoor', x: 517.5, y: 172, z: 2 },
+			{ id: 'wheel-l', part: 'realMiniBusWheel', x: 140, y: 228, z: 4 },
+			{ id: 'wheel-r', part: 'realMiniBusWheel', x: 500, y: 228, z: 4, flip: true }
 		]
 	},
 	{

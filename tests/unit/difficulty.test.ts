@@ -19,12 +19,12 @@ describe('difficulty', () => {
 			expect(view.slots).toHaveLength(4);
 			expect(
 				view.slots.some((slot) =>
-					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realSchoolBusWheel', 'realDiggerTracks'].includes(slot.part)
+					['wheel', 'tracks', 'roller', 'realCarWheel', 'realFireWheel', 'realTruckWheel', 'realBusWheel', 'realSchoolBusWheel', 'realMiniBusWheel', 'realDiggerTracks'].includes(slot.part)
 				)
 			).toBe(true);
 			expect(
 				view.slots.some((slot) =>
-					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody', 'realSchoolBusBody'].includes(slot.part)
+					['body', 'bodyBox', 'realCarBody', 'realFireBody', 'realDiggerHouse', 'realTruckBox', 'realBusBody', 'realSchoolBusBody', 'realMiniBusBody'].includes(slot.part)
 				)
 			).toBe(true);
 		}
