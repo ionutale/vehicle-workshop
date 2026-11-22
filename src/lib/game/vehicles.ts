@@ -514,18 +514,18 @@ VEHICLES.push(
 	{
 		id: 'garbage-truck',
 		name: 'Garbage truck',
-		width: 580,
-		height: 280,
-		groundY: 210,
+		width: 760,
+		height: 330,
+		groundY: 272,
 		palette: palette('#2A9D8F', '#264653'),
-		chassisPath: slabPath(580, 210, 160),
+		chassisPath: slabPath(760, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'hopper', part: 'tipper', x: 350, y: 120, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 200, y: 92, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 460, 210)
+			{ id: 'body', part: 'realGarbageTruckBody', x: 384, y: 157, z: 0 },
+			{ id: 'windows', part: 'realGarbageTruckWindows', x: 112, y: 128, z: 1 },
+			{ id: 'door', part: 'realGarbageTruckDoor', x: 157, y: 208, z: 2 },
+			{ id: 'wheel-l', part: 'realGarbageTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realGarbageTruckWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -565,19 +565,18 @@ VEHICLES.push(
 	{
 		id: 'car-transporter',
 		name: 'Car transporter',
-		width: 640,
-		height: 280,
-		groundY: 212,
+		width: 860,
+		height: 340,
+		groundY: 272,
 		palette: palette('#577590', '#F9C74F'),
-		chassisPath: slabPath(640, 212, 150),
+		chassisPath: slabPath(860, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 340, y: 178, z: 0, scale: 0.66 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'deck', part: 'flatbed', x: 400, y: 158, z: 1, scale: 0.9 },
-			{ id: 'car-a', part: 'miniCar', x: 320, y: 124, z: 2 },
-			{ id: 'car-b', part: 'miniCar', x: 470, y: 124, z: 2 },
-			wheelSlot('l', 160, 212),
-			wheelSlot('r', 500, 212)
+			{ id: 'body', part: 'realCarTransporterBody', x: 429, y: 162.5, z: 0 },
+			{ id: 'windows', part: 'realCarTransporterWindows', x: 105, y: 161, z: 1 },
+			{ id: 'door', part: 'realCarTransporterDoor', x: 148, y: 215, z: 2 },
+			{ id: 'wheel-l', part: 'realCarTransporterWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCarTransporterWheel', x: 650, y: 236, z: 4, flip: true }
 		]
 	},
 	{

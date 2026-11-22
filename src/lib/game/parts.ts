@@ -134,7 +134,19 @@ export type PartId =
 	| 'realTowTruckBody'
 	| 'realTowTruckWindows'
 	| 'realTowTruckDoor'
-	| 'realTowTruckWheel';
+	| 'realTowTruckWheel'
+	| 'realGarbageTruckBody'
+	| 'realGarbageTruckWindows'
+	| 'realGarbageTruckDoor'
+	| 'realGarbageTruckWheel'
+	| 'realCarTransporterBody'
+	| 'realCarTransporterWindows'
+	| 'realCarTransporterDoor'
+	| 'realCarTransporterWheel'
+	| 'realRefrigeratedTruckBody'
+	| 'realRefrigeratedTruckWindows'
+	| 'realRefrigeratedTruckDoor'
+	| 'realRefrigeratedTruckWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1236,6 +1248,102 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realGarbageTruckBody: realPart(
+		'realGarbageTruckBody',
+		'shell',
+		'body',
+		'garbage-truck',
+		'M30,250 L30,150 Q30,136 38,128 L70,88 Q76,80 88,80 L196,80 L196,68 Q196,58 206,58 L250,56 Q455,38 640,54 L656,56 Q670,58 676,70 L682,80 L700,92 Q704,95 704,106 L704,250 Z M140,80 L140,74 L150,74 Q150,60 160,60 Q170,60 170,74 L180,74 L180,80 Z M18,96 L30,96 L30,126 L18,126 Z M16,230 L30,230 L30,260 L16,260 Z M112,250 L188,250 L188,262 L112,262 Z M190,250 L206,250 L206,268 L190,268 Z M642,250 L658,250 L658,268 L642,268 Z M704,160 L752,160 L752,168 L704,168 Z M708,168 L748,168 L744,226 Q744,232 738,232 L718,232 Q712,232 712,226 Z M696,250 L724,250 L724,264 L696,264 Z',
+		{ x: 16, y: 46, w: 736, h: 222 }
+	),
+	realGarbageTruckWindows: realPart(
+		'realGarbageTruckWindows',
+		'glass',
+		'face',
+		'garbage-truck',
+		'M36,164 L36,138 Q36,128 44,122 L58,102 Q64,92 76,92 L102,92 Q110,92 110,100 L110,156 Q110,164 102,164 Z M124,94 L180,94 Q188,94 188,102 L188,150 Q188,158 180,158 L124,158 Q116,158 116,150 L116,102 Q116,94 124,94 Z',
+		{ x: 36, y: 92, w: 152, h: 72 }
+	),
+	realGarbageTruckDoor: realPart(
+		'realGarbageTruckDoor',
+		'trim',
+		'detail',
+		'garbage-truck',
+		'M124,172 L190,172 L190,244 L124,244 Z',
+		{ x: 124, y: 172, w: 66, h: 72 }
+	),
+	realGarbageTruckWheel: realPart(
+		'realGarbageTruckWheel',
+		'rubber',
+		'locomotion',
+		'garbage-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realCarTransporterBody: realPart(
+		'realCarTransporterBody',
+		'shell',
+		'body',
+		'car-transporter',
+		'M24,252 L24,132 Q24,116 40,116 L174,116 Q190,116 190,132 L190,252 Z M38,106 L116,106 L116,116 L38,116 Z M6,134 Q6,130 10,130 L18,130 Q22,130 22,134 L22,158 Q22,162 18,162 L10,162 Q6,162 6,158 Z M22,144 L24,144 L24,152 L22,152 Z M6,238 L24,238 L24,264 L6,264 Z M120,252 L190,252 L190,258 L120,258 Z M194,124 L206,124 L206,182 L194,182 Z M196,124 Q194,119 198,115 Q202,111 207,112 Q211,114 209,118 Q212,121 207,124 Z M150,108 L150,116 L118,116 Z M150,96 L816,96 L816,108 L150,108 Z M190,182 L812,182 L812,200 L190,200 Z M214,200 L600,200 L600,244 L214,244 Z M686,200 L812,200 L812,244 L686,244 Z M190,200 L214,200 L214,244 L190,244 Z M190,244 L824,244 L824,258 L190,258 Z M792,258 L824,258 L824,266 L792,266 Z M236,108 L248,108 L248,182 L236,182 Z M386,108 L398,108 L398,182 L386,182 Z M596,108 L608,108 L608,182 L596,182 Z M800,108 L812,108 L812,182 L800,182 Z M250,110 L378,176 L378,180 L250,114 Z M700,173 L792,108 L792,117 L700,182 Z M812,202 L852,262 L838,270 L812,216 Z M214,112 L218,112 L218,182 L214,182 Z M228,112 L232,112 L232,182 L228,182 Z M218,124 L228,124 L228,128 L218,128 Z M218,140 L228,140 L228,144 L218,144 Z M218,156 L228,156 L228,160 L218,160 Z M218,172 L228,172 L228,176 L218,176 Z M196,78 L236,78 L236,96 L196,96 Z M250,96 L250,90 Q250,86 256,85 L274,82 L290,61 Q294,55 302,55 L340,55 Q348,55 352,61 L368,76 L386,79 Q396,80 396,86 L396,96 Z M440,182 L440,176 Q440,172 446,171 L464,168 L478,147 Q482,141 490,141 L524,141 Q532,141 536,147 L550,162 L576,165 Q586,166 586,172 L586,182 Z',
+		{ x: 6, y: 55, w: 846, h: 215 }
+	),
+	realCarTransporterWindows: realPart(
+		'realCarTransporterWindows',
+		'glass',
+		'face',
+		'car-transporter',
+		'M32,190 L32,142 Q32,132 42,132 L88,132 Q96,132 96,142 L96,190 Z M118,178 L118,142 Q118,132 128,132 L168,132 Q178,132 178,142 L178,178 Z',
+		{ x: 32, y: 132, w: 146, h: 58 }
+	),
+	realCarTransporterDoor: realPart(
+		'realCarTransporterDoor',
+		'trim',
+		'detail',
+		'car-transporter',
+		'M118,184 L178,184 L178,246 L118,246 Z',
+		{ x: 118, y: 184, w: 60, h: 62 }
+	),
+	realCarTransporterWheel: realPart(
+		'realCarTransporterWheel',
+		'rubber',
+		'locomotion',
+		'car-transporter',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realRefrigeratedTruckBody: realPart(
+		'realRefrigeratedTruckBody',
+		'shell',
+		'body',
+		'refrigerated-truck',
+		'M24,260 L24,134 Q24,114 42,110 Q58,106 78,106 L130,106 L130,62 Q130,58 136,58 L196,58 L196,52 L742,52 Q752,52 752,62 L752,240 L196,240 L196,260 Z M196,240 L752,240 L752,260 L196,260 Z M6,116 L24,116 L24,150 L6,150 Z M8,244 L24,244 L24,268 L8,268 Z M752,246 L768,246 L768,266 L752,266 Z',
+		{ x: 6, y: 52, w: 762, h: 216 }
+	),
+	realRefrigeratedTruckWindows: realPart(
+		'realRefrigeratedTruckWindows',
+		'glass',
+		'face',
+		'refrigerated-truck',
+		'M45,120 L119,120 Q128,120 128,129 L128,169 Q128,178 119,178 L45,178 Q36,178 36,169 L36,129 Q36,120 45,120 Z M143,124 L177,124 Q182,124 182,129 L182,173 Q182,178 177,178 L143,178 Q138,178 138,173 L138,129 Q138,124 143,124 Z',
+		{ x: 36, y: 120, w: 146, h: 58 }
+	),
+	realRefrigeratedTruckDoor: realPart(
+		'realRefrigeratedTruckDoor',
+		'trim',
+		'detail',
+		'refrigerated-truck',
+		'M470,96 L556,96 L556,204 L470,204 Z',
+		{ x: 470, y: 96, w: 86, h: 108 }
+	),
+	realRefrigeratedTruckWheel: realPart(
+		'realRefrigeratedTruckWheel',
+		'rubber',
+		'locomotion',
+		'refrigerated-truck',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1371,6 +1479,18 @@ export const PART_NAMES: Record<PartId, string> = {
 	realTowTruckWindows: 'Windows',
 	realTowTruckDoor: 'Door',
 	realTowTruckWheel: 'Wheel',
+	realGarbageTruckBody: 'Garbage truck',
+	realGarbageTruckWindows: 'Windows',
+	realGarbageTruckDoor: 'Door',
+	realGarbageTruckWheel: 'Wheel',
+	realCarTransporterBody: 'Car transporter',
+	realCarTransporterWindows: 'Windows',
+	realCarTransporterDoor: 'Door',
+	realCarTransporterWheel: 'Wheel',
+	realRefrigeratedTruckBody: 'Refrigerated truck',
+	realRefrigeratedTruckWindows: 'Windows',
+	realRefrigeratedTruckDoor: 'Side door',
+	realRefrigeratedTruckWheel: 'Wheel',
 
 };
 

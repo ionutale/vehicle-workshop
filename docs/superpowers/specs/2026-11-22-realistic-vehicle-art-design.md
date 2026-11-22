@@ -63,10 +63,13 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 18. **Cement mixer (done):** compact cab-over with a pear-shaped drum and short wheelbase at Level 5; 5 pieces, 4 at the first tier.
 19. **Crane truck (done):** lorry-mounted lattice boom with hook block and outriggers at Level 5; 5 pieces, 4 at the first tier.
 20. **Tow truck (done):** compact cab-over recovery truck with boom, winch and hook at Level 5; 5 pieces, 4 at the first tier.
-21. Convert the remaining **special vehicles** and **trucks** by cargo type (garbage, transporter, refrigerated, curtain-side, parcel).
-22. Convert the remaining **cars and vans**.
-23. Convert **farm** and the remaining **works** machines.
-24. Remove the generic parts once no catalogue entry uses them.
+21. **Garbage truck (done):** rear-loading compactor with hopper, bin lift and bin at Level 5; 5 pieces, 4 at the first tier.
+22. **Car transporter (done):** two-deck carrier with two loaded cars and stowed ramps at Level 5; 5 pieces, 4 at the first tier.
+23. **Refrigerated truck (done):** insulated box with roof chiller and rear cargo doors at Level 5; 5 pieces, 4 at the first tier.
+24. Convert the remaining **trucks** (curtain-side, parcel, cement tanker, logging, livestock, recovery) and **vans**.
+25. Convert the remaining **cars**.
+26. Convert **farm** and the remaining **works** machines.
+27. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

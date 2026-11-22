@@ -208,18 +208,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'refrigerated-truck',
 		name: 'Refrigerated truck',
-		width: 600,
-		height: 280,
-		groundY: 212,
+		width: 780,
+		height: 340,
+		groundY: 272,
 		palette: pal('#F7F9FC', '#457B9D'),
-		chassisPath: slab(600, 212, 150),
+		chassisPath: slab(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 160, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 115, y: 125, z: 1, scale: 0.9 },
-			{ id: 'chiller', part: 'roofSign', x: 350, y: 82, z: 2, scale: 1.2 },
-			wheel('l', 170, 212),
-			wheel('r', 500, 212),
-			{ id: 'door', part: 'door', x: 545, y: 165, z: 2 }
+			{ id: 'body', part: 'realRefrigeratedTruckBody', x: 387, y: 160, z: 0 },
+			{ id: 'windows', part: 'realRefrigeratedTruckWindows', x: 109, y: 149, z: 1 },
+			{ id: 'door', part: 'realRefrigeratedTruckDoor', x: 513, y: 150, z: 2 },
+			{ id: 'wheel-l', part: 'realRefrigeratedTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realRefrigeratedTruckWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{

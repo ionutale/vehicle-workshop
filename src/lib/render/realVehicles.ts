@@ -17,6 +17,9 @@ import { drawRealFlatbedLorry } from './realFlatbedLorry';
 import { drawRealCraneTruck } from './realCraneTruck';
 import { drawRealCementMixer } from './realCementMixer';
 import { drawRealTowTruck } from './realTowTruck';
+import { drawRealGarbageTruck } from './realGarbageTruck';
+import { drawRealCarTransporter } from './realCarTransporter';
+import { drawRealRefrigeratedTruck } from './realRefrigeratedTruck';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -761,7 +764,10 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'flatbed-lorry': { draw: drawRealFlatbedLorry, width: 780, height: 340 },
 	'crane-truck': { draw: drawRealCraneTruck, width: 820, height: 300 },
 	'cement-mixer': { draw: drawRealCementMixer, width: 740, height: 380 },
-	'tow-truck': { draw: drawRealTowTruck, width: 780, height: 390 }
+	'tow-truck': { draw: drawRealTowTruck, width: 780, height: 390 },
+	'garbage-truck': { draw: drawRealGarbageTruck, width: 760, height: 330 },
+	'car-transporter': { draw: drawRealCarTransporter, width: 860, height: 340 },
+	'refrigerated-truck': { draw: drawRealRefrigeratedTruck, width: 780, height: 340 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

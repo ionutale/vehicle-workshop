@@ -38,7 +38,7 @@ describe('vehicle details', () => {
 			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
 		}
 		expect(grille('delivery-van').x).toBeLessThan(getVehicle('delivery-van').width / 2);
-		expect(grille('refrigerated-truck').x).toBeLessThan(getVehicle('refrigerated-truck').width / 2);
+		expect(grille('airport-fuel-bowser').x).toBeLessThan(getVehicle('airport-fuel-bowser').width / 2);
 	});
 
 	it('keeps the facing when the level view has trimmed the cab away', () => {

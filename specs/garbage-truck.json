@@ -1,0 +1,55 @@
+{
+	"id": "garbage-truck",
+	"name": "Garbage truck",
+	"module": "realGarbageTruck",
+	"artWidth": 760,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realGarbageTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M30,250 L30,150 Q30,136 38,128 L70,88 Q76,80 88,80 L196,80 L196,68 Q196,58 206,58 L250,56 Q455,38 640,54 L656,56 Q670,58 676,70 L682,80 L700,92 Q704,95 704,106 L704,250 Z M140,80 L140,74 L150,74 Q150,60 160,60 Q170,60 170,74 L180,74 L180,80 Z M18,96 L30,96 L30,126 L18,126 Z M16,230 L30,230 L30,260 L16,260 Z M112,250 L188,250 L188,262 L112,262 Z M190,250 L206,250 L206,268 L190,268 Z M642,250 L658,250 L658,268 L642,268 Z M704,160 L752,160 L752,168 L704,168 Z M708,168 L748,168 L744,226 Q744,232 738,232 L718,232 Q712,232 712,226 Z M696,250 L724,250 L724,264 L696,264 Z",
+			"bounds": { "x": 16, "y": 46, "w": 736, "h": 222 },
+			"name": "Garbage truck"
+		},
+		{
+			"id": "realGarbageTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M36,164 L36,138 Q36,128 44,122 L58,102 Q64,92 76,92 L102,92 Q110,92 110,100 L110,156 Q110,164 102,164 Z M124,94 L180,94 Q188,94 188,102 L188,150 Q188,158 180,158 L124,158 Q116,158 116,150 L116,102 Q116,94 124,94 Z",
+			"bounds": { "x": 36, "y": 92, "w": 152, "h": 72 },
+			"name": "Windows"
+		},
+		{
+			"id": "realGarbageTruckDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M124,172 L190,172 L190,244 L124,244 Z",
+			"bounds": { "x": 124, "y": 172, "w": 66, "h": 72 },
+			"name": "Door"
+		},
+		{
+			"id": "realGarbageTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 330,
+		"groundY": 272,
+		"colors": ["#2A9D8F", "#264653"],
+		"chassis": "slabPath(760, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realGarbageTruckBody", "x": 384, "y": 157, "z": 0 },
+			{ "id": "windows", "part": "realGarbageTruckWindows", "x": 112, "y": 128, "z": 1 },
+			{ "id": "door", "part": "realGarbageTruckDoor", "x": 157, "y": 208, "z": 2 },
+			{ "id": "wheel-l", "part": "realGarbageTruckWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realGarbageTruckWheel", "x": 600, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}
