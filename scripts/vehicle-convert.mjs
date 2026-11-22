@@ -94,19 +94,19 @@ const partEntries = spec.parts
 \t),`
 	)
 	.join('\n');
-parts = replaceOnce(
-	parts,
-	/\n\n};\n\n\/\*\* Child-facing names/,
-	`${partEntries}\n\n};\n\n/** Child-facing names`,
-	'PARTS object end'
-);
+const insertObjectEntries = (text, anchor, entries, label) => {
+	const index = text.indexOf(anchor);
+	if (index < 0) {
+		console.error(`anchor not found: ${label}`);
+		process.exit(1);
+	}
+	const before = text.slice(0, index).replace(/\s+$/, '');
+	const comma = before.endsWith(',') ? '' : ',';
+	return `${before}${comma}\n${entries}\n${text.slice(index)}`;
+};
+parts = insertObjectEntries(parts, '\n};\n\n/** Child-facing names', partEntries, 'PARTS object end');
 const nameEntries = spec.parts.map((part) => `\t${part.id}: '${part.name}',`).join('\n');
-parts = replaceOnce(
-	parts,
-	/\n};\n\nexport function partName/,
-	`${nameEntries}\n};\n\nexport function partName`,
-	'PART_NAMES end'
-);
+parts = insertObjectEntries(parts, '\n};\n\nexport function partName', nameEntries, 'PART_NAMES end');
 write('src/lib/game/parts.ts', parts);
 
 let art = read('src/lib/render/realVehicles.ts');
