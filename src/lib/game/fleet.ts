@@ -464,19 +464,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'mobile-clinic',
 		name: 'Mobile clinic',
-		width: 620,
-		height: 280,
-		groundY: 212,
+		width: 780,
+		height: 340,
+		groundY: 270,
 		palette: pal('#F7F9FC', '#E63946'),
-		chassisPath: slab(620, 212, 150),
+		chassisPath: slab(780, 270, 160),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 160, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 118, y: 125, z: 1, scale: 0.9 },
-			{ id: 'window', part: 'windowStrip', x: 420, y: 126, z: 2, scale: 1.2 },
-			{ id: 'lights', part: 'lightBar', x: 330, y: 84, z: 2 },
-			{ id: 'door', part: 'door', x: 300, y: 165, z: 2 },
-			wheel('l', 180, 212),
-			wheel('r', 500, 212)
+			{ id: 'body', part: 'realMobileClinicBody', x: 423, y: 164, z: 0 },
+			{ id: 'windows', part: 'realMobileClinicWindows', x: 368, y: 144, z: 1 },
+			{ id: 'door', part: 'realMobileClinicDoor', x: 579, y: 177, z: 2 },
+			{ id: 'wheel-l', part: 'realMobileClinicWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMobileClinicWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{
