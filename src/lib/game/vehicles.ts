@@ -446,18 +446,18 @@ VEHICLES.push(
 	{
 		id: 'fuel-tanker',
 		name: 'Fuel tanker',
-		width: 600,
-		height: 260,
-		groundY: 210,
-		palette: palette('#FFB703', '#023047'),
-		chassisPath: slabPath(600, 210, 150),
+		width: 900,
+		height: 360,
+		groundY: 272,
+		palette: palette('#E4EBF2', '#1F3448'),
+		chassisPath: slabPath(900, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 310, y: 196, z: 0, scale: 0.78 },
-			{ id: 'tank', part: 'tank', x: 370, y: 145, z: 1, scale: 1.1 },
-			{ id: 'cab', part: 'cab', x: 100, y: 120, z: 2, scale: 0.9 },
-			{ id: 'lights', part: 'lightBar', x: 100, y: 72, z: 3 },
-			wheelSlot('l', 180, 210),
-			wheelSlot('r', 480, 210)
+			{ id: 'body', part: 'realFuelTankerBody', x: 446, y: 191, z: 0 },
+			{ id: 'windows', part: 'realFuelTankerWindows', x: 108, y: 153, z: 1 },
+			{ id: 'door', part: 'realFuelTankerDoor', x: 152, y: 218, z: 2 },
+			{ id: 'wheel-l', part: 'realFuelTankerWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realFuelTankerWheel', x: 760, y: 236, z: 4, flip: true }
 		]
 	},
 	{

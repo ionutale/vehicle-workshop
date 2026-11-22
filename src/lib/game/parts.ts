@@ -166,7 +166,11 @@ export type PartId =
 	| 'realWaterTankerBody'
 	| 'realWaterTankerWindows'
 	| 'realWaterTankerDoor'
-	| 'realWaterTankerWheel';
+	| 'realWaterTankerWheel'
+	| 'realFuelTankerBody'
+	| 'realFuelTankerWindows'
+	| 'realFuelTankerDoor'
+	| 'realFuelTankerWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -1524,6 +1528,38 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
 		{ x: 114, y: 200, w: 72, h: 72 }
 	),
+	realFuelTankerBody: realPart(
+		'realFuelTankerBody',
+		'shell',
+		'body',
+		'fuel-tanker',
+		'M26,264 L26,142 Q26,124 40,118 L54,112 Q60,110 74,110 L178,110 Q192,110 192,124 L192,242 L236,242 L236,182 Q236,150 264,144 L752,144 Q776,144 790,158 Q806,172 806,196 Q806,220 790,234 Q778,242 764,242 L820,242 L820,176 L866,176 L866,264 L682.6,264 A36,36 0 0 1 637.4,264 L422.6,264 A36,36 0 0 1 377.4,264 L26,264 Z M8,126 L24,126 L24,138 L26,138 L26,146 L24,146 L24,162 L8,162 Z M8,248 L26,248 L26,268 L8,268 Z M866,257 L884,257 L884,264 L866,264 Z M282,144 L282,138 Q282,128 292,128 L308,128 Q318,128 318,138 L318,144 Z M407,144 L407,138 Q407,128 417,128 L433,128 Q443,128 443,138 L443,144 Z M537,144 L537,138 Q537,128 547,128 L563,128 Q573,128 573,138 L573,144 Z M667,144 L667,138 Q667,128 677,128 L693,128 Q703,128 703,138 L703,144 Z',
+		{ x: 8, y: 110, w: 876, h: 162 }
+	),
+	realFuelTankerWindows: realPart(
+		'realFuelTankerWindows',
+		'glass',
+		'face',
+		'fuel-tanker',
+		'M43,124 L113,124 Q120,124 120,131 L120,175 Q120,182 113,182 L43,182 Q36,182 36,175 L36,131 Q36,124 43,124 Z M135,124 L175,124 Q180,124 180,129 L180,167 Q180,172 175,172 L135,172 Q130,172 130,167 L130,129 Q130,124 135,124 Z',
+		{ x: 36, y: 124, w: 144, h: 58 }
+	),
+	realFuelTankerDoor: realPart(
+		'realFuelTankerDoor',
+		'trim',
+		'detail',
+		'fuel-tanker',
+		'M120,186 L184,186 L184,250 L120,250 Z',
+		{ x: 120, y: 186, w: 64, h: 64 }
+	),
+	realFuelTankerWheel: realPart(
+		'realFuelTankerWheel',
+		'rubber',
+		'locomotion',
+		'fuel-tanker',
+		'M124,236 A36,36 0 1 1 196,236 A36,36 0 1 1 124,236 Z',
+		{ x: 124, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1691,6 +1727,10 @@ export const PART_NAMES: Record<PartId, string> = {
 	realWaterTankerWindows: 'Windows',
 	realWaterTankerDoor: 'Door',
 	realWaterTankerWheel: 'Wheel',
+	realFuelTankerBody: 'Fuel tanker',
+	realFuelTankerWindows: 'Windows',
+	realFuelTankerDoor: 'Door',
+	realFuelTankerWheel: 'Wheel',
 
 };
 

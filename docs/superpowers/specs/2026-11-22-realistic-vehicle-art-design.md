@@ -71,7 +71,7 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 26. **Log truck (done):** stake bunk with a loaded log stack and chains at Level 5; 5 pieces, 4 at the first tier.
 27. **Livestock truck (done):** double-deck slatted cattle body with folded ramp at Level 5; 5 pieces, 4 at the first tier.
 28. **Water tanker (done):** blue barrel tanker with hose-reel cabinet and ladder at Level 5; 5 pieces, 4 at the first tier.
-29. **Fuel tanker (rework):** cylindrical multi-compartment barrel with hazard placards and rear hose cabinet; awaiting level review.
+29. **Fuel tanker (done):** articulated tractor and semi-trailer with a long four-compartment barrel, hazard placards and rear hose cabinet at Level 5; 5 pieces, 4 at the first tier.
 30. Convert the remaining **trucks** and **vans**.
 31. Convert the remaining **cars**.
 32. Convert **farm** and the remaining **works** machines.

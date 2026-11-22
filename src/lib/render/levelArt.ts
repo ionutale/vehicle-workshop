@@ -12,6 +12,7 @@ import { drawRealCraneTruckLevel } from './realCraneTruck';
 import { drawRealCurtainSideLorryLevel } from './realCurtainSideLorry';
 import { drawRealDumpTruckLevel } from './realDumpTruck';
 import { drawRealFlatbedLorryLevel } from './realFlatbedLorry';
+import { drawRealFuelTankerLevel } from './realFuelTanker';
 import { drawRealGarbageTruckLevel } from './realGarbageTruck';
 import { drawRealLightRailTrainLevel } from './realLightRailTrain';
 import { drawRealMetroTrainLevel } from './realMetroTrain';
@@ -56,6 +57,7 @@ export const LEVEL_ART: Record<string, LevelArtSpec> = {
 	'log-truck': { draw: drawRealLogTruckLevel, width: 800, height: 380 },
 	'livestock-truck': { draw: drawRealLivestockTruckLevel, width: 800, height: 300 },
 	'water-tanker': { draw: drawRealWaterTankerLevel, width: 780, height: 340 },
+	'fuel-tanker': { draw: drawRealFuelTankerLevel, width: 900, height: 360 }
 };
 
 export const LEVEL_IDS = Object.keys(LEVEL_ART);

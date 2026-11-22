@@ -42,7 +42,7 @@ describe('vehicle details', () => {
 	});
 
 	it('keeps the facing when the level view has trimmed the cab away', () => {
-		const truck = getVehicle('fuel-tanker');
+		const truck = getVehicle('airport-fuel-bowser');
 		const trimmed = vehicleAtLevel(truck, 0);
 		expect(trimmed.slots.some((slot) => slot.part === 'cab')).toBe(false);
 		const grille = detailsFor(trimmed).find((detail) => detail.kind === 'grille')!;
