@@ -28,8 +28,9 @@
 		promptInstall,
 		shouldOfferInstall
 	} from '#lib/install.svelte';
-	import { PARTS } from '#lib/game/parts';
+	import { PARTS, partName } from '#lib/game/parts';
 	import { attachPointerHandlers, hitPiece } from '#lib/game/pointer';
+	import { speakPart } from '#lib/game/speech';
 	import { FIRST_VEHICLE_ID, getVehicle, nextVehicleId, type Vehicle } from '#lib/game/vehicles';
 	import {
 		hydratePrefs,
@@ -62,6 +63,7 @@
 	let requestVehicle: ((id: string) => void) | null = null;
 	let startVoice: (() => void) | null = null;
 	let pauseForMenu: (() => void) | null = null;
+	let movingPart: string | null = $state(null);
 
 	const play = (vehicleId?: string) => {
 		started = true;
@@ -77,7 +79,12 @@
 	};
 
 	$effect(() => {
-		audioRef?.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
+		audioRef?.setVolumes({
+			master: prefs.sound,
+			music: prefs.music,
+			sfx: prefs.sfx,
+			voices: prefs.voices
+		});
 		audioRef?.setMuted(prefs.muted);
 	});
 
@@ -149,7 +156,12 @@
 		vehicle = vehicleAtLevel(baseVehicle, prefs.difficulty.level);
 
 		audio.setMuted(prefs.muted);
-		audio.setVolumes({ master: prefs.sound, music: prefs.music, sfx: prefs.sfx });
+		audio.setVolumes({
+			master: prefs.sound,
+			music: prefs.music,
+			sfx: prefs.sfx,
+			voices: prefs.voices
+		});
 		audioRef = audio;
 		musicRef = music;
 		startVoice = () => audio.voice(familyOf(vehicle));
@@ -343,6 +355,8 @@
 			onPick: (piece: TrayPiece, world: Point) => {
 				audio.unlock();
 				audio.pick();
+				movingPart = partName(piece.part);
+				speakPart(movingPart);
 				hintSlotId = null;
 				state = reduce(state, {
 					type: 'pick',
@@ -368,6 +382,7 @@
 					shelfCenters: shelfCenters()
 				});
 				needsPaint = true;
+				movingPart = null;
 				if (state.placed.length > before) {
 					audio.snap();
 					markHintSeen();
@@ -421,6 +436,7 @@
 			confetti.clear();
 			completedVehicleId = null;
 			stallNoted = false;
+			movingPart = null;
 			scene = sceneForBuild(builds);
 			const next = nextVehicleId(baseVehicle.id, previousVehicleId);
 			previousVehicleId = baseVehicle.id;
@@ -567,6 +583,7 @@
 			previousVehicleId = baseVehicle.id;
 			baseVehicle = getVehicle(id);
 			vehicle = vehicleAtLevel(baseVehicle, prefs.difficulty.level);
+			movingPart = null;
 			measure(vehicle);
 			lastPhase = 'assembling';
 			reset(nowMs());
@@ -605,6 +622,7 @@
 					// The job is its own vignette; leftover paper from the cheer would clutter it.
 					confetti.clear();
 					jobs++;
+					audio.job(jobOf(vehicle));
 				}
 				if (state.phase === 'assembling' && previousPhase === 'arriving') {
 					audio.voice(familyOf(vehicle));
@@ -818,6 +836,7 @@
 		aria-label="Menu"
 		onclick={() => {
 			pauseForMenu?.();
+			movingPart = null;
 			screen = 'menu';
 		}}
 	>
@@ -830,6 +849,9 @@
 			/>
 		</svg>
 	</button>
+	{#if movingPart}
+		<div class="piece-label" data-testid="piece-label" aria-live="polite">{movingPart}</div>
+	{/if}
 {/if}
 
 {#if screen === 'menu'}
@@ -859,6 +881,36 @@
 		width: 100vw;
 		height: 100dvh;
 		touch-action: none;
+	}
+
+	.piece-label {
+		position: fixed;
+		top: max(6px, env(safe-area-inset-top));
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 15;
+		pointer-events: none;
+		padding: 6px 20px;
+		border-radius: 999px;
+		border: 3px solid #3a271b;
+		background: #fff9ec;
+		color: #3a271b;
+		font-size: clamp(19px, 5.5vw, 26px);
+		font-weight: 700;
+		line-height: 1.1;
+		box-shadow: 0 4px 0 #3a271b;
+		animation: label-pop 140ms ease-out;
+	}
+
+	@keyframes label-pop {
+		from {
+			opacity: 0;
+			transform: translateX(-50%) scale(0.85);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(-50%) scale(1);
+		}
 	}
 
 	.gear {

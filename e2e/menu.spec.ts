@@ -7,8 +7,9 @@ test('the menu opens settings and plays', async ({ page }) => {
 
 	await page.getByRole('button', { name: 'Settings' }).click();
 	await expect(page.getByRole('slider', { name: 'Music' })).toBeVisible();
-	await expect(page.getByRole('slider', { name: 'Sound', exact: true })).toBeVisible();
+	await expect(page.getByRole('slider', { name: 'Master', exact: true })).toBeVisible();
 	await expect(page.getByRole('slider', { name: 'Sound effects' })).toBeVisible();
+	await expect(page.getByRole('slider', { name: 'Voices' })).toBeVisible();
 
 	await page.getByRole('button', { name: 'Back' }).click();
 	await expect(page.getByRole('button', { name: 'Play' })).toBeVisible();

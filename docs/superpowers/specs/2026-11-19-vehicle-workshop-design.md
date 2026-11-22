@@ -23,7 +23,7 @@ It is the flat, drag-and-drop, endless-catalogue sibling of `truck-game` (3D, ta
 - No scoring, stars, stickers, collection book, or unlock progression. (A garage shelf and persisted build order were added later, at the user's direction; see **Growth pass**.)
 - No failure state of any kind: it must be impossible to place a piece wrongly.
 - No vehicle driving simulation, steering, hills, or collisions. The drive-off is a canned animation.
-- No 3D, no characters, no dialogue, no reading.
+- No 3D, no characters, no dialogue. The optional piece-name label and spoken names are a learning aid; the game remains playable without reading.
 - No keyboard play in v1, no multi-touch, no two-player.
 - No settings screen. One mute toggle is the entire UI outside the game.
 
@@ -167,13 +167,16 @@ Total ≈ 5.1 s. During the drive-off the canvas ignores pointers; the sequence 
 
 ### Audio
 
-Synthesised at runtime with WebAudio — no audio assets to cache and no latency on the first tap. A single `AudioBus` with a master gain of 0.2, created and `resume()`d on the first `pointerdown` (browser autoplay policy).
+Synthesised at runtime with WebAudio — no audio assets to cache and no latency on the first tap. A single `AudioBus` with a master gain of 0.28, created and `resume()`d on the first `pointerdown` (browser autoplay policy). Four independent gains feed the master: music, sound effects, voices, and the mute level.
 
 - **pick:** 60 ms sine blip at 660 Hz, quick decay.
 - **snap:** 120 ms click — filtered noise burst plus a 220 Hz sine, very short attack.
 - **complete:** three-note rising fanfare, C–E–G (523 → 659 → 784 Hz), 95 ms apart on a soft triangle.
-- **voice:** one short signature per family, selected by `familyOf(vehicle)`: car beeps, truck air horn, bus honk, farm chug, works reverse beeps, emergency siren, rail bell. All synthesised and routed through the effects slider.
+- **voice:** one short signature per family, selected by `familyOf(vehicle)`: car beeps, truck air horn, bus honk, farm chug, works reverse beeps, emergency siren, rail bell. All synthesised and routed through the **Voices** slider.
+- **job:** a short effect for every job beat — a crate thud, door chime, dig scoop, water hiss, siren, bell, winch, mixer rumble, plough scrape, brush swish, roller rumble, pour, log knock, car clank, hydraulic hiss or rescue chime — selected by `jobOf(vehicle)` and routed through Sound effects.
+- **speech:** picking a piece speaks its child-friendly name (Wheel, Ladder, Bucket, Windows, …) with the Web Speech API, at `voices × sound`; missing speech support is silent, and the visual label still works.
 - **engine:** 700 ms sawtooth ramping 80 → 140 Hz with a 6 Hz vibrato, low-passed and faded out under the scroll.
+- **music bed:** the four-chord loop gains a soft bass, sustained pad, bell on each bar, off-beat arpeggio and a quiet shaker. It is scheduled 0.4 s ahead on the audio clock.
 
 Mute toggle: a 44 × 44 speaker icon drawn in the top-right of the tray panel, tinted not-outlined so it never competes with the pieces. Persisted in `localStorage` under `vw:muted`; the key is read defensively (private mode, quota errors) and defaults to unmuted when unavailable.
 
@@ -182,7 +185,7 @@ Mute toggle: a 44 × 44 speaker icon drawn in the top-right of the tray panel, t
 Everything in `localStorage` sits behind a safe wrapper that never throws:
 
 - `vw:muted`, `vw:seenHint` — booleans.
-- `vw:music`, `vw:sound`, `vw:sfx` — volume decimals.
+- `vw:music`, `vw:sound`, `vw:sfx`, `vw:voices` — volume decimals.
 - `vw:garage` — the last nine unique vehicle ids, oldest first, as JSON.
 - `vw:installDismissed` — boolean; once set, the add-to-home-screen card never returns.
 - `vw:difficulty` — `{ level, streak, stalls }` as JSON; level 0–3.
@@ -238,11 +241,17 @@ Five additions, each independent of the others:
 - **Parent lock and how-to-play.** Settings sliders are disabled until a 1.2 s hold; the padlock is a real button with `aria-pressed` and a keyboard path. The hold state is per visit and resets on Back.
 - **Install hint.** After two finished builds, the menu offers a dismissible add-to-home-screen card. iOS gets "Tap Share, then Add to Home Screen"; Chromium gets a button backed by `beforeinstallprompt`. It never appears in standalone mode, after dismissal, or before two builds. Dismissal is persisted in `vw:installDismissed`.
 
+### Piece label and speech
+
+While a piece is held, a cream pill at the top centre names it — “Wheel”, “Ladder”, “Bucket”, “Windows”. Picking it also speaks that name through the Web Speech API at `voices × sound`; the speech is skipped when muted or when the browser has no speech engine. The label disappears on release. Every part id has one child-friendly name in `PART_NAMES`, including the realistic cut-out parts.
+
+This is the only text on the game surface; it is transient and never required to complete a vehicle.
+
 ## Menu, settings and music
 
 The game opens on a menu rather than straight into the shelf: one **Play** button and one **Settings** button, both far larger than a child's finger. The menu is a DOM overlay, not canvas, so the buttons and sliders get native focus, hit targets and accessibility for free; the canvas keeps painting the idle scene behind it. A gear in the bottom-left of the game brings the menu back.
 
-Settings holds three sliders — music, sound (master) and sound effects — each 48 px of track with a 34 px thumb, saved on input under `vw:music`, `vw:sound` and `vw:sfx` as decimals. They start **locked**: a 1.2 s press-and-hold on the padlock unlocks them, a tap cannot, a keyboard activation can, and Back locks them again. A short "How to play" line sits above the lock. Music is synthesised at runtime: an eight-bar loop over C–Am–F–G at 84 bpm, a pentatonic melody on a soft triangle, a sine bass and no drums, so there is no audio file to cache and it can duck or stop instantly. It starts on Play (the gesture browsers require), stops when the tab is hidden, and resumes on return.
+Settings holds four sliders — music, master, sound effects and voices — each 48 px of track with a 34 px thumb, saved on input under `vw:music`, `vw:sound`, `vw:sfx` and `vw:voices` as decimals. Voices controls the family signatures and the spoken component names; sound effects controls job and interaction sounds. They start **locked**: a 1.2 s press-and-hold on the padlock unlocks them, a tap cannot, a keyboard activation can, and Back locks them again. A short "How to play" line sits above the lock. Music is synthesised at runtime: an eight-bar loop over C–Am–F–G at 84 bpm, a pentatonic melody on a soft triangle, a sine bass and no drums, so there is no audio file to cache and it can duck or stop instantly. It starts on Play (the gesture browsers require), stops when the tab is hidden, and resumes on return.
 
 The page cannot be zoomed: `user-scalable=no` and `maximum-scale=1` in the viewport, `touch-action: manipulation`, and `gesturestart`/`gesturechange`/`dblclick` refused for iOS, which ignores the viewport flags. Text selection and the long-press callout are off on every element; only the settings values remain real, focusable inputs.
 

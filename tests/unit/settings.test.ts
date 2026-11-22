@@ -10,6 +10,7 @@ describe('settings lock', () => {
 		render(SettingsPanel, { props: { onback: vi.fn() } });
 		const slider = screen.getByRole('slider', { name: 'Music' });
 		expect(slider).toBeDisabled();
+		expect(screen.getByRole('slider', { name: 'Voices' })).toBeDisabled();
 
 		await fireEvent.pointerDown(screen.getByRole('button', { name: 'Unlock settings' }));
 		await vi.advanceTimersByTimeAsync(1200);

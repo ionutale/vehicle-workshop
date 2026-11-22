@@ -5,6 +5,7 @@
  */
 
 import type { VehicleFamily } from './families';
+import type { JobKind } from './jobs';
 
 export const TONES = {
 	pick: 660,
@@ -16,7 +17,7 @@ export const TONES = {
 	engineTo: 140
 };
 
-export const MASTER_GAIN = 0.2;
+export const MASTER_GAIN = 0.28;
 
 export interface VoiceNote {
 	/** Milliseconds from the start of the signature. */
@@ -60,7 +61,109 @@ export interface Volumes {
 	master: number;
 	music: number;
 	sfx: number;
+	voices: number;
 }
+
+export interface JobNote {
+	at: number;
+	frequency: number;
+	duration: number;
+	type: OscillatorType;
+	endFrequency?: number;
+}
+
+export interface JobSound {
+	notes: JobNote[];
+	noise?: { at?: number; duration: number; frequency: number; level: number; type?: BiquadFilterType };
+}
+
+/** Short, characterful effects for each job beat, all from the same oscillator/noise kit. */
+export const JOB_SOUNDS: Record<JobKind, JobSound> = {
+	beep: {
+		notes: [
+			{ at: 0, frequency: 420, duration: 0.12, type: 'square' },
+			{ at: 150, frequency: 520, duration: 0.12, type: 'square' }
+		]
+	},
+	deliver: {
+		notes: [{ at: 0, frequency: 90, duration: 0.2, type: 'sine' }],
+		noise: { duration: 0.16, frequency: 260, level: 0.22, type: 'lowpass' }
+	},
+	passengers: {
+		notes: [
+			{ at: 0, frequency: 660, duration: 0.18, type: 'sine' },
+			{ at: 130, frequency: 880, duration: 0.24, type: 'sine' }
+		]
+	},
+	harvest: {
+		notes: [{ at: 0, frequency: 110, duration: 0.22, type: 'triangle' }],
+		noise: { duration: 0.3, frequency: 1500, level: 0.14, type: 'highpass' }
+	},
+	dig: {
+		notes: [{ at: 80, frequency: 160, duration: 0.14, type: 'triangle' }],
+		noise: { duration: 0.24, frequency: 500, level: 0.3, type: 'lowpass' }
+	},
+	spray: {
+		notes: [],
+		noise: { duration: 0.5, frequency: 2200, level: 0.18, type: 'highpass' }
+	},
+	siren: {
+		notes: [
+			{ at: 0, frequency: 760, duration: 0.18, type: 'square' },
+			{ at: 210, frequency: 560, duration: 0.18, type: 'square' }
+		]
+	},
+	platform: {
+		notes: [
+			{ at: 0, frequency: 1046, duration: 0.4, type: 'sine' },
+			{ at: 180, frequency: 784, duration: 0.3, type: 'sine' }
+		]
+	},
+	tow: {
+		notes: [{ at: 0, frequency: 220, duration: 0.38, type: 'sawtooth', endFrequency: 300 }],
+		noise: { at: 40, duration: 0.16, frequency: 900, level: 0.12, type: 'lowpass' }
+	},
+	mix: {
+		notes: [{ at: 0, frequency: 80, duration: 0.55, type: 'sawtooth' }],
+		noise: { duration: 0.4, frequency: 350, level: 0.16, type: 'lowpass' }
+	},
+	plough: {
+		notes: [{ at: 0, frequency: 120, duration: 0.22, type: 'triangle' }],
+		noise: { duration: 0.38, frequency: 900, level: 0.22, type: 'lowpass' }
+	},
+	sweep: {
+		notes: [],
+		noise: { duration: 0.34, frequency: 2600, level: 0.14, type: 'highpass' }
+	},
+	roll: {
+		notes: [{ at: 0, frequency: 65, duration: 0.55, type: 'sawtooth', endFrequency: 85 }],
+		noise: { duration: 0.4, frequency: 400, level: 0.14, type: 'lowpass' }
+	},
+	pour: {
+		notes: [{ at: 0, frequency: 140, duration: 0.3, type: 'sine' }],
+		noise: { duration: 0.45, frequency: 900, level: 0.18, type: 'bandpass' }
+	},
+	logs: {
+		notes: [{ at: 0, frequency: 180, duration: 0.12, type: 'triangle' }],
+		noise: { at: 80, duration: 0.14, frequency: 500, level: 0.16, type: 'lowpass' }
+	},
+	cars: {
+		notes: [
+			{ at: 0, frequency: 320, duration: 0.12, type: 'square' },
+			{ at: 110, frequency: 180, duration: 0.14, type: 'triangle' }
+		]
+	},
+	lift: {
+		notes: [{ at: 60, frequency: 200, duration: 0.32, type: 'sine', endFrequency: 300 }],
+		noise: { duration: 0.3, frequency: 2000, level: 0.12, type: 'highpass' }
+	},
+	rescue: {
+		notes: [
+			{ at: 0, frequency: 880, duration: 0.24, type: 'sine' },
+			{ at: 190, frequency: 660, duration: 0.3, type: 'sine' }
+		]
+	}
+};
 
 export interface AudioBus {
 	unlock(): void;
@@ -69,6 +172,7 @@ export interface AudioBus {
 	complete(): void;
 	engine(): void;
 	voice(family: VehicleFamily): void;
+	job(job: JobKind): void;
 	setMuted(muted: boolean): void;
 	setVolumes(volumes: Partial<Volumes>): void;
 	/** Where a music generator should connect. */
@@ -79,10 +183,11 @@ export interface AudioBus {
 
 export function createAudioBus(context?: AudioContext): AudioBus {
 	let muted = false;
-	let volumes: Volumes = { master: 1, music: 0.5, sfx: 1 };
+	let volumes: Volumes = { master: 1, music: 0.5, sfx: 1, voices: 1 };
 	let master: GainNode | null = null;
 	let sfx: GainNode | null = null;
 	let music: GainNode | null = null;
+	let voices: GainNode | null = null;
 	let timers: number[] = [];
 
 	const clearTimers = () => {
@@ -111,8 +216,11 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			music = ctx.createGain();
 			music.gain.setValueAtTime(volumes.music, ctx.currentTime);
 			music.connect(master);
+			voices = ctx.createGain();
+			voices.gain.setValueAtTime(volumes.voices, ctx.currentTime);
+			voices.connect(master);
 		}
-		return { master, sfx: sfx!, music: music! };
+		return { master, sfx: sfx!, music: music!, voices: voices! };
 	};
 
 	const tone = (
@@ -120,7 +228,8 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		frequency: number,
 		duration: number,
 		type: OscillatorType = 'sine',
-		endFrequency?: number
+		endFrequency?: number,
+		bus?: AudioNode
 	) => {
 		const osc = ctx.createOscillator();
 		const gain = ctx.createGain();
@@ -132,9 +241,39 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 		gain.gain.setValueAtTime(0.9, ctx.currentTime);
 		gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
 		osc.connect(gain);
-		gain.connect(ensureMaster(ctx).sfx);
+		gain.connect(bus ?? ensureMaster(ctx).sfx);
 		osc.start();
 		osc.stop(ctx.currentTime + duration + 0.02);
+	};
+
+	const noise = (
+		ctx: AudioContext,
+		duration: number,
+		frequency: number,
+		level: number,
+		type: BiquadFilterType = 'highpass',
+		at = 0
+	) => {
+		const start = ctx.currentTime + at;
+		const length = Math.max(1, Math.floor(ctx.sampleRate * duration));
+		const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+		const data = buffer.getChannelData(0);
+		for (let i = 0; i < length; i++) {
+			data[i] = (Math.random() * 2 - 1) * (1 - i / length) ** 2;
+		}
+		const source = ctx.createBufferSource();
+		source.buffer = buffer;
+		const filter = ctx.createBiquadFilter();
+		filter.type = type;
+		filter.frequency.setValueAtTime(frequency, start);
+		const gain = ctx.createGain();
+		gain.gain.setValueAtTime(level, start);
+		gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+		source.connect(filter);
+		filter.connect(gain);
+		gain.connect(ensureMaster(ctx).sfx);
+		source.start(start);
+		source.stop(start + duration + 0.02);
 	};
 
 	const click = (ctx: AudioContext, duration: number) => {
@@ -195,8 +334,30 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			for (const note of VOICES[family]) {
 				later(() => {
 					const ctx = ready();
-					if (ctx) tone(ctx, note.frequency, note.duration, note.type, note.endFrequency);
+					if (ctx) {
+						tone(ctx, note.frequency, note.duration, note.type, note.endFrequency, ensureMaster(ctx).voices);
+					}
 				}, note.at);
+			}
+		},
+		job(job: JobKind) {
+			const ctx = ready();
+			if (!ctx) return;
+			const sound = JOB_SOUNDS[job];
+			for (const note of sound.notes) {
+				later(() => {
+					const current = ready();
+					if (current) {
+						tone(current, note.frequency, note.duration, note.type, note.endFrequency);
+					}
+				}, note.at);
+			}
+			if (sound.noise) {
+				const { at = 0, duration, frequency, level, type } = sound.noise;
+				later(() => {
+					const current = ready();
+					if (current) noise(current, duration, frequency, level, type);
+				}, at);
 			}
 		},
 		setMuted(value: boolean) {
@@ -211,6 +372,7 @@ export function createAudioBus(context?: AudioContext): AudioBus {
 			nodes.master.gain.setValueAtTime(muted ? 0 : MASTER_GAIN * volumes.master, context.currentTime);
 			nodes.sfx.gain.setValueAtTime(volumes.sfx, context.currentTime);
 			nodes.music.gain.setValueAtTime(volumes.music, context.currentTime);
+			nodes.voices.gain.setValueAtTime(volumes.voices, context.currentTime);
 		},
 		musicInput() {
 			if (!context) return null;

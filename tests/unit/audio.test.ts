@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { TONES, VOICES, createAudioBus } from '#lib/game/audio';
+import { JOB_SOUNDS, TONES, VOICES, createAudioBus } from '#lib/game/audio';
+import { JOB_KINDS } from '#lib/game/jobs';
 
 function fakeContext() {
 	const osc = {
@@ -46,6 +47,7 @@ describe('audio', () => {
 			bus.complete();
 			bus.engine();
 			bus.voice('car');
+			bus.job('dig');
 		}).not.toThrow();
 	});
 
@@ -62,6 +64,13 @@ describe('audio', () => {
 		const bus = createAudioBus(ctx);
 		bus.pick();
 		expect(osc.start).toHaveBeenCalled();
+	});
+
+	it('has a sound for every job kind', () => {
+		for (const job of JOB_KINDS) {
+			expect(JOB_SOUNDS[job]).toBeDefined();
+			expect(JOB_SOUNDS[job].notes.length + (JOB_SOUNDS[job].noise ? 1 : 0)).toBeGreaterThan(0);
+		}
 	});
 
 	it('gives every family a distinct voice and mutes it with the rest', () => {

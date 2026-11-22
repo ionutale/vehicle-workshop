@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { prefs, setMusic, setSfx, setSound } from '#lib/preferences.svelte';
+	import { prefs, setMusic, setSfx, setSound, setVoices } from '#lib/preferences.svelte';
 
 	interface Props {
 		onback: () => void;
@@ -8,8 +8,9 @@
 
 	const rows = [
 		{ key: 'music' as const, label: 'Music', set: setMusic },
-		{ key: 'sound' as const, label: 'Sound', set: setSound },
-		{ key: 'sfx' as const, label: 'Sound effects', set: setSfx }
+		{ key: 'sound' as const, label: 'Master', set: setSound },
+		{ key: 'sfx' as const, label: 'Sound effects', set: setSfx },
+		{ key: 'voices' as const, label: 'Voices', set: setVoices }
 	];
 
 	const HOLD_MS = 1200;
@@ -321,34 +322,74 @@
 	}
 
 	@media (max-height: 640px) {
+		.screen {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
 		.panel {
-			padding: 16px;
+			padding: 12px;
 		}
 
 		h1 {
-			font-size: 26px;
+			font-size: 24px;
 		}
 
 		.tagline {
-			margin-bottom: 8px;
+			margin-bottom: 6px;
+			font-size: 13px;
 		}
 
 		.how {
-			font-size: 13px;
-			margin-bottom: 10px;
-		}
-
-		.rows {
-			gap: 12px;
-			margin-bottom: 16px;
+			font-size: 12px;
+			margin-bottom: 8px;
 		}
 
 		.lock {
-			min-height: 46px;
+			min-height: 42px;
+			font-size: 15px;
 		}
 
 		.lock-note {
-			margin-bottom: 12px;
+			font-size: 11px;
+			margin-bottom: 8px;
+		}
+
+		.rows {
+			gap: 6px;
+			margin-bottom: 10px;
+		}
+
+		.row {
+			gap: 2px 8px;
+		}
+
+		.label {
+			font-size: 15px;
+		}
+
+		.value {
+			font-size: 14px;
+		}
+
+		input[type='range'] {
+			height: 38px;
+		}
+
+		input[type='range']::-webkit-slider-thumb {
+			width: 28px;
+			height: 28px;
+			margin-top: -8px;
+		}
+
+		input[type='range']::-moz-range-thumb {
+			width: 26px;
+			height: 26px;
+		}
+
+		.back {
+			min-height: 48px;
+			font-size: 17px;
 		}
 	}
 </style>

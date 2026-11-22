@@ -14,6 +14,7 @@ export interface Settings {
 	music: number;
 	sound: number;
 	sfx: number;
+	voices: number;
 }
 
 const KEYS = {
@@ -22,6 +23,7 @@ const KEYS = {
 	music: 'vw:music',
 	sound: 'vw:sound',
 	sfx: 'vw:sfx',
+	voices: 'vw:voices',
 	garage: 'vw:garage',
 	difficulty: 'vw:difficulty'
 };
@@ -75,6 +77,7 @@ export const prefs = $state({
 	music: 0.5,
 	sound: 1,
 	sfx: 1,
+	voices: 1,
 	garage: [] as string[],
 	difficulty: initialDifficulty()
 });
@@ -85,6 +88,7 @@ export function hydratePrefs(): void {
 	prefs.music = readLevel(KEYS.music, 0.5);
 	prefs.sound = readLevel(KEYS.sound, 1);
 	prefs.sfx = readLevel(KEYS.sfx, 1);
+	prefs.voices = readLevel(KEYS.voices, 1);
 	prefs.garage = readJson<string[]>(
 		KEYS.garage,
 		[],
@@ -138,4 +142,9 @@ export function setSound(value: number): void {
 export function setSfx(value: number): void {
 	prefs.sfx = clamp01(value);
 	writeLevel(KEYS.sfx, prefs.sfx);
+}
+
+export function setVoices(value: number): void {
+	prefs.voices = clamp01(value);
+	writeLevel(KEYS.voices, prefs.voices);
 }
