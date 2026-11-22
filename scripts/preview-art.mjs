@@ -76,7 +76,7 @@ await page.evaluate(
 			ctx.fillText(`${level}. ${NAMES[level - 1]}`, x + 24, y + 33);
 		};
 
-		const strip = (variant) => {
+		const strip = () => {
 			const y = 430;
 			const gap = 8;
 			const cellW = (W - 48 - gap * 5) / 6;
@@ -92,10 +92,6 @@ await page.evaluate(
 				ctx.fillStyle = '#3A271B';
 				ctx.font = '700 11px ui-rounded, system-ui, sans-serif';
 				ctx.fillText(`Level ${level}`, x + 12, y + 21);
-				if (level === variant) {
-					ctx.fillStyle = '#8AD88A';
-					ctx.fillRect(x + cellW - 43, y + 7, 35, 17);
-				}
 				const scale = Math.min((cellW - 20) / artW, (cellH - 44) / artH);
 				draw(
 					ctx,
@@ -113,7 +109,7 @@ await page.evaluate(
 		};
 
 		hero(4);
-		strip(4);
+		strip();
 	},
 	{ moduleName, exportName, width, height }
 );

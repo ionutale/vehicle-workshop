@@ -115,7 +115,7 @@
 
 		for (let level = 1; level <= 5; level++) {
 			const x = 24 + level * (cellW + gap);
-			card(ctx, x, y, cellW, cellH, `Level ${level}`, level === variant ? 'PICK' : '');
+			card(ctx, x, y, cellW, cellH, `Level ${level}`, level === variant ? 'VIEW' : '');
 			if (art) {
 				const scale = Math.min((cellW - 20) / art.width, (cellH - 44) / art.height);
 				art.draw(

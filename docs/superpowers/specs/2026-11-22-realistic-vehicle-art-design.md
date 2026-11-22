@@ -54,11 +54,14 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 9. **Mobile library (done):** cream library van with a glazed wall of book spines, awning cassette and open-book roof sign at Level 4; 5 pieces, 4 at the first tier.
 10. **Mobile clinic (done):** white clinic van with a red cross, red livery, treatment window, patient door and roof cross sign at Level 4; 5 pieces, 4 at the first tier.
 11. **Trolleybus (done):** cream city bus with twin trolley poles baked into the body, teal livery and collector shoes at Level 4; 5 pieces, 4 at the first tier.
-12. Convert the **trams and trains**, then the remaining special vehicles.
-13. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
-14. Convert the remaining **cars and vans**.
-15. Convert **farm** and the remaining **works** machines.
-16. Remove the generic parts once no catalogue entry uses them.
+12. **Tram (done):** rounded city tram with pantograph and rail skirt at Level 5; 5 pieces, 4 at the first tier.
+13. **Light-rail train (done):** two-car articulated train with gangway and pantograph at Level 5; 5 pieces, 4 at the first tier.
+14. **Metro train (done):** streamlined metro car with three door sets and pantograph at Level 5; 5 pieces, 4 at the first tier.
+15. Convert the remaining **special vehicles**, then the trucks, cars, farm and works machines.
+16. Convert the remaining **trucks** by cargo type (tanker, tipper, flatbed, mixer, crane, tow, garbage, transporter).
+17. Convert the remaining **cars and vans**.
+18. Convert **farm** and the remaining **works** machines.
+19. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

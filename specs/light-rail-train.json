@@ -1,0 +1,55 @@
+{
+	"id": "light-rail-train",
+	"name": "Light-rail train",
+	"module": "realLightRailTrain",
+	"artWidth": 900,
+	"artHeight": 380,
+	"parts": [
+		{
+			"id": "realLightRailTrainBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M50,262 L50,112 Q50,92 70,92 L410,92 Q430,92 430,112 L430,262 Z M474,262 L474,112 Q474,92 494,92 L800,92 Q820,92 828,106 L858,158 Q866,170 866,184 L866,262 Z M430,262 L430,124 Q430,116 438,116 L466,116 Q474,116 474,124 L474,262 Z M176,8 L256,8 L256,92 L176,92 Z M330,79 L406,79 L406,92 L330,92 Z M544,79 L608,79 L608,92 L544,92 Z M866,238 L880,238 L880,250 L866,250 Z M36,240 L50,240 L50,252 L36,252 Z",
+			"bounds": { "x": 36, "y": 8, "w": 844, "h": 254 },
+			"name": "Light-rail train"
+		},
+		{
+			"id": "realLightRailTrainWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M74,112 L238,112 L238,170 L74,170 Z M318,112 L412,112 L412,170 L318,170 Z M494,112 L556,112 L556,170 L494,170 Z M640,112 L790,112 L790,170 L640,170 Z M802,106 L822,106 L848,170 Q852,178 846,186 L802,186 Z",
+			"bounds": { "x": 74, "y": 106, "w": 774, "h": 80 },
+			"name": "Windows"
+		},
+		{
+			"id": "realLightRailTrainDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M566,108 L630,108 L630,252 L566,252 Z",
+			"bounds": { "x": 566, "y": 108, "w": 64, "h": 144 },
+			"name": "Door"
+		},
+		{
+			"id": "realLightRailTrainWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+			"bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 900,
+		"height": 380,
+		"groundY": 272,
+		"colors": ["#E76F51", "#F2E8CF"],
+		"chassis": "slab(900, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realLightRailTrainBody", "x": 458, "y": 135, "z": 0 },
+			{ "id": "windows", "part": "realLightRailTrainWindows", "x": 461, "y": 146, "z": 1 },
+			{ "id": "door", "part": "realLightRailTrainDoor", "x": 598, "y": 180, "z": 2 },
+			{ "id": "wheel-l", "part": "realLightRailTrainWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realLightRailTrainWheel", "x": 700, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

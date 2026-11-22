@@ -9,7 +9,7 @@ An art pass owns exactly two files plus one image:
 
 - `src/lib/render/real<Name>.ts` — the level-aware drawing
 - `specs/<vehicle-id>.json` — masks, bounds, slots and dimensions
-- `<vehicle-id>-levels.png` — the five-level contact sheet
+- `specs/<vehicle-id>-levels.png` — the five-level contact sheet
 
 It **must not edit** shared files: `parts.ts`, `realVehicles.ts`, `levelArt.ts`, `vehicles.ts`,
 `fleet.ts`, tests, or package scripts. The main agent runs the converter once per vehicle.
@@ -109,7 +109,7 @@ Level 4 is the production target. Keep the gating booleans (`shaded`, `fitted`, 
 ```bash
 # contact sheet without registering anything (needs the dev server on 5182)
 node scripts/preview-art.mjs --module realTram --export drawRealTramLevel \
-  --width 820 --height 380 --out tram-levels.png
+  --width 820 --height 380 --out specs/tram-levels.png
 
 # register the vehicle after review
 node scripts/vehicle-convert.mjs specs/tram.json

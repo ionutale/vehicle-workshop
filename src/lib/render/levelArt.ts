@@ -6,6 +6,10 @@
  * with no per-vehicle page.
  */
 
+import { drawRealLightRailTrainLevel } from './realLightRailTrain';
+import { drawRealMetroTrainLevel } from './realMetroTrain';
+import { drawRealTramLevel } from './realTram';
+
 export type LevelDraw = (
 	ctx: CanvasRenderingContext2D,
 	x: number,
@@ -21,8 +25,9 @@ export interface LevelArtSpec {
 }
 
 export const LEVEL_ART: Record<string, LevelArtSpec> = {
-	// one line per converted vehicle, e.g.
-	// tram: { draw: drawRealTramLevel, width: 820, height: 380 },
+	'tram': { draw: drawRealTramLevel, width: 820, height: 380 },
+	'metro-train': { draw: drawRealMetroTrainLevel, width: 900, height: 380 },
+	'light-rail-train': { draw: drawRealLightRailTrainLevel, width: 900, height: 380 }
 };
 
 export const LEVEL_IDS = Object.keys(LEVEL_ART);

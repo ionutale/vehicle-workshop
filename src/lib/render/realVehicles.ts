@@ -8,6 +8,9 @@ import { drawRealMobileLibrary } from './realMobileLibrary';
 import { drawRealDoubleDecker } from './realDoubleDecker';
 import { drawRealMiniBus } from './realMiniBus';
 import { drawRealSchoolBus } from './realSchoolBus';
+import { drawRealTram } from './realTram';
+import { drawRealMetroTrain } from './realMetroTrain';
+import { drawRealLightRailTrain } from './realLightRailTrain';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -743,7 +746,10 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'airport-shuttle': { draw: drawRealAirportShuttle, width: 760, height: 320 },
 	'mobile-library': { draw: drawRealMobileLibrary, width: 780, height: 340 },
 	'mobile-clinic': { draw: drawRealMobileClinic, width: 780, height: 340 },
-	trolleybus: { draw: drawRealTrolleybus, width: 820, height: 400 }
+	trolleybus: { draw: drawRealTrolleybus, width: 820, height: 400 },
+	'tram': { draw: drawRealTram, width: 820, height: 380 },
+	'metro-train': { draw: drawRealMetroTrain, width: 900, height: 380 },
+	'light-rail-train': { draw: drawRealLightRailTrain, width: 900, height: 380 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

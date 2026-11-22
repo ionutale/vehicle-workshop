@@ -601,36 +601,35 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'light-rail-train',
 		name: 'Light-rail train',
-		width: 720,
-		height: 290,
-		groundY: 212,
+		width: 900,
+		height: 380,
+		groundY: 272,
 		palette: pal('#E76F51', '#F2E8CF'),
-		chassisPath: slab(720, 212, 170),
+		chassisPath: slab(900, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body-front', part: 'bodyBox', x: 210, y: 160, z: 0, scale: 0.95 },
-			{ id: 'body-rear', part: 'bodyBox', x: 510, y: 160, z: 0, scale: 0.95 },
-			{ id: 'windows', part: 'windowStrip', x: 360, y: 116, z: 2, scale: 3.2 },
-			{ id: 'pantograph', part: 'pantograph', x: 360, y: 74, z: 1, scale: 1.4 },
-			wheel('l', 160, 212),
-			wheel('r', 580, 212)
+			{ id: 'body', part: 'realLightRailTrainBody', x: 458, y: 135, z: 0 },
+			{ id: 'windows', part: 'realLightRailTrainWindows', x: 461, y: 146, z: 1 },
+			{ id: 'door', part: 'realLightRailTrainDoor', x: 598, y: 180, z: 2 },
+			{ id: 'wheel-l', part: 'realLightRailTrainWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realLightRailTrainWheel', x: 700, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'metro-train',
 		name: 'Metro train',
-		width: 720,
-		height: 290,
-		groundY: 212,
+		width: 900,
+		height: 380,
+		groundY: 272,
 		palette: pal('#F1FAEE', '#1D3557'),
-		chassisPath: slab(720, 212, 170),
+		chassisPath: slab(900, 272, 170),
+		realistic: true,
 		slots: [
-			{ id: 'body-front', part: 'bodyBox', x: 210, y: 160, z: 0, scale: 0.95 },
-			{ id: 'body-rear', part: 'bodyBox', x: 510, y: 160, z: 0, scale: 0.95 },
-			{ id: 'windows', part: 'windowStrip', x: 360, y: 112, z: 2, scale: 3 },
-			{ id: 'door', part: 'door', x: 360, y: 162, z: 2 },
-			{ id: 'pantograph', part: 'pantograph', x: 520, y: 74, z: 1, scale: 1.4 },
-			wheel('l', 160, 212),
-			wheel('r', 580, 212)
+			{ id: 'body', part: 'realMetroTrainBody', x: 458, y: 128, z: 0 },
+			{ id: 'windows', part: 'realMetroTrainWindows', x: 475, y: 148, z: 1 },
+			{ id: 'door', part: 'realMetroTrainDoor', x: 608, y: 164, z: 2 },
+			{ id: 'wheel-l', part: 'realMetroTrainWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMetroTrainWheel', x: 700, y: 236, z: 4, flip: true }
 		]
 	},
 	// ── Emergency and service ────────────────────────────────────────────────────────

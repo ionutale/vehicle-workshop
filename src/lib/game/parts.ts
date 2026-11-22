@@ -98,7 +98,19 @@ export type PartId =
 	| 'realTrolleybusBody'
 	| 'realTrolleybusWindows'
 	| 'realTrolleybusDoor'
-	| 'realTrolleybusWheel';
+	| 'realTrolleybusWheel'
+	| 'realTramBody'
+	| 'realTramWindows'
+	| 'realTramDoor'
+	| 'realTramWheel'
+	| 'realMetroTrainBody'
+	| 'realMetroTrainWindows'
+	| 'realMetroTrainDoor'
+	| 'realMetroTrainWheel'
+	| 'realLightRailTrainBody'
+	| 'realLightRailTrainWindows'
+	| 'realLightRailTrainDoor'
+	| 'realLightRailTrainWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -911,7 +923,103 @@ export const PARTS: Record<PartId, PartShape> = {
 		'trolleybus',
 		'M604,236 A36,36 0 1 1 676,236 A36,36 0 1 1 604,236 Z',
 		{ x: 604, y: 200, w: 72, h: 72 }
-	)
+	),
+	realTramBody: realPart(
+		'realTramBody',
+		'shell',
+		'body',
+		'tram',
+		'M98,94 L722,94 Q760,94 760,132 L760,230 Q760,252 738,252 L82,252 Q60,252 60,230 L60,132 Q60,94 98,94 Z M362,94 L362,56 L368,18 L438,18 L452,56 L452,94 Z M654,76 L724,76 L724,94 L654,94 Z M178,85 L240,85 L240,94 L178,94 Z M278,85 L340,85 L340,94 L278,94 Z M760,238 L778,238 L778,248 L760,248 Z M80,252 L740,252 L740,264 L80,264 Z M760,136 L776,116 L786,120 L786,128 L766,140 L760,140 Z M82,116 L106,116 Q112,116 112,122 L112,168 Q112,174 106,174 L82,174 Q76,174 76,168 L76,122 Q76,116 82,116 Z M132,114 L580,114 Q588,114 588,122 L588,166 Q588,174 580,174 L132,174 Q124,174 124,166 L124,122 Q124,114 132,114 Z M714,112 L738,112 Q748,112 748,122 L748,166 Q748,176 738,176 L714,176 Q704,176 704,166 L704,122 Q704,112 714,112 Z M124,236 A36,36 0 1 1 196,236 A36,36 0 1 1 124,236 Z M604,236 A36,36 0 1 1 676,236 A36,36 0 1 1 604,236 Z',
+		{ x: 60, y: 18, w: 726, h: 246 }
+	),
+	realTramWindows: realPart(
+		'realTramWindows',
+		'glass',
+		'face',
+		'tram',
+		'M82,116 L106,116 Q112,116 112,122 L112,168 Q112,174 106,174 L82,174 Q76,174 76,168 L76,122 Q76,116 82,116 Z M132,114 L580,114 Q588,114 588,122 L588,166 Q588,174 580,174 L132,174 Q124,174 124,166 L124,122 Q124,114 132,114 Z M714,112 L738,112 Q748,112 748,122 L748,166 Q748,176 738,176 L714,176 Q704,176 704,166 L704,122 Q704,112 714,112 Z',
+		{ x: 76, y: 112, w: 672, h: 64 }
+	),
+	realTramDoor: realPart(
+		'realTramDoor',
+		'trim',
+		'detail',
+		'tram',
+		'M594,112 L678,112 L678,238 L594,238 Z',
+		{ x: 594, y: 112, w: 84, h: 126 }
+	),
+	realTramWheel: realPart(
+		'realTramWheel',
+		'rubber',
+		'locomotion',
+		'tram',
+		'M124,236 A36,36 0 1 1 196,236 A36,36 0 1 1 124,236 Z',
+		{ x: 124, y: 200, w: 72, h: 72 }
+	),
+	realMetroTrainBody: realPart(
+		'realMetroTrainBody',
+		'shell',
+		'body',
+		'metro-train',
+		'M58,256 L58,96 Q58,74 82,74 L742,74 Q778,74 796,92 Q846,140 858,200 L858,232 Q858,256 834,256 Z M294,74 L416,74 L422,0 L298,0 Z',
+		{ x: 58, y: 0, w: 800, h: 256 }
+	),
+	realMetroTrainWindows: realPart(
+		'realMetroTrainWindows',
+		'glass',
+		'face',
+		'metro-train',
+		'M100,108 L210,108 L210,166 L100,166 Z M286,108 L398,108 L398,166 L286,166 Z M474,108 L570,108 L570,166 L474,166 Z M646,108 L768,108 L768,166 L646,166 Z M792,94 Q830,142 854,198 L810,202 Q786,150 770,100 Z',
+		{ x: 100, y: 94, w: 750, h: 108 }
+	),
+	realMetroTrainDoor: realPart(
+		'realMetroTrainDoor',
+		'trim',
+		'detail',
+		'metro-train',
+		'M572,102 L644,102 L644,226 L572,226 Z',
+		{ x: 572, y: 102, w: 72, h: 124 }
+	),
+	realMetroTrainWheel: realPart(
+		'realMetroTrainWheel',
+		'rubber',
+		'locomotion',
+		'metro-train',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
+	realLightRailTrainBody: realPart(
+		'realLightRailTrainBody',
+		'shell',
+		'body',
+		'light-rail-train',
+		'M50,262 L50,112 Q50,92 70,92 L410,92 Q430,92 430,112 L430,262 Z M474,262 L474,112 Q474,92 494,92 L800,92 Q820,92 828,106 L858,158 Q866,170 866,184 L866,262 Z M430,262 L430,124 Q430,116 438,116 L466,116 Q474,116 474,124 L474,262 Z M176,8 L256,8 L256,92 L176,92 Z M330,79 L406,79 L406,92 L330,92 Z M544,79 L608,79 L608,92 L544,92 Z M866,238 L880,238 L880,250 L866,250 Z M36,240 L50,240 L50,252 L36,252 Z',
+		{ x: 36, y: 8, w: 844, h: 254 }
+	),
+	realLightRailTrainWindows: realPart(
+		'realLightRailTrainWindows',
+		'glass',
+		'face',
+		'light-rail-train',
+		'M74,112 L238,112 L238,170 L74,170 Z M318,112 L412,112 L412,170 L318,170 Z M494,112 L556,112 L556,170 L494,170 Z M640,112 L790,112 L790,170 L640,170 Z M802,106 L822,106 L848,170 Q852,178 846,186 L802,186 Z',
+		{ x: 74, y: 106, w: 774, h: 80 }
+	),
+	realLightRailTrainDoor: realPart(
+		'realLightRailTrainDoor',
+		'trim',
+		'detail',
+		'light-rail-train',
+		'M566,108 L630,108 L630,252 L566,252 Z',
+		{ x: 566, y: 108, w: 64, h: 144 }
+	),
+	realLightRailTrainWheel: realPart(
+		'realLightRailTrainWheel',
+		'rubber',
+		'locomotion',
+		'light-rail-train',
+		'M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z',
+		{ x: 114, y: 200, w: 72, h: 72 }
+	),
 
 };
 
@@ -1010,7 +1118,20 @@ export const PART_NAMES: Record<PartId, string> = {
 	realTrolleybusBody: 'Trolleybus',
 	realTrolleybusWindows: 'Windows',
 	realTrolleybusDoor: 'Door',
-	realTrolleybusWheel: 'Wheel'
+	realTrolleybusWheel: 'Wheel',
+	realTramBody: 'Tram',
+	realTramWindows: 'Windows',
+	realTramDoor: 'Door',
+	realTramWheel: 'Wheel',
+	realMetroTrainBody: 'Metro train',
+	realMetroTrainWindows: 'Windows',
+	realMetroTrainDoor: 'Door',
+	realMetroTrainWheel: 'Wheel',
+	realLightRailTrainBody: 'Light-rail train',
+	realLightRailTrainWindows: 'Windows',
+	realLightRailTrainDoor: 'Door',
+	realLightRailTrainWheel: 'Wheel',
+
 };
 
 export function partName(part: PartId): string {

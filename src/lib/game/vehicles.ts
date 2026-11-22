@@ -412,19 +412,18 @@ VEHICLES.push(
 	{
 		id: 'tram',
 		name: 'Tram',
-		width: 640,
-		height: 270,
-		groundY: 215,
+		width: 820,
+		height: 380,
+		groundY: 272,
 		palette: palette('#EF476F', '#FFD166'),
-		chassisPath: slabPath(640, 215, 160),
+		chassisPath: slabPath(820, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 158, z: 0, scale: 1.25 },
-			{ id: 'windows', part: 'windowStrip', x: 320, y: 112, z: 2, scale: 2.9 },
-			{ id: 'pantograph', part: 'pantograph', x: 320, y: 42, z: 1, scale: 1.6 },
-			{ id: 'door', part: 'door', x: 420, y: 160, z: 2 },
-			{ id: 'lights', part: 'lightBar', x: 90, y: 160, z: 2 },
-			wheelSlot('l', 170, 215),
-			wheelSlot('r', 480, 215)
+			{ id: 'body', part: 'realTramBody', x: 423, y: 141, z: 0 },
+			{ id: 'windows', part: 'realTramWindows', x: 412, y: 144, z: 1 },
+			{ id: 'door', part: 'realTramDoor', x: 636, y: 175, z: 2 },
+			{ id: 'wheel-l', part: 'realTramWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realTramWheel', x: 640, y: 236, z: 4, flip: true }
 		]
 	},
 	{

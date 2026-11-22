@@ -75,25 +75,22 @@ const replaceOnce = (text, pattern, replacement, label) => {
 const bounds = (b) => `{ x: ${b.x}, y: ${b.y}, w: ${b.w}, h: ${b.h} }`;
 
 let parts = read('src/lib/game/parts.ts');
+const firstId = spec.parts[0].id;
 const ids = spec.parts.map((part) => `\t| '${part.id}'`).join('\n');
-parts = replaceOnce(
-	parts,
-	/(\t\| '[^']+');\n\nexport type Role/,
-	(match, last) => `${last}\n${ids};\n\nexport type Role`,
-	'PartId union'
-);
 const partEntries = spec.parts
 	.map(
 		(part) => `\t${part.id}: realPart(
-\t\t'${part.id}',
-\t\t'${part.role}',
-\t\t'${part.kind}',
-\t\t'${spec.id}',
-\t\t'${part.mask}',
-\t\t${bounds(part.bounds)}
-\t),`
+		'${part.id}',
+		'${part.role}',
+		'${part.kind}',
+		'${spec.id}',
+		'${part.mask}',
+		${bounds(part.bounds)}
+	),`
 	)
 	.join('\n');
+const nameEntries = spec.parts.map((part) => `\t${part.id}: '${part.name}',`).join('\n');
+
 const insertObjectEntries = (text, anchor, entries, label) => {
 	const index = text.indexOf(anchor);
 	if (index < 0) {
@@ -104,18 +101,33 @@ const insertObjectEntries = (text, anchor, entries, label) => {
 	const comma = before.endsWith(',') ? '' : ',';
 	return `${before}${comma}\n${entries}\n${text.slice(index)}`;
 };
-parts = insertObjectEntries(parts, '\n};\n\n/** Child-facing names', partEntries, 'PARTS object end');
-const nameEntries = spec.parts.map((part) => `\t${part.id}: '${part.name}',`).join('\n');
-parts = insertObjectEntries(parts, '\n};\n\nexport function partName', nameEntries, 'PART_NAMES end');
+
+if (!parts.includes(`| '${firstId}'`)) {
+	parts = replaceOnce(
+		parts,
+		/(\t\| '[^']+');\n\nexport type Role/,
+		(match, last) => `${last}\n${ids};\n\nexport type Role`,
+		'PartId union'
+	);
+}
+if (!parts.includes(`\t${firstId}: realPart(`)) {
+	parts = insertObjectEntries(parts, '\n};\n\n/** Child-facing names', partEntries, 'PARTS object end');
+}
+if (!parts.includes(`\t${firstId}: '`)) {
+	parts = insertObjectEntries(parts, '\n};\n\nexport function partName', nameEntries, 'PART_NAMES end');
+}
 write('src/lib/game/parts.ts', parts);
 
 let art = read('src/lib/render/realVehicles.ts');
+if (!art.includes(`from './${spec.module}'`)) {
 art = replaceOnce(
 	art,
 	/(import \{ drawReal[^\n]+\n)(\n)/,
 	`$1import { ${drawName} } from './${spec.module}';\n$2`,
 	'REAL_ART imports'
 );
+}
+if (!art.includes(`'${spec.id}': { draw:`)) {
 art = replaceOnce(
 	art,
 	/(export const REAL_ART: Record<string, RealArtSpec> = \{[\s\S]*?)(\n\};)/,
@@ -123,21 +135,26 @@ art = replaceOnce(
 		`${body.replace(/\s*$/, '')},\n\t'${spec.id}': { draw: ${drawName}, width: ${spec.artWidth}, height: ${spec.artHeight} }${close}`,
 	'REAL_ART object'
 );
+}
 write('src/lib/render/realVehicles.ts', art);
 
 let levels = read('src/lib/render/levelArt.ts');
+if (!levels.includes(`from './${spec.module}'`)) {
 levels = replaceOnce(
 	levels,
 	/(\nexport type LevelDraw)/,
 	`\nimport { ${levelName} } from './${spec.module}';\n$1`,
 	'level registry import'
 );
+}
+if (!levels.includes(`'${spec.id}': {`) && !levels.includes(`\n\t${spec.id}: {`)) {
 levels = replaceOnce(
 	levels,
 	/(export const LEVEL_ART: Record<string, LevelArtSpec> = \{\n)/,
 	`$1\t'${spec.id}': { draw: ${levelName}, width: ${spec.artWidth}, height: ${spec.artHeight} },\n`,
 	'level registry object'
 );
+}
 write('src/lib/render/levelArt.ts', levels);
 
 const vehicleFile = existsSync(join(root, 'src/lib/game/vehicles.ts')) ? 'src/lib/game/vehicles.ts' : null;

@@ -1,0 +1,55 @@
+{
+  "id": "metro-train",
+  "name": "Metro train",
+  "module": "realMetroTrain",
+  "artWidth": 900,
+  "artHeight": 380,
+  "parts": [
+    {
+      "id": "realMetroTrainBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M58,256 L58,96 Q58,74 82,74 L742,74 Q778,74 796,92 Q846,140 858,200 L858,232 Q858,256 834,256 Z M294,74 L416,74 L422,0 L298,0 Z",
+      "bounds": { "x": 58, "y": 0, "w": 800, "h": 256 },
+      "name": "Metro train"
+    },
+    {
+      "id": "realMetroTrainWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M100,108 L210,108 L210,166 L100,166 Z M286,108 L398,108 L398,166 L286,166 Z M474,108 L570,108 L570,166 L474,166 Z M646,108 L768,108 L768,166 L646,166 Z M792,94 Q830,142 854,198 L810,202 Q786,150 770,100 Z",
+      "bounds": { "x": 100, "y": 94, "w": 750, "h": 108 },
+      "name": "Windows"
+    },
+    {
+      "id": "realMetroTrainDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M572,102 L644,102 L644,226 L572,226 Z",
+      "bounds": { "x": 572, "y": 102, "w": 72, "h": 124 },
+      "name": "Door"
+    },
+    {
+      "id": "realMetroTrainWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": { "x": 114, "y": 200, "w": 72, "h": 72 },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 900,
+    "height": 380,
+    "groundY": 272,
+    "colors": ["#F1FAEE", "#1D3557"],
+    "chassis": "slab(900, 272, 170)",
+    "slots": [
+      { "id": "body", "part": "realMetroTrainBody", "x": 458, "y": 128, "z": 0 },
+      { "id": "windows", "part": "realMetroTrainWindows", "x": 475, "y": 148, "z": 1 },
+      { "id": "door", "part": "realMetroTrainDoor", "x": 608, "y": 164, "z": 2 },
+      { "id": "wheel-l", "part": "realMetroTrainWheel", "x": 150, "y": 236, "z": 4 },
+      { "id": "wheel-r", "part": "realMetroTrainWheel", "x": 700, "y": 236, "z": 4, "flip": true }
+    ]
+  }
+}
