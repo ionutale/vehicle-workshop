@@ -85,8 +85,18 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 40. **Taxi (done):** yellow cab with roof sign and checker band at Level 5; 5 pieces, 4 at the first tier.
 41. **Limousine (done):** long black body with gold waistline at Level 5; 5 pieces, 4 at the first tier.
 42. **Race car (done):** low racer with rear wing and number roundel at Level 5; 5 pieces, 4 at the first tier.
-43. Convert the remaining **special trucks**, **farm** and **works** machines.
-44. Remove the generic parts once no catalogue entry uses them.
+43. **Tractor (done):** green farm tractor with cab, linkage and beacon at Level 5; 5 pieces, 4 at the first tier.
+44. **Bulldozer (done):** tracked dozer with separate blade, cab and ripper at Level 5; 5 pieces, 4 at the first tier.
+45. **Forklift (done):** mast, pallet forks, guard cage and counterweight at Level 5; 5 pieces, 4 at the first tier (forks are the fourth piece).
+46. **Road roller (done):** articulated roller with two drums at Level 5; 5 pieces, 4 at the first tier.
+47. **Telehandler (done):** forward boom, fork carriage and stabilisers at Level 4; 5 pieces, 4 at the first tier.
+48. **Snow plough (done):** blade, spreader body and spinner at Level 5; 5 pieces, 4 at the first tier.
+49. **Street sweeper (done):** brushes, hopper and water tank at Level 5; 5 pieces, 4 at the first tier.
+50. **Monster truck (done):** lifted body on oversized wheels at Level 5; 5 pieces, 4 at the first tier.
+51. **Food truck (done):** serving hatch, awning and menu board at Level 5; 5 pieces, 4 at the first tier.
+52. **Combine harvester (done):** header reel, cab and grain tank at Level 5; 5 pieces, 4 at the first tier.
+53. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
+54. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

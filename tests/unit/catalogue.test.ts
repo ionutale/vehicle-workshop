@@ -63,9 +63,10 @@ describe('catalogue', () => {
 		}
 	});
 
-	it('uses scale rather than duplicate part ids for the tractor wheels', () => {
+	it('reuses one wheel part for the realistic tractor', () => {
 		const tractor = getVehicle('tractor');
-		const sizes = tractor.slots.filter((s) => s.part === 'wheel').map((s) => s.scale ?? 1);
-		expect(new Set(sizes).size).toBe(2);
+		const wheels = tractor.slots.filter((s) => s.part.endsWith('Wheel'));
+		expect(wheels).toHaveLength(2);
+		expect(new Set(wheels.map((s) => s.part)).size).toBe(1);
 	});
 });

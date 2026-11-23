@@ -1,0 +1,109 @@
+{
+  "id": "tractor",
+  "name": "Tractor",
+  "module": "realTractor",
+  "artWidth": 640,
+  "artHeight": 330,
+  "parts": [
+    {
+      "id": "realTractorBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M30,244 L30,192 Q30,183 41,179 L54,175 Q62,167 76,165 L158,149 L164,148 L164,54 Q164,46 172,46 L184,46 Q192,46 192,54 L192,118 L197,127 Q199,132 205,135 L205,140 L231,63 Q234,55 244,55 L382,53 Q394,53 396,65 L398,168 L412,180 L432,186 Q440,168 456,162 Q500,154 544,162 Q562,170 568,186 L572,200 L572,244 L540,244 Q540,198 500,194 Q460,198 460,244 L192,244 Q192,201 150,197 Q108,201 108,244 L30,244 Z M18,208 L30,208 L30,244 L18,244 Z M250,244 L430,244 L430,262 L250,262 Z M574,237 L620,222 L622,229 L576,243 Z M556,244 L616,258 L614,266 L554,252 Z M616,263 A5,5 0 1 1 626,263 A5,5 0 1 1 616,263 Z M294,44 Q294,36 302,36 L308,36 Q316,36 316,44 L316,52 L294,52 Z",
+      "bounds": {
+        "x": 18,
+        "y": 36,
+        "w": 608,
+        "h": 232
+      },
+      "name": "Tractor"
+    },
+    {
+      "id": "realTractorWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M212,131 L235,64 L250,64 L250,131 Z M255,63 L317,63 Q321,63 321,67 L321,125 Q321,129 317,129 L255,129 Q251,129 251,125 L251,67 Q251,63 255,63 Z M333,70 L381,70 Q384,70 384,73 L384,121 Q384,124 381,124 L333,124 Q330,124 330,121 L330,73 Q330,70 333,70 Z",
+      "bounds": {
+        "x": 212,
+        "y": 63,
+        "w": 172,
+        "h": 68
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realTractorDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M254,136 L320,136 L320,214 L254,214 Z",
+      "bounds": {
+        "x": 254,
+        "y": 136,
+        "w": 66,
+        "h": 78
+      },
+      "name": "Door"
+    },
+    {
+      "id": "realTractorWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": {
+        "x": 114,
+        "y": 200,
+        "w": 72,
+        "h": 72
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 640,
+    "height": 330,
+    "groundY": 272,
+    "colors": [
+      "#59B85C",
+      "#F4A261"
+    ],
+    "chassis": "slabPath(640, 272, 150)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realTractorBody",
+        "x": 322,
+        "y": 152,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realTractorWindows",
+        "x": 298,
+        "y": 97,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realTractorDoor",
+        "x": 287,
+        "y": 175,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realTractorWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realTractorWheel",
+        "x": 500,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

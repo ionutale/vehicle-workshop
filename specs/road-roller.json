@@ -1,0 +1,55 @@
+{
+	"id": "road-roller",
+	"name": "Road roller",
+	"module": "realRoadRoller",
+	"artWidth": 680,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realRoadRollerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M176,174 A52,52 0 0 1 202.1,206 L338,206 L338,100 Q338,84 326,84 L228,84 Q212,86 208,102 L196,140 Q188,146 186,160 L176,174 Z M356,206 L356,166 Q356,150 372,146 L370,146 L370,88 L384,88 L384,146 L392,146 L392,126 Q392,112 408,108 L420,106 L420,104 L426,104 L426,96 L442,96 L442,104 L556,104 Q574,104 580,122 L580,146 L592,148 Q606,154 610,172 Q614,186 610,198 L610,214 L597.7,214 A44,44 0 0 0 514.3,214 L356,214 Z M338,160 L356,160 L356,206 L338,206 Z M296,84 L296,78 Q296,64 306,64 Q316,64 316,78 L316,84 Z M208,84 L208,76 L226,76 L226,84 Z M172,88 L188,88 L188,104 L172,104 Z M188,96 L206,100 L206,104 L188,100 Z M246,206 L282,206 L282,214 L246,214 Z",
+			"bounds": { "x": 172, "y": 64, "w": 438, "h": 150 },
+			"name": "Road roller"
+		},
+		{
+			"id": "realRoadRollerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M190,158 L200,112 Q203,100 215,98 L246,98 L246,158 Z M258,96 L322,96 Q328,96 328,102 L328,154 Q328,160 322,160 L258,160 Q252,160 252,154 L252,102 Q252,96 258,96 Z",
+			"bounds": { "x": 190, "y": 96, "w": 138, "h": 64 },
+			"name": "Windows"
+		},
+		{
+			"id": "realRoadRollerDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M252,166 L324,166 L324,202 L252,202 Z",
+			"bounds": { "x": 252, "y": 166, "w": 72, "h": 36 },
+			"name": "Door"
+		},
+		{
+			"id": "realRoadRollerDrum",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M100,220 A52,52 0 1 1 204,220 A52,52 0 1 1 100,220 Z",
+			"bounds": { "x": 100, "y": 168, "w": 104, "h": 104 },
+			"name": "Drum"
+		}
+	],
+	"vehicle": {
+		"width": 680,
+		"height": 340,
+		"groundY": 272,
+		"colors": ["#F9C74F", "#2B2D42"],
+		"chassis": "slabPath(680, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realRoadRollerBody", "x": 391, "y": 139, "z": 0 },
+			{ "id": "windows", "part": "realRoadRollerWindows", "x": 259, "y": 128, "z": 1 },
+			{ "id": "door", "part": "realRoadRollerDoor", "x": 288, "y": 184, "z": 2 },
+			{ "id": "drum-front", "part": "realRoadRollerDrum", "x": 152, "y": 220, "z": 4 },
+			{ "id": "drum-rear", "part": "realRoadRollerDrum", "x": 556, "y": 228, "z": 4, "scale": 0.846154 }
+		]
+	}
+}

@@ -197,12 +197,16 @@ ${slots}
 
 const start = source.indexOf(`\t\tid: '${spec.id}',`);
 const blockStart = source.lastIndexOf('\n\t{', start);
-const blockEnd = source.indexOf('\n\t},', start) + '\n\t},'.length;
+const commaClose = source.indexOf('\n\t},', start);
+const finalClose = source.indexOf('\n\t}\n', start);
+const isLast = commaClose < 0 || (finalClose >= 0 && finalClose < commaClose);
+const blockEnd = isLast ? finalClose + '\n\t}\n'.length : commaClose + '\n\t},'.length;
 if (start < 0 || blockStart < 0 || blockEnd <= start) {
 	console.error(`could not isolate the ${spec.id} vehicle block`);
 	process.exit(1);
 }
-source = source.slice(0, blockStart + 1) + entry + source.slice(blockEnd);
+const entryText = isLast ? entry.replace(/,$/, '') : entry;
+source = source.slice(0, blockStart + 1) + entryText + source.slice(blockEnd);
 write(target, source);
 
 console.log(

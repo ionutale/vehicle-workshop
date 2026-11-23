@@ -1,0 +1,129 @@
+{
+  "id": "combine-harvester",
+  "name": "Combine harvester",
+  "module": "realCombineHarvester",
+  "artWidth": 900,
+  "artHeight": 315,
+  "parts": [
+    {
+      "id": "realCombineHarvesterBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M148,264 L148,234 L244,194 L244,168 L250,164 L256,122 Q259,112 270,112 L382,118 Q392,118 396,112 L402,94 L402,54 L252,54 L252,100 L268,100 L268,74 L560,74 L560,62 Q560,56 566,56 L654,56 Q660,56 660,62 L660,74 L728,74 Q742,74 744,86 L748,152 Q750,162 762,164 L798,170 Q808,172 808,186 L808,200 L826,204 L884,208 Q894,210 894,224 L894,252 Q894,266 880,266 Z M228,124 L244,124 L244,158 L228,158 Z",
+      "bounds": {
+        "x": 148,
+        "y": 54,
+        "w": 746,
+        "h": 212
+      },
+      "name": "Combine harvester"
+    },
+    {
+      "id": "realCombineHarvesterWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M269,128 L289,128 Q294,128 294,133 L294,179 Q294,184 289,184 L269,184 Q264,184 264,179 L264,133 Q264,128 269,128 Z M308,124 L380,124 Q386,124 386,130 L386,180 Q386,186 380,186 L308,186 Q302,186 302,180 L302,130 Q302,124 308,124 Z",
+      "bounds": {
+        "x": 264,
+        "y": 124,
+        "w": 122,
+        "h": 62
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realCombineHarvesterDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M266,192 L362,192 L362,236 L266,236 Z",
+      "bounds": {
+        "x": 266,
+        "y": 192,
+        "w": 96,
+        "h": 44
+      },
+      "name": "Door"
+    },
+    {
+      "id": "realCombineHarvesterWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M135,236 A45,45 0 1 1 225,236 A45,45 0 1 1 135,236 Z",
+      "bounds": {
+        "x": 135,
+        "y": 191,
+        "w": 90,
+        "h": 90
+      },
+      "name": "Wheel"
+    },
+    {
+      "id": "realCombineHarvesterHeader",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M14,270 L2,256 L10,234 Q14,226 26,224 L61,222 L61,206 A35,35 0 0 1 131,206 L134,222 L152,224 L152,246 Q152,270 136,270 Z",
+      "bounds": {
+        "x": 2,
+        "y": 171,
+        "w": 150,
+        "h": 99
+      },
+      "name": "Header"
+    }
+  ],
+  "vehicle": {
+    "width": 900,
+    "height": 315,
+    "groundY": 281,
+    "colors": [
+      "#F9C74F",
+      "#2B2D42"
+    ],
+    "chassis": "slab(900, 281, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realCombineHarvesterBody",
+        "x": 521,
+        "y": 160,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realCombineHarvesterWindows",
+        "x": 325,
+        "y": 155,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realCombineHarvesterDoor",
+        "x": 314,
+        "y": 214,
+        "z": 2
+      },
+      {
+        "id": "header",
+        "part": "realCombineHarvesterHeader",
+        "x": 77,
+        "y": 220.5,
+        "z": 3
+      },
+      {
+        "id": "wheel-l",
+        "part": "realCombineHarvesterWheel",
+        "x": 180,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realCombineHarvesterWheel",
+        "x": 720,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

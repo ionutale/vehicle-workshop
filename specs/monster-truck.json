@@ -1,0 +1,109 @@
+{
+  "id": "monster-truck",
+  "name": "Monster truck",
+  "module": "realMonsterTruck",
+  "artWidth": 720,
+  "artHeight": 320,
+  "parts": [
+    {
+      "id": "realMonsterTruckBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M54,190 L54,150 Q54,142 64,138 L94,130 L146,124 Q158,124 164,116 L182,104 L196,96 Q202,88 212,84 L234,80 Q242,72 254,72 L326,72 Q338,72 340,84 L342,124 L348,130 L664,130 L664,190 L632,190 Q624,162 560,162 Q496,162 488,190 L216,190 Q208,162 150,162 Q92,162 84,190 Z M382,130 L382,80 Q382,60 402,60 L518,60 Q538,60 538,80 L538,130 L526,130 L526,80 Q526,72 518,72 L402,72 Q394,72 394,80 L394,130 Z M394,92 L526,92 L526,99 L394,99 Z M350,98 L358,98 L358,130 L350,130 Z M362,98 L370,98 L370,130 L362,130 Z M40,164 L54,164 L54,188 L40,188 Z M664,162 L682,162 L682,186 L664,186 Z M185.3,193.9 A44,44 0 0 1 185.3,278.1 A55,55 0 0 0 185.3,193.9 Z M594.8,193.4 A44,44 0 0 1 594.8,278.6 A55,55 0 0 0 594.8,193.4 Z M246,190 L500,190 L500,204 L246,204 Z M244,204 L256,204 L256,236 L244,236 Z M486,204 L498,204 L498,236 L486,236 Z",
+      "bounds": {
+        "x": 40,
+        "y": 60,
+        "w": 642,
+        "h": 220
+      },
+      "name": "Monster truck"
+    },
+    {
+      "id": "realMonsterTruckWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M212,120 L246,84 L256,84 L256,120 Z M266,84 Q266,80 270,80 L318,80 Q322,80 322,84 L322,116 Q322,120 318,120 L270,120 Q266,120 266,116 Z M328,88 Q328,85 331,85 L335,85 Q338,85 338,88 L338,116 Q338,119 335,119 L331,119 Q328,119 328,116 Z",
+      "bounds": {
+        "x": 212,
+        "y": 80,
+        "w": 126,
+        "h": 40
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realMonsterTruckDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M258,128 L322,128 L322,184 L258,184 Z",
+      "bounds": {
+        "x": 258,
+        "y": 128,
+        "w": 64,
+        "h": 56
+      },
+      "name": "Door"
+    },
+    {
+      "id": "realMonsterTruckWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M95,236 A55,55 0 1 1 205,236 A55,55 0 1 1 95,236 Z",
+      "bounds": {
+        "x": 95,
+        "y": 181,
+        "w": 110,
+        "h": 110
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 720,
+    "height": 320,
+    "groundY": 291,
+    "colors": [
+      "#8338EC",
+      "#FFBE0B"
+    ],
+    "chassis": "slabPath(720, 291, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realMonsterTruckBody",
+        "x": 361,
+        "y": 170,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realMonsterTruckWindows",
+        "x": 275,
+        "y": 100,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realMonsterTruckDoor",
+        "x": 290,
+        "y": 156,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realMonsterTruckWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realMonsterTruckWheel",
+        "x": 560,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

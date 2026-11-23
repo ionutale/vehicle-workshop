@@ -1,0 +1,63 @@
+{
+	"id": "bulldozer",
+	"name": "Bulldozer",
+	"module": "realBulldozer",
+	"artWidth": 720,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realBulldozerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M176,198 L176,150 L194,142 L222,142 L240,76 Q242,66 252,66 L312,66 L314,56 Q322,46 330,56 L332,66 L344,66 Q352,66 352,74 L352,128 L356,134 L468,143 L468,82 L494,82 L494,144 L562,150 L562,172 L616,172 L616,192 L600,198 L676,242 L690,238 L704,250 L700,266 L684,272 L660,266 L580,206 L562,198 Z M210,84 L224,84 L224,102 L210,102 Z",
+			"bounds": { "x": 176, "y": 50, "w": 528, "h": 222 },
+			"name": "Bulldozer"
+		},
+		{
+			"id": "realBulldozerBlade",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M176,164 L84,190 L22,182 Q8,180 10,260 L10,272 L84,272 L84,202 L176,182 Z",
+			"bounds": { "x": 9, "y": 164, "w": 168, "h": 108 },
+			"name": "Blade"
+		},
+		{
+			"id": "realBulldozerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M238,82 L264,82 L264,126 L226,126 Z M276,82 Q276,78 282,78 L328,78 Q334,78 334,84 L334,106 Q334,112 328,112 L282,112 Q276,112 276,106 Z",
+			"bounds": { "x": 226, "y": 78, "w": 108, "h": 48 },
+			"name": "Windows"
+		},
+		{
+			"id": "realBulldozerDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M274,120 L332,120 L332,176 L274,176 Z",
+			"bounds": { "x": 274, "y": 120, "w": 58, "h": 56 },
+			"name": "Door"
+		},
+		{
+			"id": "realBulldozerTracks",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M126,200 L442,200 Q472,200 472,230 L472,242 Q472,272 442,272 L126,272 Q96,272 96,242 L96,230 Q96,200 126,200 Z",
+			"bounds": { "x": 96, "y": 200, "w": 376, "h": 72 },
+			"name": "Tracks"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 340,
+		"groundY": 272,
+		"colors": ["#E9C46A", "#6B6B6B"],
+		"chassis": "slabPath(720, 272, 190)",
+		"slots": [
+			{ "id": "tracks", "part": "realBulldozerTracks", "x": 284, "y": 236, "z": 0 },
+			{ "id": "body", "part": "realBulldozerBody", "x": 440, "y": 161, "z": 1 },
+			{ "id": "blade", "part": "realBulldozerBlade", "x": 93, "y": 218, "z": 2 },
+			{ "id": "windows", "part": "realBulldozerWindows", "x": 280, "y": 102, "z": 3 },
+			{ "id": "door", "part": "realBulldozerDoor", "x": 303, "y": 148, "z": 4 }
+		]
+	}
+}

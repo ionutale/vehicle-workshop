@@ -1,0 +1,110 @@
+{
+  "id": "telehandler",
+  "name": "Telehandler",
+  "module": "realTelehandler",
+  "artWidth": 760,
+  "artHeight": 310,
+  "parts": [
+    {
+      "id": "realTelehandlerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M150,252 L150,186 Q150,172 162,164 L182,152 Q190,146 200,146 L286,146 Q300,146 300,160 L300,252 Z M300,252 L300,206 L460,206 L460,252 Z M460,252 L460,160 L620,160 L620,252 Z M620,252 L620,178 Q620,170 628,170 L692,170 Q700,170 700,178 L700,252 Z M612,86 L80,124 L80,232 L24,232 L24,248 L104,248 L104,150.29 L612,114 Z M570,160 L612,160 L612,114 L570,117 Z M26,216 L80,216 L80,232 L26,232 Z M320,206 L336,206 L336,133.71 L320,134.86 Z M658,170 L658,154 Q658,148 664,148 L676,148 Q682,148 682,154 L682,170 Z M630,170 L630,130 L642,130 L642,170 Z M190,252 L202,252 L202,260 L226,260 L226,270 L190,270 Z M640,252 L652,252 L652,260 L674,260 L674,270 L640,270 Z",
+      "bounds": {
+        "x": 24,
+        "y": 86,
+        "w": 676,
+        "h": 184
+      },
+      "name": "Telehandler"
+    },
+    {
+      "id": "realTelehandlerWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M160,196 L162,172 Q163,166 169,162 L184,154 L184,196 Z M200,196 L200,160 Q200,154 208,154 L278,154 Q288,154 288,164 L288,190 Q288,196 280,196 Z",
+      "bounds": {
+        "x": 160,
+        "y": 154,
+        "w": 128,
+        "h": 42
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realTelehandlerDoor",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M200,202 L288,202 L288,246 L200,246 Z",
+      "bounds": {
+        "x": 200,
+        "y": 202,
+        "w": 88,
+        "h": 44
+      },
+      "name": "Door"
+    },
+    {
+      "id": "realTelehandlerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M110,236 A40,40 0 1 1 190,236 A40,40 0 1 1 110,236 Z",
+      "bounds": {
+        "x": 110,
+        "y": 196,
+        "w": 80,
+        "h": 80
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 760,
+    "height": 310,
+    "groundY": 276,
+    "colors": [
+      "#F4A261",
+      "#264653"
+    ],
+    "chassis": "slab(760, 276, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realTelehandlerBody",
+        "x": 362,
+        "y": 178,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realTelehandlerWindows",
+        "x": 224,
+        "y": 175,
+        "z": 1
+      },
+      {
+        "id": "door",
+        "part": "realTelehandlerDoor",
+        "x": 244,
+        "y": 224,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realTelehandlerWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realTelehandlerWheel",
+        "x": 560,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  },
+  "groundY": 276
+}

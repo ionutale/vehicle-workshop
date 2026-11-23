@@ -1,0 +1,109 @@
+{
+	"id": "forklift",
+	"name": "Forklift",
+	"module": "realForklift",
+	"artWidth": 640,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realForkliftBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M196,252 L196,204 Q196,196 204,194 L214,194 L214,150 Q214,142 222,142 L252,142 L252,172 L330,172 L330,124 Q330,118 338,118 L354,118 Q362,118 362,124 L362,148 L456,148 L456,140 L528,140 Q536,140 536,146 L536,252 L516,252 L516,236 A36,36 0 0 0 444,236 L444,252 Z M96,202 L96,50 Q96,44 102,44 L142,44 Q148,44 148,50 L148,202 Z M148,204 L148,190 L182,190 L182,204 Z M182,204 L196,204 L196,252 L182,252 Z M200,80 L200,62 Q200,56 206,56 L446,56 Q452,56 452,62 L452,80 Z M252,80 L264,80 L264,172 L252,172 Z M420,80 L434,80 L434,148 L420,148 Z M372,56 L372,48 Q372,42 380,42 L396,42 Q404,42 404,48 L404,56 Z M468,140 L468,112 L480,112 L480,140 Z M464,112 Q462,98 474,94 Q484,82 498,88 Q508,94 504,104 Q510,108 504,112 Z",
+			"bounds": {
+				"x": 96,
+				"y": 42,
+				"w": 440,
+				"h": 210
+			},
+			"name": "Forklift"
+		},
+		{
+			"id": "realForkliftWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M214,80 L252,80 L252,142 L226,142 Z",
+			"bounds": {
+				"x": 214,
+				"y": 80,
+				"w": 38,
+				"h": 62
+			},
+			"name": "Windows"
+		},
+		{
+			"id": "realForkliftForks",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M74,182 L96,182 L96,252 L74,252 Z M28,236 L74,236 L74,248 L28,248 Z",
+			"bounds": {
+				"x": 28,
+				"y": 182,
+				"w": 68,
+				"h": 70
+			},
+			"name": "Pallet forks"
+		},
+		{
+			"id": "realForkliftWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M118,236 A32,32 0 1 1 182,236 A32,32 0 1 1 118,236 Z",
+			"bounds": {
+				"x": 118,
+				"y": 204,
+				"w": 64,
+				"h": 64
+			},
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 640,
+		"height": 340,
+		"groundY": 272,
+		"colors": [
+			"#F4A261",
+			"#2B2D42"
+		],
+		"chassis": "slabPath(640, 272, 150)",
+		"slots": [
+			{
+				"id": "body",
+				"part": "realForkliftBody",
+				"x": 316,
+				"y": 147,
+				"z": 0
+			},
+			{
+				"id": "windows",
+				"part": "realForkliftWindows",
+				"x": 233,
+				"y": 111,
+				"z": 1
+			},
+			{
+				"id": "forks",
+				"part": "realForkliftForks",
+				"x": 62,
+				"y": 217,
+				"z": 2
+			},
+			{
+				"id": "wheel-l",
+				"part": "realForkliftWheel",
+				"x": 150,
+				"y": 236,
+				"z": 4
+			},
+			{
+				"id": "wheel-r",
+				"part": "realForkliftWheel",
+				"x": 480,
+				"y": 236,
+				"z": 4,
+				"flip": true
+			}
+		]
+	}
+}

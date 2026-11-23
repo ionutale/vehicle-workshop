@@ -37,18 +37,19 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'combine-harvester',
 		name: 'Combine harvester',
-		width: 700,
-		height: 340,
-		groundY: 250,
+		width: 900,
+		height: 315,
+		groundY: 281,
 		palette: pal('#F9C74F', '#2B2D42'),
-		chassisPath: slab(700, 250, 160),
+		chassisPath: slab(900, 281, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 380, y: 190, z: 0, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 130, y: 135, z: 1, scale: 0.9 },
-			{ id: 'tank', part: 'tank', x: 400, y: 110, z: 1, scale: 0.8 },
-			{ id: 'header', part: 'header', x: 600, y: 215, z: 2, scale: 1.2 },
-			wheel('l', 200, 250, 1.1),
-			wheel('r', 520, 250, 1.1)
+			{ id: 'body', part: 'realCombineHarvesterBody', x: 521, y: 160, z: 0 },
+			{ id: 'windows', part: 'realCombineHarvesterWindows', x: 325, y: 155, z: 1 },
+			{ id: 'door', part: 'realCombineHarvesterDoor', x: 314, y: 214, z: 2 },
+			{ id: 'header', part: 'realCombineHarvesterHeader', x: 77, y: 220.5, z: 3 },
+			{ id: 'wheel-l', part: 'realCombineHarvesterWheel', x: 180, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCombineHarvesterWheel', x: 720, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -88,18 +89,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'telehandler',
 		name: 'Telehandler',
-		width: 580,
-		height: 320,
-		groundY: 230,
+		width: 760,
+		height: 310,
+		groundY: 276,
 		palette: pal('#F4A261', '#264653'),
-		chassisPath: slab(580, 230, 130),
+		chassisPath: slab(760, 276, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 270, y: 188, z: 0, scale: 0.72 },
-			{ id: 'cab', part: 'cab', x: 150, y: 132, z: 1, scale: 0.7 },
-			{ id: 'boom', part: 'boom', x: 390, y: 92, z: 2, scale: 1.2 },
-			{ id: 'forks', part: 'forks', x: 530, y: 175, z: 3 },
-			wheel('l', 160, 230),
-			wheel('r', 450, 230)
+			{ id: 'body', part: 'realTelehandlerBody', x: 362, y: 178, z: 0 },
+			{ id: 'windows', part: 'realTelehandlerWindows', x: 224, y: 175, z: 1 },
+			{ id: 'door', part: 'realTelehandlerDoor', x: 244, y: 224, z: 2 },
+			{ id: 'wheel-l', part: 'realTelehandlerWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realTelehandlerWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{

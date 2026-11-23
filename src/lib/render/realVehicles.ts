@@ -39,6 +39,16 @@ import { drawRealPoliceCar } from './realPoliceCar';
 import { drawRealTaxi } from './realTaxi';
 import { drawRealLimousine } from './realLimousine';
 import { drawRealRaceCar } from './realRaceCar';
+import { drawRealTractor } from './realTractor';
+import { drawRealBulldozer } from './realBulldozer';
+import { drawRealForklift } from './realForklift';
+import { drawRealRoadRoller } from './realRoadRoller';
+import { drawRealTelehandler } from './realTelehandler';
+import { drawRealSnowPlough } from './realSnowPlough';
+import { drawRealStreetSweeper } from './realStreetSweeper';
+import { drawRealMonsterTruck } from './realMonsterTruck';
+import { drawRealFoodTruck } from './realFoodTruck';
+import { drawRealCombineHarvester } from './realCombineHarvester';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -805,7 +815,17 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'police-car': { draw: drawRealPoliceCar, width: 660, height: 300 },
 	'taxi': { draw: drawRealTaxi, width: 660, height: 300 },
 	'limousine': { draw: drawRealLimousine, width: 820, height: 300 },
-	'race-car': { draw: drawRealRaceCar, width: 680, height: 280 }
+	'race-car': { draw: drawRealRaceCar, width: 680, height: 280 },
+	'tractor': { draw: drawRealTractor, width: 640, height: 330 },
+	'bulldozer': { draw: drawRealBulldozer, width: 720, height: 340 },
+	'forklift': { draw: drawRealForklift, width: 640, height: 340 },
+	'road-roller': { draw: drawRealRoadRoller, width: 680, height: 340 },
+	'telehandler': { draw: drawRealTelehandler, width: 760, height: 310 },
+	'snow-plough': { draw: drawRealSnowPlough, width: 780, height: 350 },
+	'street-sweeper': { draw: drawRealStreetSweeper, width: 760, height: 350 },
+	'monster-truck': { draw: drawRealMonsterTruck, width: 720, height: 320 },
+	'food-truck': { draw: drawRealFoodTruck, width: 720, height: 350 },
+	'combine-harvester': { draw: drawRealCombineHarvester, width: 900, height: 315 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

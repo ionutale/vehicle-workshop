@@ -1,0 +1,55 @@
+{
+	"id": "street-sweeper",
+	"name": "Street sweeper",
+	"module": "realStreetSweeper",
+	"artWidth": 760,
+	"artHeight": 350,
+	"parts": [
+		{
+			"id": "realStreetSweeperBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M36,246 L36,168 Q36,156 45,148 L70,118 Q78,100 96,100 L200,100 L200,112 L656,112 Q684,112 690,132 L690,246 L112,246 L112,226 L36,226 Z M144,100 L144,92 L152,92 Q152,80 164,80 Q176,80 176,92 L184,92 L184,100 Z M20,146 L36,146 L36,186 L20,186 Z M20,218 L36,218 L36,256 L20,256 Z M690,226 L716,226 L716,256 L690,256 Z M216,112 L216,96 Q216,84 230,84 L254,84 L254,80 L274,80 L274,84 L316,84 Q330,84 330,96 L330,112 Z M566,112 L566,102 Q566,96 574,96 L640,96 Q648,96 648,102 L648,112 Z M300,246 L352,246 L356,256 L362,263 L288,263 L294,256 Z M38,248 A22,22 0 1 1 82,248 A22,22 0 1 1 38,248 Z M84,242 A16,16 0 1 1 116,242 A16,16 0 1 1 84,242 Z",
+			"bounds": { "x": 20, "y": 80, "w": 696, "h": 190 },
+			"name": "Street sweeper"
+		},
+		{
+			"id": "realStreetSweeperWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M52,160 L52,148 Q52,138 60,130 L82,110 Q88,104 100,104 L116,104 Q124,104 124,112 L124,152 Q124,160 116,160 Z M140,110 L182,110 Q188,110 188,116 L188,152 Q188,158 182,158 L140,158 Q134,158 134,152 L134,116 Q134,110 140,110 Z",
+			"bounds": { "x": 52, "y": 104, "w": 136, "h": 56 },
+			"name": "Windows"
+		},
+		{
+			"id": "realStreetSweeperDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M132,170 L194,170 L194,238 L132,238 Z",
+			"bounds": { "x": 132, "y": 170, "w": 62, "h": 68 },
+			"name": "Door"
+		},
+		{
+			"id": "realStreetSweeperWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z",
+			"bounds": { "x": 116, "y": 202, "w": 68, "h": 68 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 350,
+		"groundY": 272,
+		"colors": ["#90BE6D", "#2B2D42"],
+		"chassis": "slabPath(760, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realStreetSweeperBody", "x": 368, "y": 175, "z": 0 },
+			{ "id": "windows", "part": "realStreetSweeperWindows", "x": 120, "y": 132, "z": 1 },
+			{ "id": "door", "part": "realStreetSweeperDoor", "x": 163, "y": 204, "z": 2 },
+			{ "id": "wheel-l", "part": "realStreetSweeperWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realStreetSweeperWheel", "x": 600, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}

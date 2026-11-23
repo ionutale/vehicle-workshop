@@ -95,19 +95,18 @@ export const VEHICLES: Vehicle[] = [
 	{
 		id: 'tractor',
 		name: 'Tractor',
-		width: 420,
-		height: 280,
-		groundY: 225,
+		width: 640,
+		height: 330,
+		groundY: 272,
 		palette: palette('#59B85C', '#F4A261'),
-		chassisPath:
-			'M70,170 Q70,140 100,140 L330,140 L330,150 Q330,190 300,190 L80,190 Q70,190 70,178 Z',
+		chassisPath: slabPath(640, 272, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 210, y: 168, z: 0, scale: 0.62 },
-			{ id: 'cabin', part: 'cabin', x: 150, y: 104, z: 1, scale: 0.8 },
-			{ id: 'exhaust', part: 'exhaust', x: 292, y: 116, z: 2 },
-			{ id: 'light', part: 'light', x: 362, y: 146, z: 2 },
-			{ id: 'wheel-rear', part: 'wheel', x: 112, y: 214, z: 4, scale: 1.35 },
-			{ id: 'wheel-front', part: 'wheel', x: 330, y: 224, z: 4, scale: 0.72, flip: true }
+			{ id: 'body', part: 'realTractorBody', x: 322, y: 152, z: 0 },
+			{ id: 'windows', part: 'realTractorWindows', x: 298, y: 97, z: 1 },
+			{ id: 'door', part: 'realTractorDoor', x: 287, y: 175, z: 2 },
+			{ id: 'wheel-l', part: 'realTractorWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realTractorWheel', x: 500, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -275,18 +274,18 @@ VEHICLES.push(
 	{
 		id: 'food-truck',
 		name: 'Food truck',
-		width: 520,
-		height: 250,
-		groundY: 212,
+		width: 720,
+		height: 350,
+		groundY: 272,
 		palette: palette('#F4A261', '#2A9D8F'),
-		chassisPath: slabPath(520, 212, 140),
+		chassisPath: slabPath(720, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 270, y: 155, z: 0, scale: 1 },
-			{ id: 'sign', part: 'roofSign', x: 300, y: 86, z: 1, scale: 1.4 },
-			{ id: 'window', part: 'windowStrip', x: 170, y: 118, z: 2, scale: 1.2 },
-			{ id: 'door', part: 'door', x: 350, y: 155, z: 2 },
-			wheelSlot('l', 150, 212),
-			wheelSlot('r', 400, 212)
+			{ id: 'body', part: 'realFoodTruckBody', x: 362, y: 154, z: 0 },
+			{ id: 'windows', part: 'realFoodTruckWindows', x: 158, y: 145, z: 1 },
+			{ id: 'door', part: 'realFoodTruckDoor', x: 294, y: 173, z: 2 },
+			{ id: 'wheel-l', part: 'realFoodTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realFoodTruckWheel', x: 560, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -581,104 +580,106 @@ VEHICLES.push(
 	{
 		id: 'snow-plough',
 		name: 'Snow plough',
-		width: 580,
-		height: 270,
-		groundY: 210,
+		width: 780,
+		height: 350,
+		groundY: 272,
 		palette: palette('#E9ECEF', '#1D3557'),
-		chassisPath: slabPath(580, 210, 140),
+		chassisPath: slabPath(780, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'plough', part: 'plough', x: 520, y: 180, z: 2 },
-			{ id: 'lights', part: 'lightBar', x: 110, y: 70, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 440, 210)
+			{ id: 'body', part: 'realSnowPloughBody', x: 435, y: 178, z: 0 },
+			{ id: 'windows', part: 'realSnowPloughWindows', x: 201, y: 146, z: 1 },
+			{ id: 'door', part: 'realSnowPloughDoor', x: 237, y: 216, z: 2 },
+			{ id: 'plough', part: 'realSnowPloughPlough', x: 67, y: 172, z: 3 },
+			{ id: 'wheel-l', part: 'realSnowPloughWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realSnowPloughWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'street-sweeper',
 		name: 'Street sweeper',
-		width: 580,
-		height: 260,
-		groundY: 210,
+		width: 760,
+		height: 350,
+		groundY: 272,
 		palette: palette('#90BE6D', '#2B2D42'),
-		chassisPath: slabPath(580, 210, 130),
+		chassisPath: slabPath(760, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 160, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 110, y: 120, z: 1, scale: 0.9 },
-			{ id: 'brush', part: 'brush', x: 520, y: 196, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 200, y: 92, z: 2 },
-			wheelSlot('l', 160, 210),
-			wheelSlot('r', 440, 210)
+			{ id: 'body', part: 'realStreetSweeperBody', x: 368, y: 175, z: 0 },
+			{ id: 'windows', part: 'realStreetSweeperWindows', x: 120, y: 132, z: 1 },
+			{ id: 'door', part: 'realStreetSweeperDoor', x: 163, y: 204, z: 2 },
+			{ id: 'wheel-l', part: 'realStreetSweeperWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realStreetSweeperWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'road-roller',
 		name: 'Road roller',
-		width: 560,
-		height: 280,
-		groundY: 215,
+		width: 680,
+		height: 340,
+		groundY: 272,
 		palette: palette('#F9C74F', '#2B2D42'),
-		chassisPath: slabPath(560, 215, 150),
+		chassisPath: slabPath(680, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 280, y: 150, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cab', x: 140, y: 108, z: 1, scale: 0.8 },
-			{ id: 'roller', part: 'roller', x: 480, y: 200, z: 3 },
-			{ id: 'beacon', part: 'beacon', x: 140, y: 62, z: 2 },
-			wheelSlot('l', 150, 215, 1.1),
-			wheelSlot('r', 300, 215, 1.1)
+			{ id: 'body', part: 'realRoadRollerBody', x: 391, y: 139, z: 0 },
+			{ id: 'windows', part: 'realRoadRollerWindows', x: 259, y: 128, z: 1 },
+			{ id: 'door', part: 'realRoadRollerDoor', x: 288, y: 184, z: 2 },
+			{ id: 'drum-front', part: 'realRoadRollerDrum', x: 152, y: 220, z: 4 },
+			{ id: 'drum-rear', part: 'realRoadRollerDrum', x: 556, y: 228, z: 4, scale: 0.846154 }
 		]
 	},
 	{
 		id: 'forklift',
 		name: 'Forklift',
-		width: 460,
-		height: 270,
-		groundY: 225,
+		width: 640,
+		height: 340,
+		groundY: 272,
 		palette: palette('#F4A261', '#2B2D42'),
-		chassisPath: slabPath(460, 225, 110),
+		chassisPath: slabPath(640, 272, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 230, y: 178, z: 0, scale: 0.6 },
-			{ id: 'cab', part: 'cab', x: 160, y: 122, z: 1, scale: 0.7 },
-			{ id: 'forks', part: 'forks', x: 390, y: 190, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 260, y: 136, z: 2 },
-			wheelSlot('l', 130, 225, 0.9),
-			wheelSlot('r', 290, 225, 0.9)
+			{ id: 'body', part: 'realForkliftBody', x: 316, y: 147, z: 0 },
+			{ id: 'windows', part: 'realForkliftWindows', x: 233, y: 111, z: 1 },
+			{ id: 'forks', part: 'realForkliftForks', x: 62, y: 217, z: 2 },
+			{ id: 'wheel-l', part: 'realForkliftWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realForkliftWheel', x: 480, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'bulldozer',
 		name: 'Bulldozer',
-		width: 480,
-		height: 290,
-		groundY: 250,
+		width: 720,
+		height: 340,
+		groundY: 272,
 		palette: palette('#E9C46A', '#6B6B6B'),
-		chassisPath: slabPath(480, 250, 120),
+		chassisPath: slabPath(720, 272, 190),
+		realistic: true,
 		slots: [
-			{ id: 'tracks', part: 'tracks', x: 220, y: 228, z: 0 },
-			{ id: 'body', part: 'bodyBox', x: 220, y: 186, z: 1, scale: 0.7 },
-			{ id: 'cab', part: 'cabin', x: 150, y: 128, z: 2, scale: 0.65 },
-			{ id: 'blade', part: 'plough', x: 420, y: 212, z: 3 },
-			{ id: 'exhaust', part: 'exhaust', x: 300, y: 140, z: 2 }
+			{ id: 'tracks', part: 'realBulldozerTracks', x: 284, y: 236, z: 0 },
+			{ id: 'body', part: 'realBulldozerBody', x: 440, y: 161, z: 1 },
+			{ id: 'blade', part: 'realBulldozerBlade', x: 93, y: 218, z: 2 },
+			{ id: 'windows', part: 'realBulldozerWindows', x: 280, y: 102, z: 3 },
+			{ id: 'door', part: 'realBulldozerDoor', x: 303, y: 148, z: 4 }
 		]
 	},
 	{
 		id: 'monster-truck',
 		name: 'Monster truck',
-		width: 540,
-		height: 300,
-		groundY: 230,
+		width: 720,
+		height: 320,
+		groundY: 291,
 		palette: palette('#8338EC', '#FFBE0B'),
-		chassisPath: slabPath(540, 230, 150),
+		chassisPath: slabPath(720, 291, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 270, y: 150, z: 0, scale: 1.05 },
-			{ id: 'cabin', part: 'cabin', x: 265, y: 66, z: 1, scale: 0.9 },
-			{ id: 'exhaust', part: 'exhaust', x: 360, y: 120, z: 2 },
-			wheelSlot('l', 140, 230, 1.6),
-			wheelSlot('r', 410, 230, 1.6)
+			{ id: 'body', part: 'realMonsterTruckBody', x: 361, y: 170, z: 0 },
+			{ id: 'windows', part: 'realMonsterTruckWindows', x: 275, y: 100, z: 1 },
+			{ id: 'door', part: 'realMonsterTruckDoor', x: 290, y: 156, z: 2 },
+			{ id: 'wheel-l', part: 'realMonsterTruckWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMonsterTruckWheel', x: 560, y: 236, z: 4, flip: true }
 		]
-	}
-);
+	});
 
 VEHICLES.push(...FLEET);
 

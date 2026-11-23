@@ -1,0 +1,55 @@
+{
+	"id": "food-truck",
+	"name": "Food truck",
+	"module": "realFoodTruck",
+	"artWidth": 720,
+	"artHeight": 350,
+	"parts": [
+		{
+			"id": "realFoodTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M36,258 L36,198 Q36,186 48,182 L86,176 L142,104 Q146,94 158,94 L674,94 Q688,94 688,108 L688,244 Q688,258 672,258 Z M296,44 L420,44 Q428,44 428,52 L428,94 L288,94 L288,52 Q288,44 296,44 Z M22,236 L36,236 L36,258 L22,258 Z M688,246 L702,246 L702,260 L688,260 Z M206,258 L512,258 L512,264 L206,264 Z",
+			"bounds": { "x": 22, "y": 44, "w": 680, "h": 220 },
+			"name": "Food truck"
+		},
+		{
+			"id": "realFoodTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M96,168 L138,114 L154,124 L112,176 Z M172,116 L214,116 Q220,116 220,122 L220,156 Q220,162 214,162 L172,162 Q166,162 166,156 L166,122 Q166,116 172,116 Z",
+			"bounds": { "x": 96, "y": 114, "w": 124, "h": 62 },
+			"name": "Windows"
+		},
+		{
+			"id": "realFoodTruckDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M232,112 L356,112 L356,234 L232,234 Z",
+			"bounds": { "x": 232, "y": 112, "w": 124, "h": 122 },
+			"name": "Side door"
+		},
+		{
+			"id": "realFoodTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M116,236 A34,34 0 1 1 184,236 A34,34 0 1 1 116,236 Z",
+			"bounds": { "x": 116, "y": 202, "w": 68, "h": 68 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 350,
+		"groundY": 272,
+		"colors": ["#F4A261", "#2A9D8F"],
+		"chassis": "slabPath(720, 272, 200)",
+		"slots": [
+			{ "id": "body", "part": "realFoodTruckBody", "x": 362, "y": 154, "z": 0 },
+			{ "id": "windows", "part": "realFoodTruckWindows", "x": 158, "y": 145, "z": 1 },
+			{ "id": "door", "part": "realFoodTruckDoor", "x": 294, "y": 173, "z": 2 },
+			{ "id": "wheel-l", "part": "realFoodTruckWheel", "x": 150, "y": 236, "z": 4 },
+			{ "id": "wheel-r", "part": "realFoodTruckWheel", "x": 560, "y": 236, "z": 4, "flip": true }
+		]
+	}
+}
