@@ -49,6 +49,16 @@ import { drawRealStreetSweeper } from './realStreetSweeper';
 import { drawRealMonsterTruck } from './realMonsterTruck';
 import { drawRealFoodTruck } from './realFoodTruck';
 import { drawRealCombineHarvester } from './realCombineHarvester';
+import { drawRealSkidSteer } from './realSkidSteer';
+import { drawRealBackhoeLoader } from './realBackhoeLoader';
+import { drawRealWheelLoader } from './realWheelLoader';
+import { drawRealMotorGrader } from './realMotorGrader';
+import { drawRealArticulatedHauler } from './realArticulatedHauler';
+import { drawRealCropSprayer } from './realCropSprayer';
+import { drawRealHayBaler } from './realHayBaler';
+import { drawRealSteamRoller } from './realSteamRoller';
+import { drawRealQuadBike } from './realQuadBike';
+import { drawRealMiniDumper } from './realMiniDumper';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -825,7 +835,17 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'street-sweeper': { draw: drawRealStreetSweeper, width: 760, height: 350 },
 	'monster-truck': { draw: drawRealMonsterTruck, width: 720, height: 320 },
 	'food-truck': { draw: drawRealFoodTruck, width: 720, height: 350 },
-	'combine-harvester': { draw: drawRealCombineHarvester, width: 900, height: 315 }
+	'combine-harvester': { draw: drawRealCombineHarvester, width: 900, height: 315 },
+	'skid-steer': { draw: drawRealSkidSteer, width: 620, height: 300 },
+	'backhoe-loader': { draw: drawRealBackhoeLoader, width: 760, height: 310 },
+	'wheel-loader': { draw: drawRealWheelLoader, width: 760, height: 310 },
+	'motor-grader': { draw: drawRealMotorGrader, width: 820, height: 300 },
+	'articulated-hauler': { draw: drawRealArticulatedHauler, width: 780, height: 310 },
+	'crop-sprayer': { draw: drawRealCropSprayer, width: 800, height: 306 },
+	'hay-baler': { draw: drawRealHayBaler, width: 720, height: 300 },
+	'steam-roller': { draw: drawRealSteamRoller, width: 700, height: 310 },
+	'quad-bike': { draw: drawRealQuadBike, width: 560, height: 300 },
+	'mini-dumper': { draw: drawRealMiniDumper, width: 620, height: 300 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

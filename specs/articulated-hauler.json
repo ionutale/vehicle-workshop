@@ -1,0 +1,109 @@
+{
+  "id": "articulated-hauler",
+  "name": "Articulated hauler",
+  "module": "realArticulatedHauler",
+  "artWidth": 780,
+  "artHeight": 310,
+  "parts": [
+    {
+      "id": "realArticulatedHaulerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M22,262 L22,232 L40,230 L47,206 L62,198 L92,104 Q95,90 108,90 L232,90 Q244,90 244,102 L244,212 L282,218 L310,222 L322,224 L352,56 Q354,48 364,48 L740,68 Q752,70 752,82 L752,246 Q752,254 744,254 L332,254 L318,250 L288,244 L62,246 L40,256 Z M195,74 L215,74 L215,90 L195,90 Z M218,60 L232,60 L232,90 L218,90 Z M46,106 L68,106 L68,132 L46,132 Z",
+      "bounds": {
+        "x": 22,
+        "y": 48,
+        "w": 730,
+        "h": 214
+      },
+      "name": "Articulated hauler"
+    },
+    {
+      "id": "realArticulatedHaulerWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M78,170 L82,152 L102,112 Q106,104 116,104 L126,104 Q134,104 134,112 L134,162 Q134,170 126,170 Z M153,104 L231,104 Q238,104 238,111 L238,155 Q238,162 231,162 L153,162 Q146,162 146,155 L146,111 Q146,104 153,104 Z",
+      "bounds": {
+        "x": 78,
+        "y": 104,
+        "w": 160,
+        "h": 66
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realArticulatedHaulerTipper",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M334,226 L360,48 L372,49 L384,40 L398,44 L412,38 L426,46 L440,40 L454,34 L468,40 L482,34 L496,31 L508,40 L524,33 L540,43 L556,36 L572,45 L588,42 L604,49 L620,42 L636,53 L652,47 L668,54 L684,51 L700,56 L716,55 L726,59 L734,68 L734,226 Z",
+      "bounds": {
+        "x": 334,
+        "y": 31,
+        "w": 400,
+        "h": 195
+      },
+      "name": "Tipper"
+    },
+    {
+      "id": "realArticulatedHaulerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M118,236 A42,42 0 1 1 202,236 A42,42 0 1 1 118,236 Z",
+      "bounds": {
+        "x": 118,
+        "y": 194,
+        "w": 84,
+        "h": 84
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 780,
+    "height": 310,
+    "groundY": 278,
+    "colors": [
+      "#F9C74F",
+      "#2B2D42"
+    ],
+    "chassis": "slab(780, 278, 190)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realArticulatedHaulerBody",
+        "x": 387,
+        "y": 155,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realArticulatedHaulerWindows",
+        "x": 158,
+        "y": 137,
+        "z": 1
+      },
+      {
+        "id": "tipper",
+        "part": "realArticulatedHaulerTipper",
+        "x": 534,
+        "y": 128.5,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realArticulatedHaulerWheel",
+        "x": 160,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realArticulatedHaulerWheel",
+        "x": 620,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

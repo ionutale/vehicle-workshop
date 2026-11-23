@@ -34,7 +34,7 @@ describe('vehicle details', () => {
 
 	it('puts the grille at the nose of right-facing and rear-cab machines', () => {
 		const grille = (id: string) => detailsFor(getVehicle(id)).find((d) => d.kind === 'grille')!;
-		for (const id of ['skid-steer', 'steam-roller']) {
+		for (const id of ['road-planer', 'snow-blower']) {
 			expect(grille(id).x).toBeGreaterThan(getVehicle(id).width / 2);
 		}
 		expect(grille('airport-fuel-bowser').x).toBeLessThan(getVehicle('airport-fuel-bowser').width / 2);

@@ -1,0 +1,109 @@
+{
+  "id": "skid-steer",
+  "name": "Skid-steer loader",
+  "module": "realSkidSteer",
+  "artWidth": 620,
+  "artHeight": 300,
+  "parts": [
+    {
+      "id": "realSkidSteerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M96,252 L96,222 Q96,214 105,214 L122,199 L456,199 L470,146 L524,146 Q540,146 540,164 L540,238 Q540,252 528,252 L482,252 L482,236 A32,32 0 0 0 418,236 L418,252 L182,252 L182,236 A32,32 0 0 0 118,236 L118,252 Z M122,158 L300,148 L452,156 L452,199 L122,199 Z M230,98 L230,82 Q230,76 238,76 L408,76 Q416,76 416,82 L416,98 Z M236,98 L248,98 L248,148 L236,148 Z M306,98 L318,98 L318,146 L306,146 Z M400,98 L412,98 L412,151 L400,151 Z M326,146 L358,146 L358,118 Q358,106 346,106 L338,106 Q326,106 326,118 Z M362,146 L396,146 L396,104 Q396,100 392,100 L366,100 Q362,100 362,104 Z M236,76 L236,68 Q236,60 248,60 Q260,60 260,68 L260,76 Z M496,146 L496,118 L508,118 L508,146 Z M492,118 Q486,106 498,100 Q508,90 520,98 Q526,106 520,114 Q522,118 512,118 Z",
+      "bounds": {
+        "x": 96,
+        "y": 60,
+        "w": 444,
+        "h": 192
+      },
+      "name": "Skid-steer loader"
+    },
+    {
+      "id": "realSkidSteerWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M248,99 L306,99 L306,146 L248,149 Z",
+      "bounds": {
+        "x": 248,
+        "y": 99,
+        "w": 58,
+        "h": 50
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realSkidSteerBucket",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M122,154 L122,244 Q122,258 106,260 L48,265 Q28,265 26,248 Q22,204 34,168 L36,160 L112,154 Z",
+      "bounds": {
+        "x": 25,
+        "y": 154,
+        "w": 97,
+        "h": 111
+      },
+      "name": "Bucket"
+    },
+    {
+      "id": "realSkidSteerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M122,236 A28,28 0 1 1 178,236 A28,28 0 1 1 122,236 Z",
+      "bounds": {
+        "x": 122,
+        "y": 208,
+        "w": 56,
+        "h": 56
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 620,
+    "height": 300,
+    "groundY": 264,
+    "colors": [
+      "#F9C74F",
+      "#2B2D42"
+    ],
+    "chassis": "slab(620, 264, 150)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realSkidSteerBody",
+        "x": 318,
+        "y": 156,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realSkidSteerWindows",
+        "x": 277,
+        "y": 124,
+        "z": 1
+      },
+      {
+        "id": "bucket",
+        "part": "realSkidSteerBucket",
+        "x": 73.5,
+        "y": 209.5,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realSkidSteerWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realSkidSteerWheel",
+        "x": 450,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

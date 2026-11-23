@@ -95,8 +95,18 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 50. **Monster truck (done):** lifted body on oversized wheels at Level 5; 5 pieces, 4 at the first tier.
 51. **Food truck (done):** serving hatch, awning and menu board at Level 5; 5 pieces, 4 at the first tier.
 52. **Combine harvester (done):** header reel, cab and grain tank at Level 5; 5 pieces, 4 at the first tier.
-53. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
-54. Remove the generic parts once no catalogue entry uses them.
+53. **Skid-steer loader (done):** compact chassis, lift arms, front bucket and open cage cab at Level 5; 5 pieces, 4 at the first tier.
+54. **Backhoe loader (done):** front loader bucket, glazed cab and rear backhoe arm with bucket and teeth at Level 5; 5 pieces, 4 at the first tier.
+55. **Wheel loader (done):** articulated body, glazed cab and big front bucket on lift arms at Level 5; 5 pieces, 4 at the first tier.
+56. **Motor grader (done):** long chassis, central mouldboard, cab and tandem rear axles at Level 5; 5 pieces, 4 at the first tier.
+57. **Articulated hauler (done):** tractor unit with a cab and an articulated heaped dump body at Level 5; 5 pieces, 4 at the first tier.
+58. **Crop sprayer (done):** high-clearance body, glazed cab, tank and folded booms with nozzles at Level 5; 5 pieces, 4 at the first tier.
+59. **Hay baler (done):** trailed pickup reel, round chamber, rear chute and finished bale at Level 5; 5 pieces, 4 at the first tier.
+60. **Steam roller (done):** riveted boiler, chimney, brass dome and canopy over a big smooth front drum at Level 5; 5 pieces, 4 at the first tier.
+61. **Quad bike (done):** chunky ATV with handlebars, saddle, brush guard and front/rear racks at Level 5; 5 pieces, 4 at the first tier.
+62. **Mini dumper (done):** compact site dumper with front tipping skip, rear seat and roll bar at Level 5; 5 pieces, 4 at the first tier.
+63. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
+64. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

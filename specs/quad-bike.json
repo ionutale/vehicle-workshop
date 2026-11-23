@@ -1,0 +1,109 @@
+{
+  "id": "quad-bike",
+  "name": "Quad bike",
+  "module": "realQuadBike",
+  "artWidth": 560,
+  "artHeight": 300,
+  "parts": [
+    {
+      "id": "realQuadBikeBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M76,208 L76,196 Q76,188 90,186 L158,186 Q172,185 176,196 L182,204 Q186,196 196,194 L202,194 L202,170 L196,172 Q189,173 188,169 Q187,164 194,163 L213,151 Q219,150 220,155 Q221,160 214,161 L209,162 L209,196 Q224,198 240,197 L262,199 Q268,200 270,205 L354,200 L360,190 L362,186 L436,186 Q454,186 454,200 Q454,216 438,222 L372,228 L354,234 L348,242 L210,242 L198,234 L94,228 Q80,226 78,216 Z M106,174 L180,174 L180,182 L162,182 L162,186 L152,186 L152,182 L118,182 L118,186 L108,186 L108,182 L106,182 Z M98.5,236 A31.5,31.5 0 1 1 161.5,236 A31.5,31.5 0 1 1 98.5,236 Z M368.5,236 A31.5,31.5 0 1 1 431.5,236 A31.5,31.5 0 1 1 368.5,236 Z",
+      "bounds": {
+        "x": 76,
+        "y": 150,
+        "w": 378,
+        "h": 92
+      },
+      "name": "Quad bike"
+    },
+    {
+      "id": "realQuadBikeSeat",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M272,164 L348,164 L348,202 L272,202 Z",
+      "bounds": {
+        "x": 272,
+        "y": 164,
+        "w": 76,
+        "h": 38
+      },
+      "name": "Seat"
+    },
+    {
+      "id": "realQuadBikeRack",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M362,174 L452,174 L452,182 L448,182 L448,186 L438,186 L438,182 L382,182 L382,186 L372,186 L372,182 L362,182 Z",
+      "bounds": {
+        "x": 362,
+        "y": 174,
+        "w": 90,
+        "h": 12
+      },
+      "name": "Cargo rack"
+    },
+    {
+      "id": "realQuadBikeWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M100,236 A30,30 0 1 1 160,236 A30,30 0 1 1 100,236 Z",
+      "bounds": {
+        "x": 100,
+        "y": 206,
+        "w": 60,
+        "h": 60
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 560,
+    "height": 300,
+    "groundY": 266,
+    "colors": [
+      "#E63946",
+      "#2B2D42"
+    ],
+    "chassis": "slab(560, 266, 110)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realQuadBikeBody",
+        "x": 265,
+        "y": 196,
+        "z": 0
+      },
+      {
+        "id": "seat",
+        "part": "realQuadBikeSeat",
+        "x": 310,
+        "y": 183,
+        "z": 1
+      },
+      {
+        "id": "rack",
+        "part": "realQuadBikeRack",
+        "x": 407,
+        "y": 180,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realQuadBikeWheel",
+        "x": 130,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realQuadBikeWheel",
+        "x": 400,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

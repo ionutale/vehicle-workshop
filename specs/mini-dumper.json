@@ -1,0 +1,109 @@
+{
+  "id": "mini-dumper",
+  "name": "Mini dumper",
+  "module": "realMiniDumper",
+  "artWidth": 620,
+  "artHeight": 300,
+  "parts": [
+    {
+      "id": "realMiniDumperBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M170,250 L170,204 L222,196 L292,194 L302,184 L316,172 Q326,166 336,174 L342,184 L342,200 L352,198 L352,194 L430,190 L430,178 L520,166 L544,166 L544,144 L556,144 L556,165 L566,164 L566,250 L498,250 L498,236 A38,38 0 0 0 422,236 L422,250 Z M542,144 Q536,132 548,127 Q560,119 568,127 Q575,135 568,144 Z",
+      "bounds": {
+        "x": 170,
+        "y": 120,
+        "w": 406,
+        "h": 132
+      },
+      "name": "Mini dumper"
+    },
+    {
+      "id": "realMiniDumperSkip",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M50,206 L50,156 L236,138 L236,198 L150,202 Z",
+      "bounds": {
+        "x": 48,
+        "y": 136,
+        "w": 190,
+        "h": 72
+      },
+      "name": "Skip"
+    },
+    {
+      "id": "realMiniDumperSeat",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M334,174 L390,172 L390,188 L334,190 Z M390,184 L414,182 L414,130 Q414,124 408,124 L398,124 Q390,124 390,130 Z M334,190 L390,188 L390,204 L334,206 Z M468,180 L468,120 Q468,108 480,108 L510,108 Q522,108 522,120 L522,174 L508,174 L508,124 L482,126 L482,180 Z M462,180 L488,180 L488,188 L462,188 Z M502,180 L528,180 L528,188 L502,188 Z M486,108 L504,108 L504,100 L486,100 Z M488,100 L502,100 L500,92 Q495,88 488,92 Z",
+      "bounds": {
+        "x": 334,
+        "y": 86,
+        "w": 194,
+        "h": 122
+      },
+      "name": "Seat and roll bar"
+    },
+    {
+      "id": "realMiniDumperWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M110,236 A30,30 0 1 1 170,236 A30,30 0 1 1 110,236 Z",
+      "bounds": {
+        "x": 110,
+        "y": 206,
+        "w": 60,
+        "h": 60
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 620,
+    "height": 300,
+    "groundY": 266,
+    "colors": [
+      "#F4A261",
+      "#2B2D42"
+    ],
+    "chassis": "slab(620, 266, 150)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realMiniDumperBody",
+        "x": 373,
+        "y": 186,
+        "z": 0
+      },
+      {
+        "id": "skip",
+        "part": "realMiniDumperSkip",
+        "x": 143,
+        "y": 172,
+        "z": 1
+      },
+      {
+        "id": "seat",
+        "part": "realMiniDumperSeat",
+        "x": 431,
+        "y": 147,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realMiniDumperWheel",
+        "x": 140,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realMiniDumperWheel",
+        "x": 460,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

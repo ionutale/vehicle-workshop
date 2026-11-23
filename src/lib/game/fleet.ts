@@ -55,35 +55,35 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'crop-sprayer',
 		name: 'Crop sprayer',
-		width: 680,
-		height: 310,
-		groundY: 240,
+		width: 800,
+		height: 306,
+		groundY: 274,
 		palette: pal('#90BE6D', '#F9C74F'),
-		chassisPath: slab(680, 240, 130),
+		chassisPath: slab(800, 274, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 180, z: 0, scale: 0.8 },
-			{ id: 'cab', part: 'cab', x: 120, y: 140, z: 1, scale: 0.8 },
-			{ id: 'tank', part: 'tank', x: 340, y: 130, z: 2, scale: 0.9 },
-			{ id: 'boom', part: 'boom', x: 480, y: 150, z: 3, scale: 1.3 },
-			wheel('l', 170, 240),
-			wheel('r', 540, 240)
+			{ id: 'body', part: 'realCropSprayerBody', x: 353, y: 126, z: 0 },
+			{ id: 'windows', part: 'realCropSprayerWindows', x: 259.5, y: 96, z: 1 },
+			{ id: 'boom', part: 'realCropSprayerBoom', x: 560, y: 183, z: 3 },
+			{ id: 'wheel-l', part: 'realCropSprayerWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realCropSprayerWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'hay-baler',
 		name: 'Hay baler',
-		width: 580,
-		height: 280,
-		groundY: 215,
+		width: 720,
+		height: 300,
+		groundY: 268,
 		palette: pal('#E9C46A', '#2A9D8F'),
-		chassisPath: slab(580, 215, 130),
+		chassisPath: slab(720, 268, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 280, y: 172, z: 0, scale: 0.8 },
-			{ id: 'cab', part: 'cab', x: 110, y: 132, z: 1, scale: 0.85 },
-			{ id: 'bale', part: 'bale', x: 440, y: 180, z: 2 },
-			{ id: 'light', part: 'light', x: 530, y: 150, z: 2 },
-			wheel('l', 160, 215),
-			wheel('r', 460, 215)
+			{ id: 'body', part: 'realHayBalerBody', x: 367, y: 182, z: 0 },
+			{ id: 'drawbar', part: 'realHayBalerDrawbar', x: 37, y: 226, z: 1 },
+			{ id: 'bale', part: 'realHayBalerBale', x: 602, y: 160, z: 2 },
+			{ id: 'wheel-l', part: 'realHayBalerWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realHayBalerWheel', x: 540, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -106,87 +106,87 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'skid-steer',
 		name: 'Skid-steer loader',
-		width: 460,
-		height: 270,
-		groundY: 235,
+		width: 620,
+		height: 300,
+		groundY: 264,
 		palette: pal('#F9C74F', '#2B2D42'),
-		chassisPath: slab(460, 235, 90),
+		chassisPath: slab(620, 264, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 220, y: 185, z: 0, scale: 0.58 },
-			{ id: 'cab', part: 'cabin', x: 180, y: 132, z: 1, scale: 0.6 },
-			{ id: 'forks', part: 'forks', x: 370, y: 210, z: 2, scale: 0.9 },
-			{ id: 'beacon', part: 'beacon', x: 270, y: 140, z: 2 },
-			wheel('l', 110, 235, 0.85),
-			wheel('r', 330, 235, 0.85)
+			{ id: 'body', part: 'realSkidSteerBody', x: 318, y: 156, z: 0 },
+			{ id: 'windows', part: 'realSkidSteerWindows', x: 277, y: 124, z: 1 },
+			{ id: 'bucket', part: 'realSkidSteerBucket', x: 73.5, y: 209.5, z: 2 },
+			{ id: 'wheel-l', part: 'realSkidSteerWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realSkidSteerWheel', x: 450, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'backhoe-loader',
 		name: 'Backhoe loader',
-		width: 620,
-		height: 300,
-		groundY: 225,
+		width: 760,
+		height: 310,
+		groundY: 272,
 		palette: pal('#F4A261', '#2B2D42'),
-		chassisPath: slab(620, 225, 120),
+		chassisPath: slab(760, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 180, z: 0, scale: 0.85 },
-			{ id: 'cab', part: 'cab', x: 140, y: 130, z: 1, scale: 0.8 },
-			{ id: 'front-bucket', part: 'bucket', x: 60, y: 195, z: 2, scale: 0.8 },
-			{ id: 'arm', part: 'arm', x: 500, y: 170, z: 2, scale: 0.8 },
-			{ id: 'bucket', part: 'bucket', x: 570, y: 205, z: 3, scale: 0.8 },
-			wheel('l', 170, 225),
-			wheel('r', 470, 225)
+			{ id: 'body', part: 'realBackhoeLoaderBody', x: 341, y: 163, z: 0 },
+			{ id: 'windows', part: 'realBackhoeLoaderWindows', x: 488, y: 148, z: 1 },
+			{ id: 'backhoe', part: 'realBackhoeLoaderBackhoe', x: 698, y: 188, z: 2 },
+			{ id: 'wheel-l', part: 'realBackhoeLoaderWheel', x: 150, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realBackhoeLoaderWheel', x: 600, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'wheel-loader',
 		name: 'Wheel loader',
-		width: 600,
-		height: 300,
-		groundY: 235,
+		width: 760,
+		height: 310,
+		groundY: 278,
 		palette: pal('#E9C46A', '#264653'),
-		chassisPath: slab(600, 235, 130),
+		chassisPath: slab(760, 278, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 300, y: 188, z: 0, scale: 0.8 },
-			{ id: 'cab', part: 'cab', x: 150, y: 132, z: 1, scale: 0.75 },
-			{ id: 'arm', part: 'arm', x: 430, y: 168, z: 2, scale: 0.9 },
-			{ id: 'bucket', part: 'bucket', x: 545, y: 208, z: 3 },
-			wheel('l', 170, 235),
-			wheel('r', 470, 235)
+			{ id: 'body', part: 'realWheelLoaderBody', x: 424, y: 167, z: 0 },
+			{ id: 'windows', part: 'realWheelLoaderWindows', x: 371, y: 149, z: 1 },
+			{ id: 'bucket', part: 'realWheelLoaderBucket', x: 62.75, y: 215.25, z: 2 },
+			{ id: 'wheel-l', part: 'realWheelLoaderWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realWheelLoaderWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'motor-grader',
 		name: 'Motor grader',
-		width: 660,
-		height: 290,
-		groundY: 220,
+		width: 820,
+		height: 300,
+		groundY: 270,
 		palette: pal('#F9C74F', '#264653'),
-		chassisPath: slab(660, 220, 110),
+		chassisPath: slab(820, 270, 190),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 172, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cab', x: 190, y: 122, z: 1, scale: 0.75 },
-			{ id: 'blade', part: 'plough', x: 440, y: 208, z: 2, scale: 1.2 },
-			{ id: 'exhaust', part: 'exhaust', x: 280, y: 110, z: 2 },
-			wheel('l', 160, 220),
-			wheel('r', 520, 220)
+			{ id: 'body', part: 'realMotorGraderBody', x: 431, y: 148.5, z: 0 },
+			{ id: 'windows', part: 'realMotorGraderWindows', x: 584, y: 88, z: 1 },
+			{ id: 'blade', part: 'realMotorGraderBlade', x: 394.5, y: 229, z: 2 },
+			{ id: 'wheel-l', part: 'realMotorGraderWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMotorGraderWheel', x: 660, y: 236, z: 4, flip: true }
 		]
 	},
 	// ── Heavy haulage ────────────────────────────────────────────────────────────────
 	{
 		id: 'articulated-hauler',
 		name: 'Articulated hauler',
-		width: 640,
-		height: 320,
-		groundY: 250,
+		width: 780,
+		height: 310,
+		groundY: 278,
 		palette: pal('#F9C74F', '#2B2D42'),
-		chassisPath: slab(640, 250, 150),
+		chassisPath: slab(780, 278, 190),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 340, y: 200, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cab', x: 150, y: 140, z: 1, scale: 0.9 },
-			{ id: 'tipper', part: 'tipper', x: 370, y: 120, z: 2, scale: 1.1 },
-			wheel('l', 200, 250, 1.3),
-			wheel('r', 520, 250, 1.3)
+			{ id: 'body', part: 'realArticulatedHaulerBody', x: 387, y: 155, z: 0 },
+			{ id: 'windows', part: 'realArticulatedHaulerWindows', x: 158, y: 137, z: 1 },
+			{ id: 'tipper', part: 'realArticulatedHaulerTipper', x: 534, y: 128.5, z: 2 },
+			{ id: 'wheel-l', part: 'realArticulatedHaulerWheel', x: 160, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realArticulatedHaulerWheel', x: 620, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -810,17 +810,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'mini-dumper',
 		name: 'Mini dumper',
-		width: 460,
-		height: 270,
-		groundY: 240,
+		width: 620,
+		height: 300,
+		groundY: 266,
 		palette: pal('#F4A261', '#2B2D42'),
-		chassisPath: slab(460, 240, 80),
+		chassisPath: slab(620, 266, 150),
+		realistic: true,
 		slots: [
-			{ id: 'tracks', part: 'tracks', x: 220, y: 232, z: 0, scale: 0.85 },
-			{ id: 'body', part: 'bodyBox', x: 220, y: 198, z: 1, scale: 0.5 },
-			{ id: 'tipper', part: 'tipper', x: 240, y: 155, z: 2, scale: 0.7 },
-			{ id: 'light', part: 'light', x: 360, y: 180, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 300, y: 138, z: 2 }
+			{ id: 'body', part: 'realMiniDumperBody', x: 373, y: 186, z: 0 },
+			{ id: 'skip', part: 'realMiniDumperSkip', x: 143, y: 172, z: 1 },
+			{ id: 'seat', part: 'realMiniDumperSeat', x: 431, y: 147, z: 2 },
+			{ id: 'wheel-l', part: 'realMiniDumperWheel', x: 140, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realMiniDumperWheel', x: 460, y: 236, z: 4, flip: true }
 		]
 	},
 	{
@@ -860,34 +861,34 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'steam-roller',
 		name: 'Steam roller',
-		width: 560,
+		width: 700,
 		height: 310,
-		groundY: 232,
+		groundY: 272,
 		palette: pal('#C1121F', '#2B2D42'),
-		chassisPath: slab(560, 232, 150),
+		chassisPath: slab(700, 272, 200),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 280, y: 180, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cabin', x: 180, y: 122, z: 1, scale: 0.8 },
-			{ id: 'drum', part: 'roller', x: 480, y: 215, z: 2, scale: 1.1 },
-			{ id: 'chimney', part: 'exhaust', x: 120, y: 112, z: 2 },
-			wheel('l', 160, 232, 0.9),
-			wheel('r', 330, 232, 0.9)
+			{ id: 'body', part: 'realSteamRollerBody', x: 431, y: 155, z: 0 },
+			{ id: 'canopy', part: 'realSteamRollerCanopy', x: 544, y: 153, z: 2 },
+			{ id: 'drum', part: 'realSteamRollerDrum', x: 160, y: 224, z: 4 },
+			{ id: 'wheel-near', part: 'realSteamRollerWheel', x: 560, y: 242, z: 4 },
+			{ id: 'wheel-far', part: 'realSteamRollerWheel', x: 592, y: 245, z: 3, scale: 0.9 }
 		]
 	},
 	{
 		id: 'quad-bike',
 		name: 'Quad bike',
-		width: 460,
-		height: 240,
-		groundY: 205,
+		width: 560,
+		height: 300,
+		groundY: 266,
 		palette: pal('#E63946', '#2B2D42'),
-		chassisPath: slab(460, 205, 100),
+		chassisPath: slab(560, 266, 110),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'body', x: 240, y: 165, z: 0, scale: 0.7 },
-			{ id: 'seat', part: 'roofSign', x: 250, y: 132, z: 1, scale: 0.8 },
-			{ id: 'light', part: 'light', x: 400, y: 160, z: 2 },
-			wheel('l', 150, 205, 1.15),
-			wheel('r', 380, 205, 1.15)
+			{ id: 'body', part: 'realQuadBikeBody', x: 265, y: 196, z: 0 },
+			{ id: 'seat', part: 'realQuadBikeSeat', x: 310, y: 183, z: 1 },
+			{ id: 'rack', part: 'realQuadBikeRack', x: 407, y: 180, z: 2 },
+			{ id: 'wheel-l', part: 'realQuadBikeWheel', x: 130, y: 236, z: 4 },
+			{ id: 'wheel-r', part: 'realQuadBikeWheel', x: 400, y: 236, z: 4, flip: true }
 		]
-	}
-];
+	}];

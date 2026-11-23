@@ -1,0 +1,109 @@
+{
+  "id": "steam-roller",
+  "name": "Steam roller",
+  "module": "realSteamRoller",
+  "artWidth": 700,
+  "artHeight": 310,
+  "parts": [
+    {
+      "id": "realSteamRollerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M196,252 L196,146 Q196,140 202,140 L266,140 Q282,150 302,150 L410,150 Q424,150 424,134 L472,134 L472,206 L596,206 L596,168 Q596,162 604,162 L640,162 Q648,162 648,170 L648,236 L636,252 Z M232,140 L234,88 Q234,80 230,78 L224,70 Q222,58 232,58 L262,58 Q272,58 270,70 L264,78 Q260,80 260,88 L262,140 Z M196,140 L196,114 Q196,108 202,108 L226,108 Q232,108 232,114 L232,140 Z M648,220 L658,220 L658,228 L666,228 L666,236 L648,236 Z M334,150 Q334,122 352,122 Q370,122 370,150 Z M392,129 L399,129 L399,150 L392,150 Z M436,124 L454,124 L454,134 L436,134 Z M512,206 L507,184 L502,179 L502,173 L496,173 L496,180 L500,184 L506,206 Z M534,206 L530,186 L522,186 L526,206 Z",
+      "bounds": {
+        "x": 196,
+        "y": 58,
+        "w": 470,
+        "h": 194
+      },
+      "name": "Steam roller"
+    },
+    {
+      "id": "realSteamRollerCanopy",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M444,120 Q444,100 464,100 L624,100 Q644,100 644,120 L644,132 L632,132 L632,162 L618,162 L618,132 L466,132 L466,206 L452,206 L452,132 L444,132 Z M552,132 L552,139 Q552,148 558,148 Q564,148 564,139 L564,132 Z",
+      "bounds": {
+        "x": 444,
+        "y": 100,
+        "w": 200,
+        "h": 106
+      },
+      "name": "Canopy"
+    },
+    {
+      "id": "realSteamRollerDrum",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M112,224 A48,48 0 1 1 208,224 A48,48 0 1 1 112,224 Z",
+      "bounds": {
+        "x": 112,
+        "y": 176,
+        "w": 96,
+        "h": 96
+      },
+      "name": "Front drum"
+    },
+    {
+      "id": "realSteamRollerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M530,242 A30,30 0 1 1 590,242 A30,30 0 1 1 530,242 Z",
+      "bounds": {
+        "x": 530,
+        "y": 212,
+        "w": 60,
+        "h": 60
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 700,
+    "height": 310,
+    "groundY": 272,
+    "colors": [
+      "#C1121F",
+      "#2B2D42"
+    ],
+    "chassis": "slab(700, 272, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realSteamRollerBody",
+        "x": 431,
+        "y": 155,
+        "z": 0
+      },
+      {
+        "id": "canopy",
+        "part": "realSteamRollerCanopy",
+        "x": 544,
+        "y": 153,
+        "z": 2
+      },
+      {
+        "id": "drum",
+        "part": "realSteamRollerDrum",
+        "x": 160,
+        "y": 224,
+        "z": 4
+      },
+      {
+        "id": "wheel-near",
+        "part": "realSteamRollerWheel",
+        "x": 560,
+        "y": 242,
+        "z": 4
+      },
+      {
+        "id": "wheel-far",
+        "part": "realSteamRollerWheel",
+        "x": 592,
+        "y": 245,
+        "z": 3,
+        "scale": 0.9
+      }
+    ]
+  }
+}

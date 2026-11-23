@@ -1,0 +1,110 @@
+{
+  "id": "backhoe-loader",
+  "name": "Backhoe loader",
+  "module": "realBackhoeLoader",
+  "artWidth": 760,
+  "artHeight": 310,
+  "parts": [
+    {
+      "id": "realBackhoeLoaderBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M112,264 L112,200 L102,196 L26,228 L14,232 L24,238 L14,242 L24,246 L14,250 L22,256 L20,264 Z M112,182 Q200,160 260,157 L352,162 L352,176 L260,172 Q170,190 112,210 Z M212,252 L212,206 Q212,188 226,186 L352,178 L352,148 L380,148 L380,176 L420,174 L420,252 Z M420,252 L420,174 L444,90 Q448,78 460,78 L552,78 Q560,78 560,88 L560,252 Z M560,252 L560,146 L630,146 Q646,146 648,158 L652,186 L664,194 L666,252 L644,252 Q644,192 600,190 Q560,192 560,252 Z M186,252 L186,262 L232,262 L236,268 L236,272 L266,272 L266,258 L634,258 L634,272 L664,272 L668,266 L668,262 L666,262 L666,252 Z M468,78 L468,60 Q468,54 474,54 L486,54 Q492,54 492,60 L492,78 Z M576,146 L576,88 L588,88 L588,146 Z",
+      "bounds": {
+        "x": 13,
+        "y": 53,
+        "w": 656,
+        "h": 220
+      },
+      "name": "Backhoe loader"
+    },
+    {
+      "id": "realBackhoeLoaderWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M426,188 L448,100 L468,100 L468,188 Z M472,96 L544,96 Q550,96 550,102 L550,194 Q550,200 544,200 L472,200 Z",
+      "bounds": {
+        "x": 425,
+        "y": 95,
+        "w": 126,
+        "h": 106
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realBackhoeLoaderBackhoe",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M639,188 L711,118 L723,122 L747,210 L753,220 Q757,232 754,244 L751,251 L746,251 L743,258 L738,251 L733,251 L730,258 L725,251 L720,251 L717,258 L712,251 L707,251 Q701,250 702,242 Q705,235 714,230 Q722,226 727,221 L731,217 L735,213 L711,126 L723,131 L651,200 Z",
+      "bounds": {
+        "x": 638,
+        "y": 117,
+        "w": 120,
+        "h": 142
+      },
+      "name": "Backhoe arm"
+    },
+    {
+      "id": "realBackhoeLoaderWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M114,236 A36,36 0 1 1 186,236 A36,36 0 1 1 114,236 Z",
+      "bounds": {
+        "x": 114,
+        "y": 200,
+        "w": 72,
+        "h": 72
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 760,
+    "height": 310,
+    "groundY": 272,
+    "colors": [
+      "#F4A261",
+      "#2B2D42"
+    ],
+    "chassis": "slab(760, 272, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realBackhoeLoaderBody",
+        "x": 341,
+        "y": 163,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realBackhoeLoaderWindows",
+        "x": 488,
+        "y": 148,
+        "z": 1
+      },
+      {
+        "id": "backhoe",
+        "part": "realBackhoeLoaderBackhoe",
+        "x": 698,
+        "y": 188,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realBackhoeLoaderWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realBackhoeLoaderWheel",
+        "x": 600,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  },
+  "groundY": 272
+}

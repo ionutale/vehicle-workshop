@@ -1,0 +1,109 @@
+{
+  "id": "wheel-loader",
+  "name": "Wheel loader",
+  "module": "realWheelLoader",
+  "artWidth": 760,
+  "artHeight": 310,
+  "parts": [
+    {
+      "id": "realWheelLoaderBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M118,160 L300,144 L308,138 L318,106 Q322,100 330,100 L430,100 Q440,100 440,110 L440,152 L520,152 L648,176 L660,144 L716,144 Q730,144 730,156 L730,240 Q730,252 718,252 L684,252 L684,248 Q684,184 620,184 Q556,184 556,248 L556,252 L224,252 L224,200 L118,182 Z M396,100 L396,86 Q396,82 401,82 L409,82 Q414,82 414,86 L414,100 Z M322,100 L322,90 Q322,86 327,86 L345,86 Q350,86 350,90 L350,100 Z M470,152 L470,118 L486,118 L486,152 Z M204,222 L224,222 L224,234 L204,234 Z",
+      "bounds": {
+        "x": 118,
+        "y": 82,
+        "w": 612,
+        "h": 170
+      },
+      "name": "Wheel loader"
+    },
+    {
+      "id": "realWheelLoaderWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M314,134 L324,108 L336,108 L336,134 Z M346,108 L420,108 Q428,108 428,116 L428,182 Q428,190 420,190 L346,190 Z",
+      "bounds": {
+        "x": 314,
+        "y": 108,
+        "w": 114,
+        "h": 82
+      },
+      "name": "Windows"
+    },
+    {
+      "id": "realWheelLoaderBucket",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M118,156 L118,242 Q118,262 100,268 L52,274 Q24,276 12,264 Q6,256 8,246 L16,190 Z",
+      "bounds": {
+        "x": 7.5,
+        "y": 156,
+        "w": 110.5,
+        "h": 118.5
+      },
+      "name": "Bucket"
+    },
+    {
+      "id": "realWheelLoaderWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M118,236 A42,42 0 1 1 202,236 A42,42 0 1 1 118,236 Z",
+      "bounds": {
+        "x": 118,
+        "y": 194,
+        "w": 84,
+        "h": 84
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 760,
+    "height": 310,
+    "groundY": 278,
+    "colors": [
+      "#E9C46A",
+      "#264653"
+    ],
+    "chassis": "slab(760, 278, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realWheelLoaderBody",
+        "x": 424,
+        "y": 167,
+        "z": 0
+      },
+      {
+        "id": "windows",
+        "part": "realWheelLoaderWindows",
+        "x": 371,
+        "y": 149,
+        "z": 1
+      },
+      {
+        "id": "bucket",
+        "part": "realWheelLoaderBucket",
+        "x": 62.75,
+        "y": 215.25,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realWheelLoaderWheel",
+        "x": 160,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realWheelLoaderWheel",
+        "x": 620,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}

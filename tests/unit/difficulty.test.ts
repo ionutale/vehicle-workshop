@@ -37,7 +37,7 @@ describe('difficulty', () => {
 		expect(signature('airport-fuel-bowser')).toContain('tank');
 		expect(signature('fire-engine')).toContain('realFireLadder');
 		expect(signature('digger')).toContain('realDiggerBucket');
-		expect(signature('backhoe-loader')).toContain('arm');
+		expect(signature('backhoe-loader')).toContain('realBackhoeLoaderBackhoe');
 		expect(signature('school-bus')).toContain('realSchoolBusWindows');
 		expect(signature('bendy-bus')).toContain('realBendyBusWindows');
 		expect(signature('coach-bus')).toContain('realCoachBusWindows');

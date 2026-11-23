@@ -1,0 +1,109 @@
+{
+  "id": "hay-baler",
+  "name": "Hay baler",
+  "module": "realHayBaler",
+  "artWidth": 720,
+  "artHeight": 300,
+  "parts": [
+    {
+      "id": "realHayBalerBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M58,252 L58,200 Q58,186 72,182 L96,176 L253.3,176 A78,78 0 0 1 407.8,196 L640,206 L648,196 L672,196 L676,206 L676,218 L600,222 L460,222 L430,252 Z",
+      "bounds": {
+        "x": 58,
+        "y": 112,
+        "w": 618,
+        "h": 140
+      },
+      "name": "Hay baler"
+    },
+    {
+      "id": "realHayBalerBale",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M558,160 A44,44 0 1 1 646,160 A44,44 0 1 1 558,160 Z",
+      "bounds": {
+        "x": 558,
+        "y": 116,
+        "w": 88,
+        "h": 88
+      },
+      "name": "Round bale"
+    },
+    {
+      "id": "realHayBalerDrawbar",
+      "role": "trim",
+      "kind": "detail",
+      "mask": "M6,246 L58,240 L58,254 L6,258 Z M62,194 Q46,208 42,232 L51,234 Q56,212 68,200 Z",
+      "bounds": {
+        "x": 6,
+        "y": 194,
+        "w": 62,
+        "h": 64
+      },
+      "name": "Drawbar"
+    },
+    {
+      "id": "realHayBalerWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M118,236 A32,32 0 1 1 182,236 A32,32 0 1 1 118,236 Z",
+      "bounds": {
+        "x": 118,
+        "y": 204,
+        "w": 64,
+        "h": 64
+      },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 720,
+    "height": 300,
+    "groundY": 268,
+    "colors": [
+      "#E9C46A",
+      "#2A9D8F"
+    ],
+    "chassis": "slab(720, 268, 200)",
+    "slots": [
+      {
+        "id": "body",
+        "part": "realHayBalerBody",
+        "x": 367,
+        "y": 182,
+        "z": 0
+      },
+      {
+        "id": "drawbar",
+        "part": "realHayBalerDrawbar",
+        "x": 37,
+        "y": 226,
+        "z": 1
+      },
+      {
+        "id": "bale",
+        "part": "realHayBalerBale",
+        "x": 602,
+        "y": 160,
+        "z": 2
+      },
+      {
+        "id": "wheel-l",
+        "part": "realHayBalerWheel",
+        "x": 150,
+        "y": 236,
+        "z": 4
+      },
+      {
+        "id": "wheel-r",
+        "part": "realHayBalerWheel",
+        "x": 540,
+        "y": 236,
+        "z": 4,
+        "flip": true
+      }
+    ]
+  }
+}
