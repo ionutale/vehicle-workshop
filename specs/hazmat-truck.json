@@ -1,0 +1,55 @@
+{
+	"id": "hazmat-truck",
+	"name": "Hazmat truck",
+	"module": "realHazmatTruck",
+	"artWidth": 680,
+	"artHeight": 320,
+	"parts": [
+		{
+			"id": "realHazmatTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M14,270 L14,246 L24,242 L24,140 Q24,116 48,111 L188,111 Q204,112 204,124 L204,258 L582,258 L582,170 L648,170 L648,262 L656,262 L656,278 L584,278 L584,270 Z M94,111 L94,104 L97,94 Q98,90 104,90 L112,90 Q118,90 119,94 L120,104 L120,111 Z M4,136 L18,136 L18,146 L24,146 L24,152 L18,152 L18,168 L4,168 Z M586,170 L646,170 L646,148 L586,148 Z M250,258 L250,248 L306,248 L306,258 Z M420,258 L420,248 L476,248 L476,258 Z M539,270 L548,270 L548,278 L539,278 Z",
+			"bounds": { "x": 4, "y": 90, "w": 652, "h": 188 },
+			"name": "Hazmat truck"
+		},
+		{
+			"id": "realHazmatTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M45,128 L109,128 Q118,128 118,137 L118,179 Q118,188 109,188 L45,188 Q36,188 36,179 L36,137 Q36,128 45,128 Z M133,132 L181,132 Q186,132 186,137 L186,179 Q186,184 181,184 L133,184 Q128,184 128,179 L128,137 Q128,132 133,132 Z",
+			"bounds": { "x": 36, "y": 128, "w": 150, "h": 60 },
+			"name": "Windows"
+		},
+		{
+			"id": "realHazmatTruckTank",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M204,124 L548,124 C566,124 582,150 582,186 C582,222 566,248 548,248 L204,248 Z M300,124 L300,106 Q300,100 306,100 L346,100 Q352,100 352,106 L352,124 Z",
+			"bounds": { "x": 204, "y": 100, "w": 378, "h": 148 },
+			"name": "Chemical tank"
+		},
+		{
+			"id": "realHazmatTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M142,254 A28,28 0 1 1 198,254 A28,28 0 1 1 142,254 Z",
+			"bounds": { "x": 142, "y": 226, "w": 56, "h": 56 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 680,
+		"height": 320,
+		"groundY": 282,
+		"colors": ["#F9C74F", "#1D3557"],
+		"chassis": "slab(680, 282, 150)",
+		"slots": [
+			{ "id": "body", "part": "realHazmatTruckBody", "x": 330, "y": 184, "z": 0 },
+			{ "id": "windows", "part": "realHazmatTruckWindows", "x": 111, "y": 158, "z": 1 },
+			{ "id": "tank", "part": "realHazmatTruckTank", "x": 393, "y": 174, "z": 2 },
+			{ "id": "wheel-l", "part": "realHazmatTruckWheel", "x": 170, "y": 254, "z": 4 },
+			{ "id": "wheel-r", "part": "realHazmatTruckWheel", "x": 510, "y": 254, "z": 4, "flip": true }
+		]
+	}
+}

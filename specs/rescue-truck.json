@@ -1,0 +1,55 @@
+{
+  "id": "rescue-truck",
+  "name": "Rescue truck",
+  "module": "realRescueTruck",
+  "artWidth": 700,
+  "artHeight": 330,
+  "parts": [
+    {
+      "id": "realRescueTruckBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M38,270 L38,182 Q38,172 44,166 L74,120 Q78,114 86,114 L212,114 L212,96 Q212,90 218,90 L652,90 Q664,90 664,102 L664,264 Q664,270 658,270 Z M92,100 L200,100 L200,114 L92,114 Z M620,80 L650,80 L650,90 L620,90 Z M16,156 L38,156 L38,200 L16,200 Z M20,244 L38,244 L38,270 L20,270 Z M664,250 L680,250 L680,268 L664,268 Z M96,270 L320,270 L320,286 L420,286 L420,270 L656,270 L656,278 L96,278 Z",
+      "bounds": { "x": 16, "y": 80, "w": 664, "h": 206 },
+      "name": "Rescue truck"
+    },
+    {
+      "id": "realRescueTruckWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M46,170 L76,124 L104,128 L74,174 Z M117,124 L151,124 Q156,124 156,129 L156,169 Q156,174 151,174 L117,174 Q112,174 112,169 L112,129 Q112,124 117,124 Z M167,126 L195,126 Q200,126 200,131 L200,167 Q200,172 195,172 L167,172 Q162,172 162,167 L162,131 Q162,126 167,126 Z",
+      "bounds": { "x": 46, "y": 124, "w": 154, "h": 50 },
+      "name": "Windows"
+    },
+    {
+      "id": "realRescueTruckShutter",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M598,100 L660,100 L660,244 L598,244 Z M634,270 L688,270 L688,284 L634,284 Z M622,246 L660,246 L660,260 L622,260 Z M600,248 L618,248 L618,257 L600,257 Z",
+      "bounds": { "x": 598, "y": 100, "w": 90, "h": 184 },
+      "name": "Rear roller shutter"
+    },
+    {
+      "id": "realRescueTruckWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M140,262 A30,30 0 1 1 200,262 A30,30 0 1 1 140,262 Z",
+      "bounds": { "x": 140, "y": 232, "w": 60, "h": 60 },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 700,
+    "height": 330,
+    "groundY": 292,
+    "colors": ["#E63946", "#F1FAEE"],
+    "chassis": "slab(700, 292, 150)",
+    "slots": [
+      { "id": "body", "part": "realRescueTruckBody", "x": 348, "y": 183, "z": 0 },
+      { "id": "windows", "part": "realRescueTruckWindows", "x": 123, "y": 149, "z": 1 },
+      { "id": "shutter", "part": "realRescueTruckShutter", "x": 643, "y": 192, "z": 2 },
+      { "id": "wheel-l", "part": "realRescueTruckWheel", "x": 170, "y": 262, "z": 4 },
+      { "id": "wheel-r", "part": "realRescueTruckWheel", "x": 550, "y": 262, "z": 4, "flip": true }
+    ]
+  }
+}

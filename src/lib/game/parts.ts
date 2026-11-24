@@ -345,7 +345,51 @@ export type PartId =
 	| 'realAirportFuelBowserBody'
 	| 'realAirportFuelBowserTank'
 	| 'realAirportFuelBowserWindows'
-	| 'realAirportFuelBowserWheel';
+	| 'realAirportFuelBowserWheel'
+	| 'realAerialLadderBody'
+	| 'realAerialLadderWindows'
+	| 'realAerialLadderLadder'
+	| 'realAerialLadderWheel'
+	| 'realAirportFireTruckBody'
+	| 'realAirportFireTruckWindows'
+	| 'realAirportFireTruckMonitor'
+	| 'realAirportFireTruckWheel'
+	| 'realHazmatTruckBody'
+	| 'realHazmatTruckWindows'
+	| 'realHazmatTruckTank'
+	| 'realHazmatTruckWheel'
+	| 'realRescueTruckBody'
+	| 'realRescueTruckWindows'
+	| 'realRescueTruckShutter'
+	| 'realRescueTruckWheel'
+	| 'realCherryPickerBody'
+	| 'realCherryPickerWindows'
+	| 'realCherryPickerBoom'
+	| 'realCherryPickerWheel'
+	| 'realScissorLiftBody'
+	| 'realScissorLiftScissor'
+	| 'realScissorLiftPlatform'
+	| 'realScissorLiftWheel'
+	| 'realAllTerrainCraneBody'
+	| 'realAllTerrainCraneWindows'
+	| 'realAllTerrainCraneBoom'
+	| 'realAllTerrainCraneWheel'
+	| 'realSideLoaderGarbageBody'
+	| 'realSideLoaderGarbageWindows'
+	| 'realSideLoaderGarbageBin'
+	| 'realSideLoaderGarbageWheel'
+	| 'realRecyclingTruckBody'
+	| 'realRecyclingTruckWindows'
+	| 'realRecyclingTruckHopper'
+	| 'realRecyclingTruckWheel'
+	| 'realIceCreamTruckBody'
+	| 'realIceCreamTruckWindows'
+	| 'realIceCreamTruckHatch'
+	| 'realIceCreamTruckWheel'
+	| 'realMilkFloatBody'
+	| 'realMilkFloatWindows'
+	| 'realMilkFloatCrates'
+	| 'realMilkFloatWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -3135,6 +3179,358 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z',
 		{ x: 142, y: 188, w: 56, h: 56 }
 	),
+	realAerialLadderBody: realPart(
+		'realAerialLadderBody',
+		'shell',
+		'body',
+		'aerial-ladder',
+		'M30,262 L30,188 Q30,174 40,170 L48,142 Q52,130 66,130 L188,130 Q196,130 196,140 L196,152 L744,152 Q752,152 752,162 L752,262 Z M16,240 L30,240 L30,264 L16,264 Z M16,140 L30,140 L30,166 L16,166 Z M66,130 L66,118 Q66,114 70,114 L174,114 Q178,114 178,118 L178,130 Z M252,262 L266,262 L266,280 L286,280 L286,290 L234,290 L234,280 L252,280 Z M544,262 L558,262 L558,280 L578,280 L578,290 L526,290 L526,280 L544,280 Z M688,262 L756,262 L756,288 L688,288 Z M198,118 L210,118 L210,152 L198,152 Z M196,118 Q194,104 206,100 Q212,88 226,90 Q242,92 240,104 Q248,110 240,118 Z M146,268 A34,34 0 0 1 214,268 Z M586,268 A34,34 0 0 1 654,268 Z',
+		{ x: 16, y: 88, w: 740, h: 202 }
+	),
+	realAerialLadderWindows: realPart(
+		'realAerialLadderWindows',
+		'glass',
+		'face',
+		'aerial-ladder',
+		'M42,184 L50,152 Q52,144 60,144 L112,144 L112,184 Z M124,144 L184,144 Q190,144 190,150 L190,184 L124,184 Z',
+		{ x: 42, y: 144, w: 148, h: 40 }
+	),
+	realAerialLadderLadder: realPart(
+		'realAerialLadderLadder',
+		'trim',
+		'cargo',
+		'aerial-ladder',
+		'M212,126 L340,126 L340,122 L472,122 L472,118 L652,118 L652,150 L472,150 L472,146 L340,146 L340,142 L212,142 Z M652,152 L652,136 Q652,128 660,128 L736,128 Q744,128 744,136 L744,152 Z',
+		{ x: 212, y: 118, w: 532, h: 34 }
+	),
+	realAerialLadderWheel: realPart(
+		'realAerialLadderWheel',
+		'rubber',
+		'locomotion',
+		'aerial-ladder',
+		'M148,268 A32,32 0 1 1 212,268 A32,32 0 1 1 148,268 Z',
+		{ x: 148, y: 236, w: 64, h: 64 }
+	),
+	realAirportFireTruckBody: realPart(
+		'realAirportFireTruckBody',
+		'shell',
+		'body',
+		'airport-fire-truck',
+		'M42,252 L42,200 Q42,184 56,178 L74,154 Q80,144 94,144 L182,144 Q194,144 194,156 L194,182 L692,182 L692,252 L605.10,252 A36,36 0 0 0 534.90,252 L215.10,252 A36,36 0 0 0 144.90,252 L42,252 Z M14,176 L30,176 L30,182 L42,182 L42,188 L30,188 L30,210 L14,210 Z M8,238 L18,238 L18,252 L8,252 Z M18,226 L42,226 L42,270 L18,270 Z M692,240 L708,240 L708,262 L692,262 Z M96,130 L180,130 L180,144 L96,144 Z',
+		{ x: 8, y: 130, w: 700, h: 140 }
+	),
+	realAirportFireTruckWindows: realPart(
+		'realAirportFireTruckWindows',
+		'glass',
+		'face',
+		'airport-fire-truck',
+		'M50,206 L50,188 Q50,180 58,174 L86,154 Q90,152 96,152 L124,152 L124,206 Z M139,152 L173,152 Q178,152 178,157 L178,201 Q178,206 173,206 L139,206 Q134,206 134,201 L134,157 Q134,152 139,152 Z',
+		{ x: 50, y: 152, w: 128, h: 54 }
+	),
+	realAirportFireTruckMonitor: realPart(
+		'realAirportFireTruckMonitor',
+		'trim',
+		'cargo',
+		'airport-fire-truck',
+		'M264,185 L328,185 L328,168 L320,168 L318,156 L313.4,141.3 L269.7,91.8 L256,72.9 Q242,77.6 236,91.1 L253.5,106.6 L298.6,154.7 L296,156 L296,168 L264,168 Z',
+		{ x: 235, y: 72, w: 94, h: 114 }
+	),
+	realAirportFireTruckWheel: realPart(
+		'realAirportFireTruckWheel',
+		'rubber',
+		'locomotion',
+		'airport-fire-truck',
+		'M144,260 A36,36 0 1 1 216,260 A36,36 0 1 1 144,260 Z',
+		{ x: 144, y: 224, w: 72, h: 72 }
+	),
+	realHazmatTruckBody: realPart(
+		'realHazmatTruckBody',
+		'shell',
+		'body',
+		'hazmat-truck',
+		'M14,270 L14,246 L24,242 L24,140 Q24,116 48,111 L188,111 Q204,112 204,124 L204,258 L582,258 L582,170 L648,170 L648,262 L656,262 L656,278 L584,278 L584,270 Z M94,111 L94,104 L97,94 Q98,90 104,90 L112,90 Q118,90 119,94 L120,104 L120,111 Z M4,136 L18,136 L18,146 L24,146 L24,152 L18,152 L18,168 L4,168 Z M586,170 L646,170 L646,148 L586,148 Z M250,258 L250,248 L306,248 L306,258 Z M420,258 L420,248 L476,248 L476,258 Z M539,270 L548,270 L548,278 L539,278 Z',
+		{ x: 4, y: 90, w: 652, h: 188 }
+	),
+	realHazmatTruckWindows: realPart(
+		'realHazmatTruckWindows',
+		'glass',
+		'face',
+		'hazmat-truck',
+		'M45,128 L109,128 Q118,128 118,137 L118,179 Q118,188 109,188 L45,188 Q36,188 36,179 L36,137 Q36,128 45,128 Z M133,132 L181,132 Q186,132 186,137 L186,179 Q186,184 181,184 L133,184 Q128,184 128,179 L128,137 Q128,132 133,132 Z',
+		{ x: 36, y: 128, w: 150, h: 60 }
+	),
+	realHazmatTruckTank: realPart(
+		'realHazmatTruckTank',
+		'trim',
+		'cargo',
+		'hazmat-truck',
+		'M204,124 L548,124 C566,124 582,150 582,186 C582,222 566,248 548,248 L204,248 Z M300,124 L300,106 Q300,100 306,100 L346,100 Q352,100 352,106 L352,124 Z',
+		{ x: 204, y: 100, w: 378, h: 148 }
+	),
+	realHazmatTruckWheel: realPart(
+		'realHazmatTruckWheel',
+		'rubber',
+		'locomotion',
+		'hazmat-truck',
+		'M142,254 A28,28 0 1 1 198,254 A28,28 0 1 1 142,254 Z',
+		{ x: 142, y: 226, w: 56, h: 56 }
+	),
+	realRescueTruckBody: realPart(
+		'realRescueTruckBody',
+		'shell',
+		'body',
+		'rescue-truck',
+		'M38,270 L38,182 Q38,172 44,166 L74,120 Q78,114 86,114 L212,114 L212,96 Q212,90 218,90 L652,90 Q664,90 664,102 L664,264 Q664,270 658,270 Z M92,100 L200,100 L200,114 L92,114 Z M620,80 L650,80 L650,90 L620,90 Z M16,156 L38,156 L38,200 L16,200 Z M20,244 L38,244 L38,270 L20,270 Z M664,250 L680,250 L680,268 L664,268 Z M96,270 L320,270 L320,286 L420,286 L420,270 L656,270 L656,278 L96,278 Z',
+		{ x: 16, y: 80, w: 664, h: 206 }
+	),
+	realRescueTruckWindows: realPart(
+		'realRescueTruckWindows',
+		'glass',
+		'face',
+		'rescue-truck',
+		'M46,170 L76,124 L104,128 L74,174 Z M117,124 L151,124 Q156,124 156,129 L156,169 Q156,174 151,174 L117,174 Q112,174 112,169 L112,129 Q112,124 117,124 Z M167,126 L195,126 Q200,126 200,131 L200,167 Q200,172 195,172 L167,172 Q162,172 162,167 L162,131 Q162,126 167,126 Z',
+		{ x: 46, y: 124, w: 154, h: 50 }
+	),
+	realRescueTruckShutter: realPart(
+		'realRescueTruckShutter',
+		'trim',
+		'cargo',
+		'rescue-truck',
+		'M598,100 L660,100 L660,244 L598,244 Z M634,270 L688,270 L688,284 L634,284 Z M622,246 L660,246 L660,260 L622,260 Z M600,248 L618,248 L618,257 L600,257 Z',
+		{ x: 598, y: 100, w: 90, h: 184 }
+	),
+	realRescueTruckWheel: realPart(
+		'realRescueTruckWheel',
+		'rubber',
+		'locomotion',
+		'rescue-truck',
+		'M140,262 A30,30 0 1 1 200,262 A30,30 0 1 1 140,262 Z',
+		{ x: 140, y: 232, w: 60, h: 60 }
+	),
+	realCherryPickerBody: realPart(
+		'realCherryPickerBody',
+		'shell',
+		'body',
+		'cherry-picker',
+		'M40,266 L40,192 Q40,182 48,178 L86,168 L132,120 Q138,112 150,112 L606,112 Q620,112 620,126 L620,254 Q620,266 606,266 Z M40,266 L104,266 L104,276 L144,276 L144,266 L558,266 L558,276 L598,276 L598,266 L620,266 L620,276 L40,276 Z M412,112 L412,98 Q412,88 422,86 L466,86 Q476,88 476,98 L476,112 Z M392,112 L400,112 L314,74 L306,66 Z M172,112 L172,104 Q172,98 178,98 L212,98 Q218,98 218,104 L218,112 Z M56,136 L80,136 L80,164 L56,164 Z M80,146 L80,154 L97.5,156 L109,144 Z M22,240 L40,240 L40,266 L22,266 Z M620,240 L636,240 L636,266 L620,266 Z M112,266 L128,266 L128,282 L144,282 L144,292 L104,292 L104,282 L112,282 Z M566,266 L582,266 L582,282 L598,282 L598,292 L558,292 L558,282 L566,282 Z',
+		{ x: 22, y: 66, w: 614, h: 226 }
+	),
+	realCherryPickerWindows: realPart(
+		'realCherryPickerWindows',
+		'glass',
+		'face',
+		'cherry-picker',
+		'M90,166 L134,122 L142.5,130.5 L98.5,174.5 Z M172,126 L224,126 Q230,126 230,132 L230,168 Q230,174 224,174 L172,174 Q166,174 166,168 L166,132 Q166,126 172,126 Z',
+		{ x: 90, y: 122, w: 140, h: 53 }
+	),
+	realCherryPickerBoom: realPart(
+		'realCherryPickerBoom',
+		'trim',
+		'cargo',
+		'cherry-picker',
+		'M444,78 L330,48 L326,52 L204,32 L204,52 L326,72 L330,76 L444,108 L452,110 Q464,106 464,96 Q464,86 452,82 Z M123,14 L199,14 Q204,14 204,19 L204,59 Q204,64 199,64 L123,64 Q118,64 118,59 L118,19 Q118,14 123,14 Z',
+		{ x: 118, y: 14, w: 346, h: 96 }
+	),
+	realCherryPickerWheel: realPart(
+		'realCherryPickerWheel',
+		'rubber',
+		'locomotion',
+		'cherry-picker',
+		'M152,272 A28,28 0 1 1 208,272 A28,28 0 1 1 152,272 Z',
+		{ x: 152, y: 244, w: 56, h: 56 }
+	),
+	realScissorLiftBody: realPart(
+		'realScissorLiftBody',
+		'shell',
+		'body',
+		'scissor-lift',
+		'M104,236 L426,236 Q434,236 434,244 L434,286 Q434,294 426,294 L407,294 A27,27 0 0 0 353,294 L177,294 A27,27 0 0 0 123,294 L104,294 Q96,294 96,286 L96,244 Q96,236 104,236 Z',
+		{ x: 96, y: 236, w: 338, h: 58 }
+	),
+	realScissorLiftScissor: realPart(
+		'realScissorLiftScissor',
+		'trim',
+		'cargo',
+		'scissor-lift',
+		'M133.88,152.62 L136.25,137.8 L393.75,137.8 L396.12,152.62 L396.12,219.38 L393.75,234.2 L136.25,234.2 L133.88,219.38 Z',
+		{ x: 133, y: 137, w: 264, h: 98 }
+	),
+	realScissorLiftPlatform: realPart(
+		'realScissorLiftPlatform',
+		'trim',
+		'detail',
+		'scissor-lift',
+		'M123,110 L407,110 Q412,110 412,115 L412,131 Q412,136 407,136 L123,136 Q118,136 118,131 L118,115 Q118,110 123,110 Z M121,51 L132,51 L132,110 L121,110 Z M186,51 L197,51 L197,110 L186,110 Z M300,51 L311,51 L311,110 L300,110 Z M398,51 L409,51 L409,110 L398,110 Z M197,51 L300,51 L300,58 L197,58 Z M311,51 L398,51 L398,58 L311,58 Z M197,82 L300,82 L300,88 L197,88 Z M311,82 L398,82 L398,88 L311,88 Z M132,52 L186,52 L186,110 L132,110 Z M348,43 L378,43 L378,51 L348,51 Z M352,43 L352,38 Q352,32 359,32 L367,32 Q374,32 374,38 L374,43 Z',
+		{ x: 118, y: 32, w: 294, h: 104 }
+	),
+	realScissorLiftWheel: realPart(
+		'realScissorLiftWheel',
+		'rubber',
+		'locomotion',
+		'scissor-lift',
+		'M128,294 A22,22 0 1 1 172,294 A22,22 0 1 1 128,294 Z',
+		{ x: 128, y: 272, w: 44, h: 44 }
+	),
+	realAllTerrainCraneBody: realPart(
+		'realAllTerrainCraneBody',
+		'shell',
+		'body',
+		'all-terrain-crane',
+		'M26,282 L26,224 L36,206 Q40,196 52,196 L126,196 Q140,198 140,214 L140,282 Z M140,244 L770,244 Q782,244 782,254 L782,268 Q782,276 770,276 L140,276 Z M318,244 L318,236 Q318,214 340,214 L744,214 Q760,214 760,232 L760,244 Z M340,214 L340,190 L352,174 Q356,168 366,168 L418,168 Q432,170 432,184 L432,214 Z M544,214 L544,202 Q544,196 550,196 L736,196 Q744,196 744,204 L744,214 Z M232,276 L258,276 L258,298 L268,298 L268,310 L220,310 L220,298 L232,298 Z M706,276 L732,276 L732,298 L744,298 L744,310 L696,310 L696,298 L706,298 Z M74,196 L74,188 Q74,184 79,184 L97,184 Q102,184 102,188 L102,196 Z M372,168 L372,160 Q372,156 377,156 L395,156 Q400,156 400,160 L400,168 Z M16,212 L26,212 L26,238 L16,238 Z M14,262 L26,262 L26,284 L14,284 Z M158,244 L158,192 L162,188 L170,188 L170,244 Z',
+		{ x: 14, y: 156, w: 768, h: 154 }
+	),
+	realAllTerrainCraneWindows: realPart(
+		'realAllTerrainCraneWindows',
+		'glass',
+		'face',
+		'all-terrain-crane',
+		'M37,250 L45,214 Q47,208 53,208 L76,208 L76,250 Z M84,208 L126,208 Q134,208 134,216 L134,250 L84,250 Z M350,206 L350,194 Q350,188 357,184 L374,177 Q380,175 386,177 L386,206 Z M394,179 L410,179 Q418,179 418,187 L418,206 L394,206 Z',
+		{ x: 37, y: 175, w: 381, h: 75 }
+	),
+	realAllTerrainCraneBoom: realPart(
+		'realAllTerrainCraneBoom',
+		'trim',
+		'cargo',
+		'all-terrain-crane',
+		'M530.08,242.21 L430.33,176.47 L432.16,173.49 L346.4,121.01 L347.96,118.45 L267.56,69.25 L276.44,54.75 L356.84,103.95 L358.4,101.39 L444.16,153.87 L445.99,150.89 L549.92,209.79 Z M297,92 L303,92 L303,175 L317,175 L317,197 L283,197 L283,175 L297,175 Z M291,197 L315,197 L315,215 L291,215 Z',
+		{ x: 267.6, y: 54.8, w: 282.4, h: 187.4 }
+	),
+	realAllTerrainCraneWheel: realPart(
+		'realAllTerrainCraneWheel',
+		'rubber',
+		'locomotion',
+		'all-terrain-crane',
+		'M148,288 A32,32 0 1 1 212,288 A32,32 0 1 1 148,288 Z',
+		{ x: 148, y: 256, w: 64, h: 64 }
+	),
+	realSideLoaderGarbageBody: realPart(
+		'realSideLoaderGarbageBody',
+		'shell',
+		'body',
+		'side-loader-garbage',
+		'M32,272 L32,158 Q32,144 40,136 L62,116 Q68,108 82,108 L174,108 Q182,108 182,100 L182,96 Q182,88 194,88 L634,84 L646,62 Q650,58 660,58 L690,58 Q702,58 702,70 L702,272 Z M118,108 L118,100 L128,100 Q128,84 140,84 Q152,84 152,100 L158,100 L158,108 Z M14,118 L28,118 L28,150 L14,150 Z M16,244 L32,244 L32,272 L16,272 Z M96,272 L158,272 L158,284 L96,284 Z M196,272 L212,272 L212,292 L196,292 Z M586,272 L602,272 L602,292 L586,292 Z',
+		{ x: 14, y: 58, w: 688, h: 234 }
+	),
+	realSideLoaderGarbageWindows: realPart(
+		'realSideLoaderGarbageWindows',
+		'glass',
+		'face',
+		'side-loader-garbage',
+		'M38,202 L38,166 Q38,156 44,148 L58,130 Q64,122 76,122 L98,122 Q106,122 106,130 L106,194 Q106,202 98,202 Z M118,124 L166,124 Q174,124 174,132 L174,184 Q174,192 166,192 L118,192 Q110,192 110,184 L110,132 Q110,124 118,124 Z',
+		{ x: 38, y: 122, w: 136, h: 80 }
+	),
+	realSideLoaderGarbageBin: realPart(
+		'realSideLoaderGarbageBin',
+		'trim',
+		'cargo',
+		'side-loader-garbage',
+		'M296,219 L352,219 L352,231 Q352,234 349,234 L299,234 Q296,234 296,231 Z M299,234 L349,234 L345,284 Q345,290 339,290 L334,290 L334,300 L327,300 L327,290 L321,290 L321,300 L314,300 L314,290 L309,290 Q303,290 303,284 Z',
+		{ x: 296, y: 219, w: 56, h: 81 }
+	),
+	realSideLoaderGarbageWheel: realPart(
+		'realSideLoaderGarbageWheel',
+		'rubber',
+		'locomotion',
+		'side-loader-garbage',
+		'M138,268 A32,32 0 1 1 202,268 A32,32 0 1 1 138,268 Z',
+		{ x: 138, y: 236, w: 64, h: 64 }
+	),
+	realRecyclingTruckBody: realPart(
+		'realRecyclingTruckBody',
+		'shell',
+		'body',
+		'recycling-truck',
+		'M40,282 L40,248 L40,214 L44,168 Q45,152 53,140 L65,122 Q71,112 85,110 L226,110 L226,74 Q226,62 238,62 L604,62 Q622,62 622,80 L622,282 Z M376,62 L376,54 Q376,50 382,50 L418,50 Q424,50 424,54 L424,62 Z M166,110 L166,103 L171,103 Q171,92 182,92 Q193,92 193,103 L198,103 L198,110 Z M204,110 L204,80 L202,76 L218,76 L216,80 L216,110 Z M20,126 L34,131 L34,158 L20,152 Z M24,248 L40,248 L40,282 L24,282 Z M202,282 L218,282 L218,290 L202,290 Z M576,282 L592,282 L592,290 L576,290 Z M660,282 L696,282 L696,290 L660,290 Z',
+		{ x: 20, y: 50, w: 676, h: 240 }
+	),
+	realRecyclingTruckWindows: realPart(
+		'realRecyclingTruckWindows',
+		'glass',
+		'face',
+		'recycling-truck',
+		'M50,206 L50,168 Q50,153 57,145 L71,128 Q78,118 91,118 L116,118 Q124,118 124,126 L124,198 Q124,206 116,206 Z M136,114 L210,114 Q218,114 218,122 L218,192 Q218,200 210,200 L136,200 Q128,200 128,192 L128,122 Q128,114 136,114 Z',
+		{ x: 50, y: 114, w: 168, h: 92 }
+	),
+	realRecyclingTruckHopper: realPart(
+		'realRecyclingTruckHopper',
+		'trim',
+		'cargo',
+		'recycling-truck',
+		'M590,174 L690,174 L690,266 Q690,282 674,282 L606,282 Q596,282 594,270 L584,200 Q584,188 590,174 Z M594,174 L594,142 L602,134 L616,138 L616,174 Z M620,174 L620,156 Q620,150 625,148 L625,143 L628,141 L628,137 Q628,132 631,132 Q634,132 634,137 L634,141 L637,143 L637,148 Q642,150 642,156 L642,174 Z M646,174 L646,158 Q646,153 650,151 L650,146 L652,144 L652,142 Q652,139 655,139 Q658,139 658,142 L658,144 L660,146 L660,151 Q664,153 664,158 L664,174 Z M668,174 L672,132 L684,136 L682,174 Z',
+		{ x: 584, y: 132, w: 106, h: 150 }
+	),
+	realRecyclingTruckWheel: realPart(
+		'realRecyclingTruckWheel',
+		'rubber',
+		'locomotion',
+		'recycling-truck',
+		'M140,262 A30,30 0 1 1 200,262 A30,30 0 1 1 140,262 Z',
+		{ x: 140, y: 232, w: 60, h: 60 }
+	),
+	realIceCreamTruckBody: realPart(
+		'realIceCreamTruckBody',
+		'shell',
+		'body',
+		'ice-cream-truck',
+		'M30,276 L30,206 Q30,196 40,192 L74,184 L100,146 Q104,136 114,136 L566,136 Q582,136 582,150 L582,262 Q582,276 566,276 Z M349,136 L323,96 Q311,92 320,82 Q311,72 321,62 Q316,50 330,48 Q337,37 349,41 Q362,37 369,48 Q383,50 378,62 Q388,72 379,82 Q388,92 375,96 Z M118,136 L118,130 Q118,120 128,120 Q138,120 138,130 L138,136 Z M16,248 L30,248 L30,276 L16,276 Z M582,254 L596,254 L596,270 L582,270 Z M210,276 L430,276 L430,282 L210,282 Z',
+		{ x: 16, y: 38, w: 580, h: 244 }
+	),
+	realIceCreamTruckWindows: realPart(
+		'realIceCreamTruckWindows',
+		'glass',
+		'face',
+		'ice-cream-truck',
+		'M84,196 L118,146 L142,152 L106,202 Z M158,143 L198,143 Q204,143 204,149 L204,176 Q204,182 198,182 L158,182 Q152,182 152,176 L152,149 Q152,143 158,143 Z',
+		{ x: 84, y: 142, w: 120, h: 60 }
+	),
+	realIceCreamTruckHatch: realPart(
+		'realIceCreamTruckHatch',
+		'trim',
+		'cargo',
+		'ice-cream-truck',
+		'M226,148 L442,148 L442,248 L226,248 Z',
+		{ x: 226, y: 148, w: 216, h: 100 }
+	),
+	realIceCreamTruckWheel: realPart(
+		'realIceCreamTruckWheel',
+		'rubber',
+		'locomotion',
+		'ice-cream-truck',
+		'M120,258 A30,30 0 1 1 180,258 A30,30 0 1 1 120,258 Z',
+		{ x: 120, y: 228, w: 60, h: 60 }
+	),
+	realMilkFloatBody: realPart(
+		'realMilkFloatBody',
+		'shell',
+		'body',
+		'milk-float',
+		'M48,84 L48,74 Q48,64 60,64 L526,64 Q538,64 538,74 L538,84 Z M38,222 L38,172 Q38,158 50,154 L70,150 L92,84 L124,84 L124,222 Z M124,158 L144,158 L144,204 L124,204 Z M124,204 L538,204 L538,222 L124,222 Z M152,204 L152,181 Q152,172 162,172 L204,172 L204,204 Z M204,204 L204,158 Q204,150 212,150 Q220,150 220,158 L220,204 Z M462,84 L474,84 L474,204 L462,204 Z M520,84 L532,84 L532,204 L520,204 Z M474,96 L520,96 L520,104 L474,104 Z M474,132 L520,132 L520,140 L474,140 Z M474,168 L520,168 L520,176 L474,176 Z M477,111 L477,132 L489,132 L489,111 L485,111 L485,104 L481,104 L481,111 Z M491,111 L491,132 L503,132 L503,111 L499,111 L499,104 L495,104 L495,111 Z M505,111 L505,132 L517,132 L517,111 L513,111 L513,104 L509,104 L509,111 Z M477,147 L477,168 L489,168 L489,147 L485,147 L485,140 L481,140 L481,147 Z M491,147 L491,168 L503,168 L503,147 L499,147 L499,140 L495,140 L495,147 Z M505,147 L505,168 L517,168 L517,147 L513,147 L513,140 L509,140 L509,147 Z M477,183 L477,204 L489,204 L489,183 L485,183 L485,176 L481,176 L481,183 Z M491,183 L491,204 L503,204 L503,183 L499,183 L499,176 L495,176 L495,183 Z M505,183 L505,204 L517,204 L517,183 L513,183 L513,176 L509,176 L509,183 Z M22,196 L38,196 L38,222 L22,222 Z M520,222 L538,222 L538,236 L520,236 Z',
+		{ x: 22, y: 64, w: 516, h: 172 }
+	),
+	realMilkFloatWindows: realPart(
+		'realMilkFloatWindows',
+		'glass',
+		'face',
+		'milk-float',
+		'M76,148 L93,89 L114,89 L108,150 Z',
+		{ x: 76, y: 89, w: 38, h: 61 }
+	),
+	realMilkFloatCrates: realPart(
+		'realMilkFloatCrates',
+		'trim',
+		'cargo',
+		'milk-float',
+		'M226,172 L280,172 L280,204 L226,204 Z M280,172 L334,172 L334,204 L280,204 Z M334,172 L388,172 L388,204 L334,204 Z M388,172 L442,172 L442,204 L388,204 Z M232,140 L286,140 L286,172 L232,172 Z M286,140 L340,140 L340,172 L286,172 Z M340,140 L394,140 L394,172 L340,172 Z M394,140 L448,140 L448,172 L394,172 Z M250,108 L304,108 L304,140 L250,140 Z M304,108 L358,108 L358,140 L304,140 Z M358,108 L412,108 L412,140 L358,140 Z M262,95 L262,108 L274,108 L274,95 L270,95 L270,88 L266,88 L266,95 Z M298,95 L298,108 L310,108 L310,95 L306,95 L306,88 L302,88 L302,95 Z M334,95 L334,108 L346,108 L346,95 L342,95 L342,88 L338,88 L338,95 Z M370,95 L370,108 L382,108 L382,95 L378,95 L378,88 L374,88 L374,95 Z',
+		{ x: 226, y: 88, w: 222, h: 116 }
+	),
+	realMilkFloatWheel: realPart(
+		'realMilkFloatWheel',
+		'rubber',
+		'locomotion',
+		'milk-float',
+		'M102,236 A28,28 0 1 1 158,236 A28,28 0 1 1 102,236 Z',
+		{ x: 102, y: 208, w: 56, h: 56 }
+	),
 
 };
 
@@ -3481,6 +3877,50 @@ export const PART_NAMES: Record<PartId, string> = {
 	realAirportFuelBowserTank: 'Fuel tank',
 	realAirportFuelBowserWindows: 'Windows',
 	realAirportFuelBowserWheel: 'Wheel',
+	realAerialLadderBody: 'Aerial ladder truck',
+	realAerialLadderWindows: 'Windows',
+	realAerialLadderLadder: 'Aerial ladder',
+	realAerialLadderWheel: 'Wheel',
+	realAirportFireTruckBody: 'Airport fire truck',
+	realAirportFireTruckWindows: 'Windows',
+	realAirportFireTruckMonitor: 'Water monitor',
+	realAirportFireTruckWheel: 'Wheel',
+	realHazmatTruckBody: 'Hazmat truck',
+	realHazmatTruckWindows: 'Windows',
+	realHazmatTruckTank: 'Chemical tank',
+	realHazmatTruckWheel: 'Wheel',
+	realRescueTruckBody: 'Rescue truck',
+	realRescueTruckWindows: 'Windows',
+	realRescueTruckShutter: 'Rear roller shutter',
+	realRescueTruckWheel: 'Wheel',
+	realCherryPickerBody: 'Cherry picker',
+	realCherryPickerWindows: 'Windows',
+	realCherryPickerBoom: 'Boom and basket',
+	realCherryPickerWheel: 'Wheel',
+	realScissorLiftBody: 'Scissor lift',
+	realScissorLiftScissor: 'Scissor stack',
+	realScissorLiftPlatform: 'Platform',
+	realScissorLiftWheel: 'Wheel',
+	realAllTerrainCraneBody: 'Crane carrier',
+	realAllTerrainCraneWindows: 'Windows',
+	realAllTerrainCraneBoom: 'Telescopic boom',
+	realAllTerrainCraneWheel: 'Wheel',
+	realSideLoaderGarbageBody: 'Side-loader garbage truck',
+	realSideLoaderGarbageWindows: 'Windows',
+	realSideLoaderGarbageBin: 'Wheelie bin',
+	realSideLoaderGarbageWheel: 'Wheel',
+	realRecyclingTruckBody: 'Recycling truck',
+	realRecyclingTruckWindows: 'Windows',
+	realRecyclingTruckHopper: 'Recycling hopper',
+	realRecyclingTruckWheel: 'Wheel',
+	realIceCreamTruckBody: 'Ice-cream truck',
+	realIceCreamTruckWindows: 'Windows',
+	realIceCreamTruckHatch: 'Serving hatch',
+	realIceCreamTruckWheel: 'Wheel',
+	realMilkFloatBody: 'Milk float',
+	realMilkFloatWindows: 'Windows',
+	realMilkFloatCrates: 'Milk crates',
+	realMilkFloatWheel: 'Wheel',
 
 };
 

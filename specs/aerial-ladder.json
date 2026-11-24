@@ -1,0 +1,55 @@
+{
+	"id": "aerial-ladder",
+	"name": "Aerial ladder truck",
+	"module": "realAerialLadder",
+	"artWidth": 780,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realAerialLadderBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M30,262 L30,188 Q30,174 40,170 L48,142 Q52,130 66,130 L188,130 Q196,130 196,140 L196,152 L744,152 Q752,152 752,162 L752,262 Z M16,240 L30,240 L30,264 L16,264 Z M16,140 L30,140 L30,166 L16,166 Z M66,130 L66,118 Q66,114 70,114 L174,114 Q178,114 178,118 L178,130 Z M252,262 L266,262 L266,280 L286,280 L286,290 L234,290 L234,280 L252,280 Z M544,262 L558,262 L558,280 L578,280 L578,290 L526,290 L526,280 L544,280 Z M688,262 L756,262 L756,288 L688,288 Z M198,118 L210,118 L210,152 L198,152 Z M196,118 Q194,104 206,100 Q212,88 226,90 Q242,92 240,104 Q248,110 240,118 Z M146,268 A34,34 0 0 1 214,268 Z M586,268 A34,34 0 0 1 654,268 Z",
+			"bounds": { "x": 16, "y": 88, "w": 740, "h": 202 },
+			"name": "Aerial ladder truck"
+		},
+		{
+			"id": "realAerialLadderWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M42,184 L50,152 Q52,144 60,144 L112,144 L112,184 Z M124,144 L184,144 Q190,144 190,150 L190,184 L124,184 Z",
+			"bounds": { "x": 42, "y": 144, "w": 148, "h": 40 },
+			"name": "Windows"
+		},
+		{
+			"id": "realAerialLadderLadder",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M212,126 L340,126 L340,122 L472,122 L472,118 L652,118 L652,150 L472,150 L472,146 L340,146 L340,142 L212,142 Z M652,152 L652,136 Q652,128 660,128 L736,128 Q744,128 744,136 L744,152 Z",
+			"bounds": { "x": 212, "y": 118, "w": 532, "h": 34 },
+			"name": "Aerial ladder"
+		},
+		{
+			"id": "realAerialLadderWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M148,268 A32,32 0 1 1 212,268 A32,32 0 1 1 148,268 Z",
+			"bounds": { "x": 148, "y": 236, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 780,
+		"height": 360,
+		"groundY": 300,
+		"colors": ["#E63946", "#F7F9FC"],
+		"chassis": "slab(780, 300, 150)",
+		"slots": [
+			{ "id": "body", "part": "realAerialLadderBody", "x": 386, "y": 189, "z": 0 },
+			{ "id": "windows", "part": "realAerialLadderWindows", "x": 116, "y": 164, "z": 1 },
+			{ "id": "ladder", "part": "realAerialLadderLadder", "x": 478, "y": 135, "z": 2 },
+			{ "id": "wheel-l", "part": "realAerialLadderWheel", "x": 180, "y": 268, "z": 4 },
+			{ "id": "wheel-r", "part": "realAerialLadderWheel", "x": 620, "y": 268, "z": 4, "flip": true }
+		]
+	}
+}

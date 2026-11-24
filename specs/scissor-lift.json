@@ -1,0 +1,55 @@
+{
+	"id": "scissor-lift",
+	"name": "Scissor lift",
+	"module": "realScissorLift",
+	"artWidth": 540,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realScissorLiftBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M104,236 L426,236 Q434,236 434,244 L434,286 Q434,294 426,294 L407,294 A27,27 0 0 0 353,294 L177,294 A27,27 0 0 0 123,294 L104,294 Q96,294 96,286 L96,244 Q96,236 104,236 Z",
+			"bounds": { "x": 96, "y": 236, "w": 338, "h": 58 },
+			"name": "Scissor lift"
+		},
+		{
+			"id": "realScissorLiftScissor",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M133.88,152.62 L136.25,137.8 L393.75,137.8 L396.12,152.62 L396.12,219.38 L393.75,234.2 L136.25,234.2 L133.88,219.38 Z",
+			"bounds": { "x": 133, "y": 137, "w": 264, "h": 98 },
+			"name": "Scissor stack"
+		},
+		{
+			"id": "realScissorLiftPlatform",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M123,110 L407,110 Q412,110 412,115 L412,131 Q412,136 407,136 L123,136 Q118,136 118,131 L118,115 Q118,110 123,110 Z M121,51 L132,51 L132,110 L121,110 Z M186,51 L197,51 L197,110 L186,110 Z M300,51 L311,51 L311,110 L300,110 Z M398,51 L409,51 L409,110 L398,110 Z M197,51 L300,51 L300,58 L197,58 Z M311,51 L398,51 L398,58 L311,58 Z M197,82 L300,82 L300,88 L197,88 Z M311,82 L398,82 L398,88 L311,88 Z M132,52 L186,52 L186,110 L132,110 Z M348,43 L378,43 L378,51 L348,51 Z M352,43 L352,38 Q352,32 359,32 L367,32 Q374,32 374,38 L374,43 Z",
+			"bounds": { "x": 118, "y": 32, "w": 294, "h": 104 },
+			"name": "Platform"
+		},
+		{
+			"id": "realScissorLiftWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M128,294 A22,22 0 1 1 172,294 A22,22 0 1 1 128,294 Z",
+			"bounds": { "x": 128, "y": 272, "w": 44, "h": 44 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 540,
+		"height": 360,
+		"groundY": 316,
+		"colors": ["#F9C74F", "#6B6B6B"],
+		"chassis": "slab(540, 316, 100)",
+		"slots": [
+			{ "id": "body", "part": "realScissorLiftBody", "x": 265, "y": 265, "z": 0 },
+			{ "id": "scissor", "part": "realScissorLiftScissor", "x": 265, "y": 186, "z": 1 },
+			{ "id": "platform", "part": "realScissorLiftPlatform", "x": 265, "y": 84, "z": 2 },
+			{ "id": "wheel-l", "part": "realScissorLiftWheel", "x": 150, "y": 294, "z": 4 },
+			{ "id": "wheel-r", "part": "realScissorLiftWheel", "x": 380, "y": 294, "z": 4, "flip": true }
+		]
+	}
+}

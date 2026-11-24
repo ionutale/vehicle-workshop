@@ -1,0 +1,55 @@
+{
+	"id": "all-terrain-crane",
+	"name": "All-terrain crane",
+	"module": "realAllTerrainCrane",
+	"artWidth": 800,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realAllTerrainCraneBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M26,282 L26,224 L36,206 Q40,196 52,196 L126,196 Q140,198 140,214 L140,282 Z M140,244 L770,244 Q782,244 782,254 L782,268 Q782,276 770,276 L140,276 Z M318,244 L318,236 Q318,214 340,214 L744,214 Q760,214 760,232 L760,244 Z M340,214 L340,190 L352,174 Q356,168 366,168 L418,168 Q432,170 432,184 L432,214 Z M544,214 L544,202 Q544,196 550,196 L736,196 Q744,196 744,204 L744,214 Z M232,276 L258,276 L258,298 L268,298 L268,310 L220,310 L220,298 L232,298 Z M706,276 L732,276 L732,298 L744,298 L744,310 L696,310 L696,298 L706,298 Z M74,196 L74,188 Q74,184 79,184 L97,184 Q102,184 102,188 L102,196 Z M372,168 L372,160 Q372,156 377,156 L395,156 Q400,156 400,160 L400,168 Z M16,212 L26,212 L26,238 L16,238 Z M14,262 L26,262 L26,284 L14,284 Z M158,244 L158,192 L162,188 L170,188 L170,244 Z",
+			"bounds": { "x": 14, "y": 156, "w": 768, "h": 154 },
+			"name": "Crane carrier"
+		},
+		{
+			"id": "realAllTerrainCraneWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M37,250 L45,214 Q47,208 53,208 L76,208 L76,250 Z M84,208 L126,208 Q134,208 134,216 L134,250 L84,250 Z M350,206 L350,194 Q350,188 357,184 L374,177 Q380,175 386,177 L386,206 Z M394,179 L410,179 Q418,179 418,187 L418,206 L394,206 Z",
+			"bounds": { "x": 37, "y": 175, "w": 381, "h": 75 },
+			"name": "Windows"
+		},
+		{
+			"id": "realAllTerrainCraneBoom",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M530.08,242.21 L430.33,176.47 L432.16,173.49 L346.4,121.01 L347.96,118.45 L267.56,69.25 L276.44,54.75 L356.84,103.95 L358.4,101.39 L444.16,153.87 L445.99,150.89 L549.92,209.79 Z M297,92 L303,92 L303,175 L317,175 L317,197 L283,197 L283,175 L297,175 Z M291,197 L315,197 L315,215 L291,215 Z",
+			"bounds": { "x": 267.6, "y": 54.8, "w": 282.4, "h": 187.4 },
+			"name": "Telescopic boom"
+		},
+		{
+			"id": "realAllTerrainCraneWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M148,288 A32,32 0 1 1 212,288 A32,32 0 1 1 148,288 Z",
+			"bounds": { "x": 148, "y": 256, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 800,
+		"height": 360,
+		"groundY": 320,
+		"colors": ["#F9C74F", "#2B2D42"],
+		"chassis": "slab(800, 320, 160)",
+		"slots": [
+			{ "id": "body", "part": "realAllTerrainCraneBody", "x": 398, "y": 233, "z": 0 },
+			{ "id": "windows", "part": "realAllTerrainCraneWindows", "x": 227.5, "y": 212.5, "z": 1 },
+			{ "id": "boom", "part": "realAllTerrainCraneBoom", "x": 408.8, "y": 148.5, "z": 2 },
+			{ "id": "wheel-l", "part": "realAllTerrainCraneWheel", "x": 180, "y": 288, "z": 4 },
+			{ "id": "wheel-r", "part": "realAllTerrainCraneWheel", "x": 650, "y": 288, "z": 4, "flip": true }
+		]
+	}
+}

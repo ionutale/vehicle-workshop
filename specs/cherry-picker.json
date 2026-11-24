@@ -1,0 +1,55 @@
+{
+	"id": "cherry-picker",
+	"name": "Cherry picker",
+	"module": "realCherryPicker",
+	"artWidth": 700,
+	"artHeight": 360,
+	"parts": [
+		{
+			"id": "realCherryPickerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M40,266 L40,192 Q40,182 48,178 L86,168 L132,120 Q138,112 150,112 L606,112 Q620,112 620,126 L620,254 Q620,266 606,266 Z M40,266 L104,266 L104,276 L144,276 L144,266 L558,266 L558,276 L598,276 L598,266 L620,266 L620,276 L40,276 Z M412,112 L412,98 Q412,88 422,86 L466,86 Q476,88 476,98 L476,112 Z M392,112 L400,112 L314,74 L306,66 Z M172,112 L172,104 Q172,98 178,98 L212,98 Q218,98 218,104 L218,112 Z M56,136 L80,136 L80,164 L56,164 Z M80,146 L80,154 L97.5,156 L109,144 Z M22,240 L40,240 L40,266 L22,266 Z M620,240 L636,240 L636,266 L620,266 Z M112,266 L128,266 L128,282 L144,282 L144,292 L104,292 L104,282 L112,282 Z M566,266 L582,266 L582,282 L598,282 L598,292 L558,292 L558,282 L566,282 Z",
+			"bounds": { "x": 22, "y": 66, "w": 614, "h": 226 },
+			"name": "Cherry picker"
+		},
+		{
+			"id": "realCherryPickerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M90,166 L134,122 L142.5,130.5 L98.5,174.5 Z M172,126 L224,126 Q230,126 230,132 L230,168 Q230,174 224,174 L172,174 Q166,174 166,168 L166,132 Q166,126 172,126 Z",
+			"bounds": { "x": 90, "y": 122, "w": 140, "h": 53 },
+			"name": "Windows"
+		},
+		{
+			"id": "realCherryPickerBoom",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M444,78 L330,48 L326,52 L204,32 L204,52 L326,72 L330,76 L444,108 L452,110 Q464,106 464,96 Q464,86 452,82 Z M123,14 L199,14 Q204,14 204,19 L204,59 Q204,64 199,64 L123,64 Q118,64 118,59 L118,19 Q118,14 123,14 Z",
+			"bounds": { "x": 118, "y": 14, "w": 346, "h": 96 },
+			"name": "Boom and basket"
+		},
+		{
+			"id": "realCherryPickerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M152,272 A28,28 0 1 1 208,272 A28,28 0 1 1 152,272 Z",
+			"bounds": { "x": 152, "y": 244, "w": 56, "h": 56 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 360,
+		"groundY": 300,
+		"colors": ["#F4A261", "#264653"],
+		"chassis": "slab(700, 300, 150)",
+		"slots": [
+			{ "id": "body", "part": "realCherryPickerBody", "x": 329, "y": 179, "z": 0 },
+			{ "id": "windows", "part": "realCherryPickerWindows", "x": 160, "y": 148.5, "z": 1 },
+			{ "id": "boom", "part": "realCherryPickerBoom", "x": 291, "y": 62, "z": 2 },
+			{ "id": "wheel-l", "part": "realCherryPickerWheel", "x": 180, "y": 272, "z": 4 },
+			{ "id": "wheel-r", "part": "realCherryPickerWheel", "x": 520, "y": 272, "z": 4, "flip": true }
+		]
+	}
+}

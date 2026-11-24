@@ -1,0 +1,55 @@
+{
+	"id": "airport-fire-truck",
+	"name": "Airport fire truck",
+	"module": "realAirportFireTruck",
+	"artWidth": 720,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realAirportFireTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M42,252 L42,200 Q42,184 56,178 L74,154 Q80,144 94,144 L182,144 Q194,144 194,156 L194,182 L692,182 L692,252 L605.10,252 A36,36 0 0 0 534.90,252 L215.10,252 A36,36 0 0 0 144.90,252 L42,252 Z M14,176 L30,176 L30,182 L42,182 L42,188 L30,188 L30,210 L14,210 Z M8,238 L18,238 L18,252 L8,252 Z M18,226 L42,226 L42,270 L18,270 Z M692,240 L708,240 L708,262 L692,262 Z M96,130 L180,130 L180,144 L96,144 Z",
+			"bounds": { "x": 8, "y": 130, "w": 700, "h": 140 },
+			"name": "Airport fire truck"
+		},
+		{
+			"id": "realAirportFireTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M50,206 L50,188 Q50,180 58,174 L86,154 Q90,152 96,152 L124,152 L124,206 Z M139,152 L173,152 Q178,152 178,157 L178,201 Q178,206 173,206 L139,206 Q134,206 134,201 L134,157 Q134,152 139,152 Z",
+			"bounds": { "x": 50, "y": 152, "w": 128, "h": 54 },
+			"name": "Windows"
+		},
+		{
+			"id": "realAirportFireTruckMonitor",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M264,185 L328,185 L328,168 L320,168 L318,156 L313.4,141.3 L269.7,91.8 L256,72.9 Q242,77.6 236,91.1 L253.5,106.6 L298.6,154.7 L296,156 L296,168 L264,168 Z",
+			"bounds": { "x": 235, "y": 72, "w": 94, "h": 114 },
+			"name": "Water monitor"
+		},
+		{
+			"id": "realAirportFireTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M144,260 A36,36 0 1 1 216,260 A36,36 0 1 1 144,260 Z",
+			"bounds": { "x": 144, "y": 224, "w": 72, "h": 72 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 340,
+		"groundY": 296,
+		"colors": ["#C1121F", "#F9C74F"],
+		"chassis": "slab(720, 296, 150)",
+		"slots": [
+			{ "id": "body", "part": "realAirportFireTruckBody", "x": 358, "y": 200, "z": 0 },
+			{ "id": "windows", "part": "realAirportFireTruckWindows", "x": 114, "y": 179, "z": 1 },
+			{ "id": "monitor", "part": "realAirportFireTruckMonitor", "x": 282, "y": 129, "z": 2 },
+			{ "id": "wheel-l", "part": "realAirportFireTruckWheel", "x": 180, "y": 260, "z": 4 },
+			{ "id": "wheel-r", "part": "realAirportFireTruckWheel", "x": 570, "y": 260, "z": 4, "flip": true }
+		]
+	}
+}

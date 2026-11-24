@@ -1,0 +1,55 @@
+{
+	"id": "side-loader-garbage",
+	"name": "Side-loader garbage truck",
+	"module": "realSideLoaderGarbage",
+	"artWidth": 720,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realSideLoaderGarbageBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M32,272 L32,158 Q32,144 40,136 L62,116 Q68,108 82,108 L174,108 Q182,108 182,100 L182,96 Q182,88 194,88 L634,84 L646,62 Q650,58 660,58 L690,58 Q702,58 702,70 L702,272 Z M118,108 L118,100 L128,100 Q128,84 140,84 Q152,84 152,100 L158,100 L158,108 Z M14,118 L28,118 L28,150 L14,150 Z M16,244 L32,244 L32,272 L16,272 Z M96,272 L158,272 L158,284 L96,284 Z M196,272 L212,272 L212,292 L196,292 Z M586,272 L602,272 L602,292 L586,292 Z",
+			"bounds": { "x": 14, "y": 58, "w": 688, "h": 234 },
+			"name": "Side-loader garbage truck"
+		},
+		{
+			"id": "realSideLoaderGarbageWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M38,202 L38,166 Q38,156 44,148 L58,130 Q64,122 76,122 L98,122 Q106,122 106,130 L106,194 Q106,202 98,202 Z M118,124 L166,124 Q174,124 174,132 L174,184 Q174,192 166,192 L118,192 Q110,192 110,184 L110,132 Q110,124 118,124 Z",
+			"bounds": { "x": 38, "y": 122, "w": 136, "h": 80 },
+			"name": "Windows"
+		},
+		{
+			"id": "realSideLoaderGarbageBin",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M296,219 L352,219 L352,231 Q352,234 349,234 L299,234 Q296,234 296,231 Z M299,234 L349,234 L345,284 Q345,290 339,290 L334,290 L334,300 L327,300 L327,290 L321,290 L321,300 L314,300 L314,290 L309,290 Q303,290 303,284 Z",
+			"bounds": { "x": 296, "y": 219, "w": 56, "h": 81 },
+			"name": "Wheelie bin"
+		},
+		{
+			"id": "realSideLoaderGarbageWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M138,268 A32,32 0 1 1 202,268 A32,32 0 1 1 138,268 Z",
+			"bounds": { "x": 138, "y": 236, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 720,
+		"height": 340,
+		"groundY": 300,
+		"colors": ["#2A9D8F", "#264653"],
+		"chassis": "slab(720, 300, 150)",
+		"slots": [
+			{ "id": "body", "part": "realSideLoaderGarbageBody", "x": 358, "y": 175, "z": 0 },
+			{ "id": "windows", "part": "realSideLoaderGarbageWindows", "x": 106, "y": 162, "z": 1 },
+			{ "id": "bin", "part": "realSideLoaderGarbageBin", "x": 324, "y": 259.5, "z": 2 },
+			{ "id": "wheel-l", "part": "realSideLoaderGarbageWheel", "x": 170, "y": 268, "z": 4 },
+			{ "id": "wheel-r", "part": "realSideLoaderGarbageWheel", "x": 560, "y": 268, "z": 4, "flip": true }
+		]
+	}
+}

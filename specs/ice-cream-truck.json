@@ -1,0 +1,55 @@
+{
+	"id": "ice-cream-truck",
+	"name": "Ice-cream truck",
+	"module": "realIceCreamTruck",
+	"artWidth": 620,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realIceCreamTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M30,276 L30,206 Q30,196 40,192 L74,184 L100,146 Q104,136 114,136 L566,136 Q582,136 582,150 L582,262 Q582,276 566,276 Z M349,136 L323,96 Q311,92 320,82 Q311,72 321,62 Q316,50 330,48 Q337,37 349,41 Q362,37 369,48 Q383,50 378,62 Q388,72 379,82 Q388,92 375,96 Z M118,136 L118,130 Q118,120 128,120 Q138,120 138,130 L138,136 Z M16,248 L30,248 L30,276 L16,276 Z M582,254 L596,254 L596,270 L582,270 Z M210,276 L430,276 L430,282 L210,282 Z",
+			"bounds": { "x": 16, "y": 38, "w": 580, "h": 244 },
+			"name": "Ice-cream truck"
+		},
+		{
+			"id": "realIceCreamTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M84,196 L118,146 L142,152 L106,202 Z M158,143 L198,143 Q204,143 204,149 L204,176 Q204,182 198,182 L158,182 Q152,182 152,176 L152,149 Q152,143 158,143 Z",
+			"bounds": { "x": 84, "y": 142, "w": 120, "h": 60 },
+			"name": "Windows"
+		},
+		{
+			"id": "realIceCreamTruckHatch",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M226,148 L442,148 L442,248 L226,248 Z",
+			"bounds": { "x": 226, "y": 148, "w": 216, "h": 100 },
+			"name": "Serving hatch"
+		},
+		{
+			"id": "realIceCreamTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M120,258 A30,30 0 1 1 180,258 A30,30 0 1 1 120,258 Z",
+			"bounds": { "x": 120, "y": 228, "w": 60, "h": 60 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 620,
+		"height": 330,
+		"groundY": 288,
+		"colors": ["#F7C8E0", "#F9C74F"],
+		"chassis": "slab(620, 288, 160)",
+		"slots": [
+			{ "id": "body", "part": "realIceCreamTruckBody", "x": 306, "y": 160, "z": 0 },
+			{ "id": "windows", "part": "realIceCreamTruckWindows", "x": 144, "y": 172, "z": 1 },
+			{ "id": "hatch", "part": "realIceCreamTruckHatch", "x": 334, "y": 198, "z": 2 },
+			{ "id": "wheel-l", "part": "realIceCreamTruckWheel", "x": 150, "y": 258, "z": 4 },
+			{ "id": "wheel-r", "part": "realIceCreamTruckWheel", "x": 480, "y": 258, "z": 4, "flip": true }
+		]
+	}
+}

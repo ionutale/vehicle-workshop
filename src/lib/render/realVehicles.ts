@@ -69,6 +69,17 @@ import { drawRealRoadPlaner } from './realRoadPlaner';
 import { drawRealAsphaltPaver } from './realAsphaltPaver';
 import { drawRealSewerCleaner } from './realSewerCleaner';
 import { drawRealAirportFuelBowser } from './realAirportFuelBowser';
+import { drawRealAerialLadder } from './realAerialLadder';
+import { drawRealAirportFireTruck } from './realAirportFireTruck';
+import { drawRealHazmatTruck } from './realHazmatTruck';
+import { drawRealRescueTruck } from './realRescueTruck';
+import { drawRealCherryPicker } from './realCherryPicker';
+import { drawRealScissorLift } from './realScissorLift';
+import { drawRealAllTerrainCrane } from './realAllTerrainCrane';
+import { drawRealSideLoaderGarbage } from './realSideLoaderGarbage';
+import { drawRealRecyclingTruck } from './realRecyclingTruck';
+import { drawRealIceCreamTruck } from './realIceCreamTruck';
+import { drawRealMilkFloat } from './realMilkFloat';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -865,7 +876,18 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'road-planer': { draw: drawRealRoadPlaner, width: 760, height: 320 },
 	'asphalt-paver': { draw: drawRealAsphaltPaver, width: 700, height: 310 },
 	'sewer-cleaner': { draw: drawRealSewerCleaner, width: 660, height: 300 },
-	'airport-fuel-bowser': { draw: drawRealAirportFuelBowser, width: 660, height: 300 }
+	'airport-fuel-bowser': { draw: drawRealAirportFuelBowser, width: 660, height: 300 },
+	'aerial-ladder': { draw: drawRealAerialLadder, width: 780, height: 360 },
+	'airport-fire-truck': { draw: drawRealAirportFireTruck, width: 720, height: 340 },
+	'hazmat-truck': { draw: drawRealHazmatTruck, width: 680, height: 320 },
+	'rescue-truck': { draw: drawRealRescueTruck, width: 700, height: 330 },
+	'cherry-picker': { draw: drawRealCherryPicker, width: 700, height: 360 },
+	'scissor-lift': { draw: drawRealScissorLift, width: 540, height: 360 },
+	'all-terrain-crane': { draw: drawRealAllTerrainCrane, width: 800, height: 360 },
+	'side-loader-garbage': { draw: drawRealSideLoaderGarbage, width: 720, height: 340 },
+	'recycling-truck': { draw: drawRealRecyclingTruck, width: 700, height: 330 },
+	'ice-cream-truck': { draw: drawRealIceCreamTruck, width: 620, height: 330 },
+	'milk-float': { draw: drawRealMilkFloat, width: 560, height: 300 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

@@ -1,0 +1,55 @@
+{
+	"id": "recycling-truck",
+	"name": "Recycling truck",
+	"module": "realRecyclingTruck",
+	"artWidth": 700,
+	"artHeight": 330,
+	"parts": [
+		{
+			"id": "realRecyclingTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M40,282 L40,248 L40,214 L44,168 Q45,152 53,140 L65,122 Q71,112 85,110 L226,110 L226,74 Q226,62 238,62 L604,62 Q622,62 622,80 L622,282 Z M376,62 L376,54 Q376,50 382,50 L418,50 Q424,50 424,54 L424,62 Z M166,110 L166,103 L171,103 Q171,92 182,92 Q193,92 193,103 L198,103 L198,110 Z M204,110 L204,80 L202,76 L218,76 L216,80 L216,110 Z M20,126 L34,131 L34,158 L20,152 Z M24,248 L40,248 L40,282 L24,282 Z M202,282 L218,282 L218,290 L202,290 Z M576,282 L592,282 L592,290 L576,290 Z M660,282 L696,282 L696,290 L660,290 Z",
+			"bounds": { "x": 20, "y": 50, "w": 676, "h": 240 },
+			"name": "Recycling truck"
+		},
+		{
+			"id": "realRecyclingTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M50,206 L50,168 Q50,153 57,145 L71,128 Q78,118 91,118 L116,118 Q124,118 124,126 L124,198 Q124,206 116,206 Z M136,114 L210,114 Q218,114 218,122 L218,192 Q218,200 210,200 L136,200 Q128,200 128,192 L128,122 Q128,114 136,114 Z",
+			"bounds": { "x": 50, "y": 114, "w": 168, "h": 92 },
+			"name": "Windows"
+		},
+		{
+			"id": "realRecyclingTruckHopper",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M590,174 L690,174 L690,266 Q690,282 674,282 L606,282 Q596,282 594,270 L584,200 Q584,188 590,174 Z M594,174 L594,142 L602,134 L616,138 L616,174 Z M620,174 L620,156 Q620,150 625,148 L625,143 L628,141 L628,137 Q628,132 631,132 Q634,132 634,137 L634,141 L637,143 L637,148 Q642,150 642,156 L642,174 Z M646,174 L646,158 Q646,153 650,151 L650,146 L652,144 L652,142 Q652,139 655,139 Q658,139 658,142 L658,144 L660,146 L660,151 Q664,153 664,158 L664,174 Z M668,174 L672,132 L684,136 L682,174 Z",
+			"bounds": { "x": 584, "y": 132, "w": 106, "h": 150 },
+			"name": "Recycling hopper"
+		},
+		{
+			"id": "realRecyclingTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M140,262 A30,30 0 1 1 200,262 A30,30 0 1 1 140,262 Z",
+			"bounds": { "x": 140, "y": 232, "w": 60, "h": 60 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 330,
+		"groundY": 292,
+		"colors": ["#457B9D", "#90BE6D"],
+		"chassis": "slab(700, 292, 150)",
+		"slots": [
+			{ "id": "body", "part": "realRecyclingTruckBody", "x": 358, "y": 170, "z": 0 },
+			{ "id": "windows", "part": "realRecyclingTruckWindows", "x": 134, "y": 160, "z": 1 },
+			{ "id": "hopper", "part": "realRecyclingTruckHopper", "x": 637, "y": 207, "z": 2 },
+			{ "id": "wheel-l", "part": "realRecyclingTruckWheel", "x": 170, "y": 262, "z": 4 },
+			{ "id": "wheel-r", "part": "realRecyclingTruckWheel", "x": 550, "y": 262, "z": 4, "flip": true }
+		]
+	}
+}

@@ -115,8 +115,19 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 70. **Asphalt paver (done):** front hopper with an asphalt load, canopy and trailing screed board at Level 5; 5 pieces, 4 at the first tier.
 71. **Sewer cleaner (done):** jetting tank, hose reel and boom arm on a cab-over chassis at Level 5; 5 pieces, 4 at the first tier.
 72. **Airport fuel bowser (done):** short-wheelbase tanker with a ribbed barrel, JET placard and refuelling cabinet at Level 5; 5 pieces, 4 at the first tier.
-73. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
-74. Remove the generic parts once no catalogue entry uses them.
+73. **Aerial ladder (done):** cab-over appliance with a stowed three-section ladder on a turntable and outrigger jacks at Level 5; 5 pieces, 4 at the first tier.
+74. **Airport fire truck (done):** low ARFF body with a roof water monitor, heavy bumper and hose reel at Level 5; 5 pieces, 4 at the first tier.
+75. **Hazmat truck (done):** ribbed chemical barrel with diamond placards, valve cabinet and chevrons at Level 5; 5 pieces, 4 at the first tier.
+76. **Rescue truck (done):** box-body appliance with lockers, a RESCUE board and a rear roller shutter at Level 5; 5 pieces, 4 at the first tier.
+77. **Cherry picker (done):** van-based lift with a rising two-section boom and basket at Level 5; 5 pieces, 4 at the first tier.
+78. **Scissor lift (done):** slab chassis, crossing scissor stack and railed platform at Level 5; 5 pieces, 4 at the first tier.
+79. **All-terrain crane (done):** multi-axle carrier with a turntable, telescopic boom and hook block at Level 5; 5 pieces, 4 at the first tier.
+80. **Side-loader garbage (done):** refuse body with a side-lift arm and wheelie bin at Level 5; 5 pieces, 4 at the first tier.
+81. **Recycling truck (done):** divided body with recycling roundels and a loaded rear hopper at Level 5; 5 pieces, 4 at the first tier.
+82. **Ice-cream truck (done):** pink serving van with a striped awning, serving hatch, counter and roof cone at Level 5; 5 pieces, 4 at the first tier.
+83. **Milk float (done):** open-sided electric float with a canopy and stacked milk crates at Level 5; 5 pieces, 4 at the first tier.
+84. **Fleet complete:** all 86 catalogue vehicles now use realistic, level-aware art.
+85. Remove the generic parts now that no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 
