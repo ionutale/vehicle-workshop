@@ -6,8 +6,8 @@
  * the tractor hitch, with a stone guard standing ahead of the pickup. The pickup reel
  * turns at the nose and feeds the tall drum that forms the whole working body — its
  * rounded chamber arc is the machine's silhouette, ringed in teal. A chute slopes out
- * of the drum's rear over the axle, and the finished round bale — the naming cue —
- * rests on its steel deck under the end board.
+ * of the drum's rear over the axle into a wide steel cradle, and the finished round bale
+ * — the naming cue — sits down in that cradle between a front stop and the end board.
  *
  * Level 4 is the production target: shaded, fitted, lit and grounded. Level 5 adds the
  * picture-book finish: paint grain, straw, glints, hub hardware and a chaff puff.
@@ -27,33 +27,54 @@ const STRAW_LINE = '#A9813F';
 const WELL = '#25403C';
 const IRON = '#3E4652';
 const RAIL = '#4C5560';
+const STEEL_DECK = '#7C8694';
 const LAMP = '#FFF1BE';
 const AMBER = '#FFB703';
 const RED = '#E0455A';
 
-/** Art box 720 x 330, road at 272. Front (drawbar and pickup) faces left. */
+/** Art box 720 x 300, road at 268. Front (drawbar and pickup) faces left. */
 const FRONT_WHEEL = { x: 150, y: 236, r: 32 };
 const REAR_WHEEL = { x: 540, y: 236, r: 32 };
-const BALE = { x: 602, y: 160, r: 44 };
+/** The finished bale, seated down in the tail cradle. Mask bounds centre = slot anchor. */
+const BALE = { x: 602, y: 160, r: 50 };
 const PICKUP = { x: 92, y: 226, r: 21 };
 const PICKUP_RECESS = 24;
 
 /** The drum that forms the body: its crown is the machine's roofline. */
 const DRUM = { x: 330, y: 190, r: 78 };
-const CHUTE_DECK_Y = 196;
-const CHUTE_END = { x: 640, y: 206 };
+/** Flat cradle floor under the bale, between a raised front stop and the end board. */
+const CRADLE_Y = 210;
+const CRADLE_FLOOR = 'M556,210 L646,210 L646,217 L556,217 Z';
+const FRONT_STOP = { x: 538, top: 177, inner: 556 };
+const REAR_STOP = { x: 646, top: 185, outer: 668 };
+const CHUTE_END = { x: 538, y: 202 };
+/**
+ * The cradle arm: a steel trough that cups the bale's lower edge. It lives in the
+ * body mask, and the bale mask is cut by the same inner arc (r45, 42°..138°), so
+ * the two masks stay disjoint while the arm visibly holds the bale when the tiles
+ * are assembled.
+ */
+const CRADLE_ARM =
+	'M635.4,190.1 A45,45 0 0 1 568.6,190.1 L564.8,193.5 L564.8,210 L639.2,210 L639.2,193.5 Z';
+const CRADLE_CUT = { r: 45, from: 42, to: 138 };
 
 /**
  * Body shell, one closed outline: the nose and feed deck at the front, then the drum's
  * chamber arc over the crown and down its rear, then the chute that slopes over the
- * axle into its end board, and the rear wall down to the flat chassis line.
+ * axle into the cradle — a raised front stop, the flat floor the bale sits on, and the
+ * end board as the rear stop — then the rear wall down to the flat chassis line.
  */
 const SHELL =
-	'M58,252 L58,200 Q58,186 72,182 L96,176 L253.3,176 A78,78 0 0 1 407.8,196 L640,206 L648,196 L672,196 L676,206 L676,218 L600,222 L460,222 L430,252 Z';
+	'M58,252 L58,200 Q58,186 72,182 L96,176 L253.3,176 A78,78 0 0 1 407.8,196 ' +
+	'L520,200 L538,202 L538,187 Q538,177 545,177 L552,177 Q556,177 556,183 ' +
+	'L556,205 Q556,210 562,210 L646,210 L646,187 Q646,185 649,185 L662,185 ' +
+	'Q668,185 668,192 L668,199 L676,206 L676,218 L600,222 L460,222 L430,252 Z';
 
-/** Sloping chute deck, drawn as its own strip over the teal arm. */
-const CHUTE_DECK = 'M408,196 L640,206 L640,213 L408,203 Z';
-const CHUTE_ARM = 'M408,196 L640,206 L648,196 L672,196 L676,206 L676,218 L600,222 L460,222 L430,252 L330,252 Z';
+/** Sloping chute strip, drawn over the teal tail arm. */
+const CHUTE_DECK = 'M408,196 L538,202 L538,208 L408,202 Z';
+/** Teal tail fill; the steel cradle floor and stops are laid over it. */
+const CHUTE_ARM =
+	'M408,196 L676,196 L676,218 L600,222 L460,222 L430,252 L330,252 Z';
 
 /** Drawbar bar out to the hitch, then the stone guard standing ahead of the pickup. */
 const DRAWBAR_BAR = 'M6,246 L58,240 L58,254 L6,258 Z';
@@ -381,7 +402,11 @@ function drawDrive(ctx: CanvasRenderingContext2D, shaded: boolean): void {
 	}
 }
 
-/** The finished round bale: rolled layers, net wrap, straw and a contact shadow. */
+/**
+ * The finished round bale: a pale straw end face under a net wrap, with fine broken
+ * strands and a soft underside shade. The roll is suggested by the short straw lines
+ * and the wrap, never by hard concentric rings, so it never reads as a cut log.
+ */
 function drawBale(
 	ctx: CanvasRenderingContext2D,
 	shaded: boolean,
@@ -390,148 +415,260 @@ function drawBale(
 	finish: boolean
 ): void {
 	const { x, y, r } = BALE;
-
-	if (shaded) {
-		// Contact shadow where the bale meets the chute deck.
-		ctx.save();
-		ctx.globalAlpha = 0.22;
-		ctx.fillStyle = INK;
-		ctx.beginPath();
-		ctx.ellipse(x - 6, 204, 29, 4.6, 0, 0, Math.PI * 2);
-		ctx.fill();
-		ctx.restore();
-	}
-
-	circle(ctx, x, y, r, STRAW, 3);
+	circle(ctx, x, y, r, STRAW, 2.8);
 
 	ctx.save();
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, Math.PI * 2);
 	ctx.clip();
 
-	if (shaded) {
-		const round = ctx.createRadialGradient(x - 15, y - 17, 4, x, y, r + 6);
-		round.addColorStop(0, 'rgba(255,255,255,0.42)');
-		round.addColorStop(0.55, 'rgba(255,255,255,0.03)');
-		round.addColorStop(1, 'rgba(146,104,34,0.3)');
-		ctx.fillStyle = round;
-		ctx.fillRect(x - r, y - r, r * 2, r * 2);
-	}
-
-	// Rolled layers read as a true spiral on the bale's end face, turned off the
-	// vertical so the face never reads as a wheel.
-	ctx.beginPath();
-	for (let a = 0; a < Math.PI * 2 * 4.2; a += 0.12) {
-		const rr = 4 + (a / (Math.PI * 2 * 4.2)) * (r - 8);
-		const aa = a + 0.42;
-		const px = x + Math.cos(aa) * rr;
-		const py = y + Math.sin(aa) * rr;
-		if (a === 0) ctx.moveTo(px, py);
-		else ctx.lineTo(px, py);
-	}
-	ctx.strokeStyle = STRAW_LINE;
-	ctx.globalAlpha = 0.5;
-	ctx.lineWidth = 1.8;
-	ctx.stroke();
-	ctx.globalAlpha = 1;
-
-	// Short radial strands so the face does not read as a machined disc.
 	let seed = 21;
 	const rnd = (): number => {
 		seed = (seed * 9301 + 49297) % 233280;
 		return seed / 233280;
 	};
-	ctx.strokeStyle = STRAW_DEEP;
-	for (let i = 0; i < 74; i++) {
-		const a = rnd() * Math.PI * 2;
-		const inner = 6 + rnd() * (r - 20);
-		const outer = inner + 3 + rnd() * 9;
-		ctx.globalAlpha = 0.18 + rnd() * 0.26;
-		ctx.lineWidth = 0.9 + rnd() * 0.5;
+
+	if (shaded) {
+		// Warm hay: sun on the upper left, blonde body, straw shade low right.
+		const round = ctx.createRadialGradient(
+			x - r * 0.3,
+			y - r * 0.36,
+			r * 0.12,
+			x,
+			y,
+			r * 1.04
+		);
+		round.addColorStop(0, 'rgba(255,250,226,0.9)');
+		round.addColorStop(0.42, 'rgba(255,244,210,0.22)');
+		round.addColorStop(0.8, 'rgba(222,190,126,0.16)');
+		round.addColorStop(1, 'rgba(150,108,48,0.3)');
+		ctx.fillStyle = round;
+		ctx.fillRect(x - r, y - r, r * 2, r * 2);
+
+		// One faint, broken roll layer, off-centre and mostly buried under the straw.
+		ctx.strokeStyle = 'rgba(176,138,74,0.13)';
+		ctx.lineWidth = 4.5;
 		ctx.beginPath();
-		ctx.moveTo(x + Math.cos(a) * inner, y + Math.sin(a) * inner);
-		ctx.lineTo(x + Math.cos(a + 0.05) * outer, y + Math.sin(a + 0.05) * outer);
+		ctx.arc(x - 2, y + 1, r * 0.62, Math.PI * 0.42, Math.PI * 1.55);
+		ctx.stroke();
+	}
+
+	// Fine, mostly tangential strands: the hay grain, broken and irregular.
+	for (let i = 0; i < 180; i++) {
+		const a = rnd() * Math.PI * 2;
+		const rr = r * 0.06 + rnd() * r * 0.88;
+		const px = x + Math.cos(a) * rr;
+		const py = y + Math.sin(a) * rr;
+		const len = 2.5 + rnd() * 10;
+		const tangent = a + Math.PI / 2 + (rnd() - 0.5) * 0.8;
+		const ex = px + Math.cos(tangent) * len;
+		const ey = py + Math.sin(tangent) * len;
+		ctx.strokeStyle =
+			i % 7 === 0 ? STRAW_LINE : i % 3 === 0 ? STRAW_DEEP : i % 2 === 0 ? STRAW_LIGHT : '#F7E6B8';
+		ctx.globalAlpha = 0.2 + rnd() * 0.38;
+		ctx.lineWidth = 0.8 + rnd() * 0.8;
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.quadraticCurveTo(
+			(px + ex) / 2 + (rnd() - 0.5) * 2.4,
+			(py + ey) / 2 + (rnd() - 0.5) * 2.4,
+			ex,
+			ey
+		);
 		ctx.stroke();
 	}
 	ctx.globalAlpha = 1;
-	// Straw ends curling out of the wrap at the rim.
+
+	// Loose straw ends around the rim, kept inside the cut-out mask.
 	ctx.strokeStyle = STRAW_LIGHT;
-	for (let i = 0; i < 12; i++) {
-		const a = 0.2 + (i / 12) * Math.PI * 2;
-		ctx.globalAlpha = 0.55;
-		ctx.lineWidth = 1.3;
+	for (let i = 0; i < 16; i++) {
+		const a = (i / 16) * Math.PI * 2 + 0.15;
+		ctx.globalAlpha = 0.45 + rnd() * 0.3;
+		ctx.lineWidth = 1 + rnd() * 0.5;
 		ctx.beginPath();
-		ctx.moveTo(x + Math.cos(a) * (r - 6), y + Math.sin(a) * (r - 6));
+		ctx.moveTo(x + Math.cos(a) * (r - 9), y + Math.sin(a) * (r - 9));
 		ctx.quadraticCurveTo(
-			x + Math.cos(a + 0.12) * (r - 1),
-			y + Math.sin(a + 0.12) * (r - 1),
-			x + Math.cos(a + 0.2) * (r + 2),
-			y + Math.sin(a + 0.2) * (r + 2)
+			x + Math.cos(a + 0.08) * (r - 4),
+			y + Math.sin(a + 0.08) * (r - 4),
+			x + Math.cos(a + 0.15) * (r - 1.6),
+			y + Math.sin(a + 0.15) * (r - 1.6)
 		);
 		ctx.stroke();
 	}
 	ctx.globalAlpha = 1;
 
 	if (fitted) {
-		// Net wrap: fine chords across the face, the wrap seam and its loose corner.
-		ctx.strokeStyle = 'rgba(255,246,228,0.34)';
-		ctx.lineWidth = 1.1;
-		for (const a of [-0.75, -0.1, 0.55, 1.2]) {
+		// Net wrap: a pale diamond lattice over the whole face.
+		ctx.strokeStyle = 'rgba(255,252,239,0.42)';
+		ctx.lineWidth = 1.2;
+		for (let d = -r * 1.5; d <= r * 1.5; d += 9.5) {
 			ctx.beginPath();
-			ctx.moveTo(x + Math.cos(a) * (r - 3), y + Math.sin(a) * (r - 3));
-			ctx.lineTo(x + Math.cos(a + Math.PI) * (r - 3), y + Math.sin(a + Math.PI) * (r - 3));
+			ctx.moveTo(x + d - r, y - r);
+			ctx.lineTo(x + d + r, y + r);
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.moveTo(x + d + r, y - r);
+			ctx.lineTo(x + d - r, y + r);
 			ctx.stroke();
 		}
-		ctx.strokeStyle = 'rgba(169,129,63,0.6)';
-		ctx.lineWidth = 2.4;
+		// A warmer second pass so the mesh is still legible at game scale.
+		ctx.strokeStyle = 'rgba(190,152,88,0.11)';
+		ctx.lineWidth = 2;
+		for (let d = -r * 1.5 + 4; d <= r * 1.5; d += 19) {
+			ctx.beginPath();
+			ctx.moveTo(x + d - r, y - r);
+			ctx.lineTo(x + d + r, y + r);
+			ctx.stroke();
+		}
+
+		// Wrap seam near the rim and a loose corner flap.
+		ctx.strokeStyle = 'rgba(255,250,234,0.7)';
+		ctx.lineWidth = 2.2;
 		ctx.beginPath();
-		ctx.arc(x, y, r - 14, Math.PI * 0.88, Math.PI * 1.92);
+		ctx.arc(x, y, r - 8, Math.PI * 0.92, Math.PI * 1.94);
 		ctx.stroke();
+		ctx.fillStyle = 'rgba(255,250,234,0.55)';
 		ctx.beginPath();
-		ctx.moveTo(x + 13, y + 37);
-		ctx.quadraticCurveTo(x + 4, y + 41, x - 2, y + 38);
+		ctx.moveTo(x + 20, y + 30);
+		ctx.lineTo(x + 32, y + 27);
+		ctx.lineTo(x + 26, y + 38);
+		ctx.closePath();
+		ctx.fill();
+	}
+
+	if (shaded) {
+		// Soft underside shade: where the bale settles onto the cradle, carried on
+		// the bale itself so the cut-out tile keeps it in the game.
+		const foot = ctx.createLinearGradient(x, y + r * 0.28, x, y + r);
+		foot.addColorStop(0, 'rgba(120,84,34,0)');
+		foot.addColorStop(0.68, 'rgba(120,84,34,0.14)');
+		foot.addColorStop(1, 'rgba(96,62,22,0.4)');
+		ctx.fillStyle = foot;
+		ctx.fillRect(x - r, y + r * 0.28, r * 2, r * 0.72);
+
+		// The hay compresses where it meets the cradle arm: a dark band just above
+		// the cut plus pale squashed strands, so the bale looks weighted, not perched.
+		ctx.strokeStyle = 'rgba(96,62,22,0.22)';
+		ctx.lineWidth = 4.4;
+		ctx.beginPath();
+		ctx.arc(
+			x,
+			y,
+			CRADLE_CUT.r - 2.4,
+			(CRADLE_CUT.from * Math.PI) / 180,
+			(CRADLE_CUT.to * Math.PI) / 180
+		);
 		ctx.stroke();
+		for (const dx of [-27, -15, -3, 9, 21]) {
+			line(ctx, x + dx, y + r - 7.4, x + dx + 2.8, y + r - 4.2, 'rgba(255,248,226,0.34)', 1.1);
+		}
 	}
 
 	if (finish) {
-		// Sun on the crown and a spiral catchlight.
-		ctx.strokeStyle = 'rgba(255,255,255,0.6)';
-		ctx.lineWidth = 2.6;
+		// Sun on the crown.
+		ctx.strokeStyle = 'rgba(255,255,255,0.62)';
+		ctx.lineWidth = 2.4;
 		ctx.beginPath();
-		ctx.arc(x, y, r - 6, Math.PI * 1.12, Math.PI * 1.56);
+		ctx.arc(x, y, r - 5, Math.PI * 1.12, Math.PI * 1.56);
 		ctx.stroke();
-		ctx.strokeStyle = 'rgba(255,255,255,0.45)';
-		ctx.lineWidth = 1.6;
+		ctx.strokeStyle = 'rgba(255,255,255,0.42)';
+		ctx.lineWidth = 1.5;
 		ctx.beginPath();
-		ctx.arc(x + 1, y, 26, Math.PI * 1.16, Math.PI * 1.42);
+		ctx.arc(x + 1, y, r * 0.52, Math.PI * 1.16, Math.PI * 1.42);
 		ctx.stroke();
-		// Loose straw ends poking past the wrap.
+		// Loose straw ends, kept clear of the rim so they survive the mask.
 		for (const [sx, sy, ex, ey] of [
-			[x - 33, y - 26, x - 38, y - 32],
-			[x + 24, y - 33, x + 29, y - 40],
-			[x - 37, y + 9, x - 43, y + 11],
-			[x + 34, y + 15, x + 39, y + 19]
+			[x - 30, y - 24, x - 35, y - 30],
+			[x + 22, y - 31, x + 27, y - 37],
+			[x - 34, y + 8, x - 40, y + 10],
+			[x + 31, y + 14, x + 37, y + 18]
 		]) {
 			ctx.globalAlpha = 0.8;
-			line(ctx, sx, sy, ex, ey, STRAW_LIGHT, 1.6);
+			line(ctx, sx, sy, ex, ey, STRAW_LIGHT, 1.5);
 		}
 		ctx.globalAlpha = 1;
 	}
 	ctx.restore();
 
 	if (lit) {
-		// Rim light down the top-left arc of the bale, shade under the bottom.
-		ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+		// Rim light down the top-left arc, warm bounce low right.
+		ctx.strokeStyle = 'rgba(255,255,255,0.62)';
 		ctx.lineWidth = 2.4;
 		ctx.beginPath();
-		ctx.arc(x, y, r - 1.4, Math.PI * 1.04, Math.PI * 1.5);
+		ctx.arc(x, y, r - 1.6, Math.PI * 1.04, Math.PI * 1.5);
 		ctx.stroke();
-		ctx.strokeStyle = 'rgba(88,58,16,0.22)';
+		ctx.strokeStyle = 'rgba(214,166,88,0.4)';
 		ctx.lineWidth = 2;
 		ctx.beginPath();
-		ctx.arc(x, y, r - 1.4, Math.PI * 0.15, Math.PI * 0.6);
+		ctx.arc(x, y, r - 1.6, Math.PI * 0.18, Math.PI * 0.62);
 		ctx.stroke();
 	}
+}
+
+/**
+ * Steel cradle arm. Drawn after the bale, but carried by the body mask: the bale
+ * mask is cut by the same inner arc, so the trough shows in front of the bale's
+ * lower edge while the two masks never overlap.
+ */
+function drawCradleArm(
+	ctx: CanvasRenderingContext2D,
+	shaded: boolean,
+	fitted: boolean,
+	finish: boolean
+): void {
+	const { x, y } = BALE;
+	const arm = new Path2D(CRADLE_ARM);
+	const from = (CRADLE_CUT.from * Math.PI) / 180;
+	const to = (CRADLE_CUT.to * Math.PI) / 180;
+
+	ctx.save();
+	ctx.fillStyle = STEEL;
+	ctx.fill(arm);
+
+	if (shaded) {
+		// Bright mouth, dark steel down by the deck.
+		const tone = ctx.createLinearGradient(0, 184, 0, 211);
+		tone.addColorStop(0, 'rgba(255,255,255,0.34)');
+		tone.addColorStop(0.4, 'rgba(255,255,255,0.05)');
+		tone.addColorStop(1, 'rgba(8,20,24,0.32)');
+		ctx.fillStyle = tone;
+		ctx.fill(arm);
+	}
+
+	ctx.strokeStyle = INK;
+	ctx.lineWidth = 2.4;
+	ctx.stroke(arm);
+
+	if (shaded) {
+		// Catchlight on the cradle mouth the bale rests against.
+		ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+		ctx.lineWidth = 1.8;
+		ctx.beginPath();
+		ctx.arc(x, y, CRADLE_CUT.r + 2.4, from + 0.12, to - 0.12);
+		ctx.stroke();
+		ctx.strokeStyle = 'rgba(8,20,24,0.3)';
+		ctx.lineWidth = 1.6;
+		ctx.beginPath();
+		ctx.arc(x, y, CRADLE_CUT.r + 4.2, from + 0.2, to - 0.2);
+		ctx.stroke();
+	}
+
+	if (fitted) {
+		// Trough rollers and a pair of bolts at the mouth.
+		for (const a of [60, 90, 120]) {
+			const rad = (a * Math.PI) / 180;
+			circle(ctx, x + Math.cos(rad) * 47.6, y + Math.sin(rad) * 47.6, 1.7, CHROME, 0.8);
+		}
+		for (const a of [55, 125]) {
+			const rad = (a * Math.PI) / 180;
+			circle(ctx, x + Math.cos(rad) * 47.4, y + Math.sin(rad) * 47.4, 1.3, RAIL, 0.7);
+		}
+	}
+
+	if (finish) {
+		glint(ctx, x + 24, y + 38, 2);
+	}
+	ctx.restore();
 }
 
 /** Drawbar: teal bar to the hitch eye, chrome pin and iron stone guard. */
@@ -632,7 +769,7 @@ function paintGrain(ctx: CanvasRenderingContext2D): void {
 		[110, 180, 260, 178],
 		[256, 170, 340, 116],
 		[344, 114, 408, 150],
-		[476, 204, 636, 214],
+		[470, 202, 534, 208],
 		[120, 244, 360, 240]
 	]) {
 		ctx.beginPath();
@@ -656,8 +793,12 @@ function strawFlecks(ctx: CanvasRenderingContext2D): void {
 
 	for (const [x0, x1, y0, y1, count] of [
 		[64, 200, 200, 250, 14],
-		[480, 630, 198, 220, 12],
-		[240, 360, 232, 250, 9]
+		[480, 630, 198, 218, 12],
+		[240, 360, 232, 250, 9],
+		// Straw shed onto the cradle floor and the two stops under the bale.
+		[556, 648, 210, 219, 16],
+		[538, 556, 182, 208, 6],
+		[647, 668, 188, 208, 6]
 	]) {
 		for (let i = 0; i < count; i++) {
 			const px = x0 + rnd() * (x1 - x0);
@@ -793,16 +934,41 @@ export function drawRealHayBalerLevel(
 	drawWheelArch(ctx, FRONT_WHEEL.x, shaded);
 	drawWheelArch(ctx, REAR_WHEEL.x, shaded);
 
-	// Livery: lower teal band and the chute frame.
+	// Livery: lower teal band and the tail cradle frame.
 	ctx.fillStyle = TEAL;
 	ctx.fillRect(0, 236, 720, 16);
 	ctx.fill(new Path2D(CHUTE_ARM));
 	ctx.fillStyle = CREAM;
 	ctx.fillRect(0, 233, 720, 2.4);
 
-	// Steel chute deck under the bale.
+	// Steel: the sloping chute, the flat cradle floor and its two stops.
 	ctx.fillStyle = STEEL;
 	ctx.fill(new Path2D(CHUTE_DECK));
+	ctx.fillStyle = STEEL_DECK;
+	ctx.fill(new Path2D(CRADLE_FLOOR));
+	ctx.fillStyle = STEEL;
+	ctx.fillRect(
+		FRONT_STOP.x,
+		FRONT_STOP.top,
+		FRONT_STOP.inner - FRONT_STOP.x,
+		CRADLE_Y - FRONT_STOP.top
+	);
+	ctx.fillRect(
+		REAR_STOP.x,
+		REAR_STOP.top,
+		REAR_STOP.outer - REAR_STOP.x,
+		CRADLE_Y - REAR_STOP.top
+	);
+
+	// Contact shadow the bale lays on the cradle floor.
+	if (shaded) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.ellipse(BALE.x, CRADLE_Y + 2.4, 45, 5.6, 0, 0, Math.PI * 2);
+		ctx.fillStyle = 'rgba(58,39,27,0.2)';
+		ctx.fill();
+		ctx.restore();
+	}
 
 	if (shaded) {
 		// Roof light rolling down the shell into a low-body shade.
@@ -814,25 +980,30 @@ export function drawRealHayBalerLevel(
 		ctx.fillStyle = paint;
 		ctx.fillRect(56, 106, 636, 150);
 
-		// Bevels on the band, the chute frame and the tail wall.
+		// Bevels on the band, the chute and the cradle stops.
 		ctx.fillStyle = 'rgba(255,255,255,0.16)';
 		ctx.fillRect(0, 237, 720, 2.6);
 		ctx.fillStyle = 'rgba(8,44,40,0.22)';
 		ctx.fillRect(0, 248, 720, 4);
-		line(ctx, 410, 196.6, 638, 205.8, 'rgba(255,255,255,0.3)', 1.6);
+		line(ctx, 410, 196.8, 536, 202.4, 'rgba(255,255,255,0.3)', 1.6);
 		line(ctx, 412, 220, 636, 220, 'rgba(8,44,40,0.3)', 2.2);
+		// Sun on the stop tops, shade down their facing walls.
+		line(ctx, 540, 177.8, 554, 177.8, 'rgba(255,255,255,0.44)', 2);
+		line(ctx, 648, 185.8, 666, 185.8, 'rgba(255,255,255,0.44)', 2);
+		line(ctx, 557, 186, 557, 205, 'rgba(8,44,40,0.3)', 1.8);
+		line(ctx, 645, 188, 645, 209, 'rgba(8,44,40,0.3)', 1.8);
 
 		// Feed deck and chute seams.
 		line(ctx, 100, 178, 250, 178, 'rgba(255,255,255,0.3)', 1.6);
-		line(ctx, 480, 208, 636, 210, 'rgba(58,39,27,0.16)', 1.6);
+		line(ctx, 452, 199.4, 532, 202, 'rgba(58,39,27,0.16)', 1.4);
 	}
 
 	// Panel work: the feed deck edge, the tail wall seam and the chute ribs.
 	line(ctx, 96, 176, 250, 176, 'rgba(58,39,27,0.26)', 2);
 	line(ctx, 420, 222, 398, 246, 'rgba(58,39,27,0.24)', 1.6);
-	for (const rx of [492, 518, 544, 570, 596, 622, 648]) {
-		const ry = CHUTE_DECK_Y + ((rx - 408) * (CHUTE_END.y - CHUTE_DECK_Y)) / 232;
-		line(ctx, rx, ry + 1, rx, ry + 7, 'rgba(58,39,27,0.3)', 1.2);
+	for (const rx of [456, 480, 504, 528]) {
+		const ry = 196 + ((rx - 408) * (CHUTE_END.y - 196)) / (CHUTE_END.x - 408);
+		line(ctx, rx, ry + 1, rx, ry + 6, 'rgba(58,39,27,0.3)', 1.2);
 	}
 
 	// Toolbox bolted to the feed deck.
@@ -871,24 +1042,27 @@ export function drawRealHayBalerLevel(
 		circle(ctx, 63, 239, 1.5, '#FFFDE8', 0.7);
 		circle(ctx, 63, 214, 2.6, AMBER, 1.4);
 
-		// Ram on the tail wall and the chute's end-board latch.
+		// Ram on the tail wall and the end-board latch over the rear stop.
 		rect(ctx, 412, 200, 8, 24, STEEL, 3, 2);
 		line(ctx, 416, 202, 416, 218, CHROME, 2.2);
-		rect(ctx, 650, 196, 9, 13, CHROME, 2, 1.4);
-		line(ctx, 652, 199, 657, 204, INK, 1.4);
+		rect(ctx, 649, 188, 8, 10, CHROME, 2, 1.4);
+		line(ctx, 651, 191, 655, 194, INK, 1.4);
 
-		// Rear lamp cluster on the end board and its plate on the chute.
-		rect(ctx, 660, 198, 9, 10, RED, 2, 1.4);
-		rect(ctx, 660, 210, 9, 5, AMBER, 1.5, 1);
+		// Rear lamp cluster on the end board and its plate on the tail.
+		rect(ctx, 659, 188, 9, 9, RED, 2, 1.4);
+		rect(ctx, 659, 198, 9, 5, AMBER, 1.5, 1);
 		rect(ctx, 500, 208, 30, 11, CREAM, 1.5, 1.4);
 		for (let d = 0; d < 2; d++) {
 			line(ctx, 504, 212 + d * 3, 526, 212 + d * 3, 'rgba(58,39,27,0.4)', 1);
 		}
 
-		// Rollers on the chute deck.
-		for (const rx of [492, 518, 544, 570, 596, 622]) {
-			const ry = CHUTE_DECK_Y + ((rx - 408) * (CHUTE_END.y - CHUTE_DECK_Y)) / 232;
+		// Rollers: two on the slope, the rest along the cradle floor under the bale.
+		for (const rx of [452, 480]) {
+			const ry = 196 + ((rx - 408) * (CHUTE_END.y - 196)) / (CHUTE_END.x - 408);
 			circle(ctx, rx, ry + 4, 2.2, CHROME, 1);
+		}
+		for (const rx of [568, 586, 604, 622, 640]) {
+			circle(ctx, rx, 214, 2, CHROME, 1);
 		}
 
 		// Reflectors on the lower band, clear of both tyres.
@@ -901,8 +1075,9 @@ export function drawRealHayBalerLevel(
 		circle(ctx, 166, 186, 3.2, RAIL, 1.2);
 	}
 
-	// The finished bale rests on the chute deck.
+	// The finished bale sits down in the tail cradle, cupped by the steel arm.
 	drawBale(ctx, shaded, fitted, lit, finish);
+	drawCradleArm(ctx, shaded, fitted, finish);
 
 	// Both wheels share the one wheel part; the rear tile is the front mirrored.
 	wheel(ctx, FRONT_WHEEL.x, FRONT_WHEEL.y, FRONT_WHEEL.r, finish);
@@ -937,13 +1112,17 @@ export function drawRealHayBalerLevel(
 		ctx.lineWidth = 2.2;
 		ctx.beginPath();
 		ctx.moveTo(412, 197.4);
-		ctx.lineTo(638, 206.2);
+		ctx.lineTo(536, 202.6);
 		ctx.stroke();
 		ctx.strokeStyle = 'rgba(255,255,255,0.34)';
 		ctx.lineWidth = 1.8;
 		ctx.beginPath();
-		ctx.moveTo(650, 197.4);
-		ctx.lineTo(670, 197.4);
+		ctx.moveTo(540, 178.2);
+		ctx.lineTo(554, 178.2);
+		ctx.moveTo(648, 186.2);
+		ctx.lineTo(666, 186.2);
+		ctx.moveTo(564, 210.8);
+		ctx.lineTo(644, 210.8);
 		ctx.stroke();
 		ctx.strokeStyle = 'rgba(255,255,255,0.4)';
 		ctx.lineWidth = 2;

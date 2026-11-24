@@ -2,7 +2,11 @@
 /**
  * Register a converted vehicle after its art module exists.
  *
- * Usage: node scripts/vehicle-convert.mjs <spec.json> [--dry]
+ * Usage: node scripts/vehicle-convert.mjs <spec.json> [--dry] [--update]
+ *
+ * --update rewrites the masks, bounds and names of parts that are already registered.
+ * Use it when an existing vehicle's art geometry changes; without it new parts are only
+ * inserted once, so changed masks would be silently ignored.
  *
  * The spec owns only the new vehicle. This script performs the shared-file edits:
  * PartId union, PARTS, PART_NAMES, REAL_ART, the vehicle entry, and the level-art
@@ -77,18 +81,15 @@ const bounds = (b) => `{ x: ${b.x}, y: ${b.y}, w: ${b.w}, h: ${b.h} }`;
 let parts = read('src/lib/game/parts.ts');
 const firstId = spec.parts[0].id;
 const ids = spec.parts.map((part) => `\t| '${part.id}'`).join('\n');
-const partEntries = spec.parts
-	.map(
-		(part) => `\t${part.id}: realPart(
+const partEntry = (part) => `\t${part.id}: realPart(
 		'${part.id}',
 		'${part.role}',
 		'${part.kind}',
 		'${spec.id}',
 		'${part.mask}',
 		${bounds(part.bounds)}
-	),`
-	)
-	.join('\n');
+	),`;
+const partEntries = spec.parts.map(partEntry).join('\n');
 const nameEntries = spec.parts.map((part) => `\t${part.id}: '${part.name}',`).join('\n');
 
 const insertObjectEntries = (text, anchor, entries, label) => {
@@ -102,6 +103,8 @@ const insertObjectEntries = (text, anchor, entries, label) => {
 	return `${before}${comma}\n${entries}\n${text.slice(index)}`;
 };
 
+const update = process.argv.includes('--update');
+
 if (!parts.includes(`| '${firstId}'`)) {
 	parts = replaceOnce(
 		parts,
@@ -110,11 +113,26 @@ if (!parts.includes(`| '${firstId}'`)) {
 		'PartId union'
 	);
 }
-if (!parts.includes(`\t${firstId}: realPart(`)) {
-	parts = insertObjectEntries(parts, '\n};\n\n/** Child-facing names', partEntries, 'PARTS object end');
-}
-if (!parts.includes(`\t${firstId}: '`)) {
-	parts = insertObjectEntries(parts, '\n};\n\nexport function partName', nameEntries, 'PART_NAMES end');
+if (update) {
+	for (const part of spec.parts) {
+		const block = new RegExp(`\\t${part.id}: realPart\\([\\s\\S]*?\\n\\t\\),`);
+		if (!block.test(parts)) {
+			console.error(`part entry not found for --update: ${part.id}`);
+			process.exit(1);
+		}
+		parts = parts.replace(block, partEntry(part));
+		const named = new RegExp(`\\t${part.id}: '[^']*',`);
+		if (named.test(parts)) {
+			parts = parts.replace(named, `\t${part.id}: '${part.name}',`);
+		}
+	}
+} else {
+	if (!parts.includes(`\t${firstId}: realPart(`)) {
+		parts = insertObjectEntries(parts, '\n};\n\n/** Child-facing names', partEntries, 'PARTS object end');
+	}
+	if (!parts.includes(`\t${firstId}: '`)) {
+		parts = insertObjectEntries(parts, '\n};\n\nexport function partName', nameEntries, 'PART_NAMES end');
+	}
 }
 write('src/lib/game/parts.ts', parts);
 
@@ -214,6 +232,7 @@ console.log(
 		{
 			ok: true,
 			dry,
+			update,
 			vehicle: spec.id,
 			module: spec.module,
 			parts: spec.parts.map((part) => part.id),
