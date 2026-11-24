@@ -1,0 +1,55 @@
+{
+	"id": "snow-blower",
+	"name": "Snow blower",
+	"module": "realSnowBlower",
+	"artWidth": 680,
+	"artHeight": 320,
+	"parts": [
+		{
+			"id": "realSnowBlowerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M168,246 L168,176 Q168,164 173,156 L180,138 Q184,128 196,128 L306,128 Q320,128 321,142 L321,158 L654,158 Q668,158 670,172 L670,246 Z M112,142 L112,74 A46,46 0 0 1 158,28 L224,28 L224,62 L158,62 A12,12 0 0 0 146,74 L146,142 Z M224,26 L231,26 L231,64 L224,64 Z M258,120 L298,120 L298,128 L258,128 Z M262,120 L262,112 Q262,98 278,98 Q294,98 294,112 L294,120 Z M198,116 L218,116 L218,128 L198,128 Z M224,116 L244,116 L244,128 L224,128 Z M150,118 L164,118 L164,146 L150,146 Z M162,130 L176,138 L173,143 L160,135 Z M338,124 L350,124 L350,158 L338,158 Z M670,222 L680,222 L680,246 L670,246 Z M232,246 L248,246 L248,252 L232,252 Z M552,246 L568,246 L568,252 L552,252 Z",
+			"bounds": { "x": 112, "y": 26, "w": 568, "h": 226 },
+			"name": "Snow blower"
+		},
+		{
+			"id": "realSnowBlowerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M172,184 L172,178 Q172,168 177,160 L188,144 Q192,136 200,136 L212,136 Q220,136 220,144 L220,176 Q220,184 212,184 Z M240,144 Q240,136 248,136 L300,136 Q308,136 308,144 L308,196 Q308,204 300,204 L248,204 Q240,204 240,194 Z",
+			"bounds": { "x": 172, "y": 136, "w": 136, "h": 68 },
+			"name": "Windows"
+		},
+		{
+			"id": "realSnowBlowerAuger",
+			"role": "shell",
+			"kind": "cargo",
+			"mask": "M22,249 L22,198 Q22,184 32,176 L50,158 Q56,150 70,150 L108,150 L108,140 L152,140 L152,150 L154,150 Q162,150 162,160 L162,249 Z",
+			"bounds": { "x": 22, "y": 140, "w": 140, "h": 109 },
+			"name": "Auger housing"
+		},
+		{
+			"id": "realSnowBlowerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M170,222 A30,30 0 1 1 230,222 A30,30 0 1 1 170,222 Z",
+			"bounds": { "x": 170, "y": 192, "w": 60, "h": 60 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 680,
+		"height": 320,
+		"groundY": 252,
+		"colors": ["#E9ECEF", "#1D3557"],
+		"chassis": "slab(680, 252, 150)",
+		"slots": [
+			{ "id": "body", "part": "realSnowBlowerBody", "x": 396, "y": 139, "z": 0 },
+			{ "id": "windows", "part": "realSnowBlowerWindows", "x": 240, "y": 170, "z": 1 },
+			{ "id": "auger", "part": "realSnowBlowerAuger", "x": 92, "y": 194.5, "z": 3 },
+			{ "id": "wheel-l", "part": "realSnowBlowerWheel", "x": 200, "y": 222, "z": 4 },
+			{ "id": "wheel-r", "part": "realSnowBlowerWheel", "x": 520, "y": 222, "z": 4, "flip": true }
+		]
+	}
+}

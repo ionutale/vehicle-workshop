@@ -1,0 +1,109 @@
+{
+	"id": "sewer-cleaner",
+	"name": "Sewer-cleaning truck",
+	"module": "realSewerCleaner",
+	"artWidth": 660,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realSewerCleanerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M28,224 L28,150 Q28,136 38,128 L60,106 Q68,96 84,96 L186,96 Q200,96 206,104 L212,104 L486,104 C498,110 506,128 506,152 C506,176 500,190 486,200 L506,200 L506,196 L632,196 Q644,196 644,208 L644,224 Z M214,104 L214,84 L392,58 L578,62 L602,72 L594,86 L392,80 L216,104 Z M100,96 L100,88 L106,88 Q108,76 118,76 Q128,76 130,88 L136,88 L136,96 Z M10,120 L26,120 Q28,120 28,124 L28,150 L10,150 Z M12,206 L28,206 L28,232 L12,232 Z M620,226 L654,226 L654,238 L620,238 Z M214,226 L470,226 L470,234 L214,234 Z M420,104 L420,94 Q420,88 428,88 L454,88 Q462,88 462,94 L462,104 Z M508,152 L548,152 L548,196 L508,196 Z M644,140 L654,140 L654,220 L644,220 Z M548,148 L556,148 L556,156 L548,156 Z M550,180 L564,180 L564,196 L550,196 Z M593,88 L603,88 L603,108 L593,108 Z M40,224 L214,224 L214,232 L40,232 Z M470,224 L620,224 L620,232 L470,232 Z",
+			"bounds": {
+				"x": 10,
+				"y": 58,
+				"w": 644,
+				"h": 180
+			},
+			"name": "Sewer-cleaning truck"
+		},
+		{
+			"id": "realSewerCleanerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M38,160 L38,142 Q38,134 44,130 L64,110 Q70,104 80,104 L112,104 Q118,104 118,110 L118,154 Q118,160 112,160 Z M129,110 L183,110 Q188,110 188,115 L188,155 Q188,160 183,160 L129,160 Q124,160 124,155 L124,115 Q124,110 129,110 Z",
+			"bounds": {
+				"x": 38,
+				"y": 104,
+				"w": 150,
+				"h": 56
+			},
+			"name": "Windows"
+		},
+		{
+			"id": "realSewerCleanerReel",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M554,152 A44,44 0 1 1 642,152 A44,44 0 1 1 554,152 Z M589,197 L601,197 L603,230 L607,238 L596,238 L591,232 Z",
+			"bounds": {
+				"x": 554,
+				"y": 108,
+				"w": 88,
+				"h": 130
+			},
+			"name": "Hose reel"
+		},
+		{
+			"id": "realSewerCleanerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z",
+			"bounds": {
+				"x": 142,
+				"y": 188,
+				"w": 56,
+				"h": 56
+			},
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 660,
+		"height": 300,
+		"groundY": 244,
+		"colors": [
+			"#90BE6D",
+			"#264653"
+		],
+		"chassis": "slab(660, 244, 150)",
+		"slots": [
+			{
+				"id": "body",
+				"part": "realSewerCleanerBody",
+				"x": 332,
+				"y": 148,
+				"z": 0
+			},
+			{
+				"id": "windows",
+				"part": "realSewerCleanerWindows",
+				"x": 113,
+				"y": 132,
+				"z": 1
+			},
+			{
+				"id": "reel",
+				"part": "realSewerCleanerReel",
+				"x": 598,
+				"y": 173,
+				"z": 2
+			},
+			{
+				"id": "wheel-l",
+				"part": "realSewerCleanerWheel",
+				"x": 170,
+				"y": 216,
+				"z": 4
+			},
+			{
+				"id": "wheel-r",
+				"part": "realSewerCleanerWheel",
+				"x": 500,
+				"y": 216,
+				"z": 4,
+				"flip": true
+			}
+		]
+	}
+}

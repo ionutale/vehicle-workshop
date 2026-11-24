@@ -1,0 +1,55 @@
+{
+	"id": "hook-lift-truck",
+	"name": "Hook-lift truck",
+	"module": "realHookLiftTruck",
+	"artWidth": 700,
+	"artHeight": 310,
+	"parts": [
+		{
+			"id": "realHookLiftTruckBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M34,232 L34,128 Q34,112 48,106 L68,100 Q78,96 92,96 L188,96 Q202,96 202,108 L202,232 Z M20,216 L34,216 L34,240 L20,240 Z M10,96 L28,96 L28,124 L10,124 Z M146,74 L174,74 L174,96 L146,96 Z M96,232 L130,232 L130,242 L96,242 Z M202,92 L222,92 L222,186 L202,186 Z M204,186 L682,186 L682,248 L204,248 Z M682,212 L698,212 L698,236 L682,236 Z M640,186 L676,182 L648,36 L626,32 L600,24 L588,32 L586,48 L594,60 L606,70 L616,68 L614,56 L600,54 L598,44 L606,38 L616,42 L620,42 Z",
+			"bounds": { "x": 10, "y": 24, "w": 688, "h": 224 },
+			"name": "Hook-lift truck"
+		},
+		{
+			"id": "realHookLiftTruckWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M41,184 L41,132 Q41,122 51,118 L92,112 Q100,111 100,119 L100,178 Q100,184 94,184 Z M112,112 L182,112 Q190,112 190,120 L190,170 Q190,176 184,176 L112,176 Q104,176 104,170 L104,120 Q104,112 112,112 Z",
+			"bounds": { "x": 41, "y": 111, "w": 149, "h": 73 },
+			"name": "Windows"
+		},
+		{
+			"id": "realHookLiftTruckContainer",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M236,186 L604,186 L604,86 L612,76 L608,76 L608,72 L592,72 L592,76 L248,76 L236,86 Z",
+			"bounds": { "x": 236, "y": 72, "w": 376, "h": 114 },
+			"name": "Container"
+		},
+		{
+			"id": "realHookLiftTruckWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M142,222 A28,28 0 1 1 198,222 A28,28 0 1 1 142,222 Z",
+			"bounds": { "x": 142, "y": 194, "w": 56, "h": 56 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 310,
+		"groundY": 250,
+		"colors": ["#2A9D8F", "#264653"],
+		"chassis": "slab(700, 250, 150)",
+		"slots": [
+			{ "id": "body", "part": "realHookLiftTruckBody", "x": 354, "y": 136, "z": 0 },
+			{ "id": "windows", "part": "realHookLiftTruckWindows", "x": 115.5, "y": 147.5, "z": 1 },
+			{ "id": "container", "part": "realHookLiftTruckContainer", "x": 424, "y": 129, "z": 2 },
+			{ "id": "wheel-l", "part": "realHookLiftTruckWheel", "x": 170, "y": 222, "z": 4 },
+			{ "id": "wheel-r", "part": "realHookLiftTruckWheel", "x": 520, "y": 222, "z": 4, "flip": true }
+		]
+	}
+}

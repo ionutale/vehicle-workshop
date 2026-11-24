@@ -1,0 +1,109 @@
+{
+	"id": "road-planer",
+	"name": "Road planer",
+	"module": "realRoadPlaner",
+	"artWidth": 760,
+	"artHeight": 320,
+	"parts": [
+		{
+			"id": "realRoadPlanerBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M70,214 L70,152 L300,152 L152,118 L92,118 L92,74 L104,62 L152,62 L368,152 L540,152 L558,96 L694,96 Q718,96 718,120 L718,214 L630,214 A31,31 0 0 0 570,214 L210,214 A31,31 0 0 0 150,214 L70,214 Z M230,152 L254,152 L210,131.3 L186,125.8 Z M640,96 L640,84 Q640,78 646,78 L658,78 Q664,78 664,84 L664,96 Z M510,152 L510,124 Q510,118 516,118 L524,118 Q530,118 530,124 L530,152 Z",
+			"bounds": {
+				"x": 70,
+				"y": 62,
+				"w": 648,
+				"h": 152
+			},
+			"name": "Road planer"
+		},
+		{
+			"id": "realRoadPlanerWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M546,148 L560,104 L594,104 L594,148 Z M604,104 L692,104 Q700,104 700,112 L700,138 Q700,146 692,146 L604,146 Z",
+			"bounds": {
+				"x": 546,
+				"y": 104,
+				"w": 154,
+				"h": 44
+			},
+			"name": "Windows"
+		},
+		{
+			"id": "realRoadPlanerDrum",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M292,190 L528,190 L534,200 L534,246 Q534,252 528,252 L292,252 Q286,252 286,246 L286,200 Z",
+			"bounds": {
+				"x": 286,
+				"y": 190,
+				"w": 248,
+				"h": 62
+			},
+			"name": "Cutting drum"
+		},
+		{
+			"id": "realRoadPlanerWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M150,222 A30,30 0 1 1 210,222 A30,30 0 1 1 150,222 Z",
+			"bounds": {
+				"x": 150,
+				"y": 192,
+				"w": 60,
+				"h": 60
+			},
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 320,
+		"groundY": 252,
+		"colors": [
+			"#F4A261",
+			"#2B2D42"
+		],
+		"chassis": "slab(760, 252, 150)",
+		"slots": [
+			{
+				"id": "body",
+				"part": "realRoadPlanerBody",
+				"x": 394,
+				"y": 138,
+				"z": 0
+			},
+			{
+				"id": "windows",
+				"part": "realRoadPlanerWindows",
+				"x": 623,
+				"y": 126,
+				"z": 1
+			},
+			{
+				"id": "drum",
+				"part": "realRoadPlanerDrum",
+				"x": 410,
+				"y": 221,
+				"z": 2
+			},
+			{
+				"id": "wheel-l",
+				"part": "realRoadPlanerWheel",
+				"x": 180,
+				"y": 222,
+				"z": 4
+			},
+			{
+				"id": "wheel-r",
+				"part": "realRoadPlanerWheel",
+				"x": 600,
+				"y": 222,
+				"z": 4,
+				"flip": true
+			}
+		]
+	}
+}

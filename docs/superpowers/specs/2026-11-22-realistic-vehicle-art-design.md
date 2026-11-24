@@ -105,8 +105,18 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 60. **Steam roller (done):** riveted boiler, chimney, brass dome and canopy over a big smooth front drum at Level 5; 5 pieces, 4 at the first tier.
 61. **Quad bike (done):** chunky ATV with handlebars, saddle, brush guard and front/rear racks at Level 5; 5 pieces, 4 at the first tier.
 62. **Mini dumper (done):** compact site dumper with front tipping skip, rear seat and roll bar at Level 5; 5 pieces, 4 at the first tier.
-63. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
-64. Remove the generic parts once no catalogue entry uses them.
+63. **Van (done):** one-box panel van with a sliding cargo door and VAN plate at Level 5; 5 pieces, 4 at the first tier.
+64. **Skip-loader (done):** cab-over lorry with a raked open steel skip, lifting lugs and chain gantry at Level 5; 5 pieces, 4 at the first tier.
+65. **Hook-lift truck (done):** hydraulic hook arm over a corrugated open container at Level 5; 5 pieces, 4 at the first tier.
+66. **Concrete pump (done):** lorry with a folded multi-section boom, delivery pipe and outriggers at Level 5; 5 pieces, 4 at the first tier.
+67. **Gritter truck (done):** front plough on a push frame, open grit hopper with load and rear spinner at Level 5; 5 pieces, 4 at the first tier.
+68. **Snow-blower (done):** front auger shroud with a nine-vane impeller and tall discharge chute at Level 5; 5 pieces, 4 at the first tier.
+69. **Road planer (done):** long miller with a mid-mounted cutting drum and a front loading conveyor at Level 5; 5 pieces, 4 at the first tier.
+70. **Asphalt paver (done):** front hopper with an asphalt load, canopy and trailing screed board at Level 5; 5 pieces, 4 at the first tier.
+71. **Sewer cleaner (done):** jetting tank, hose reel and boom arm on a cab-over chassis at Level 5; 5 pieces, 4 at the first tier.
+72. **Airport fuel bowser (done):** short-wheelbase tanker with a ribbed barrel, JET placard and refuelling cabinet at Level 5; 5 pieces, 4 at the first tier.
+73. Convert the remaining **special trucks** and **works** machines, plus the last few vans.
+74. Remove the generic parts once no catalogue entry uses them.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

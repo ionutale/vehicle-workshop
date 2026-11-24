@@ -129,24 +129,21 @@ export const VEHICLES: Vehicle[] = [
 	},
 	{
 		id: 'van',
-		name: 'Van',
-		width: 500,
-		height: 250,
-		groundY: 210,
+		name: 'Panel van',
+		width: 560,
+		height: 260,
+		groundY: 220,
 		palette: palette('#5AA9E6', '#FFD166'),
-		chassisPath:
-			'M70,110 Q70,96 88,96 L410,96 Q430,96 430,116 L430,190 Q430,210 408,210 L86,210 Q70,210 70,190 Z',
+		chassisPath: slabPath(560, 220, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 250, y: 152, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 96, y: 128, z: 1, scale: 0.75 },
-			{ id: 'window', part: 'windowStrip', x: 104, y: 108, z: 2, scale: 0.55 },
-			{ id: 'door', part: 'door', x: 280, y: 152, z: 2, scale: 1.1 },
-			{ id: 'sign', part: 'roofSign', x: 250, y: 84, z: 1 },
-			{ id: 'wheel-l', part: 'wheel', x: 140, y: 210, z: 4 },
-			{ id: 'wheel-r', part: 'wheel', x: 390, y: 210, z: 4, flip: true }
+			{ id: 'body', part: 'realVanBody', x: 289, y: 128, z: 0 },
+			{ id: 'windows', part: 'realVanWindows', x: 143, y: 95.5, z: 1 },
+			{ id: 'door', part: 'realVanDoor', x: 284, y: 137, z: 2 },
+			{ id: 'wheel-l', part: 'realVanWheel', x: 140, y: 188, z: 4 },
+			{ id: 'wheel-r', part: 'realVanWheel', x: 420, y: 188, z: 4, flip: true }
 		]
-	}
-];
+	}];
 
 
 /** A dashed slab hint: a rounded body from x=30 to width-30, sitting on the ground line. */

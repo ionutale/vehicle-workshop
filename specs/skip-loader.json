@@ -1,0 +1,109 @@
+{
+	"id": "skip-loader",
+	"name": "Skip-loader truck",
+	"module": "realSkipLoader",
+	"artWidth": 680,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realSkipLoaderBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M42,208 L42,148 L56,108 Q58,104 66,104 L198,104 Q204,104 204,108 L204,208 L201,208 A32,32 0 0 0 139,208 L42,208 Z M204,180 L646,180 L646,220 L542,220 L542,216 A32,32 0 0 0 478,216 L478,220 L204,220 Z M110,208 L138,208 L138,216 L110,216 Z M30,196 L42,196 L42,218 L30,218 Z M18,152 L26,152 L26,172 L18,172 Z M26,157 L42,155 L42,163 L26,166 Z M174,98 L192,98 L192,104 L174,104 Z M106,97 L166,97 L166,104 L106,104 Z M204,180 L222,180 L222,84 L86,74 L86,88 L204,97 Z M64,58 L104,58 L104,73 L64,73 Z M72,73 L76,73 L76,118 L72,118 Z M82,73 L86,73 L86,114 L82,114 Z M222,134 L234,134 L234,140 L232,140 L232,180 L224,180 L224,140 L222,140 Z M300,220 L360,220 L360,236 L300,236 Z M544,220 L560,220 L560,238 L544,238 Z M646,186 L658,186 L658,214 L646,214 Z M646,214 L658,214 L658,224 L646,224 Z",
+			"bounds": {
+				"x": 18,
+				"y": 58,
+				"w": 640,
+				"h": 180
+			},
+			"name": "Skip-loader truck"
+		},
+		{
+			"id": "realSkipLoaderWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M50,176 L50,144 L60,122 Q62,118 68,118 L124,118 L124,176 Z M136,112 L186,112 Q194,112 194,120 L194,158 Q194,166 186,166 L136,166 Z",
+			"bounds": {
+				"x": 50,
+				"y": 112,
+				"w": 144,
+				"h": 64
+			},
+			"name": "Windows"
+		},
+		{
+			"id": "realSkipLoaderSkip",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M268,180 L310,76 L314,58 L400,58 L410,53 L420,56 L430,50 L440,54 L450,48 L460,55 L470,52 L482,56 L492,54 L498,58 L566,58 L570,76 L612,180 Z",
+			"bounds": {
+				"x": 268,
+				"y": 48,
+				"w": 344,
+				"h": 132
+			},
+			"name": "Skip"
+		},
+		{
+			"id": "realSkipLoaderWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z",
+			"bounds": {
+				"x": 142,
+				"y": 188,
+				"w": 56,
+				"h": 56
+			},
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 680,
+		"height": 300,
+		"groundY": 244,
+		"colors": [
+			"#E76F51",
+			"#2B2D42"
+		],
+		"chassis": "slab(680, 244, 150)",
+		"slots": [
+			{
+				"id": "body",
+				"part": "realSkipLoaderBody",
+				"x": 338,
+				"y": 148,
+				"z": 0
+			},
+			{
+				"id": "windows",
+				"part": "realSkipLoaderWindows",
+				"x": 122,
+				"y": 144,
+				"z": 1
+			},
+			{
+				"id": "skip",
+				"part": "realSkipLoaderSkip",
+				"x": 440,
+				"y": 114,
+				"z": 2
+			},
+			{
+				"id": "wheel-l",
+				"part": "realSkipLoaderWheel",
+				"x": 170,
+				"y": 216,
+				"z": 4
+			},
+			{
+				"id": "wheel-r",
+				"part": "realSkipLoaderWheel",
+				"x": 510,
+				"y": 216,
+				"z": 4,
+				"flip": true
+			}
+		]
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"id": "asphalt-paver",
+	"name": "Asphalt paver",
+	"module": "realAsphaltPaver",
+	"artWidth": 700,
+	"artHeight": 310,
+	"parts": [
+		{
+			"id": "realAsphaltPaverBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M24,204 L24,148 Q24,140 32,138 L136,124 L136,204 Z M136,204 L136,152 Q136,144 144,142 L196,138 L196,196 L300,196 L300,120 L588,120 Q600,120 600,132 L600,204 Z M204,204 L560,204 L560,206 L614,206 L614,214 L204,214 Z M144,76 L144,66 Q144,60 152,60 L382,60 Q390,60 390,68 L390,76 Z M186,76 L186,138 L198,138 L198,76 Z M362,76 L362,120 L374,120 L374,76 Z M310,76 L310,120 L316,120 L316,76 Z M252,60 L252,54 Q252,44 260,44 Q268,44 268,54 L268,60 Z M132,66 L144,66 L144,76 L132,76 Z M390,66 L404,66 L404,76 L390,76 Z M120,82 L136,82 L136,76 L144,76 L144,86 L136,86 L136,98 L120,98 Z M560,120 L560,90 L574,90 L574,120 Z M556,86 L578,86 L578,90 L556,90 Z M552,84 Q546,72 558,66 Q568,60 576,68 Q582,76 574,84 Z M430,120 L430,104 L436,104 L436,112 L514,112 L514,104 L520,104 L520,120 Z M212,196 L212,182 Q212,174 222,174 L282,170 L282,130 Q282,124 288,124 L294,124 L294,196 Z",
+			"bounds": { "x": 24, "y": 44, "w": 590, "h": 170 },
+			"name": "Asphalt paver"
+		},
+		{
+			"id": "realAsphaltPaverWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M140,143 L152,78 L186,78 L186,139 Z M316,76 L360,76 L360,120 L316,120 Z",
+			"bounds": { "x": 140, "y": 76, "w": 220, "h": 67 },
+			"name": "Windows"
+		},
+		{
+			"id": "realAsphaltPaverScreed",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M574,234 L574,180 L592,180 L592,234 Z M666,230 L666,184 L682,184 L682,230 Z M592,198 L666,198 L666,232 L592,232 Z M592,190 L666,190 L666,198 L592,198 Z",
+			"bounds": { "x": 574, "y": 180, "w": 108, "h": 54 },
+			"name": "Screed"
+		},
+		{
+			"id": "realAsphaltPaverWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M140,216 A30,30 0 1 1 200,216 A30,30 0 1 1 140,216 Z",
+			"bounds": { "x": 140, "y": 186, "w": 60, "h": 60 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 700,
+		"height": 310,
+		"groundY": 246,
+		"colors": ["#F9C74F", "#6B6B6B"],
+		"chassis": "slab(700, 246, 150)",
+		"slots": [
+			{ "id": "body", "part": "realAsphaltPaverBody", "x": 319, "y": 129, "z": 0 },
+			{ "id": "windows", "part": "realAsphaltPaverWindows", "x": 250, "y": 109.5, "z": 1 },
+			{ "id": "screed", "part": "realAsphaltPaverScreed", "x": 628, "y": 207, "z": 2 },
+			{ "id": "wheel-l", "part": "realAsphaltPaverWheel", "x": 170, "y": 216, "z": 4 },
+			{ "id": "wheel-r", "part": "realAsphaltPaverWheel", "x": 520, "y": 216, "z": 4, "flip": true }
+		]
+	}
+}

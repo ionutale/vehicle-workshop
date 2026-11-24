@@ -34,7 +34,7 @@ describe('difficulty', () => {
 	it('keeps the part that names the vehicle at level 0', () => {
 		const signature = (id: string) =>
 			vehicleAtLevel(getVehicle(id), 0).slots.map((slot) => slot.part);
-		expect(signature('airport-fuel-bowser')).toContain('tank');
+		expect(signature('hazmat-truck')).toContain('tank');
 		expect(signature('fire-engine')).toContain('realFireLadder');
 		expect(signature('digger')).toContain('realDiggerBucket');
 		expect(signature('backhoe-loader')).toContain('realBackhoeLoaderBackhoe');

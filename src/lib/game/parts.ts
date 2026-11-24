@@ -305,7 +305,47 @@ export type PartId =
 	| 'realMiniDumperBody'
 	| 'realMiniDumperSkip'
 	| 'realMiniDumperSeat'
-	| 'realMiniDumperWheel';
+	| 'realMiniDumperWheel'
+	| 'realVanBody'
+	| 'realVanWindows'
+	| 'realVanDoor'
+	| 'realVanWheel'
+	| 'realSkipLoaderBody'
+	| 'realSkipLoaderWindows'
+	| 'realSkipLoaderSkip'
+	| 'realSkipLoaderWheel'
+	| 'realHookLiftTruckBody'
+	| 'realHookLiftTruckWindows'
+	| 'realHookLiftTruckContainer'
+	| 'realHookLiftTruckWheel'
+	| 'realConcretePumpBody'
+	| 'realConcretePumpWindows'
+	| 'realConcretePumpBoom'
+	| 'realConcretePumpWheel'
+	| 'realGritterTruckBody'
+	| 'realGritterTruckWindows'
+	| 'realGritterTruckHopper'
+	| 'realGritterTruckWheel'
+	| 'realSnowBlowerBody'
+	| 'realSnowBlowerWindows'
+	| 'realSnowBlowerAuger'
+	| 'realSnowBlowerWheel'
+	| 'realRoadPlanerBody'
+	| 'realRoadPlanerWindows'
+	| 'realRoadPlanerDrum'
+	| 'realRoadPlanerWheel'
+	| 'realAsphaltPaverBody'
+	| 'realAsphaltPaverWindows'
+	| 'realAsphaltPaverScreed'
+	| 'realAsphaltPaverWheel'
+	| 'realSewerCleanerBody'
+	| 'realSewerCleanerWindows'
+	| 'realSewerCleanerReel'
+	| 'realSewerCleanerWheel'
+	| 'realAirportFuelBowserBody'
+	| 'realAirportFuelBowserTank'
+	| 'realAirportFuelBowserWindows'
+	| 'realAirportFuelBowserWheel';
 
 export type Role = 'shell' | 'glass' | 'rubber' | 'trim' | 'lamp';
 
@@ -2775,6 +2815,326 @@ export const PARTS: Record<PartId, PartShape> = {
 		'M110,236 A30,30 0 1 1 170,236 A30,30 0 1 1 110,236 Z',
 		{ x: 110, y: 206, w: 60, h: 60 }
 	),
+	realVanBody: realPart(
+		'realVanBody',
+		'shell',
+		'body',
+		'van',
+		'M46,204 L46,158 Q46,146 52,138 L64,130 Q72,126 80,120 L134,64 Q138,56 148,56 L520,56 Q532,56 532,68 L532,196 Q532,204 524,204 Z M280,56 L285,46 L325,46 L330,56 Z M50,92 L70,92 L70,120 L50,120 Z M32,184 L46,184 L46,208 L32,208 Z M532,188 L546,188 L546,204 L532,204 Z M190,204 L380,204 L380,210 L190,210 Z',
+		{ x: 32, y: 46, w: 514, h: 164 }
+	),
+	realVanWindows: realPart(
+		'realVanWindows',
+		'glass',
+		'face',
+		'van',
+		'M86,114 L134,66 L146,77 L98,125 Z M156,76 L194,76 Q200,76 200,82 L200,112 Q200,118 194,118 L156,118 Q150,118 150,112 L150,82 Q150,76 156,76 Z',
+		{ x: 86, y: 66, w: 114, h: 59 }
+	),
+	realVanDoor: realPart(
+		'realVanDoor',
+		'trim',
+		'detail',
+		'van',
+		'M212,76 L356,76 L356,198 L212,198 Z',
+		{ x: 212, y: 76, w: 144, h: 122 }
+	),
+	realVanWheel: realPart(
+		'realVanWheel',
+		'rubber',
+		'locomotion',
+		'van',
+		'M108,188 A32,32 0 1 1 172,188 A32,32 0 1 1 108,188 Z',
+		{ x: 108, y: 156, w: 64, h: 64 }
+	),
+	realSkipLoaderBody: realPart(
+		'realSkipLoaderBody',
+		'shell',
+		'body',
+		'skip-loader',
+		'M42,208 L42,148 L56,108 Q58,104 66,104 L198,104 Q204,104 204,108 L204,208 L201,208 A32,32 0 0 0 139,208 L42,208 Z M204,180 L646,180 L646,220 L542,220 L542,216 A32,32 0 0 0 478,216 L478,220 L204,220 Z M110,208 L138,208 L138,216 L110,216 Z M30,196 L42,196 L42,218 L30,218 Z M18,152 L26,152 L26,172 L18,172 Z M26,157 L42,155 L42,163 L26,166 Z M174,98 L192,98 L192,104 L174,104 Z M106,97 L166,97 L166,104 L106,104 Z M204,180 L222,180 L222,84 L86,74 L86,88 L204,97 Z M64,58 L104,58 L104,73 L64,73 Z M72,73 L76,73 L76,118 L72,118 Z M82,73 L86,73 L86,114 L82,114 Z M222,134 L234,134 L234,140 L232,140 L232,180 L224,180 L224,140 L222,140 Z M300,220 L360,220 L360,236 L300,236 Z M544,220 L560,220 L560,238 L544,238 Z M646,186 L658,186 L658,214 L646,214 Z M646,214 L658,214 L658,224 L646,224 Z',
+		{ x: 18, y: 58, w: 640, h: 180 }
+	),
+	realSkipLoaderWindows: realPart(
+		'realSkipLoaderWindows',
+		'glass',
+		'face',
+		'skip-loader',
+		'M50,176 L50,144 L60,122 Q62,118 68,118 L124,118 L124,176 Z M136,112 L186,112 Q194,112 194,120 L194,158 Q194,166 186,166 L136,166 Z',
+		{ x: 50, y: 112, w: 144, h: 64 }
+	),
+	realSkipLoaderSkip: realPart(
+		'realSkipLoaderSkip',
+		'trim',
+		'cargo',
+		'skip-loader',
+		'M268,180 L310,76 L314,58 L400,58 L410,53 L420,56 L430,50 L440,54 L450,48 L460,55 L470,52 L482,56 L492,54 L498,58 L566,58 L570,76 L612,180 Z',
+		{ x: 268, y: 48, w: 344, h: 132 }
+	),
+	realSkipLoaderWheel: realPart(
+		'realSkipLoaderWheel',
+		'rubber',
+		'locomotion',
+		'skip-loader',
+		'M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z',
+		{ x: 142, y: 188, w: 56, h: 56 }
+	),
+	realHookLiftTruckBody: realPart(
+		'realHookLiftTruckBody',
+		'shell',
+		'body',
+		'hook-lift-truck',
+		'M34,232 L34,128 Q34,112 48,106 L68,100 Q78,96 92,96 L188,96 Q202,96 202,108 L202,232 Z M20,216 L34,216 L34,240 L20,240 Z M10,96 L28,96 L28,124 L10,124 Z M146,74 L174,74 L174,96 L146,96 Z M96,232 L130,232 L130,242 L96,242 Z M202,92 L222,92 L222,186 L202,186 Z M204,186 L682,186 L682,248 L204,248 Z M682,212 L698,212 L698,236 L682,236 Z M640,186 L676,182 L648,36 L626,32 L600,24 L588,32 L586,48 L594,60 L606,70 L616,68 L614,56 L600,54 L598,44 L606,38 L616,42 L620,42 Z',
+		{ x: 10, y: 24, w: 688, h: 224 }
+	),
+	realHookLiftTruckWindows: realPart(
+		'realHookLiftTruckWindows',
+		'glass',
+		'face',
+		'hook-lift-truck',
+		'M41,184 L41,132 Q41,122 51,118 L92,112 Q100,111 100,119 L100,178 Q100,184 94,184 Z M112,112 L182,112 Q190,112 190,120 L190,170 Q190,176 184,176 L112,176 Q104,176 104,170 L104,120 Q104,112 112,112 Z',
+		{ x: 41, y: 111, w: 149, h: 73 }
+	),
+	realHookLiftTruckContainer: realPart(
+		'realHookLiftTruckContainer',
+		'trim',
+		'cargo',
+		'hook-lift-truck',
+		'M236,186 L604,186 L604,86 L612,76 L608,76 L608,72 L592,72 L592,76 L248,76 L236,86 Z',
+		{ x: 236, y: 72, w: 376, h: 114 }
+	),
+	realHookLiftTruckWheel: realPart(
+		'realHookLiftTruckWheel',
+		'rubber',
+		'locomotion',
+		'hook-lift-truck',
+		'M142,222 A28,28 0 1 1 198,222 A28,28 0 1 1 142,222 Z',
+		{ x: 142, y: 194, w: 56, h: 56 }
+	),
+	realConcretePumpBody: realPart(
+		'realConcretePumpBody',
+		'shell',
+		'body',
+		'concrete-pump',
+		'M24,232 L24,136 Q24,118 42,118 L182,118 Q196,118 196,132 L196,232 Z M196,168 L208,168 L208,152 L220,138 L258,138 L270,152 L270,168 L676,168 L676,198 L196,198 Z M196,198 L748,198 L748,232 L196,232 Z M676,158 L736,158 L744,164 L744,176 L748,182 L748,198 L676,198 Z M220,232 L236,232 L236,250 L250,250 L250,262 L206,262 L206,250 L220,250 Z M616,232 L632,232 L632,250 L648,250 L648,262 L604,262 L604,250 L616,250 Z M210,232 L218,232 L218,250 L210,250 Z M596,232 L604,232 L604,250 L596,250 Z M318,154 L336,154 L336,168 L318,168 Z M596,154 L614,154 L614,168 L596,168 Z M10,196 L24,196 L24,234 L10,234 Z M8,130 L18,130 L18,154 L8,154 Z M18,142 L24,140 L24,148 L18,150 Z M56,118 L56,112 Q56,104 64,104 L86,104 Q94,104 94,112 L94,118 Z M198,126 L208,126 L208,168 L198,168 Z M200,126 Q194,114 206,108 Q216,98 230,102 Q242,106 240,118 Q246,124 242,126 Z M700,232 L748,232 L748,242 L740,246 L700,246 Z',
+		{ x: 6, y: 96, w: 746, h: 168 }
+	),
+	realConcretePumpWindows: realPart(
+		'realConcretePumpWindows',
+		'glass',
+		'face',
+		'concrete-pump',
+		'M36,196 L36,144 Q36,136 44,136 L92,136 Q100,136 100,144 L100,196 Z M116,136 L174,136 Q182,136 182,144 L182,182 Q182,190 174,190 L116,190 Q108,190 108,182 L108,144 Q108,136 116,136 Z',
+		{ x: 36, y: 136, w: 146, h: 60 }
+	),
+	realConcretePumpBoom: realPart(
+		'realConcretePumpBoom',
+		'trim',
+		'cargo',
+		'concrete-pump',
+		'M404,76 L628,76 L628,102 L656,102 L656,154 L270,154 L270,128 L404,128 Z',
+		{ x: 266, y: 72, w: 396, h: 86 }
+	),
+	realConcretePumpWheel: realPart(
+		'realConcretePumpWheel',
+		'rubber',
+		'locomotion',
+		'concrete-pump',
+		'M138,230 A32,32 0 1 1 202,230 A32,32 0 1 1 138,230 Z',
+		{ x: 138, y: 198, w: 64, h: 64 }
+	),
+	realGritterTruckBody: realPart(
+		'realGritterTruckBody',
+		'shell',
+		'body',
+		'gritter-truck',
+		'M82,240 L82,208 Q82,200 86,196 L92,124 Q94,108 108,105 L114,98 Q118,86 132,84 L246,84 Q258,84 258,96 L258,170 L600,170 Q618,170 622,184 L650,240 Z M8,118 Q2,124 3,138 Q4,152 6,166 Q8,188 14,210 Q20,234 28,246 L62,246 L66,240 L66,152 Q66,140 70,136 Q40,118 8,118 Z M70,201 L82,206 L82,212 L70,207 Z M70,229 L82,232 L82,238 L70,235 Z M650,233 A20,10 0 1 1 690,233 A20,10 0 1 1 650,233 Z M662,204 L678,204 L678,222 L662,222 Z M96,240 L650,240 L650,252 L96,252 Z M196,72 L230,72 L230,84 L196,84 Z M64,104 L82,109 L82,123 L64,118 Z M259,96 L271,96 L271,168 L259,168 Z M280,146 L340,146 L340,170 L280,170 Z',
+		{ x: 2, y: 72, w: 688, h: 180 }
+	),
+	realGritterTruckWindows: realPart(
+		'realGritterTruckWindows',
+		'glass',
+		'face',
+		'gritter-truck',
+		'M94,178 L94,150 Q94,138 100,126 L106,110 Q109,102 118,102 L146,102 Q152,102 152,110 L152,170 Q152,178 146,178 Z M164,104 Q164,98 172,98 L204,98 Q212,98 212,106 L212,158 Q212,164 204,164 L172,164 Q164,164 164,156 Z',
+		{ x: 94, y: 98, w: 118, h: 80 }
+	),
+	realGritterTruckHopper: realPart(
+		'realGritterTruckHopper',
+		'trim',
+		'cargo',
+		'gritter-truck',
+		'M424,116 L440,116 Q526,82 612,116 L628,116 L584,170 L468,170 Z M626,116 L594,88 L600,80 L632,108 Z',
+		{ x: 424, y: 80, w: 208, h: 90 }
+	),
+	realGritterTruckWheel: realPart(
+		'realGritterTruckWheel',
+		'rubber',
+		'locomotion',
+		'gritter-truck',
+		'M140,222 A30,30 0 1 1 200,222 A30,30 0 1 1 140,222 Z',
+		{ x: 140, y: 192, w: 60, h: 60 }
+	),
+	realSnowBlowerBody: realPart(
+		'realSnowBlowerBody',
+		'shell',
+		'body',
+		'snow-blower',
+		'M168,246 L168,176 Q168,164 173,156 L180,138 Q184,128 196,128 L306,128 Q320,128 321,142 L321,158 L654,158 Q668,158 670,172 L670,246 Z M112,142 L112,74 A46,46 0 0 1 158,28 L224,28 L224,62 L158,62 A12,12 0 0 0 146,74 L146,142 Z M224,26 L231,26 L231,64 L224,64 Z M258,120 L298,120 L298,128 L258,128 Z M262,120 L262,112 Q262,98 278,98 Q294,98 294,112 L294,120 Z M198,116 L218,116 L218,128 L198,128 Z M224,116 L244,116 L244,128 L224,128 Z M150,118 L164,118 L164,146 L150,146 Z M162,130 L176,138 L173,143 L160,135 Z M338,124 L350,124 L350,158 L338,158 Z M670,222 L680,222 L680,246 L670,246 Z M232,246 L248,246 L248,252 L232,252 Z M552,246 L568,246 L568,252 L552,252 Z',
+		{ x: 112, y: 26, w: 568, h: 226 }
+	),
+	realSnowBlowerWindows: realPart(
+		'realSnowBlowerWindows',
+		'glass',
+		'face',
+		'snow-blower',
+		'M172,184 L172,178 Q172,168 177,160 L188,144 Q192,136 200,136 L212,136 Q220,136 220,144 L220,176 Q220,184 212,184 Z M240,144 Q240,136 248,136 L300,136 Q308,136 308,144 L308,196 Q308,204 300,204 L248,204 Q240,204 240,194 Z',
+		{ x: 172, y: 136, w: 136, h: 68 }
+	),
+	realSnowBlowerAuger: realPart(
+		'realSnowBlowerAuger',
+		'shell',
+		'cargo',
+		'snow-blower',
+		'M22,249 L22,198 Q22,184 32,176 L50,158 Q56,150 70,150 L108,150 L108,140 L152,140 L152,150 L154,150 Q162,150 162,160 L162,249 Z',
+		{ x: 22, y: 140, w: 140, h: 109 }
+	),
+	realSnowBlowerWheel: realPart(
+		'realSnowBlowerWheel',
+		'rubber',
+		'locomotion',
+		'snow-blower',
+		'M170,222 A30,30 0 1 1 230,222 A30,30 0 1 1 170,222 Z',
+		{ x: 170, y: 192, w: 60, h: 60 }
+	),
+	realRoadPlanerBody: realPart(
+		'realRoadPlanerBody',
+		'shell',
+		'body',
+		'road-planer',
+		'M70,214 L70,152 L300,152 L152,118 L92,118 L92,74 L104,62 L152,62 L368,152 L540,152 L558,96 L694,96 Q718,96 718,120 L718,214 L630,214 A31,31 0 0 0 570,214 L210,214 A31,31 0 0 0 150,214 L70,214 Z M230,152 L254,152 L210,131.3 L186,125.8 Z M640,96 L640,84 Q640,78 646,78 L658,78 Q664,78 664,84 L664,96 Z M510,152 L510,124 Q510,118 516,118 L524,118 Q530,118 530,124 L530,152 Z',
+		{ x: 70, y: 62, w: 648, h: 152 }
+	),
+	realRoadPlanerWindows: realPart(
+		'realRoadPlanerWindows',
+		'glass',
+		'face',
+		'road-planer',
+		'M546,148 L560,104 L594,104 L594,148 Z M604,104 L692,104 Q700,104 700,112 L700,138 Q700,146 692,146 L604,146 Z',
+		{ x: 546, y: 104, w: 154, h: 44 }
+	),
+	realRoadPlanerDrum: realPart(
+		'realRoadPlanerDrum',
+		'trim',
+		'cargo',
+		'road-planer',
+		'M292,190 L528,190 L534,200 L534,246 Q534,252 528,252 L292,252 Q286,252 286,246 L286,200 Z',
+		{ x: 286, y: 190, w: 248, h: 62 }
+	),
+	realRoadPlanerWheel: realPart(
+		'realRoadPlanerWheel',
+		'rubber',
+		'locomotion',
+		'road-planer',
+		'M150,222 A30,30 0 1 1 210,222 A30,30 0 1 1 150,222 Z',
+		{ x: 150, y: 192, w: 60, h: 60 }
+	),
+	realAsphaltPaverBody: realPart(
+		'realAsphaltPaverBody',
+		'shell',
+		'body',
+		'asphalt-paver',
+		'M24,204 L24,148 Q24,140 32,138 L136,124 L136,204 Z M136,204 L136,152 Q136,144 144,142 L196,138 L196,196 L300,196 L300,120 L588,120 Q600,120 600,132 L600,204 Z M204,204 L560,204 L560,206 L614,206 L614,214 L204,214 Z M144,76 L144,66 Q144,60 152,60 L382,60 Q390,60 390,68 L390,76 Z M186,76 L186,138 L198,138 L198,76 Z M362,76 L362,120 L374,120 L374,76 Z M310,76 L310,120 L316,120 L316,76 Z M252,60 L252,54 Q252,44 260,44 Q268,44 268,54 L268,60 Z M132,66 L144,66 L144,76 L132,76 Z M390,66 L404,66 L404,76 L390,76 Z M120,82 L136,82 L136,76 L144,76 L144,86 L136,86 L136,98 L120,98 Z M560,120 L560,90 L574,90 L574,120 Z M556,86 L578,86 L578,90 L556,90 Z M552,84 Q546,72 558,66 Q568,60 576,68 Q582,76 574,84 Z M430,120 L430,104 L436,104 L436,112 L514,112 L514,104 L520,104 L520,120 Z M212,196 L212,182 Q212,174 222,174 L282,170 L282,130 Q282,124 288,124 L294,124 L294,196 Z',
+		{ x: 24, y: 44, w: 590, h: 170 }
+	),
+	realAsphaltPaverWindows: realPart(
+		'realAsphaltPaverWindows',
+		'glass',
+		'face',
+		'asphalt-paver',
+		'M140,143 L152,78 L186,78 L186,139 Z M316,76 L360,76 L360,120 L316,120 Z',
+		{ x: 140, y: 76, w: 220, h: 67 }
+	),
+	realAsphaltPaverScreed: realPart(
+		'realAsphaltPaverScreed',
+		'trim',
+		'cargo',
+		'asphalt-paver',
+		'M574,234 L574,180 L592,180 L592,234 Z M666,230 L666,184 L682,184 L682,230 Z M592,198 L666,198 L666,232 L592,232 Z M592,190 L666,190 L666,198 L592,198 Z',
+		{ x: 574, y: 180, w: 108, h: 54 }
+	),
+	realAsphaltPaverWheel: realPart(
+		'realAsphaltPaverWheel',
+		'rubber',
+		'locomotion',
+		'asphalt-paver',
+		'M140,216 A30,30 0 1 1 200,216 A30,30 0 1 1 140,216 Z',
+		{ x: 140, y: 186, w: 60, h: 60 }
+	),
+	realSewerCleanerBody: realPart(
+		'realSewerCleanerBody',
+		'shell',
+		'body',
+		'sewer-cleaner',
+		'M28,224 L28,150 Q28,136 38,128 L60,106 Q68,96 84,96 L186,96 Q200,96 206,104 L212,104 L486,104 C498,110 506,128 506,152 C506,176 500,190 486,200 L506,200 L506,196 L632,196 Q644,196 644,208 L644,224 Z M214,104 L214,84 L392,58 L578,62 L602,72 L594,86 L392,80 L216,104 Z M100,96 L100,88 L106,88 Q108,76 118,76 Q128,76 130,88 L136,88 L136,96 Z M10,120 L26,120 Q28,120 28,124 L28,150 L10,150 Z M12,206 L28,206 L28,232 L12,232 Z M620,226 L654,226 L654,238 L620,238 Z M214,226 L470,226 L470,234 L214,234 Z M420,104 L420,94 Q420,88 428,88 L454,88 Q462,88 462,94 L462,104 Z M508,152 L548,152 L548,196 L508,196 Z M644,140 L654,140 L654,220 L644,220 Z M548,148 L556,148 L556,156 L548,156 Z M550,180 L564,180 L564,196 L550,196 Z M593,88 L603,88 L603,108 L593,108 Z M40,224 L214,224 L214,232 L40,232 Z M470,224 L620,224 L620,232 L470,232 Z',
+		{ x: 10, y: 58, w: 644, h: 180 }
+	),
+	realSewerCleanerWindows: realPart(
+		'realSewerCleanerWindows',
+		'glass',
+		'face',
+		'sewer-cleaner',
+		'M38,160 L38,142 Q38,134 44,130 L64,110 Q70,104 80,104 L112,104 Q118,104 118,110 L118,154 Q118,160 112,160 Z M129,110 L183,110 Q188,110 188,115 L188,155 Q188,160 183,160 L129,160 Q124,160 124,155 L124,115 Q124,110 129,110 Z',
+		{ x: 38, y: 104, w: 150, h: 56 }
+	),
+	realSewerCleanerReel: realPart(
+		'realSewerCleanerReel',
+		'trim',
+		'cargo',
+		'sewer-cleaner',
+		'M554,152 A44,44 0 1 1 642,152 A44,44 0 1 1 554,152 Z M589,197 L601,197 L603,230 L607,238 L596,238 L591,232 Z',
+		{ x: 554, y: 108, w: 88, h: 130 }
+	),
+	realSewerCleanerWheel: realPart(
+		'realSewerCleanerWheel',
+		'rubber',
+		'locomotion',
+		'sewer-cleaner',
+		'M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z',
+		{ x: 142, y: 188, w: 56, h: 56 }
+	),
+	realAirportFuelBowserBody: realPart(
+		'realAirportFuelBowserBody',
+		'shell',
+		'body',
+		'airport-fuel-bowser',
+		'M34,210 L34,136 Q34,122 52,117 L86,114 L86,103 Q86,97 93,97 L101,97 Q108,97 108,103 L108,111 L166,111 Q180,110 184,121 L184,186 L560,186 L560,140 Q560,132 570,132 L628,132 Q638,132 638,142 L638,210 L527.331,210 A28,28 0 0 0 472.669,210 L197.331,210 A28,28 0 0 0 142.669,210 L34,210 Z M14,136 L28,136 L28,144 L34,144 L34,150 L28,150 L28,158 L14,158 Z M26,202 L34,202 L34,222 L26,222 Z M638,198 L652,198 L652,218 L638,218 Z',
+		{ x: 14, y: 96, w: 638, h: 126 }
+	),
+	realAirportFuelBowserTank: realPart(
+		'realAirportFuelBowserTank',
+		'trim',
+		'cargo',
+		'airport-fuel-bowser',
+		'M198,102 L334,102 L334,96 Q334,92 340,92 L368,92 Q374,92 374,96 L374,102 L542,102 Q558,102 560,122 L560,166 Q558,186 542,186 L198,186 Q186,186 186,166 L186,122 Q188,102 198,102 Z',
+		{ x: 186, y: 92, w: 374, h: 94 }
+	),
+	realAirportFuelBowserWindows: realPart(
+		'realAirportFuelBowserWindows',
+		'glass',
+		'face',
+		'airport-fuel-bowser',
+		'M50,128 L100,128 Q106,128 106,134 L106,156 Q106,162 100,162 L50,162 Q44,162 44,156 L44,134 Q44,128 50,128 Z M117,130 L141,130 Q146,130 146,135 L146,155 Q146,160 141,160 L117,160 Q112,160 112,155 L112,135 Q112,130 117,130 Z',
+		{ x: 44, y: 128, w: 102, h: 34 }
+	),
+	realAirportFuelBowserWheel: realPart(
+		'realAirportFuelBowserWheel',
+		'rubber',
+		'locomotion',
+		'airport-fuel-bowser',
+		'M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z',
+		{ x: 142, y: 188, w: 56, h: 56 }
+	),
 
 };
 
@@ -3081,6 +3441,46 @@ export const PART_NAMES: Record<PartId, string> = {
 	realMiniDumperSkip: 'Skip',
 	realMiniDumperSeat: 'Seat and roll bar',
 	realMiniDumperWheel: 'Wheel',
+	realVanBody: 'Panel van',
+	realVanWindows: 'Windows',
+	realVanDoor: 'Sliding side door',
+	realVanWheel: 'Wheel',
+	realSkipLoaderBody: 'Skip-loader truck',
+	realSkipLoaderWindows: 'Windows',
+	realSkipLoaderSkip: 'Skip',
+	realSkipLoaderWheel: 'Wheel',
+	realHookLiftTruckBody: 'Hook-lift truck',
+	realHookLiftTruckWindows: 'Windows',
+	realHookLiftTruckContainer: 'Container',
+	realHookLiftTruckWheel: 'Wheel',
+	realConcretePumpBody: 'Concrete pump truck',
+	realConcretePumpWindows: 'Windows',
+	realConcretePumpBoom: 'Folding boom',
+	realConcretePumpWheel: 'Wheel',
+	realGritterTruckBody: 'Gritter truck',
+	realGritterTruckWindows: 'Windows',
+	realGritterTruckHopper: 'Grit hopper',
+	realGritterTruckWheel: 'Wheel',
+	realSnowBlowerBody: 'Snow blower',
+	realSnowBlowerWindows: 'Windows',
+	realSnowBlowerAuger: 'Auger housing',
+	realSnowBlowerWheel: 'Wheel',
+	realRoadPlanerBody: 'Road planer',
+	realRoadPlanerWindows: 'Windows',
+	realRoadPlanerDrum: 'Cutting drum',
+	realRoadPlanerWheel: 'Wheel',
+	realAsphaltPaverBody: 'Asphalt paver',
+	realAsphaltPaverWindows: 'Windows',
+	realAsphaltPaverScreed: 'Screed',
+	realAsphaltPaverWheel: 'Wheel',
+	realSewerCleanerBody: 'Sewer-cleaning truck',
+	realSewerCleanerWindows: 'Windows',
+	realSewerCleanerReel: 'Hose reel',
+	realSewerCleanerWheel: 'Wheel',
+	realAirportFuelBowserBody: 'Airport fuel bowser',
+	realAirportFuelBowserTank: 'Fuel tank',
+	realAirportFuelBowserWindows: 'Windows',
+	realAirportFuelBowserWheel: 'Wheel',
 
 };
 

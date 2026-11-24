@@ -59,6 +59,16 @@ import { drawRealHayBaler } from './realHayBaler';
 import { drawRealSteamRoller } from './realSteamRoller';
 import { drawRealQuadBike } from './realQuadBike';
 import { drawRealMiniDumper } from './realMiniDumper';
+import { drawRealVan } from './realVan';
+import { drawRealSkipLoader } from './realSkipLoader';
+import { drawRealHookLiftTruck } from './realHookLiftTruck';
+import { drawRealConcretePump } from './realConcretePump';
+import { drawRealGritterTruck } from './realGritterTruck';
+import { drawRealSnowBlower } from './realSnowBlower';
+import { drawRealRoadPlaner } from './realRoadPlaner';
+import { drawRealAsphaltPaver } from './realAsphaltPaver';
+import { drawRealSewerCleaner } from './realSewerCleaner';
+import { drawRealAirportFuelBowser } from './realAirportFuelBowser';
 
 /**
  * THROWAWAY PROTOTYPE ART. Hand-authored side profiles for the fire engine and digger,
@@ -845,7 +855,17 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'hay-baler': { draw: drawRealHayBaler, width: 720, height: 300 },
 	'steam-roller': { draw: drawRealSteamRoller, width: 700, height: 310 },
 	'quad-bike': { draw: drawRealQuadBike, width: 560, height: 300 },
-	'mini-dumper': { draw: drawRealMiniDumper, width: 620, height: 300 }
+	'mini-dumper': { draw: drawRealMiniDumper, width: 620, height: 300 },
+	'van': { draw: drawRealVan, width: 560, height: 260 },
+	'skip-loader': { draw: drawRealSkipLoader, width: 680, height: 300 },
+	'hook-lift-truck': { draw: drawRealHookLiftTruck, width: 700, height: 310 },
+	'concrete-pump': { draw: drawRealConcretePump, width: 760, height: 340 },
+	'gritter-truck': { draw: drawRealGritterTruck, width: 700, height: 320 },
+	'snow-blower': { draw: drawRealSnowBlower, width: 680, height: 320 },
+	'road-planer': { draw: drawRealRoadPlaner, width: 760, height: 320 },
+	'asphalt-paver': { draw: drawRealAsphaltPaver, width: 700, height: 310 },
+	'sewer-cleaner': { draw: drawRealSewerCleaner, width: 660, height: 300 },
+	'airport-fuel-bowser': { draw: drawRealAirportFuelBowser, width: 660, height: 300 }
 };
 
 const fullCache = new Map<string, HTMLCanvasElement>();

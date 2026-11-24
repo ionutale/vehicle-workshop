@@ -1,0 +1,55 @@
+{
+	"id": "concrete-pump",
+	"name": "Concrete pump truck",
+	"module": "realConcretePump",
+	"artWidth": 760,
+	"artHeight": 340,
+	"parts": [
+		{
+			"id": "realConcretePumpBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M24,232 L24,136 Q24,118 42,118 L182,118 Q196,118 196,132 L196,232 Z M196,168 L208,168 L208,152 L220,138 L258,138 L270,152 L270,168 L676,168 L676,198 L196,198 Z M196,198 L748,198 L748,232 L196,232 Z M676,158 L736,158 L744,164 L744,176 L748,182 L748,198 L676,198 Z M220,232 L236,232 L236,250 L250,250 L250,262 L206,262 L206,250 L220,250 Z M616,232 L632,232 L632,250 L648,250 L648,262 L604,262 L604,250 L616,250 Z M210,232 L218,232 L218,250 L210,250 Z M596,232 L604,232 L604,250 L596,250 Z M318,154 L336,154 L336,168 L318,168 Z M596,154 L614,154 L614,168 L596,168 Z M10,196 L24,196 L24,234 L10,234 Z M8,130 L18,130 L18,154 L8,154 Z M18,142 L24,140 L24,148 L18,150 Z M56,118 L56,112 Q56,104 64,104 L86,104 Q94,104 94,112 L94,118 Z M198,126 L208,126 L208,168 L198,168 Z M200,126 Q194,114 206,108 Q216,98 230,102 Q242,106 240,118 Q246,124 242,126 Z M700,232 L748,232 L748,242 L740,246 L700,246 Z",
+			"bounds": { "x": 6, "y": 96, "w": 746, "h": 168 },
+			"name": "Concrete pump truck"
+		},
+		{
+			"id": "realConcretePumpWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M36,196 L36,144 Q36,136 44,136 L92,136 Q100,136 100,144 L100,196 Z M116,136 L174,136 Q182,136 182,144 L182,182 Q182,190 174,190 L116,190 Q108,190 108,182 L108,144 Q108,136 116,136 Z",
+			"bounds": { "x": 36, "y": 136, "w": 146, "h": 60 },
+			"name": "Windows"
+		},
+		{
+			"id": "realConcretePumpBoom",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M404,76 L628,76 L628,102 L656,102 L656,154 L270,154 L270,128 L404,128 Z",
+			"bounds": { "x": 266, "y": 72, "w": 396, "h": 86 },
+			"name": "Folding boom"
+		},
+		{
+			"id": "realConcretePumpWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M138,230 A32,32 0 1 1 202,230 A32,32 0 1 1 138,230 Z",
+			"bounds": { "x": 138, "y": 198, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 760,
+		"height": 340,
+		"groundY": 262,
+		"colors": ["#F4A261", "#264653"],
+		"chassis": "slab(760, 262, 150)",
+		"slots": [
+			{ "id": "body", "part": "realConcretePumpBody", "x": 379, "y": 180, "z": 0 },
+			{ "id": "windows", "part": "realConcretePumpWindows", "x": 109, "y": 166, "z": 1 },
+			{ "id": "boom", "part": "realConcretePumpBoom", "x": 464, "y": 115, "z": 2 },
+			{ "id": "wheel-l", "part": "realConcretePumpWheel", "x": 170, "y": 230, "z": 4 },
+			{ "id": "wheel-r", "part": "realConcretePumpWheel", "x": 560, "y": 230, "z": 4, "flip": true }
+		]
+	}
+}

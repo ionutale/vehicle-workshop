@@ -1,0 +1,55 @@
+{
+	"id": "airport-fuel-bowser",
+	"name": "Airport fuel bowser",
+	"module": "realAirportFuelBowser",
+	"artWidth": 660,
+	"artHeight": 300,
+	"parts": [
+		{
+			"id": "realAirportFuelBowserBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M34,210 L34,136 Q34,122 52,117 L86,114 L86,103 Q86,97 93,97 L101,97 Q108,97 108,103 L108,111 L166,111 Q180,110 184,121 L184,186 L560,186 L560,140 Q560,132 570,132 L628,132 Q638,132 638,142 L638,210 L527.331,210 A28,28 0 0 0 472.669,210 L197.331,210 A28,28 0 0 0 142.669,210 L34,210 Z M14,136 L28,136 L28,144 L34,144 L34,150 L28,150 L28,158 L14,158 Z M26,202 L34,202 L34,222 L26,222 Z M638,198 L652,198 L652,218 L638,218 Z",
+			"bounds": { "x": 14, "y": 96, "w": 638, "h": 126 },
+			"name": "Airport fuel bowser"
+		},
+		{
+			"id": "realAirportFuelBowserTank",
+			"role": "trim",
+			"kind": "cargo",
+			"mask": "M198,102 L334,102 L334,96 Q334,92 340,92 L368,92 Q374,92 374,96 L374,102 L542,102 Q558,102 560,122 L560,166 Q558,186 542,186 L198,186 Q186,186 186,166 L186,122 Q188,102 198,102 Z",
+			"bounds": { "x": 186, "y": 92, "w": 374, "h": 94 },
+			"name": "Fuel tank"
+		},
+		{
+			"id": "realAirportFuelBowserWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M50,128 L100,128 Q106,128 106,134 L106,156 Q106,162 100,162 L50,162 Q44,162 44,156 L44,134 Q44,128 50,128 Z M117,130 L141,130 Q146,130 146,135 L146,155 Q146,160 141,160 L117,160 Q112,160 112,155 L112,135 Q112,130 117,130 Z",
+			"bounds": { "x": 44, "y": 128, "w": 102, "h": 34 },
+			"name": "Windows"
+		},
+		{
+			"id": "realAirportFuelBowserWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M142,216 A28,28 0 1 1 198,216 A28,28 0 1 1 142,216 Z",
+			"bounds": { "x": 142, "y": 188, "w": 56, "h": 56 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 660,
+		"height": 300,
+		"groundY": 244,
+		"colors": ["#FFB703", "#023047"],
+		"chassis": "slab(660, 244, 150)",
+		"slots": [
+			{ "id": "body", "part": "realAirportFuelBowserBody", "x": 333, "y": 159, "z": 0 },
+			{ "id": "tank", "part": "realAirportFuelBowserTank", "x": 373, "y": 139, "z": 1 },
+			{ "id": "windows", "part": "realAirportFuelBowserWindows", "x": 95, "y": 145, "z": 2 },
+			{ "id": "wheel-l", "part": "realAirportFuelBowserWheel", "x": 170, "y": 216, "z": 4 },
+			{ "id": "wheel-r", "part": "realAirportFuelBowserWheel", "x": 500, "y": 216, "z": 4, "flip": true }
+		]
+	}
+}

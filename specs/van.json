@@ -1,0 +1,55 @@
+{
+	"id": "van",
+	"name": "Panel van",
+	"module": "realVan",
+	"artWidth": 560,
+	"artHeight": 260,
+	"parts": [
+		{
+			"id": "realVanBody",
+			"role": "shell",
+			"kind": "body",
+			"mask": "M46,204 L46,158 Q46,146 52,138 L64,130 Q72,126 80,120 L134,64 Q138,56 148,56 L520,56 Q532,56 532,68 L532,196 Q532,204 524,204 Z M280,56 L285,46 L325,46 L330,56 Z M50,92 L70,92 L70,120 L50,120 Z M32,184 L46,184 L46,208 L32,208 Z M532,188 L546,188 L546,204 L532,204 Z M190,204 L380,204 L380,210 L190,210 Z",
+			"bounds": { "x": 32, "y": 46, "w": 514, "h": 164 },
+			"name": "Panel van"
+		},
+		{
+			"id": "realVanWindows",
+			"role": "glass",
+			"kind": "face",
+			"mask": "M86,114 L134,66 L146,77 L98,125 Z M156,76 L194,76 Q200,76 200,82 L200,112 Q200,118 194,118 L156,118 Q150,118 150,112 L150,82 Q150,76 156,76 Z",
+			"bounds": { "x": 86, "y": 66, "w": 114, "h": 59 },
+			"name": "Windows"
+		},
+		{
+			"id": "realVanDoor",
+			"role": "trim",
+			"kind": "detail",
+			"mask": "M212,76 L356,76 L356,198 L212,198 Z",
+			"bounds": { "x": 212, "y": 76, "w": 144, "h": 122 },
+			"name": "Sliding side door"
+		},
+		{
+			"id": "realVanWheel",
+			"role": "rubber",
+			"kind": "locomotion",
+			"mask": "M108,188 A32,32 0 1 1 172,188 A32,32 0 1 1 108,188 Z",
+			"bounds": { "x": 108, "y": 156, "w": 64, "h": 64 },
+			"name": "Wheel"
+		}
+	],
+	"vehicle": {
+		"width": 560,
+		"height": 260,
+		"groundY": 220,
+		"colors": ["#5AA9E6", "#FFD166"],
+		"chassis": "slab(560, 220, 150)",
+		"slots": [
+			{ "id": "body", "part": "realVanBody", "x": 289, "y": 128, "z": 0 },
+			{ "id": "windows", "part": "realVanWindows", "x": 143, "y": 95.5, "z": 1 },
+			{ "id": "door", "part": "realVanDoor", "x": 284, "y": 137, "z": 2 },
+			{ "id": "wheel-l", "part": "realVanWheel", "x": 140, "y": 188, "z": 4 },
+			{ "id": "wheel-r", "part": "realVanWheel", "x": 420, "y": 188, "z": 4, "flip": true }
+		]
+	}
+}

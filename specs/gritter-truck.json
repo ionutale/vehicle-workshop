@@ -1,0 +1,55 @@
+{
+  "id": "gritter-truck",
+  "name": "Gritter truck",
+  "module": "realGritterTruck",
+  "artWidth": 700,
+  "artHeight": 320,
+  "parts": [
+    {
+      "id": "realGritterTruckBody",
+      "role": "shell",
+      "kind": "body",
+      "mask": "M82,240 L82,208 Q82,200 86,196 L92,124 Q94,108 108,105 L114,98 Q118,86 132,84 L246,84 Q258,84 258,96 L258,170 L600,170 Q618,170 622,184 L650,240 Z M8,118 Q2,124 3,138 Q4,152 6,166 Q8,188 14,210 Q20,234 28,246 L62,246 L66,240 L66,152 Q66,140 70,136 Q40,118 8,118 Z M70,201 L82,206 L82,212 L70,207 Z M70,229 L82,232 L82,238 L70,235 Z M650,233 A20,10 0 1 1 690,233 A20,10 0 1 1 650,233 Z M662,204 L678,204 L678,222 L662,222 Z M96,240 L650,240 L650,252 L96,252 Z M196,72 L230,72 L230,84 L196,84 Z M64,104 L82,109 L82,123 L64,118 Z M259,96 L271,96 L271,168 L259,168 Z M280,146 L340,146 L340,170 L280,170 Z",
+      "bounds": { "x": 2, "y": 72, "w": 688, "h": 180 },
+      "name": "Gritter truck"
+    },
+    {
+      "id": "realGritterTruckWindows",
+      "role": "glass",
+      "kind": "face",
+      "mask": "M94,178 L94,150 Q94,138 100,126 L106,110 Q109,102 118,102 L146,102 Q152,102 152,110 L152,170 Q152,178 146,178 Z M164,104 Q164,98 172,98 L204,98 Q212,98 212,106 L212,158 Q212,164 204,164 L172,164 Q164,164 164,156 Z",
+      "bounds": { "x": 94, "y": 98, "w": 118, "h": 80 },
+      "name": "Windows"
+    },
+    {
+      "id": "realGritterTruckHopper",
+      "role": "trim",
+      "kind": "cargo",
+      "mask": "M424,116 L440,116 Q526,82 612,116 L628,116 L584,170 L468,170 Z M626,116 L594,88 L600,80 L632,108 Z",
+      "bounds": { "x": 424, "y": 80, "w": 208, "h": 90 },
+      "name": "Grit hopper"
+    },
+    {
+      "id": "realGritterTruckWheel",
+      "role": "rubber",
+      "kind": "locomotion",
+      "mask": "M140,222 A30,30 0 1 1 200,222 A30,30 0 1 1 140,222 Z",
+      "bounds": { "x": 140, "y": 192, "w": 60, "h": 60 },
+      "name": "Wheel"
+    }
+  ],
+  "vehicle": {
+    "width": 700,
+    "height": 320,
+    "groundY": 252,
+    "colors": ["#F9C74F", "#264653"],
+    "chassis": "slab(700, 252, 150)",
+    "slots": [
+      { "id": "body", "part": "realGritterTruckBody", "x": 346, "y": 162, "z": 0 },
+      { "id": "windows", "part": "realGritterTruckWindows", "x": 153, "y": 138, "z": 1 },
+      { "id": "hopper", "part": "realGritterTruckHopper", "x": 528, "y": 125, "z": 2 },
+      { "id": "wheel-l", "part": "realGritterTruckWheel", "x": 170, "y": 222, "z": 4 },
+      { "id": "wheel-r", "part": "realGritterTruckWheel", "x": 530, "y": 222, "z": 4, "flip": true }
+    ]
+  }
+}

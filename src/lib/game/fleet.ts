@@ -260,35 +260,35 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'skip-loader',
 		name: 'Skip-loader truck',
-		width: 640,
+		width: 680,
 		height: 300,
-		groundY: 215,
+		groundY: 244,
 		palette: pal('#E76F51', '#2B2D42'),
-		chassisPath: slab(640, 215, 150),
+		chassisPath: slab(680, 244, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 340, y: 175, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'skip', part: 'skip', x: 420, y: 105, z: 2 },
-			{ id: 'beacon', part: 'beacon', x: 200, y: 95, z: 2 },
-			wheel('l', 180, 215),
-			wheel('r', 520, 215)
+			{ id: 'body', part: 'realSkipLoaderBody', x: 338, y: 148, z: 0 },
+			{ id: 'windows', part: 'realSkipLoaderWindows', x: 122, y: 144, z: 1 },
+			{ id: 'skip', part: 'realSkipLoaderSkip', x: 440, y: 114, z: 2 },
+			{ id: 'wheel-l', part: 'realSkipLoaderWheel', x: 170, y: 216, z: 4 },
+			{ id: 'wheel-r', part: 'realSkipLoaderWheel', x: 510, y: 216, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'hook-lift-truck',
 		name: 'Hook-lift truck',
-		width: 640,
-		height: 300,
-		groundY: 215,
+		width: 700,
+		height: 310,
+		groundY: 250,
 		palette: pal('#2A9D8F', '#264653'),
-		chassisPath: slab(640, 215, 150),
+		chassisPath: slab(700, 250, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 340, y: 175, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'tipper', part: 'tipper', x: 400, y: 115, z: 2 },
-			{ id: 'hook', part: 'hook', x: 300, y: 95, z: 2 },
-			wheel('l', 180, 215),
-			wheel('r', 520, 215)
+			{ id: 'body', part: 'realHookLiftTruckBody', x: 354, y: 136, z: 0 },
+			{ id: 'windows', part: 'realHookLiftTruckWindows', x: 115.5, y: 147.5, z: 1 },
+			{ id: 'container', part: 'realHookLiftTruckContainer', x: 424, y: 129, z: 2 },
+			{ id: 'wheel-l', part: 'realHookLiftTruckWheel', x: 170, y: 222, z: 4 },
+			{ id: 'wheel-r', part: 'realHookLiftTruckWheel', x: 520, y: 222, z: 4, flip: true }
 		]
 	},
 	{
@@ -311,18 +311,18 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'concrete-pump',
 		name: 'Concrete pump truck',
-		width: 660,
-		height: 330,
-		groundY: 215,
+		width: 760,
+		height: 340,
+		groundY: 262,
 		palette: pal('#F4A261', '#264653'),
-		chassisPath: slab(660, 215, 140),
+		chassisPath: slab(760, 262, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 350, y: 175, z: 0, scale: 0.95 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'boom', part: 'boom', x: 400, y: 80, z: 2, scale: 1.25 },
-			{ id: 'nozzle', part: 'hook', x: 570, y: 45, z: 3 },
-			wheel('l', 180, 215),
-			wheel('r', 540, 215)
+			{ id: 'body', part: 'realConcretePumpBody', x: 379, y: 180, z: 0 },
+			{ id: 'windows', part: 'realConcretePumpWindows', x: 109, y: 166, z: 1 },
+			{ id: 'boom', part: 'realConcretePumpBoom', x: 464, y: 115, z: 2 },
+			{ id: 'wheel-l', part: 'realConcretePumpWheel', x: 170, y: 230, z: 4 },
+			{ id: 'wheel-r', part: 'realConcretePumpWheel', x: 560, y: 230, z: 4, flip: true }
 		]
 	},
 	{
@@ -345,104 +345,104 @@ export const FLEET: Vehicle[] = [
 	{
 		id: 'gritter-truck',
 		name: 'Gritter truck',
-		width: 640,
-		height: 290,
-		groundY: 212,
+		width: 700,
+		height: 320,
+		groundY: 252,
 		palette: pal('#F9C74F', '#264653'),
-		chassisPath: slab(640, 212, 140),
+		chassisPath: slab(700, 252, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 180, z: 0, scale: 0.85 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'hopper', part: 'tipper', x: 400, y: 115, z: 2, scale: 0.9 },
-			{ id: 'blade', part: 'plough', x: 590, y: 190, z: 3, scale: 0.9 },
-			wheel('l', 180, 212),
-			wheel('r', 520, 212)
+			{ id: 'body', part: 'realGritterTruckBody', x: 346, y: 162, z: 0 },
+			{ id: 'windows', part: 'realGritterTruckWindows', x: 153, y: 138, z: 1 },
+			{ id: 'hopper', part: 'realGritterTruckHopper', x: 528, y: 125, z: 2 },
+			{ id: 'wheel-l', part: 'realGritterTruckWheel', x: 170, y: 222, z: 4 },
+			{ id: 'wheel-r', part: 'realGritterTruckWheel', x: 530, y: 222, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'snow-blower',
-		name: 'Snow-blower truck',
-		width: 620,
-		height: 300,
-		groundY: 212,
+		name: 'Snow blower',
+		width: 680,
+		height: 320,
+		groundY: 252,
 		palette: pal('#E9ECEF', '#1D3557'),
-		chassisPath: slab(620, 212, 140),
+		chassisPath: slab(680, 252, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 180, z: 0, scale: 0.85 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'auger', part: 'brush', x: 570, y: 205, z: 2, scale: 1.3 },
-			{ id: 'beacon', part: 'beacon', x: 200, y: 95, z: 2 },
-			wheel('l', 180, 212),
-			wheel('r', 490, 212)
+			{ id: 'body', part: 'realSnowBlowerBody', x: 396, y: 139, z: 0 },
+			{ id: 'windows', part: 'realSnowBlowerWindows', x: 240, y: 170, z: 1 },
+			{ id: 'auger', part: 'realSnowBlowerAuger', x: 92, y: 194.5, z: 3 },
+			{ id: 'wheel-l', part: 'realSnowBlowerWheel', x: 200, y: 222, z: 4 },
+			{ id: 'wheel-r', part: 'realSnowBlowerWheel', x: 520, y: 222, z: 4, flip: true }
 		]
 	},
 	// ── Road works ───────────────────────────────────────────────────────────────────
 	{
 		id: 'road-planer',
 		name: 'Road planer',
-		width: 620,
-		height: 290,
-		groundY: 212,
+		width: 760,
+		height: 320,
+		groundY: 252,
 		palette: pal('#F4A261', '#2B2D42'),
-		chassisPath: slab(620, 212, 130),
+		chassisPath: slab(760, 252, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 175, z: 0, scale: 0.9 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'drum', part: 'roller', x: 470, y: 205, z: 2, scale: 1.2 },
-			{ id: 'beacon', part: 'beacon', x: 220, y: 95, z: 2 },
-			wheel('l', 180, 212),
-			wheel('r', 320, 212)
+			{ id: 'body', part: 'realRoadPlanerBody', x: 394, y: 138, z: 0 },
+			{ id: 'windows', part: 'realRoadPlanerWindows', x: 623, y: 126, z: 1 },
+			{ id: 'drum', part: 'realRoadPlanerDrum', x: 410, y: 221, z: 2 },
+			{ id: 'wheel-l', part: 'realRoadPlanerWheel', x: 180, y: 222, z: 4 },
+			{ id: 'wheel-r', part: 'realRoadPlanerWheel', x: 600, y: 222, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'asphalt-paver',
 		name: 'Asphalt paver',
-		width: 620,
-		height: 290,
-		groundY: 212,
+		width: 700,
+		height: 310,
+		groundY: 246,
 		palette: pal('#F9C74F', '#6B6B6B'),
-		chassisPath: slab(620, 212, 120),
+		chassisPath: slab(700, 246, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 320, y: 180, z: 0, scale: 0.85 },
-			{ id: 'cab', part: 'cab', x: 120, y: 130, z: 1, scale: 0.9 },
-			{ id: 'hopper', part: 'tipper', x: 330, y: 120, z: 2, scale: 0.8 },
-			{ id: 'screed', part: 'flatbed', x: 540, y: 205, z: 2, scale: 0.5 },
-			wheel('l', 180, 212),
-			wheel('r', 430, 212)
+			{ id: 'body', part: 'realAsphaltPaverBody', x: 319, y: 129, z: 0 },
+			{ id: 'windows', part: 'realAsphaltPaverWindows', x: 250, y: 109.5, z: 1 },
+			{ id: 'screed', part: 'realAsphaltPaverScreed', x: 628, y: 207, z: 2 },
+			{ id: 'wheel-l', part: 'realAsphaltPaverWheel', x: 170, y: 216, z: 4 },
+			{ id: 'wheel-r', part: 'realAsphaltPaverWheel', x: 520, y: 216, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'sewer-cleaner',
 		name: 'Sewer-cleaning truck',
-		width: 620,
-		height: 280,
-		groundY: 212,
+		width: 660,
+		height: 300,
+		groundY: 244,
 		palette: pal('#90BE6D', '#264653'),
-		chassisPath: slab(620, 212, 140),
+		chassisPath: slab(660, 244, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 180, z: 0, scale: 0.85 },
-			{ id: 'cab', part: 'cab', x: 120, y: 125, z: 1, scale: 0.9 },
-			{ id: 'tank', part: 'tank', x: 380, y: 135, z: 2, scale: 0.95 },
-			{ id: 'hose', part: 'hoseReel', x: 520, y: 175, z: 2 },
-			wheel('l', 180, 212),
-			wheel('r', 500, 212)
+			{ id: 'body', part: 'realSewerCleanerBody', x: 332, y: 148, z: 0 },
+			{ id: 'windows', part: 'realSewerCleanerWindows', x: 113, y: 132, z: 1 },
+			{ id: 'reel', part: 'realSewerCleanerReel', x: 598, y: 173, z: 2 },
+			{ id: 'wheel-l', part: 'realSewerCleanerWheel', x: 170, y: 216, z: 4 },
+			{ id: 'wheel-r', part: 'realSewerCleanerWheel', x: 500, y: 216, z: 4, flip: true }
 		]
 	},
 	{
 		id: 'airport-fuel-bowser',
 		name: 'Airport fuel bowser',
-		width: 620,
-		height: 280,
-		groundY: 210,
+		width: 660,
+		height: 300,
+		groundY: 244,
 		palette: pal('#FFB703', '#023047'),
-		chassisPath: slab(620, 210, 140),
+		chassisPath: slab(660, 244, 150),
+		realistic: true,
 		slots: [
-			{ id: 'body', part: 'bodyBox', x: 330, y: 196, z: 0, scale: 0.72 },
-			{ id: 'tank', part: 'tank', x: 380, y: 140, z: 1, scale: 1 },
-			{ id: 'cab', part: 'cab', x: 118, y: 120, z: 2, scale: 0.9 },
-			{ id: 'lights', part: 'lightBar', x: 118, y: 72, z: 3 },
-			wheel('l', 180, 210),
-			wheel('r', 500, 210)
+			{ id: 'body', part: 'realAirportFuelBowserBody', x: 333, y: 159, z: 0 },
+			{ id: 'tank', part: 'realAirportFuelBowserTank', x: 373, y: 139, z: 1 },
+			{ id: 'windows', part: 'realAirportFuelBowserWindows', x: 95, y: 145, z: 2 },
+			{ id: 'wheel-l', part: 'realAirportFuelBowserWheel', x: 170, y: 216, z: 4 },
+			{ id: 'wheel-r', part: 'realAirportFuelBowserWheel', x: 500, y: 216, z: 4, flip: true }
 		]
 	},
 	{
