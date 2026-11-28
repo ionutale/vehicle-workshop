@@ -5,6 +5,7 @@ import type { Slot, Vehicle } from '../game/vehicles';
 import { pathFrom } from './draw';
 import { realPartCanvas, realVehicleCanvas } from './realVehicles';
 import { OUTLINE } from './scene';
+import { wheelSpin } from './motion';
 
 /**
  * Vehicle drawing. Slots are positioned in vehicle units; the assembly anchors are already
@@ -15,6 +16,10 @@ export interface DrawPartOptions {
 	alpha?: number;
 	flip?: boolean;
 	lift?: number;
+	/** Rotation about the mask centre, for round wheels only. */
+	spin?: number;
+	/** Vertical scale for a landing squash. */
+	squash?: number;
 }
 
 export function drawPart(
@@ -24,7 +29,7 @@ export function drawPart(
 	scale: number,
 	options: DrawPartOptions = {}
 ): void {
-	const { alpha = 1, flip = false, lift = 0 } = options;
+	const { alpha = 1, flip = false, lift = 0, spin = 0, squash = 1 } = options;
 	const tile = realPartCanvas(part);
 	if (!tile || !part.maskBounds) return;
 
@@ -33,6 +38,8 @@ export function drawPart(
 	ctx.save();
 	ctx.translate(at.x, at.y - lift);
 	ctx.scale(flip ? -safeScale : safeScale, safeScale);
+	ctx.rotate(spin);
+	ctx.scale(1, squash);
 	ctx.globalAlpha = alpha;
 	ctx.drawImage(tile, -b.w / 2, -b.h / 2, b.w, b.h);
 	ctx.restore();
@@ -154,7 +161,8 @@ export function drawPlacedParts(
 	vehicle: Vehicle,
 	state: AssemblyState,
 	layout: Layout,
-	lampAlpha = 1
+	lampAlpha = 1,
+	bob = 0
 ): void {
 	const anchors = anchorMap(state);
 	const placed = slotsInDrawOrder(vehicle).filter((slot) => state.placed.includes(slot.id));
@@ -168,7 +176,7 @@ export function drawPlacedParts(
 			PARTS[slot.part],
 			anchor,
 			(slot.scale ?? 1) * layout.gameScale,
-			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1 }
+			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1, lift: bob }
 		);
 	}
 }
@@ -182,7 +190,8 @@ export function drawVehicle(
 	offsetX: number,
 	squash = 1,
 	lift = 0,
-	alpha = 1
+	alpha = 1,
+	distance = 0
 ): void {
 	const anchors = anchorMap(state);
 	const originY = layout.vehicleAnchor.y;
@@ -195,13 +204,21 @@ export function drawVehicle(
 	for (const slot of slotsInDrawOrder(vehicle)) {
 		const anchor = anchors.get(slot.id);
 		if (!anchor) continue;
-		drawPart(ctx, PARTS[slot.part], anchor, (slot.scale ?? 1) * layout.gameScale, {
+		const shape = PARTS[slot.part];
+		drawPart(ctx, shape, anchor, (slot.scale ?? 1) * layout.gameScale, {
 			flip: slot.flip,
-			alpha
+			alpha,
+			spin: spinFor(shape, distance)
 		});
 	}
 
 	ctx.restore();
+}
+
+/** Wheel angle for a part; drums, tracks and bodies never spin. */
+export function spinFor(part: PartShape, distance: number): number {
+	if (!part.id.endsWith('Wheel')) return 0;
+	return wheelSpin(distance, (part.maskBounds?.w ?? 0) / 2);
 }
 
 export function partFor(id: PartId): PartShape {

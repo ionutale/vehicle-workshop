@@ -435,23 +435,24 @@
 			const scroll = reduced ? 0 : driveOffset * 0.35;
 			const frame = reduced ? undefined : motionAt(now, layout.worldWidth, layout.roadY);
 			drawFarLayer(ctx, layout, scroll, scene, frame);
-			drawRoad(ctx, layout, 0);
+			drawRoad(ctx, layout, driving ? -driveOffset : 0);
+			const breathe = reduced ? 0 : 0.5 * Math.sin(now / 900);
 
 			if (state.phase === 'assembling') {
 				drawContactShadow(ctx, vehicle, layout);
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
-				drawPlacedParts(ctx, vehicle, state, layout);
+				drawPlacedParts(ctx, vehicle, state, layout, 1, breathe);
 			} else if (state.phase === 'ready') {
 				const hop = reduced ? 0 : 16 * Math.sin(Math.PI * Math.min(1, readyT / 260));
 				drawContactShadow(ctx, vehicle, layout);
 				const squash =
 					!reduced && readyT < 250 ? 1 - 0.06 * Math.sin((Math.PI * readyT) / 250) : 1;
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
-				drawVehicle(ctx, vehicle, state, layout, 0, squash, hop);
-				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
+				drawVehicle(ctx, vehicle, state, layout, 0, squash, hop + breathe);
+				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha, hop + breathe);
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
-				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1);
+				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1, 0, 1, driveOffset / layout.gameScale);
 			} else if (state.phase === 'working') {
 				const jobT = clamp01((now - state.phaseStartedAt) / timings.workMs);
 				drawJob(ctx, vehicle, jobOf(vehicle), layout, jobT, reduced);
