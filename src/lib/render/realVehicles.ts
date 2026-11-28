@@ -813,9 +813,12 @@ export const REAL_ART: Record<string, RealArtSpec> = {
 	'bendy-bus': { draw: drawRealBendyBus, width: 900, height: 340 },
 	'coach-bus': { draw: drawRealCoachBus, width: 860, height: 360 },
 	'airport-shuttle': { draw: drawRealAirportShuttle, width: 760, height: 320 },
-	'mobile-library': { draw: drawRealMobileLibrary, width: 780, height: 340 },
-	'mobile-clinic': { draw: drawRealMobileClinic, width: 780, height: 340 },
-	trolleybus: { draw: drawRealTrolleybus, width: 820, height: 400 },
+	// The wing mirror is drawn out to x≈791; the canvas must cover it or the cut-out clips it.
+	'mobile-library': { draw: drawRealMobileLibrary, width: 800, height: 340 },
+	// Wing mirror reaches x≈791; keep the canvas wide enough to hold it.
+	'mobile-clinic': { draw: drawRealMobileClinic, width: 800, height: 340 },
+	// The right mirror reaches x≈823; keep the canvas wide enough to hold it.
+	trolleybus: { draw: drawRealTrolleybus, width: 840, height: 400 },
 	'tram': { draw: drawRealTram, width: 820, height: 380 },
 	'metro-train': { draw: drawRealMetroTrain, width: 900, height: 380 },
 	'light-rail-train': { draw: drawRealLightRailTrain, width: 900, height: 380 },
