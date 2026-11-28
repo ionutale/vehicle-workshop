@@ -43,7 +43,7 @@
 	} from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
 	import { drawJob } from '#lib/render/jobs';
-	import { motionAt, shouldPaint } from '#lib/render/motion';
+	import { driveDistance, motionAt, roadScroll, shouldPaint } from '#lib/render/motion';
 	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad, sceneForBuild, type SceneId } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
@@ -436,9 +436,10 @@
 			const readyT = state.phase === 'ready' ? now - state.phaseStartedAt : 0;
 
 			const scroll = reduced ? 0 : driveOffset * 0.35;
-			const frame = reduced ? undefined : motionAt(now, layout.worldWidth, layout.roadY);
+			const frozen = reduced || params.get('motion') === 'off';
+			const frame = frozen ? undefined : motionAt(now, layout.worldWidth, layout.roadY);
 			drawFarLayer(ctx, layout, scroll, scene, frame);
-			drawRoad(ctx, layout, driving ? -driveOffset : 0);
+			drawRoad(ctx, layout, driving ? roadScroll(driveOffset, reduced) : 0);
 			const breathe = reduced ? 0 : 0.5 * Math.sin(now / 900);
 			const hovered =
 				reduced || state.drag || state.phase !== 'assembling' || !lastClient
@@ -463,7 +464,18 @@
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha, hop + breathe);
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
-				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1, 0, 1, driveOffset / layout.gameScale);
+				drawVehicle(
+					ctx,
+					vehicle,
+					state,
+					layout,
+					driveOffset,
+					1,
+					0,
+					1,
+					driveDistance(driveOffset, layout.gameScale, reduced),
+					now - state.phaseStartedAt
+				);
 			} else if (state.phase === 'working') {
 				const jobT = clamp01((now - state.phaseStartedAt) / timings.workMs);
 				drawJob(ctx, vehicle, jobOf(vehicle), layout, jobT, reduced);
@@ -645,13 +657,14 @@
 				state.drag !== null ||
 				state.settle !== null ||
 				state.phase !== 'assembling' ||
-				hintSlotId !== null;
+				(!reduced && hintSlotId !== null);
 			if (
 				shouldPaint({
 					reduced,
 					hidden: document.hidden,
 					dirty: needsPaint,
-					animating
+					animating,
+					active: screen === 'game'
 				})
 			) {
 				paint(now, dt);

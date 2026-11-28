@@ -11,5 +11,6 @@ describe('vehicle motion helpers', () => {
 		expect(spinFor(wheel, 120)).not.toBe(0);
 		expect(spinFor(PARTS.realDiggerTracks, 120)).toBe(0);
 		expect(spinFor(body, 120)).toBe(0);
+		expect(spinFor(wheel, 120, true)).toBeCloseTo(-spinFor(wheel, 120), 6);
 	});
 });

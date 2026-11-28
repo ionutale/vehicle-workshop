@@ -191,7 +191,8 @@ export function drawVehicle(
 	squash = 1,
 	lift = 0,
 	alpha = 1,
-	distance = 0
+	distance = 0,
+	elapsedMs?: number
 ): void {
 	const anchors = anchorMap(state);
 	const originY = layout.vehicleAnchor.y;
@@ -208,7 +209,7 @@ export function drawVehicle(
 		drawPart(ctx, shape, anchor, (slot.scale ?? 1) * layout.gameScale, {
 			flip: slot.flip,
 			alpha,
-			spin: spinFor(shape, distance)
+			spin: spinFor(shape, distance, slot.flip, elapsedMs)
 		});
 	}
 
@@ -216,9 +217,9 @@ export function drawVehicle(
 }
 
 /** Wheel angle for a part; drums, tracks and bodies never spin. */
-export function spinFor(part: PartShape, distance: number): number {
+export function spinFor(part: PartShape, distance: number, flip = false, elapsedMs?: number): number {
 	if (!part.id.endsWith('Wheel')) return 0;
-	return wheelSpin(distance, (part.maskBounds?.w ?? 0) / 2);
+	return wheelSpin(distance, (part.maskBounds?.w ?? 0) / 2, { flip, elapsedMs });
 }
 
 export function partFor(id: PartId): PartShape {

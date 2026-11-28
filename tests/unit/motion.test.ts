@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MOTION, motionAt, wheelSpin } from '#lib/render/motion';
+import { MOTION, driveDistance, motionAt, roadScroll, wheelSpin } from '#lib/render/motion';
 
 describe('motion', () => {
 	it('is deterministic for one timestamp', () => {
@@ -36,10 +36,23 @@ describe('motion', () => {
 		}
 	});
 
-	it('caps wheel spin and reverses for a flipped wheel', () => {
+	it('rolls with distance and reverses for a flipped wheel', () => {
 		expect(wheelSpin(0, 30)).toBe(0);
 		expect(wheelSpin(30, 0)).toBe(0);
-		expect(wheelSpin(10_000, 30)).toBeLessThanOrEqual(MOTION.maxWheelRadPerSec);
-		expect(wheelSpin(120, 30, true)).toBeCloseTo(-wheelSpin(120, 30), 6);
+		expect(wheelSpin(120, 30)).toBeCloseTo(4, 6);
+		expect(wheelSpin(120, 30, { flip: true })).toBeCloseTo(-4, 6);
+	});
+
+	it('caps the angular rate rather than the total angle', () => {
+		const capped = wheelSpin(10_000, 30, { elapsedMs: 500 });
+		expect(capped).toBeCloseTo(MOTION.maxWheelRadPerSec * 0.5, 6);
+		expect(wheelSpin(200, 30, { elapsedMs: 5_000 })).toBeCloseTo(200 / 30, 6);
+	});
+
+	it('stops the road and the wheels under reduced motion', () => {
+		expect(roadScroll(480, false)).toBe(480);
+		expect(roadScroll(480, true)).toBe(0);
+		expect(driveDistance(480, 0.5, false)).toBeCloseTo(960, 6);
+		expect(driveDistance(480, 0.5, true)).toBe(0);
 	});
 });

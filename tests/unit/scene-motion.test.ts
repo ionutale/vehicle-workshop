@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { computeLayout } from '#lib/game/layout';
 import { motionAt } from '#lib/render/motion';
-import { drawFarLayer } from '#lib/render/scene';
+import { drawFarLayer, drawRoad } from '#lib/render/scene';
 import { recorder, stubPath } from './canvas-recorder';
 
 describe('living backdrop', () => {
@@ -13,6 +13,25 @@ describe('living backdrop', () => {
 		{ top: 0, right: 0, bottom: 0, left: 0 },
 		120
 	);
+
+	it('scrolls the road dashes with a positive drive offset', () => {
+		const firstDashX = (scrollX: number) => {
+			const xs: number[] = [];
+			const ctx = {
+				fillRect: () => {},
+				beginPath: () => {},
+				moveTo: (x: number) => xs.push(x),
+				lineTo: () => {},
+				quadraticCurveTo: () => {},
+				closePath: () => {},
+				fill: () => {},
+				fillStyle: ''
+			};
+			drawRoad(ctx as unknown as CanvasRenderingContext2D, layout, scrollX);
+			return Math.min(...xs);
+		};
+		expect(firstDashX(120)).toBeLessThan(firstDashX(0));
+	});
 
 	it('draws birds and motes only when a motion frame is supplied', () => {
 		const still = recorder();

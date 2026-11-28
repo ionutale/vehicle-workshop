@@ -59,11 +59,32 @@ export function motionAt(timeMs: number, width: number, roadY: number): MotionFr
 	};
 }
 
-/** Wheel angle for a distance travelled, capped so baked hub highlights do not strobe. */
-export function wheelSpin(distance: number, radius: number, flip = false): number {
+/**
+ * Wheel angle for a distance travelled. The cap is on angular rate, not total angle, so the
+ * wheel keeps rolling through a long drive; `elapsedMs` is how long that distance took.
+ */
+export function wheelSpin(
+	distance: number,
+	radius: number,
+	options: { flip?: boolean; elapsedMs?: number } = {}
+): number {
 	if (!(distance > 0) || !(radius > 0)) return 0;
-	const angle = Math.min(MOTION.maxWheelRadPerSec, distance / (radius * 2));
-	return flip ? -angle : angle;
+	const allowed =
+		options.elapsedMs === undefined
+			? Number.POSITIVE_INFINITY
+			: (MOTION.maxWheelRadPerSec * options.elapsedMs) / 1000;
+	const angle = Math.min(distance / radius, allowed);
+	return options.flip ? -angle : angle;
+}
+
+/** Road dashes travel with the drive-off; reduced motion keeps them still. */
+export function roadScroll(driveOffset: number, reduced: boolean): number {
+	return reduced ? 0 : driveOffset;
+}
+
+/** World distance the wheels have rolled, in vehicle units. */
+export function driveDistance(driveOffset: number, gameScale: number, reduced: boolean): number {
+	return reduced ? 0 : driveOffset / Math.max(gameScale, 0.0001);
 }
 
 /** Repaint policy: continuous while visible, one-shot under reduced motion, never hidden. */
@@ -72,8 +93,10 @@ export function shouldPaint(state: {
 	hidden: boolean;
 	dirty: boolean;
 	animating: boolean;
+	active: boolean;
 }): boolean {
 	if (state.hidden) return false;
+	if (!state.active) return state.dirty;
 	if (!state.reduced) return true;
 	return state.dirty || state.animating;
 }
