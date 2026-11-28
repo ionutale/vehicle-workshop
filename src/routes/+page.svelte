@@ -43,6 +43,7 @@
 	} from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
 	import { drawJob } from '#lib/render/jobs';
+	import { motionAt, shouldPaint } from '#lib/render/motion';
 	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad, sceneForBuild, type SceneId } from '#lib/render/scene';
 	import { drawShelf, pieceBoxes, trayPieces, type TrayPiece } from '#lib/render/tray';
@@ -124,7 +125,6 @@
 			typeof window.matchMedia === 'function' &&
 			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		let backdrop: HTMLCanvasElement | null = null;
 		let scene: SceneId = sceneForBuild(0);
 		let needsPaint = true;
 		let frames = 0;
@@ -204,35 +204,10 @@
 			y: l.roadY + 10 - v.groundY * l.gameScale
 		});
 
-		const buildBackdrop = (sceneId: SceneId) => {
-			const vp = viewport();
-			const dpr = devicePixelRatioFor(window);
-			const layer = document.createElement('canvas');
-			layer.width = Math.max(1, Math.round(2 * vp.width * dpr));
-			layer.height = Math.max(1, Math.round(vp.height * dpr));
-			const layerCtx = layer.getContext('2d');
-			if (!layerCtx) return;
-			layerCtx.setTransform(
-				(dpr * vp.width) / layout.worldWidth,
-				0,
-				0,
-				(dpr * vp.height) / layout.worldHeight,
-				0,
-				0
-			);
-			layerCtx.lineJoin = 'round';
-			layerCtx.lineCap = 'round';
-			drawFarLayer(layerCtx, layout, 0, sceneId);
-			layerCtx.translate(layout.worldWidth, 0);
-			drawFarLayer(layerCtx, layout, 0, sceneId);
-			backdrop = layer;
-		};
-
 		const measure = (v: Vehicle) => {
 			const vp = viewport();
 			const largest = Math.max(...v.slots.map((slot) => PARTS[slot.part].radius));
 			layout = computeLayout(vp, v, pieceBoxes(v), readInsets(), largest);
-			buildBackdrop(scene);
 			needsPaint = true;
 			return layout;
 		};
@@ -458,13 +433,8 @@
 			const readyT = state.phase === 'ready' ? now - state.phaseStartedAt : 0;
 
 			const scroll = reduced ? 0 : driveOffset * 0.35;
-			if (backdrop) {
-				const offset =
-					((scroll % layout.worldWidth) + layout.worldWidth) % layout.worldWidth;
-				ctx.drawImage(backdrop, -offset, 0, layout.worldWidth * 2, layout.worldHeight);
-			} else {
-				drawFarLayer(ctx, layout, scroll, scene);
-			}
+			const frame = reduced ? undefined : motionAt(now, layout.worldWidth, layout.roadY);
+			drawFarLayer(ctx, layout, scroll, scene, frame);
 			drawRoad(ctx, layout, 0);
 
 			if (state.phase === 'assembling') {
@@ -632,7 +602,14 @@
 				state.settle !== null ||
 				state.phase !== 'assembling' ||
 				hintSlotId !== null;
-			if (needsPaint || animating) {
+			if (
+				shouldPaint({
+					reduced,
+					hidden: document.hidden,
+					dirty: needsPaint,
+					animating
+				})
+			) {
 				paint(now, dt);
 				needsPaint = false;
 				frames++;
@@ -735,6 +712,7 @@
 					tray: shelfPieces().length
 				}),
 				frames: () => frames,
+				motion: () => ({ enabled: !reduced, reduced, hidden: document.hidden }),
 				confetti: () => confetti.live(),
 				level: () => prefs.difficulty.level,
 				family: () => familyOf(vehicle),

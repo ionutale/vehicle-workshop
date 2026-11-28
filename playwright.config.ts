@@ -19,8 +19,8 @@ export default defineConfig({
 			timeout: 120_000
 		},
 		{
-			command: 'node tools/serve-build.mjs',
-			url: 'http://127.0.0.1:4173',
+			command: 'PORT=4174 node tools/serve-build.mjs',
+			url: 'http://127.0.0.1:4174',
 			reuseExistingServer: false,
 			timeout: 120_000
 		}
@@ -34,7 +34,7 @@ export default defineConfig({
 		{
 			name: 'pwa',
 			testMatch: '**/pwa.spec.ts',
-			use: { ...devices['Desktop Chrome'], baseURL: 'http://127.0.0.1:4173' }
+			use: { ...devices['Desktop Chrome'], baseURL: 'http://127.0.0.1:4174' }
 		}
 	]
 });
