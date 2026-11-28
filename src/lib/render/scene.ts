@@ -1,4 +1,5 @@
 import type { Layout } from '../game/layout';
+import type { MotionFrame } from './motion';
 import { roundedRect } from './draw';
 
 /**
@@ -31,9 +32,10 @@ export function drawScene(
 	layout: Layout,
 	scrollX = 0,
 	roadScroll = 0,
-	scene: SceneId = 'countryside'
+	scene: SceneId = 'countryside',
+	frame?: MotionFrame
 ): void {
-	drawFarLayer(ctx, layout, scrollX, scene);
+	drawFarLayer(ctx, layout, scrollX, scene, frame);
 	drawRoad(ctx, layout, roadScroll);
 }
 
@@ -42,7 +44,8 @@ export function drawFarLayer(
 	ctx: CanvasRenderingContext2D,
 	layout: Layout,
 	scrollX = 0,
-	scene: SceneId = 'countryside'
+	scene: SceneId = 'countryside',
+	frame?: MotionFrame
 ): void {
 	const { worldWidth: w, worldHeight: h, roadY } = layout;
 
@@ -52,20 +55,47 @@ export function drawFarLayer(
 	const shift = (distance: number) => ((scrollX * distance) % w + w) % w;
 
 	// Sun sits high and drifts slowest.
+	const sunX = w * 0.62 - shift(0.08);
 	ctx.fillStyle = SUN;
 	ctx.beginPath();
-	ctx.arc(w * 0.62 - shift(0.08), h * 0.13, 46, 0, Math.PI * 2);
+	ctx.arc(sunX, h * 0.13, 46, 0, Math.PI * 2);
 	ctx.fill();
+	if (frame && frame.sunAlpha > 0) {
+		ctx.fillStyle = `rgba(255, 248, 210, ${frame.sunAlpha.toFixed(3)})`;
+		ctx.beginPath();
+		ctx.arc(sunX, h * 0.13, 56, 0, Math.PI * 2);
+		ctx.fill();
+	}
 
-	// Two cloud groups, a little life without motion of their own.
+	// Two cloud layers; the far one drifts at a third of the near speed.
 	ctx.fillStyle = CLOUD;
 	for (let copy = -1; copy <= 1; copy++) {
 		for (let i = 0; i < 3; i++) {
-			const cx = w * (0.18 + i * 0.3) + copy * w - shift(0.16);
+			const drift = frame ? ((i % 2 === 0 ? frame.cloudFar : frame.cloudNear) % w) : 0;
+			const cx = w * (0.18 + i * 0.3) + copy * w - shift(0.16) - drift;
 			const cy = h * (0.1 + (i % 2) * 0.05);
 			ctx.beginPath();
 			ctx.ellipse(cx, cy, 42, 15, 0, 0, Math.PI * 2);
 			ctx.ellipse(cx + 26, cy + 4, 28, 12, 0, 0, Math.PI * 2);
+			ctx.fill();
+		}
+	}
+
+	if (frame) {
+		ctx.fillStyle = 'rgba(58, 39, 27, 0.55)';
+		for (const bird of frame.birds) {
+			ctx.beginPath();
+			ctx.arc(bird.x - 5, bird.y - bird.flap * 3, 5, Math.PI * 1.1, Math.PI * 1.9);
+			ctx.arc(bird.x + 5, bird.y - bird.flap * 3, 5, Math.PI * 1.1, Math.PI * 1.9);
+			ctx.fill();
+		}
+	}
+
+	if (frame) {
+		for (const mote of frame.motes) {
+			ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, mote.alpha).toFixed(3)})`;
+			ctx.beginPath();
+			ctx.arc(mote.x, mote.y, 1.8, 0, Math.PI * 2);
 			ctx.fill();
 		}
 	}
