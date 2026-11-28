@@ -1,6 +1,6 @@
 import type { AssemblyState, SlotAnchor } from '../game/assembly';
 import type { Layout, Point } from '../game/layout';
-import { PARTS, type PartShape, type PartId, type Role } from '../game/parts';
+import { PARTS, type PartShape, type PartId } from '../game/parts';
 import type { Slot, Vehicle } from '../game/vehicles';
 import { pathFrom } from './draw';
 import { realPartCanvas, realVehicleCanvas } from './realVehicles';
@@ -11,174 +11,33 @@ import { OUTLINE } from './scene';
  * in world units, so a placed part is drawn at its anchor with `gameScale`.
  */
 
-export const OUTLINE_WIDTH = 3.5;
-
 export interface DrawPartOptions {
 	alpha?: number;
 	flip?: boolean;
 	lift?: number;
-	/** Outline thickness in world units; keeps the stroke weight even across scales. */
-	outlineWidth?: number;
 }
 
 export function drawPart(
 	ctx: CanvasRenderingContext2D,
 	part: PartShape,
-	palette: Record<Role, string>,
 	at: Point,
 	scale: number,
 	options: DrawPartOptions = {}
 ): void {
-	const { alpha = 1, flip = false, lift = 0, outlineWidth = OUTLINE_WIDTH } = options;
+	const { alpha = 1, flip = false, lift = 0 } = options;
+	const tile = realPartCanvas(part);
+	if (!tile || !part.maskBounds) return;
+
 	const safeScale = Math.max(scale, 0.0001);
+	const b = part.maskBounds;
 	ctx.save();
 	ctx.translate(at.x, at.y - lift);
 	ctx.scale(flip ? -safeScale : safeScale, safeScale);
 	ctx.globalAlpha = alpha;
-
-	if (part.realVehicle && part.maskBounds) {
-		const tile = realPartCanvas(part);
-		if (tile) {
-			const b = part.maskBounds;
-			ctx.drawImage(tile, -b.w / 2, -b.h / 2, b.w, b.h);
-			ctx.restore();
-			return;
-		}
-	}
-
-	const path = pathFrom(part.path);
-	const hw = part.halfWidth;
-	const hh = part.halfHeight;
-
-	ctx.fillStyle = palette[part.role];
-	ctx.fill(path, 'evenodd');
-
-	// Paper depth: a soft shadow along the lower edge and a light band on top.
-	ctx.save();
-	ctx.clip(path, 'evenodd');
-	ctx.fillStyle = 'rgba(58, 39, 27, 0.10)';
-	ctx.fillRect(-hw, hh * 0.32, hw * 2, hh);
-	ctx.fillStyle = 'rgba(255, 255, 255, 0.20)';
-	ctx.fillRect(-hw, -hh, hw * 2, Math.max(3, hh * 0.26));
-	ctx.restore();
-
-	if (part.glassPath) drawGlass(ctx, part, palette, outlineWidth / safeScale);
-
-	if (part.id === 'wheel') drawWheel(ctx, part, outlineWidth / safeScale);
-	else if (part.id === 'tracks') drawTrackWheels(ctx, part);
-	else if (part.id === 'roller') drawRollerBand(ctx, part);
-	else if (part.id === 'windowStrip') drawWindowPanes(ctx, part, path);
-
-	ctx.strokeStyle = OUTLINE;
-	ctx.lineWidth = outlineWidth / safeScale;
-	ctx.stroke(path);
-
-	if (part.glassPath) {
-		ctx.strokeStyle = 'rgba(58, 39, 27, 0.55)';
-		ctx.lineWidth = (outlineWidth * 0.7) / safeScale;
-		ctx.stroke(pathFrom(part.glassPath));
-	}
-
+	ctx.drawImage(tile, -b.w / 2, -b.h / 2, b.w, b.h);
 	ctx.restore();
 }
 
-function drawGlass(
-	ctx: CanvasRenderingContext2D,
-	part: PartShape,
-	palette: Record<Role, string>,
-	lineWidth: number
-): void {
-	const glass = pathFrom(part.glassPath!);
-	ctx.fillStyle = palette.glass;
-	ctx.fill(glass);
-
-	// A single diagonal reflection, clipped to the pane.
-	ctx.save();
-	ctx.clip(glass);
-	ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-	ctx.beginPath();
-	ctx.moveTo(-part.halfWidth * 0.9, part.halfHeight * 0.35);
-	ctx.lineTo(-part.halfWidth * 0.05, -part.halfHeight);
-	ctx.lineTo(part.halfWidth * 0.28, -part.halfHeight);
-	ctx.lineTo(-part.halfWidth * 0.6, part.halfHeight * 0.1);
-	ctx.closePath();
-	ctx.fill();
-	ctx.restore();
-
-	ctx.strokeStyle = 'rgba(58, 39, 27, 0.5)';
-	ctx.lineWidth = lineWidth * 0.7;
-	ctx.stroke(glass);
-}
-
-/** Tyre wall, rim and hub, so a wheel reads as a wheel at any size. */
-function drawWheel(ctx: CanvasRenderingContext2D, part: PartShape, lineWidth: number): void {
-	const outer = part.halfWidth;
-	const rim = outer * 0.42;
-	const hub = outer * 0.16;
-
-	ctx.fillStyle = '#C9D2DE';
-	ctx.beginPath();
-	ctx.arc(0, 0, rim, 0, Math.PI * 2);
-	ctx.fill();
-	ctx.strokeStyle = 'rgba(58, 39, 27, 0.65)';
-	ctx.lineWidth = lineWidth * 0.6;
-	ctx.stroke();
-
-	ctx.fillStyle = '#8A93A3';
-	ctx.beginPath();
-	ctx.arc(0, 0, hub, 0, Math.PI * 2);
-	ctx.fill();
-
-	// Tread notches around the tyre wall.
-	ctx.strokeStyle = 'rgba(0, 0, 0, 0.22)';
-	ctx.lineWidth = Math.max(1.5, outer * 0.07);
-	for (let i = 0; i < 8; i++) {
-		const angle = (i / 8) * Math.PI * 2;
-		ctx.beginPath();
-		ctx.moveTo(Math.cos(angle) * outer * 0.74, Math.sin(angle) * outer * 0.74);
-		ctx.lineTo(Math.cos(angle) * outer * 0.96, Math.sin(angle) * outer * 0.96);
-		ctx.stroke();
-	}
-}
-
-function drawTrackWheels(ctx: CanvasRenderingContext2D, part: PartShape): void {
-	const y = part.halfHeight * 0.5;
-	const spread = part.halfWidth * 0.62;
-	ctx.fillStyle = '#9AA3B2';
-	for (const x of [-spread, -spread / 3, spread / 3, spread]) {
-		ctx.beginPath();
-		ctx.arc(x, y, part.halfHeight * 0.34, 0, Math.PI * 2);
-		ctx.fill();
-	}
-}
-
-/** Mullions make a glass strip read as a row of windows rather than a stripe. */
-function drawWindowPanes(
-	ctx: CanvasRenderingContext2D,
-	part: PartShape,
-	path: Path2D
-): void {
-	ctx.save();
-	ctx.clip(path, 'evenodd');
-	ctx.strokeStyle = 'rgba(58, 39, 27, 0.35)';
-	ctx.lineWidth = Math.max(2, part.halfHeight * 0.22);
-	const panes = Math.max(2, Math.round(part.halfWidth / 22));
-	for (let i = 1; i < panes; i++) {
-		const x = -part.halfWidth + (i * part.halfWidth * 2) / panes;
-		ctx.beginPath();
-		ctx.moveTo(x, -part.halfHeight * 0.9);
-		ctx.lineTo(x, part.halfHeight * 0.9);
-		ctx.stroke();
-	}
-	ctx.restore();
-}
-
-function drawRollerBand(ctx: CanvasRenderingContext2D, part: PartShape): void {
-	ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-	ctx.fillRect(-part.halfWidth * 0.55, -part.halfHeight * 0.8, part.halfWidth * 0.25, part.halfHeight * 1.6);
-}
-
-/** A soft ellipse under the vehicle, so it sits on the road instead of floating. */
 export function drawContactShadow(
 	ctx: CanvasRenderingContext2D,
 	vehicle: Vehicle,
@@ -283,10 +142,9 @@ export function drawChassisGhosts(
 			ctx.restore();
 		}
 
-		drawPart(ctx, shape, vehicle.palette, anchor, slotScale, {
+		drawPart(ctx, shape, anchor, slotScale, {
 			alpha: highlighted ? 0.32 : 0.18,
-			flip: slot.flip,
-			outlineWidth: layout.outline
+			flip: slot.flip
 		});
 	}
 }
@@ -308,10 +166,9 @@ export function drawPlacedParts(
 		drawPart(
 			ctx,
 			PARTS[slot.part],
-			vehicle.palette,
 			anchor,
 			(slot.scale ?? 1) * layout.gameScale,
-			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1, outlineWidth: layout.outline }
+			{ flip: slot.flip, alpha: role === 'lamp' ? lampAlpha : 1 }
 		);
 	}
 }
@@ -338,10 +195,9 @@ export function drawVehicle(
 	for (const slot of slotsInDrawOrder(vehicle)) {
 		const anchor = anchors.get(slot.id);
 		if (!anchor) continue;
-		drawPart(ctx, PARTS[slot.part], vehicle.palette, anchor, (slot.scale ?? 1) * layout.gameScale, {
+		drawPart(ctx, PARTS[slot.part], anchor, (slot.scale ?? 1) * layout.gameScale, {
 			flip: slot.flip,
-			alpha,
-			outlineWidth: layout.outline
+			alpha
 		});
 	}
 

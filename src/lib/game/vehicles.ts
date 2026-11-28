@@ -155,15 +155,6 @@ function slabPath(width: number, groundY: number, height = 130, topInset = 0): s
 	return `M${left + r},${top} L${right - r},${top} Q${right},${top} ${right},${top + r} L${right},${groundY} L${left},${groundY} L${left},${top + r} Q${left},${top} ${left + r},${top} Z`;
 }
 
-const wheelSlot = (side: 'l' | 'r', x: number, y: number, scale = 1): Slot => ({
-	id: `wheel-${side}`,
-	part: 'wheel',
-	x,
-	y,
-	scale,
-	flip: side === 'r',
-	z: 4
-});
 
 VEHICLES.push(
 	{

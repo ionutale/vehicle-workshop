@@ -127,7 +127,7 @@ The body/house includes the cab so the four-piece tier never leaves a hole. The 
 82. **Ice-cream truck (done):** pink serving van with a striped awning, serving hatch, counter and roof cone at Level 5; 5 pieces, 4 at the first tier.
 83. **Milk float (done):** open-sided electric float with a canopy and stacked milk crates at Level 5; 5 pieces, 4 at the first tier.
 84. **Fleet complete:** all 86 catalogue vehicles now use realistic, level-aware art.
-85. Remove the generic parts now that no catalogue entry uses them.
+85. **Generic art removed (done):** the unused generic parts, the detail overlay and the fallback draw path are gone; every piece now draws from a cut-out tile.
 
 Each batch keeps the same cut-out method: one full illustration, 5–6 masks, four-piece minimum.
 

@@ -26,41 +26,7 @@ export function piecesAtLevel(level: number): number {
 	return MIN_PIECES + clampLevel(level);
 }
 
-const KIND: Partial<Record<PartId, PartKind>> = {
-	body: 'body',
-	bodyBox: 'body',
-	cabin: 'face',
-	cab: 'face',
-	windowStrip: 'face',
-	roof: 'face',
-	arm: 'connector',
-	boom: 'connector',
-	hook: 'connector',
-	ladder: 'connector',
-	bucket: 'cargo',
-	tank: 'cargo',
-	mixer: 'cargo',
-	forks: 'cargo',
-	plough: 'cargo',
-	brush: 'cargo',
-	flatbed: 'cargo',
-	logs: 'cargo',
-	pantograph: 'cargo',
-	tipper: 'cargo',
-	miniCar: 'cargo',
-	header: 'cargo',
-	bale: 'cargo',
-	skip: 'cargo',
-	scissor: 'cargo',
-	hoseReel: 'cargo',
-	wheel: 'locomotion',
-	tracks: 'locomotion',
-	roller: 'locomotion'
-};
-
-const kindOf = (slot: Slot): PartKind => PARTS[slot.part].kind ?? KIND[slot.part] ?? 'detail';
-// A cabin or cab carries the driver; window strips and roofs are what remains for buses.
-const FACE_ORDER = ['cabin', 'cab', 'windowStrip', 'roof', 'platform'];
+const kindOf = (slot: Slot): PartKind => PARTS[slot.part].kind ?? 'detail';
 
 function area(slot: Slot): number {
 	const shape = PARTS[slot.part];
@@ -82,13 +48,6 @@ function selectSlots(slots: Slot[], limit: number): Slot[] {
 	for (const slot of slots) if (kindOf(slot) === 'locomotion') add(slot);
 	add(byArea.find((slot) => kindOf(slot) === 'connector'));
 	add(byArea.find((slot) => kindOf(slot) === 'cargo'));
-	for (const part of FACE_ORDER) {
-		const face = byArea.find((slot) => slot.part === part);
-		if (face) {
-			add(face);
-			break;
-		}
-	}
 	add(byArea.find((slot) => kindOf(slot) === 'face'));
 	for (const slot of byArea) add(slot);
 

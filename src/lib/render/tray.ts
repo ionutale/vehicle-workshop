@@ -1,6 +1,6 @@
 import type { AssemblyState } from '../game/assembly';
 import type { Layout, PieceBox, PlacedPiece } from '../game/layout';
-import { PARTS, type PartId, type PartShape, type Role } from '../game/parts';
+import { PARTS, type PartId, type PartShape } from '../game/parts';
 import type { Vehicle } from '../game/vehicles';
 import { roundedRect } from './draw';
 import { OUTLINE, SUN } from './scene';
@@ -56,7 +56,6 @@ export function drawShelf(
 	layout: Layout,
 	pieces: TrayPiece[],
 	parts: Record<PartId, PartShape>,
-	palette: Record<Role, string>,
 	options: ShelfOptions = {}
 ): void {
 	const { hintSlotId = null, muted = false, now = 0, alphaFor, reduced = false } = options;
@@ -80,8 +79,7 @@ export function drawShelf(
 			x: piece.rect.x + piece.rect.w / 2,
 			y: piece.rect.y + piece.rect.h / 2
 		};
-		drawPart(ctx, shape, palette, centre, scale, {
-			outlineWidth: layout.outline,
+		drawPart(ctx, shape, centre, scale, {
 			alpha: alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1
 		});
 

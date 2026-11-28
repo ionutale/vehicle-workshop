@@ -14,15 +14,6 @@ const pal = (shell: string, trim: string): Record<Role, string> => ({
 	lamp: '#FFE066'
 });
 
-const wheel = (side: 'l' | 'r', x: number, y: number, scale = 1): Slot => ({
-	id: `wheel-${side}`,
-	part: 'wheel',
-	x,
-	y,
-	scale,
-	flip: side === 'r',
-	z: 4
-});
 
 function slab(width: number, groundY: number, height = 140): string {
 	const left = 30;

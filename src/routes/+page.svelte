@@ -42,7 +42,6 @@
 		setMuted
 	} from '#lib/preferences.svelte';
 	import { devicePixelRatioFor, prepareCanvas } from '#lib/render/draw';
-	import { drawVehicleDetails } from '#lib/render/details';
 	import { drawJob } from '#lib/render/jobs';
 	import { createConfetti, createDust } from '#lib/render/particles';
 	import { drawFarLayer, drawRoad, sceneForBuild, type SceneId } from '#lib/render/scene';
@@ -397,16 +396,9 @@
 			return (slot?.scale ?? 1) * layout.gameScale;
 		};
 
-		const rearWheel = () => {
-			const wheels = state.anchors.filter((anchor) => anchor.part === 'wheel');
-			if (wheels.length === 0) return { x: layout.vehicleAnchor.x, y: layout.roadY };
-			return wheels.reduce((best, wheel) => (wheel.x < best.x ? wheel : best), wheels[0]);
-		};
-
 		const beginDrive = () => {
 			if (reduced) return;
-			const wheel = rearWheel();
-			dust.spawn(wheel.x, wheel.y + 6, 8);
+			dust.spawn(layout.vehicleAnchor.x, layout.roadY + 6, 8);
 		};
 
 		const celebrate = () => {
@@ -479,7 +471,6 @@
 				drawContactShadow(ctx, vehicle, layout);
 				drawChassisGhosts(ctx, vehicle, state, layout, now);
 				drawPlacedParts(ctx, vehicle, state, layout);
-				drawVehicleDetails(ctx, vehicle, state, layout);
 			} else if (state.phase === 'ready') {
 				const hop = reduced ? 0 : 16 * Math.sin(Math.PI * Math.min(1, readyT / 260));
 				drawContactShadow(ctx, vehicle, layout);
@@ -488,11 +479,9 @@
 				const lampAlpha = readyT < 500 ? 0.35 + 0.65 * (Math.floor(readyT / 90) % 2) : 1;
 				drawVehicle(ctx, vehicle, state, layout, 0, squash, hop);
 				drawPlacedParts(ctx, vehicle, state, layout, lampAlpha);
-				drawVehicleDetails(ctx, vehicle, state, layout, { lift: hop });
 			} else if (state.phase === 'driving') {
 				drawContactShadow(ctx, vehicle, layout, driveOffset);
 				drawVehicle(ctx, vehicle, state, layout, driveOffset, 1);
-				drawVehicleDetails(ctx, vehicle, state, layout, { offsetX: driveOffset });
 			} else if (state.phase === 'working') {
 				const jobT = clamp01((now - state.phaseStartedAt) / timings.workMs);
 				drawJob(ctx, vehicle, jobOf(vehicle), layout, jobT, reduced);
@@ -510,7 +499,7 @@
 				const hidden = state.drag?.slotId ?? state.settle?.slotId ?? null;
 				const arriving = state.phase === 'arriving';
 				const pieces = shelfPieces().filter((piece) => piece.slotId !== hidden);
-				drawShelf(ctx, layout, pieces, PARTS, vehicle.palette, {
+				drawShelf(ctx, layout, pieces, PARTS, {
 					muted: prefs.muted,
 					reduced,
 					now,
@@ -526,10 +515,9 @@
 				drawPart(
 					ctx,
 					PARTS[state.drag.part],
-					vehicle.palette,
 					{ x: state.drag.at.x - state.drag.grab.x, y: state.drag.at.y - state.drag.grab.y },
 					slotScale(state.drag.slotId),
-					{ lift: 3, outlineWidth: layout.outline }
+					{ lift: 3 }
 				);
 			} else if (state.settle) {
 				const settle = state.settle;
@@ -538,13 +526,11 @@
 				drawPart(
 					ctx,
 					PARTS[vehicle.slots.find((s) => s.id === settle.slotId)!.part],
-					vehicle.palette,
 					{
 						x: settle.from.x + (settle.to.x - settle.from.x) * eased,
 						y: settle.from.y + (settle.to.y - settle.from.y) * eased
 					},
-					slotScale(settle.slotId),
-					{ outlineWidth: layout.outline }
+					slotScale(settle.slotId)
 				);
 			}
 

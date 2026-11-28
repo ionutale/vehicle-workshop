@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { PARTS } from '#lib/game/parts';
-import { drawContactShadow, drawPart } from '#lib/render/vehicle';
+import { drawContactShadow } from '#lib/render/vehicle';
 import { getVehicle } from '#lib/game/vehicles';
 import { computeLayout } from '#lib/game/layout';
 import { pieceBoxes } from '#lib/render/tray';
@@ -40,28 +39,8 @@ function recorder() {
 	return { ctx: ctx as unknown as CanvasRenderingContext2D, calls };
 }
 
-beforeEach(stubPath);
-
-const palette = { shell: '#FF6B6B', trim: '#FFD166', glass: '#CFEFFF', rubber: '#2B2D42', lamp: '#FFE066' };
-
 describe('vehicle graphics', () => {
-	it('gives cabins and cabs glazing', () => {
-		expect(PARTS.cabin.glassPath).toBeTruthy();
-		expect(PARTS.cab.glassPath).toBeTruthy();
-	});
-
-	it('shades a body with a lower shadow and a top highlight', () => {
-		const { ctx, calls } = recorder();
-		drawPart(ctx, PARTS.body, palette, { x: 0, y: 0 }, 1);
-		expect(calls.filter((call) => call === 'fillRect')).toHaveLength(2);
-	});
-
-	it('draws a rim, a hub and treads on a wheel', () => {
-		const { ctx, calls } = recorder();
-		drawPart(ctx, PARTS.wheel, palette, { x: 0, y: 0 }, 1);
-		expect(calls.filter((call) => call === 'arc').length).toBeGreaterThanOrEqual(2);
-		expect(calls.filter((call) => call === 'moveTo').length).toBeGreaterThanOrEqual(8);
-	});
+	beforeEach(stubPath);
 
 	it('puts a contact shadow under the vehicle', () => {
 		const car = getVehicle('car');

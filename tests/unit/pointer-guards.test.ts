@@ -26,7 +26,7 @@ function fakeCanvas() {
 
 const piece = (): TrayPiece => ({
 	slotId: 'wheel-l',
-	part: 'wheel',
+	part: 'realCarWheel',
 	rect: { x: 0, y: 0, w: 60, h: 60 }
 });
 

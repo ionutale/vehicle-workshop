@@ -52,10 +52,10 @@ describe('shelf affordances', () => {
 		const layout = computeLayout({ width: 390, height: 844 }, car, pieceBoxes(car), insets, 120);
 		const state = createAssembly(car, layout.gameScale, layout.snapRadius, 0);
 		const pieces = trayPieces(car, state, layout);
-		const body = pieces.find((piece) => (piece.part === 'body' || piece.part === 'bodyBox' || piece.part.endsWith('Body')))!;
+		const body = pieces.find((piece) => piece.part.endsWith('Body'))!;
 		const { ctx, calls } = recordingContext();
 
-		drawShelf(ctx, layout, pieces, PARTS, car.palette, { hintSlotId: body.slotId, now: 0 });
+		drawShelf(ctx, layout, pieces, PARTS, { hintSlotId: body.slotId, now: 0 });
 
 		const hint = calls.find((call) => call.name === 'ellipse');
 		expect(hint).toBeDefined();
@@ -68,16 +68,16 @@ describe('shelf affordances', () => {
 		const layout = computeLayout({ width: 390, height: 844 }, car, pieceBoxes(car), insets, 120);
 		const state = createAssembly(car, layout.gameScale, layout.snapRadius, 0);
 		const pieces = trayPieces(car, state, layout);
-		const body = pieces.find((piece) => (piece.part === 'body' || piece.part === 'bodyBox' || piece.part.endsWith('Body')))!;
+		const body = pieces.find((piece) => piece.part.endsWith('Body'))!;
 
 		const first = recordingContext();
-		drawShelf(first.ctx, layout, pieces, PARTS, car.palette, {
+		drawShelf(first.ctx, layout, pieces, PARTS, {
 			hintSlotId: body.slotId,
 			now: 0,
 			reduced: true
 		});
 		const second = recordingContext();
-		drawShelf(second.ctx, layout, pieces, PARTS, car.palette, {
+		drawShelf(second.ctx, layout, pieces, PARTS, {
 			hintSlotId: body.slotId,
 			now: 700,
 			reduced: true
@@ -104,7 +104,7 @@ describe('shelf affordances', () => {
 	it('pads a tiny piece to a reachable target', () => {
 		const piece = {
 			slotId: 'light',
-			part: 'light' as const,
+			part: 'realCarWheel' as const,
 			rect: { x: 100, y: 100, w: 10, h: 10 }
 		};
 		const pieces = [piece];

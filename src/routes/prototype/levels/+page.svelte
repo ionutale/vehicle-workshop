@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { createAssembly } from '#lib/game/assembly';
 	import { getVehicle } from '#lib/game/vehicles';
-	import { drawVehicleDetails } from '#lib/render/details';
 	import { LEVEL_ART, LEVEL_IDS } from '#lib/render/levelArt';
 	import { drawVehicle } from '#lib/render/vehicle';
 
@@ -46,7 +45,6 @@
 			outline: 1.6
 		};
 		drawVehicle(ctx, vehicle, placed, layout as never, 0);
-		drawVehicleDetails(ctx, vehicle, placed, layout as never);
 	}
 
 	function card(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, title: string, tag: string) {

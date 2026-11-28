@@ -2,7 +2,6 @@ import { createAssembly } from '../game/assembly';
 import type { JobKind } from '../game/jobs';
 import type { Layout } from '../game/layout';
 import type { Vehicle } from '../game/vehicles';
-import { drawVehicleDetails } from './details';
 import { roundedRect } from './draw';
 import { OUTLINE } from './scene';
 import { drawVehicle } from './vehicle';
@@ -173,7 +172,6 @@ export function drawJob(
 
 	ctx.globalAlpha = 1;
 	drawVehicle(ctx, vehicle, placed, jobLayout, 0, 1, 0, fade);
-	drawVehicleDetails(ctx, vehicle, placed, jobLayout, { alpha: fade });
 	ctx.restore();
 }
 
