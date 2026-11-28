@@ -116,6 +116,9 @@
 		let layout: Layout;
 		let state: AssemblyState;
 		let hintSlotId: string | null = null;
+		let sparks: { x: number; y: number; born: number }[] = [];
+		let sparklesSpawned = 0;
+		let lastPlacedCount = 0;
 		let lastClient: Point | null = null;
 		let lastInteraction = 0;
 		let hiddenAccum = 0;
@@ -437,6 +440,14 @@
 			drawFarLayer(ctx, layout, scroll, scene, frame);
 			drawRoad(ctx, layout, driving ? -driveOffset : 0);
 			const breathe = reduced ? 0 : 0.5 * Math.sin(now / 900);
+			const hovered =
+				reduced || state.drag || state.phase !== 'assembling' || !lastClient
+					? null
+					: (hitPiece(
+							shelfPieces(),
+							worldAt(lastClient, layout),
+							44 * (800 / Math.max(viewport().height, 1))
+						)?.slotId ?? null);
 
 			if (state.phase === 'assembling') {
 				drawContactShadow(ctx, vehicle, layout);
@@ -466,6 +477,25 @@
 				ctx.restore();
 			}
 
+			if (!reduced) {
+				for (const spark of sparks) {
+					const t = clamp01((now - spark.born) / 420);
+					const radius = 6 + 10 * t;
+					ctx.save();
+					ctx.globalAlpha = 1 - t;
+					ctx.strokeStyle = '#FFD166';
+					ctx.lineWidth = 3;
+					for (let k = 0; k < 8; k++) {
+						const angle = (k / 8) * Math.PI * 2 + t;
+						ctx.beginPath();
+						ctx.moveTo(spark.x + Math.cos(angle) * 4, spark.y + Math.sin(angle) * 4);
+						ctx.lineTo(spark.x + Math.cos(angle) * radius, spark.y + Math.sin(angle) * radius);
+						ctx.stroke();
+					}
+					ctx.restore();
+				}
+			}
+
 			if (state.phase !== 'working') {
 				const hidden = state.drag?.slotId ?? state.settle?.slotId ?? null;
 				const arriving = state.phase === 'arriving';
@@ -475,6 +505,7 @@
 					reduced,
 					now,
 					hintSlotId,
+					liftSlotId: hovered,
 					alphaFor: arriving
 						? (index) =>
 								clamp01((now - (state.arrivedAt ?? now) - index * 60) / 180)
@@ -501,7 +532,8 @@
 						x: settle.from.x + (settle.to.x - settle.from.x) * eased,
 						y: settle.from.y + (settle.to.y - settle.from.y) * eased
 					},
-					slotScale(settle.slotId)
+					slotScale(settle.slotId),
+					{ squash: 0.88 + 0.12 * eased }
 				);
 			}
 
@@ -567,6 +599,17 @@
 			const previous = state;
 			state = reduce(state, { type: 'tick', now });
 			if (state !== previous) needsPaint = true;
+
+			if (state.placed.length > lastPlacedCount) {
+				const added = state.placed[state.placed.length - 1];
+				const anchor = state.anchors.find((entry) => entry.slotId === added);
+				if (anchor && !reduced) {
+					sparks.push({ x: anchor.x, y: anchor.y, born: now });
+					sparklesSpawned++;
+				}
+			}
+			lastPlacedCount = state.placed.length;
+			sparks = sparks.filter((spark) => now - spark.born < 420);
 
 			if (state.phase === 'ready') completeBuild();
 
@@ -714,6 +757,7 @@
 				}),
 				frames: () => frames,
 				motion: () => ({ enabled: !reduced, reduced, hidden: document.hidden }),
+				sparkles: () => sparklesSpawned,
 				confetti: () => confetti.live(),
 				level: () => prefs.difficulty.level,
 				family: () => familyOf(vehicle),

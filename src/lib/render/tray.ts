@@ -42,6 +42,8 @@ export function trayPieces(vehicle: Vehicle, state: AssemblyState, layout: Layou
 }
 
 export interface ShelfOptions {
+	/** Piece lifted slightly under the pointer. */
+	liftSlotId?: string | null;
 	hintSlotId?: string | null;
 	muted?: boolean;
 	now?: number;
@@ -58,7 +60,14 @@ export function drawShelf(
 	parts: Record<PartId, PartShape>,
 	options: ShelfOptions = {}
 ): void {
-	const { hintSlotId = null, muted = false, now = 0, alphaFor, reduced = false } = options;
+	const {
+		hintSlotId = null,
+		liftSlotId = null,
+		muted = false,
+		now = 0,
+		alphaFor,
+		reduced = false
+	} = options;
 	const shelf = layout.shelf;
 
 	ctx.save();
@@ -77,7 +86,7 @@ export function drawShelf(
 		const scale = piece.rect.w / Math.max(shape.halfWidth * 2, 0.001);
 		const centre = {
 			x: piece.rect.x + piece.rect.w / 2,
-			y: piece.rect.y + piece.rect.h / 2
+			y: piece.rect.y + piece.rect.h / 2 - (piece.slotId === liftSlotId ? 2 : 0)
 		};
 		drawPart(ctx, shape, centre, scale, {
 			alpha: alphaFor ? Math.max(0, Math.min(1, alphaFor(index))) : 1
