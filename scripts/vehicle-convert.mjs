@@ -2,11 +2,11 @@
 /**
  * Register a converted vehicle after its art module exists.
  *
- * Usage: node scripts/vehicle-convert.mjs <spec.json> [--dry] [--update]
+ * Usage: node scripts/vehicle-convert.mjs <spec.json> [--dry] [--update] [--upsert]
  *
  * --update rewrites the masks, bounds and names of parts that are already registered.
- * Use it when an existing vehicle's art geometry changes; without it new parts are only
- * inserted once, so changed masks would be silently ignored.
+ * --upsert does the same and also inserts any part ids the catalogue has never seen, which
+ * is the normal path for splitting an existing vehicle into more pieces.
  *
  * The spec owns only the new vehicle. This script performs the shared-file edits:
  * PartId union, PARTS, PART_NAMES, REAL_ART, the vehicle entry, and the level-art
@@ -104,6 +104,12 @@ const insertObjectEntries = (text, anchor, entries, label) => {
 };
 
 const update = process.argv.includes('--update');
+const upsert = process.argv.includes('--upsert');
+
+if (upsert && new Set(spec.parts.map((part) => part.id)).size !== spec.parts.length) {
+	console.error('spec repeats a part id');
+	process.exit(1);
+}
 
 if (!parts.includes(`| '${firstId}'`)) {
 	parts = replaceOnce(
@@ -113,7 +119,39 @@ if (!parts.includes(`| '${firstId}'`)) {
 		'PartId union'
 	);
 }
-if (update) {
+if (upsert) {
+	const missing = spec.parts.filter((part) => !parts.includes(`\t${part.id}: realPart(`));
+	if (missing.length > 0) {
+		parts = replaceOnce(
+			parts,
+			/(\t\| '[^']+');\n\nexport type Role/,
+			(match, last) => `${last}\n${missing.map((part) => `\t| '${part.id}'`).join('\n')};\n\nexport type Role`,
+			'PartId union'
+		);
+		parts = insertObjectEntries(
+			parts,
+			'\n};\n\n/** Child-facing names',
+			missing.map(partEntry).join('\n'),
+			'PARTS object end'
+		);
+		parts = insertObjectEntries(
+			parts,
+			'\n};\n\nexport function partName',
+			missing.map((part) => `\t${part.id}: '${part.name}',`).join('\n'),
+			'PART_NAMES end'
+		);
+	}
+	for (const part of spec.parts) {
+		const block = new RegExp(`\\t${part.id}: realPart\\([\\s\\S]*?\\n\\t\\),`);
+		if (!block.test(parts)) {
+			console.error(`part entry missing after insert: ${part.id}`);
+			process.exit(1);
+		}
+		parts = parts.replace(block, partEntry(part));
+		const named = new RegExp(`\\t${part.id}: '[^']*',`);
+		if (named.test(parts)) parts = parts.replace(named, `\t${part.id}: '${part.name}',`);
+	}
+} else if (update) {
 	for (const part of spec.parts) {
 		const block = new RegExp(`\\t${part.id}: realPart\\([\\s\\S]*?\\n\\t\\),`);
 		if (!block.test(parts)) {
@@ -193,7 +231,8 @@ const slots = spec.vehicle.slots
 	.map((slot) => {
 		const extras = [
 			slot.scale !== undefined ? `scale: ${slot.scale}` : null,
-			slot.flip ? 'flip: true' : null
+			slot.flip ? 'flip: true' : null,
+			slot.cue ? 'cue: true' : null
 		].filter(Boolean);
 		const tail = extras.length ? `, ${extras.join(', ')}` : '';
 		return `\t\t\t{ id: '${slot.id}', part: '${slot.part}', x: ${slot.x}, y: ${slot.y}, z: ${slot.z}${tail} }`;
@@ -215,16 +254,21 @@ ${slots}
 
 const start = source.indexOf(`\t\tid: '${spec.id}',`);
 const blockStart = source.lastIndexOf('\n\t{', start);
-const commaClose = source.indexOf('\n\t},', start);
-const finalClose = source.indexOf('\n\t}\n', start);
-const isLast = commaClose < 0 || (finalClose >= 0 && finalClose < commaClose);
-const blockEnd = isLast ? finalClose + '\n\t}\n'.length : commaClose + '\n\t},'.length;
+// The block can end with `},`, `}\n` or the array's last `}];`; take the nearest.
+const endings = ['\n\t},', '\n\t}\n', '\n\t}];']
+	.map((token) => ({ token, at: source.indexOf(token, start) }))
+	.filter((entry) => entry.at >= 0)
+	.sort((a, b) => a.at - b.at);
+const blockEnd = endings.length > 0 ? endings[0].at + endings[0].token.length : -1;
+const isLast = endings.length > 0 && endings[0].token === '\n\t}];';
 if (start < 0 || blockStart < 0 || blockEnd <= start) {
 	console.error(`could not isolate the ${spec.id} vehicle block`);
 	process.exit(1);
 }
 const entryText = isLast ? entry.replace(/,$/, '') : entry;
-source = source.slice(0, blockStart + 1) + entryText + source.slice(blockEnd);
+// When the array closes on the same line as the object, the match swallowed `];`.
+const tail = endings.length > 0 && endings[0].token === '\n\t}];' ? '];' : '';
+source = source.slice(0, blockStart + 1) + entryText + tail + source.slice(blockEnd);
 write(target, source);
 
 console.log(
@@ -233,6 +277,7 @@ console.log(
 			ok: true,
 			dry,
 			update,
+			upsert,
 			vehicle: spec.id,
 			module: spec.module,
 			parts: spec.parts.map((part) => part.id),
